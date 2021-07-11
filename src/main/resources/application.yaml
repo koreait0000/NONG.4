@@ -1,0 +1,33 @@
+server:
+  port: 8090
+  context-path: /
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: durk3501@gmail.com
+    password: hucafkrhtcucirbd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3308/nong4
+    username: root
+    password: koreait
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 30MB
+      location: D:/springImg
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+mybatis:
+  mapper-locations: mybatis-mapper/**/*.xml
+  type-aliases-package: com.spring.nong4
