@@ -116,6 +116,5 @@
 	<a href="mailto:dksms78@gmail.com"><img src="https://img.shields.io/static/v1?label=&message=dksms78@gmail.com&color=orange&style=flat-square&logo=gmail"></a>
 	</td>
 </tr>
-</tr>
 </tbody>
 </table>
