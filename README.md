@@ -108,6 +108,75 @@
 
 ## 요구분석<a id="chapter"></a><br>
 
+- <a href="https://www.figma.com/proto/38NdKzLWRR9AeJ09VhGpkZ/%EC%82%B0%EB%A6%BC%EC%B2%AD?page-id=0%3A1&node-id=11%3A223&viewport=-187%2C156%2C0.10297423601150513&scaling=scale-down">UI구현 링크</a>
+
+### 시장조사<br>
+
+<table align="center" >
+	<tr><tbody>
+		<td width="50%"><img src="/documents/img/시장조사1.png" width="50%" height="50%"></img></td>
+		<td width="50%"><div>병해충에 대한 경험이 부족하기에 농사 실패로 이어지기 쉽고,이에 따라 경제적 어려움이 발생 </div>
+	<br><br><p>-> 영농 기술이 미숙한 상태에서 농사를 지어 실패하는 사례가 다수</p></td>
+	</tr></tbody>
+	</table><br><br>
+	
+<table align="center">
+	<tr>
+		<td width="50%"><img src="/documents/img/시장조사2.png"></img></td>
+		<td width="50%"><div>귀농 및 귀촌의 실패 요인으로, '수익창출 실패‘ 와 '불안정한 농지 확보‘ 등이 존재</div>
+	<br><br><p>-> 정부와 지자체 등의 유기적인 협력이 필요</p></td>
+	</tr>
+	</table><br><br>
+	
+<table align="center">
+	<tr>
+		<td width="50%"><img src="/documents/img/시장조사3.png"></img></td>
+		<td width="50%"><div>신종 코로나바이러스 감염증(코로나19) 사태의 영향으로 고용 불안, 높은 주거비용 등에 부담을 느낀 도시민이 증가</div>
+	<br><br><p>-> 코로나의 발생 등의 여건 변화로 귀농 및 귀촌인구가 증가 할 예정</p></td>
+	</tr>
+	</table><br><br>	
+
+#### 시장조사에 따른 결론<br>
+- 신종 코로나바이러스 사태로  
+귀농 귀촌을 희망하는 도시민들이 나날이 증가하는 추세지만,
+영농 기술 미숙과 더불어 적은 경험으로 인하여 
+한해 농사를 실패하는 사례도 적지않다.
+
+### 실태조사<br>
+<table align="center">
+	<tr>
+		<td width="50%"><img src="/documents/img/실태조사1.png" ></img></td>
+		<td width="50%"><div>(귀농) 자연환경(30.5%), 농업의 비전‧발전 가능성(23.0%), 가업승계(13.1%) 순으로 응답</div>
+	<br><br><p>(귀촌) 농산업 외 직장 취업(24.1%), 정서적 여유(15.3%), 자연환경(13.7%), 저렴한 집값(9.6%) 순으로 응답</p></td>
+	</tr>
+	</table><br><br>
+	
+<table align="center">
+	<tr>
+		<td width="50%"><img src="/documents/img/실태조사2.png"></img></td>
+		<td width="50%"><div>❍ (준비기간) 귀농 준비에는 평균적으로 25.8개월 소요, 귀촌 17.7개월 귀농 준비 기간 동안 정착 지역 탐색(42.2%), 주거 및 농지 탐색(29.3%) ,귀농 교육(12.2%), 자금조달(11.5%), 귀농 체험(1.7%) 등을 수행</div>
+	<br><br><p>(귀농 준비 기간 증가세) (’19) 25.1개월 →(‘20) 25.8개월</p></td>
+	</tr>
+	</table><br><br>
+	
+<table align="center">
+	<tr>
+		<td width="50%"><img src="/documents/img/실태조사3.png"></img></td>
+		<td width="50%"><div>(주 작목 선택) 
+주 소득 작목은 과수(22.5%), 논벼(21.9%), 노지 채소(20.2%), 시설 채소(10.7%) 순으로 응답</div>
+	<br><br><p>(작목 선택 이유) 재배의 용이성(48.4%), 높은 소득(21.0%), 주변인 권유(16.9%), 지역 특화 작목(8.5%) 순으로 응답</p></td>
+	</tr>
+	</table><br><br>
+	
+#### 실태조사에 따른 결론<br>
+- 농업의 비전,발전 가능성을 보고 귀농 및 귀촌 인구가 증가하는 추세지만, 농업 기술, 경험이 부족이 실패 요인으로 작용
+- 귀농 인구 과반수 이상의 인원이 귀농 귀촌 교육 이수하지 않음.
+
+### SWOT분석<br>
+
+<img src="/documents/img/swot1.png"></img><br><br>
+<img src="/documents/img/swot2.png"></img><br><br>
+
 ## 개발툴<a id="chapter6"></a><br>
 
 <p align="left">
