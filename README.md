@@ -225,7 +225,7 @@
 <td width="100" align="center">김상혁</td>
 <td width="150">백엔드 개발<br>영상 작업 등</td>
 <td width="175" align="center">
-	<a href="mailto:dksms78@gmail.com"><img src="https://img.shields.io/static/v1?label=&message=dksms78@gmail.com&color=orange&style=flat-square&logo=gmail"></a>
+	<a href="mailto:durk011@naver.com"><img src="https://img.shields.io/static/v1?label=&message=durk011@naver.com&color=orange&style=flat-square&logo=gmail"></a>
 	</td>
 </tr><tr>
 <td width="100" align="center">유병욱</td>
