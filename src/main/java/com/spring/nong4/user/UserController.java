@@ -29,5 +29,4 @@ public class UserController {
         service.join(param);
         return "redirect:login?needEmail=1";
     }
-    //test
 }
