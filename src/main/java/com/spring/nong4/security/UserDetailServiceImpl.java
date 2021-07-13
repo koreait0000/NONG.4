@@ -21,7 +21,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
         System.out.println("param:@:@:E" + param);
         param.setEmail(email);
         UserEntity loginUser = mapper.selUser(param);
-        System.out.println("mapperererererer lasddsasda"+ loginUser);
         if(loginUser == null) {
             return null; //아이디가 없는 상태
         }
