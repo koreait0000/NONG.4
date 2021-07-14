@@ -4,8 +4,8 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="basic_template" template="/WEB-INF/views/tilesTemplate.jsp">
-        <put-attribute name="header" value="/WEB-INF/views/tilesHeader.jsp" />
+    <definition name="basic_template" template="/WEB-INF/views/temp/tilesTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/temp/tilesHeader.jsp" />
     </definition>
 
 <!--    <definition name="*" extends="basic_template">-->
