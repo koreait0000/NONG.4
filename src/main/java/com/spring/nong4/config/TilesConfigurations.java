@@ -1,4 +1,4 @@
-package com.spring.nong4;
+package com.spring.nong4.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 @Configuration
-public class Configurations implements WebMvcConfigurer {
+public class TilesConfigurations implements WebMvcConfigurer {
 
     //뷰 세팅1
     @Bean
