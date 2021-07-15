@@ -1,0 +1,11 @@
+.main-img { width: 100%; padding-left: 50px; padding-right: 50px; padding-bottom: 30px; }
+.form-img { display: flex; width: 100%; justify-content: space-around; position: relative;}
+.form-img img{ cursor: pointer;}
+
+
+.junior-class .junior-class-child > h1{ position: absolute; object-fit: cover;}
+
+
+
+
+.junior-class .text-class { position: absolute; text-align: center; object-fit: cover; }
