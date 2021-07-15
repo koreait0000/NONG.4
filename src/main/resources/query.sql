@@ -9,3 +9,12 @@ CREATE TABLE t_user(
    regdt DATETIME DEFAULT NOW() COMMENT '가입일자',
    INDEX idx_auth_cd (`authCd`)
 );
+
+CREATE TABLE t_board(
+    iboard INT UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '글번호',
+    title VARCHAR(300) NOT NULL COMMENT '글제목',
+    ctnt VARCHAR(4000) NOT NULL COMMENT '글내용',
+    iuser INT UNSIGNED NOT NULL COMMENT '회원번호',
+    regdt DATETIME DEFAULT NOW() COMMENT '글작성 시기',
+    FOREIGN KEY(iuser) REFERENCES t_user(iuser)
+);
