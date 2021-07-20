@@ -11,10 +11,12 @@ CREATE TABLE t_user(
 );
 
 CREATE TABLE t_board(
-    iboard INT UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '글번호',
-    title VARCHAR(300) NOT NULL COMMENT '글제목',
-    ctnt VARCHAR(4000) NOT NULL COMMENT '글내용',
-    iuser INT UNSIGNED NOT NULL COMMENT '회원번호',
-    regdt DATETIME DEFAULT NOW() COMMENT '글작성 시기',
-    FOREIGN KEY(iuser) REFERENCES t_user(iuser)
+  iboard INT UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '게시물번호',
+  iuser INT UNSIGNED COMMENT '회원번호',
+  title VARCHAR(300) NOT NULL COMMENT '게시물 제목',
+  ctnt VARCHAR(4000) NOT NULL COMMENT '게시물 내용',
+  regdt DATETIME DEFAULT NOW() COMMENT '작성 날짜',
+  FOREIGN KEY (iuser) REFERENCES t_user (iuser)
 );
+
+ 

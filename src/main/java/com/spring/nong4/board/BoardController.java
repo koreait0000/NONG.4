@@ -22,6 +22,10 @@ public class BoardController {
     @GetMapping("/home")
     public String home() { return "board/home";}
 
+
+    @GetMapping("/community")
+    public String community() { return "board/community";}
+
     @GetMapping("/freeBoard")
     public String freeBoard() { return "board/freeBoard"; }
 
@@ -63,5 +67,6 @@ public class BoardController {
         model.addAttribute("data",service.friendList(param));
         return "board/friendBoardList";
     }
+
 
 }
