@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/user/login", "/user/join", "/user/auth").permitAll()
+                .antMatchers("/user/login", "/user/join", "/user/auth", "/index").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin()
@@ -43,9 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/user/login")
                 .loginProcessingUrl("/login")
                 .usernameParameter("email")
-//                th에서 email로 받겠다, 기본값은 username
                 .passwordParameter("pw")
-//                th에서 pw로 받겠다, 기본값은 password
                 .defaultSuccessUrl("/board/home");
 
         http.logout()

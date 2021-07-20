@@ -4,6 +4,8 @@
     <title>Title</title>
 </head>
 <body>
-<h1>전문가</h1>
+    <h1>
+        질문게시판
+    </h1>
 </body>
 </html>

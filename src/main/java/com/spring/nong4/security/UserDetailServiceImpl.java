@@ -18,7 +18,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity param = new UserEntity();
         System.out.println("email : " + email);
-        System.out.println("param:@:@:E" + param);
         param.setEmail(email);
         UserEntity loginUser = mapper.selUser(param);
         if(loginUser == null) {
