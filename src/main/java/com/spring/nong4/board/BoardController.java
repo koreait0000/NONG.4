@@ -15,4 +15,7 @@ public class BoardController {
     @GetMapping("/home")
     public String home() { return "board/home";}
 
+    @GetMapping("/community")
+    public String community() { return "board/community";}
+
 }
