@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="/res/css/<tiles:getAsString name="res"/>.css">
     <script defer src="/res/js/common.js"></script>
     <script defer src="/res/js/<tiles:getAsString name="res"/>.js"></script>
+    <!--<link rel="stylesheet" href="/res/css/common.css">
+    <link rel="stylesheet" href="/res/css/<tiles:getAsString name="res"/>.css">
+    <script defer src="/res/js/common.js"></script>
+    <script defer src="/res/js/<tiles:getAsString name="res"/>.js"></script>-->
 </head>
 <body>
     <div id="container">

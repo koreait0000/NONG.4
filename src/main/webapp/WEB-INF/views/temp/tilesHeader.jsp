@@ -13,6 +13,7 @@
         <li><a href="/board/home">리스트</a></li>
         <sec:authorize access="isAuthenticated()">
             <li><a href="/board/friendBoard">글쓰기</a></li>
+            <li><a href="/board/writeMod">글쓰기</a></li>
         </sec:authorize>
     </ul>
 </header>
