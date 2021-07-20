@@ -16,6 +16,7 @@ CREATE TABLE t_board(
   title VARCHAR(300) NOT NULL COMMENT '게시물 제목',
   ctnt VARCHAR(4000) NOT NULL COMMENT '게시물 내용',
   regdt DATETIME DEFAULT NOW() COMMENT '작성 날짜',
+
   FOREIGN KEY (iuser) REFERENCES t_user (iuser)
 );
 
