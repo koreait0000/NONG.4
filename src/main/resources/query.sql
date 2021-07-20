@@ -18,3 +18,5 @@ CREATE TABLE t_board(
   regdt DATETIME DEFAULT NOW() COMMENT '작성 날짜',
   FOREIGN KEY (iuser) REFERENCES t_user (iuser)
 );
+
+ 
