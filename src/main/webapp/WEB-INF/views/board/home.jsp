@@ -22,6 +22,5 @@
         </span>
     </div>
 </div>
-
 <a href="community">게시판 커뮤니티</a>
 
