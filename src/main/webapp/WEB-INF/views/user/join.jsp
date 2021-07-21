@@ -1,12 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<html>
-<head>
-    <title>
-        JOIN
-    </title>
-</head>
-<body>
 <h1>회원가입</h1>
 <form action="join" method="post">
     <div><input type="email" name="email" placeholder="email" autofocus required></div>
@@ -16,5 +8,3 @@
     <div><input type="tel" name="tel" placeholder="휴대폰번호" required></div>
     <div><input type="submit" value="회원가입"><div>
 </form>
-</body>
-</html>

@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -34,10 +33,10 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide"><img src="/res/img/junior.png"></div>
-                            <div class="swiper-slide"><img src="/res/img/intermediate.png"></div>
-                            <div class="swiper-slide"><img src="/res/img/advanced.png"></div>
-                            <div class="swiper-slide"><img src="/res/img/master.png"></div>
+                            <div class="swiper-slide"><img src="/res/img/junior.png" class="junior-class pointer"></div>
+                            <div class="swiper-slide"><img src="/res/img/intermediate.png" class="intermediate-class pointer"></div>
+                            <div class="swiper-slide"><img src="/res/img/advanced.png" class="advanced-class pointer"></div>
+                            <div class="swiper-slide"><img src="/res/img/master.png" class="master-class pointer"></div>
                         </div>
                         <!-- If we need pagination -->
                         <div class="swiper-pagination"></div>
@@ -68,7 +67,7 @@
     const swiper = new Swiper('.swiper-container', {
         // Optional parameters
         slidesPerView : 2, // 동시에 보여줄 슬라이드 갯수
-        spaceBetween : 1, // 슬라이드간 간격
+        spaceBetween : -60, // 슬라이드간 간격
         direction: 'horizontal',
         loop: true,
         autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
@@ -83,7 +82,7 @@
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
-        },
+        }
     });
 </script>
 
