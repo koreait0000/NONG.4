@@ -2,7 +2,10 @@ package com.spring.nong4.board;
 
 import com.spring.nong4.board.model.BoardDomain;
 import com.spring.nong4.board.model.BoardEntity;
+import com.spring.nong4.board.model.Criteria;
+import com.spring.nong4.board.model.PageMaker;
 import com.spring.nong4.security.IAuthenticationFacade;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,17 +57,16 @@ public class BoardController {
 
     @PostMapping("/friendBoard")
     public String friendWrite(@RequestParam(value="provider") String provider, BoardDomain param) {
-        System.out.println("provider : " + provider);
         param.setIuser(auth.getLoginUserPk());
-        param.setProvider(param.getProvider());
         System.out.println("provider : "+param.getProvider());
         service.friendWrite(param);
         return "redirect:/board/friendBoard";
     }
 
     @GetMapping("/friendBoardList")
-    public String friendList(BoardDomain param, Model model) {
-        model.addAttribute("data",service.friendList(param));
+    public String friendList(BoardDomain param, Criteria cri, Model model) {
+        model.addAllAttributes(service.friendList(param,cri));
+        System.out.println("?? ? ? :   "+cri.getPage());
         return "board/friendBoardList";
     }
 

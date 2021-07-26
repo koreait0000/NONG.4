@@ -9,7 +9,7 @@
             <img src="/res/img/main.png">
             <div style="font-size: 50px"> Nong 4</div>
             <div><input type="text" class="searchtxt"><i class="fas fa-search pointer"></i></div>
-            <div><button class="writeBtn pointer"><a href="aaa"><i class="fas fa-pen"></i>글쓰기</a></button></div>
+            <div><button class="writeBtn pointer"><a href="friendBoard"><i class="fas fa-pen"></i>글쓰기</a></button></div>
             <div class="kategorieitem1">
                 <div class="title">알림판 <i class="fas fa-list"></i></div>
                 <div><a href="">공지사항</a></div>
@@ -18,11 +18,10 @@
             <div class="kategorieitem2">
                 <div class="title">커뮤니티 <i class="fas fa-list"></i></div>
                 <div><a href="">통합 게시판</a></div>
-                <div><a href="">자유 게시판</a></div>
-                <div><a href="">질문 게시판</a></div>
-                <div><a href="">공략 게시판</a></div>
-                <div><a href="">친구 게시판</a></div>
-
+                <div><a href="friendBoardList?provider=freedom">자유 게시판</a></div>
+                <div><a href="friendBoardList?provider=question">질문 게시판</a></div>
+                <div><a href="friendBoardList?provider=strategy">공략 게시판</a></div>
+                <div><a href="friendBoardList?provider=friend">친구 게시판</a></div>
             </div>
         </div>
         <div class="community">
