@@ -18,7 +18,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mysql://localhost:3308/nong4
     username: root
-    password: koreait
+    password: 1234
   servlet:
     multipart:
       max-file-size: 5MB

@@ -2,10 +2,13 @@ package com.spring.nong4.board;
 
 import com.spring.nong4.board.model.BoardDomain;
 import com.spring.nong4.board.model.BoardEntity;
+import com.spring.nong4.board.model.Criteria;
+import com.spring.nong4.board.model.PageMaker;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +44,20 @@ public class BoardService {
         return mapper.friendWrite(param);
     }
 
-    public List<BoardDomain> friendList(BoardDomain param) {
+    public Map<String,Object> friendList(BoardDomain param, Criteria cri) {
         param.setIuser(auth.getLoginUserPk());
-        return mapper.friendList(param);
+
+        Map<String,Object> map = new HashMap<>();
+
+        int total = mapper.countBoardList(param);
+
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCri(cri);
+        pageMaker.setTotalCount(total);
+
+        map.put("pageMaker",pageMaker);
+        map.put("list",mapper.friendList(param,cri));
+
+        return map;
     }
 }

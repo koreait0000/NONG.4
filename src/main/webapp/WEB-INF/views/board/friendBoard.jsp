@@ -8,7 +8,7 @@
     <form action="friendBoard" method="post">
         <label for="provider"></label>
         <select id="provider" name="provider" size="1">
-            <option value="free">자유게시판</option>
+            <option value="freedom">자유게시판</option>
             <option value="question">질문게시판</option>
             <option value="strategy">공략게시판</option>
             <option value="friend">친구게시판</option>

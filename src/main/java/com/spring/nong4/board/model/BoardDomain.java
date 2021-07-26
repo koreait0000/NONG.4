@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class BoardDomain extends BoardEntity{
-    public String userNick;
-    public int providerType;
+    private String userNick;
+    private String providerType;
 }

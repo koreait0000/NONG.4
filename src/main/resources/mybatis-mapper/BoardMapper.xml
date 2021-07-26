@@ -49,6 +49,16 @@
              , A.provider
         FROM t_board A
         INNER JOIN t_user B
-        ON A.iuser = B.iuser;
+        ON A.iuser = B.iuser
+        WHERE 1 = 1
+        <if test="param.provider != null and param.provider != ''">
+            AND A.provider = #{param.provider}
+        </if>
+        LIMIT #{cri.pageStart},#{cri.perPageNum}
+    </select>
+    <select id="countBoardList" resultType="Integer">
+        SELECT COUNT(*)
+        FROM  t_board
+        WHERE provider = #{provider}
     </select>
 </mapper>
