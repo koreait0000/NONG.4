@@ -65,6 +65,7 @@
                             <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.endPage+1}">다음</a>
                         </c:if>
                         <div class="search">
+                          <input type="hidden" name="provider" value="${param.provider}">
                           <select name="searchType">
                               <option value="n"<c:out value=" ${scri.searchType == null ? 'selected' : ''}"/>>----</option>
                               <option value="t"<c:out value=" ${scri.searchType eq 't'  ? 'selected' : ''}"/>>제목</option>
