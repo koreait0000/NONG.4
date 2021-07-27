@@ -2,3 +2,8 @@
 /*.intermediate-class { cursor: pointer;}*/
 /*.advanced-class { cursor: pointer;}*/
 /*.master-class { cursor: pointer;}*/
+
+
+
+.main-img > img{width: 100%;}
+.form-img { display: flex;  padding-top: 5%; justify-content: space-around;}

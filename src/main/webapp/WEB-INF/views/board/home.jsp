@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div>
-    <div>
-        <img src="/res/img/main.png" class="main-img"/>
+<link rel="stylesheet" href="/res/css/home.css">
+
+<div class="main-container">
+    <div class="main-img">
+        <img src="/res/img/main.png"/>
     </div>
     <div class="form-img">
         <span class="junior-class pointer">
@@ -21,6 +23,7 @@
             <img src="/res/img/master.png"/>
         </span>
     </div>
+    <a href="community">게시판 커뮤니티</a>
 </div>
-<a href="community">게시판 커뮤니티</a>
+
 
