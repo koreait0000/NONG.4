@@ -20,4 +20,6 @@ public interface BoardMapper {
     List<BoardDomain> friendList(@Param("param") BoardDomain param, @Param("cri") Criteria cri);
 
     int countBoardList(BoardDomain param);
+
+    BoardDomain boardDetail(BoardDomain param);
 }

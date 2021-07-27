@@ -7,7 +7,7 @@
     <div class="background-center">
         <div class="kategorie">
             <img src="/res/img/main.png">
-            <div style="font-size: 50px"> Nong 4</div>
+            <div style="font-size: 50px; font-weight: bold"> Nong 4</div>
             <div><input type="text" class="searchtxt"><i class="fas fa-search pointer"></i></div>
             <div><button class="writeBtn pointer"><a href="friendBoard"><i class="fas fa-pen"></i>글쓰기</a></button></div>
             <div class="kategorieitem1">

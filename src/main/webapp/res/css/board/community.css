@@ -1,27 +1,27 @@
-.background { height: 100vh; background-image: url("/res/img/main.png"); display: flex;  background-repeat : no-repeat; background-size : cover; }
-.background-left { flex-grow: 2; }
+.background { background-image: url("/res/img/main.png"); display: flex;  background-repeat : no-repeat; background-size : cover; }
+.background-left { width: 320px; }
 .background-center { background-color: white;  display: flex; flex-grow: 1;}
-.background-right { flex-grow: 2; }
-.kategorie { border-right: 2px solid #d3d3d3; flex-grow: 3; text-align: center; padding-top: 30px; }
+.background-right { width: 320px; }
+.kategorie { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding-top: 30px; }
 .kategorie div { padding: 3px;}
 .kategorie img { border-radius: 10px; height: 100px; width: 100px; }
 .searchtxt { margin-top: 50px; margin-bottom: 2px; height: 30px; }
-.writeBtn { height: 40px; font-size: 16px; background-color: darkgreen; }
-.writeBtn a { color: white; }
-.searchtxt, .writeBtn { width: 150px; }
-.kategorieitem1 { margin-top: 80px; }
-.kategorieitem2 { margin-top: 100px; }
-.title { font-size: 30px; }
-.community { flex-grow: 7; }
-.community-top { border-bottom: 2px solid #d3d3d3; height: 5%; }
+.kategorie .writeBtn { height: 40px; font-size: 16px; background-color: darkgreen; }
+.kategorie .writeBtn a { color: white; }
+.kategorie .searchtxt, .writeBtn { width: 150px; }
+.kategorie .kategorieitem1 { margin-top: 80px; }
+.kategorie .kategorieitem2 { margin-top: 100px; }
+.kategorie .title { font-size: 30px; font-weight: bold; }
+.community { flex-grow: 1; }
+.community-top { border-bottom: 2px solid #d3d3d3; height: 50px; }
 .communityboard {}
-.level { height: 33%; }
+.level { height: 320px; }
 .level .swiper-container { height: 100%; width: 900px; }
 .level .swiper-slide { display: flex; justify-content: center; align-items: center; }
 .level .swiper-slide img { width: 350px; }
-.news { height: 33%; padding: 5px 30px;}
+.news { height: 320px; padding: 5px 30px;}
 .news div { padding: 15px 0px; border-bottom: 1px solid #d3d3d3; }
-.todayvideo { margin: 30px; display: flex; }
+.todayvideo { padding: 5px 30px; display: flex;  height: 310px; align-items: center; }
 .todayvideo .videobox { flex-grow: 1; }
 .todayvideo .videobox img { border-radius: 10px; height: 250px; }
 .todayvideo .videocnt { flex-grow: 1; }

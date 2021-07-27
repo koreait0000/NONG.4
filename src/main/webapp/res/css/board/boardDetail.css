@@ -1,0 +1,19 @@
+.background { height: 100%; background-image: url("/res/img/main.png"); display: flex;  background-repeat : no-repeat; background-size : cover; }
+.background-left { width: 320px; }
+.background-center { background-color: white;  display: flex; flex-grow: 1;}
+.background-right { width: 320px; }
+.kategorie { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding-top: 30px; }
+.kategorie div { padding: 3px;}
+.kategorie img { border-radius: 10px; height: 100px; width: 100px; }
+.kategorie .searchtxt { margin-top: 50px; margin-bottom: 2px; height: 30px; }
+.kategorie .writeBtn { height: 40px; font-size: 16px; background-color: darkgreen; }
+.kategorie .writeBtn a { color: white; }
+.kategorie .searchtxt, .writeBtn { width: 150px; }
+.kategorie .kategorieitem1 { margin-top: 80px; }
+.kategorie .kategorieitem2 { margin-top: 100px; }
+.kategorie .title { font-size: 30px; font-weight: bold; }
+.community { flex-grow: 1; }
+.community-top { border-bottom: 2px solid #d3d3d3; height: 50px; }
+.communityboard { margin: 30px;}
+.communityboard .title { font-size: 30px; }
+.communityboard .userinfo { margin-top: 10px; border-bottom: 1px solid #d3d3d3; }
