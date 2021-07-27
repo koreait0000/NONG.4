@@ -1,8 +1,14 @@
-html, body, section { margin: 0; padding: 0; }
+html, body{ margin: 0; padding: 0; }
+
+section{ padding-top: 50px;}
+
 .pointer { cursor: pointer; }
 a { text-decoration: none; color: black; }
+header { position: fixed; width: 100%; }
 header ul { list-style-type: none; margin: 0; padding: 0; background-color: #333; }
 header ul:after{ content:''; display: block; clear:both; }
-header ul li { float: left; }
+header ul li { float: left; height: 50px;}
 header ul li a { display: block; color: white; text-align: center; padding: 14px 16px; }
 header ul li a:hover:not(.active) { background-color: #111; }
+
+footer{ padding-top: 10px; text-align: center;}
