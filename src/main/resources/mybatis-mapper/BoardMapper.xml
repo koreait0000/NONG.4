@@ -74,4 +74,18 @@
         FROM  t_board
         WHERE provider = #{provider}
     </select>
+
+    <select id="boardDetail" resultType="BoardDomain">
+        SELECT A.iboard
+             , A.title
+             , A.ctnt
+             , A.provider
+             , B.nick AS userNick
+             , B.regdt
+             , B.iuser
+        FROM t_board A
+        INNER JOIN t_user B
+        ON A.iuser = B.iuser
+        WHERE iboard = #{iboard}
+    </select>
 </mapper>

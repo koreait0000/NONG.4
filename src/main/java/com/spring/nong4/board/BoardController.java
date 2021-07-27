@@ -57,7 +57,7 @@ public class BoardController {
         param.setIuser(auth.getLoginUserPk());
         System.out.println("provider : "+param.getProvider());
         service.friendWrite(param);
-        return "redirect:/board/friendBoard";
+        return "redirect:/board/friendBoardList?provider=" + provider;
     }
 
     @GetMapping("/friendBoardList")
@@ -66,5 +66,10 @@ public class BoardController {
         return "board/friendBoardList";
     }
 
-
+    @GetMapping("boardDetail")
+    public String boardDetail(BoardDomain param, Model model){
+        model.addAttribute("detail", service.boardDetail(param));
+        System.out.println(service.boardDetail(param).getUserNick());
+        return "board/boardDetail";
+    }
 }

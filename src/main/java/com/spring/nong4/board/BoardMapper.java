@@ -21,4 +21,6 @@ public interface BoardMapper {
     List<BoardDomain> friendList(@Param("param") BoardDomain param, @Param("scri") SearchCriteria scri);
 
     int countBoardList(BoardDomain param);
+
+    BoardDomain boardDetail(BoardDomain param);
 }

@@ -57,4 +57,9 @@ public class BoardService {
 
         return map;
     }
+
+    public BoardDomain boardDetail(BoardDomain param){
+
+        return mapper.boardDetail(param);
+    }
 }
