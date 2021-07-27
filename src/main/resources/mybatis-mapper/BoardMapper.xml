@@ -54,7 +54,20 @@
         <if test="param.provider != null and param.provider != ''">
             AND A.provider = #{param.provider}
         </if>
-        LIMIT #{cri.pageStart},#{cri.perPageNum}
+        <if test='scri.searchType == "t"'>
+            AND A.title LIKE CONCAT('%',#{scri.keyword},'%')
+        </if>
+        <if test='scri.searchType == "c"'>
+            AND A.ctnt LIKE CONCAT('%',#{scri.keyword},'%')
+        </if>
+        <if test='scri.searchType == "w"'>
+            AND B.nick LIKE CONCAT('%',#{scri.keyword},'%')
+        </if>
+        <if test='scri.searchType == "tc"'>
+            AND A.title LIKE CONCAT('%'+#{scri.keyword}+'%')
+            OR   A.ctnt LIKE CONCAT('%',#{scri.keyword},'%')
+        </if>
+        LIMIT #{scri.pageStart} , #{scri.perPageNum}
     </select>
     <select id="countBoardList" resultType="Integer">
         SELECT COUNT(*)
