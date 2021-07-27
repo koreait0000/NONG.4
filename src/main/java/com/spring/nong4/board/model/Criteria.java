@@ -3,7 +3,7 @@ package com.spring.nong4.board.model;
 import lombok.Data;
 
 @Data
-public class Criteria extends BoardEntity{
+public class Criteria {
     private int page;
     private int perPageNum;
 

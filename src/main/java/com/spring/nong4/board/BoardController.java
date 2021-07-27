@@ -1,9 +1,6 @@
 package com.spring.nong4.board;
 
-import com.spring.nong4.board.model.BoardDomain;
-import com.spring.nong4.board.model.BoardEntity;
-import com.spring.nong4.board.model.Criteria;
-import com.spring.nong4.board.model.PageMaker;
+import com.spring.nong4.board.model.*;
 import com.spring.nong4.security.IAuthenticationFacade;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,9 +61,8 @@ public class BoardController {
     }
 
     @GetMapping("/friendBoardList")
-    public String friendList(BoardDomain param, Criteria cri, Model model) {
-        model.addAllAttributes(service.friendList(param,cri));
-        System.out.println("?? ? ? :   "+cri.getPage());
+    public String friendList(BoardDomain param, SearchCriteria scri, Model model) {
+        model.addAllAttributes(service.friendList(param,scri));
         return "board/friendBoardList";
     }
 

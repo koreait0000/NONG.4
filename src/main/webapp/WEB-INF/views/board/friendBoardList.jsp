@@ -30,13 +30,24 @@
             </c:forEach>
         </table>
         <c:if test="${pageMaker.prev}">
-            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.startPage-1}">이전</a>
+            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.startPage - 1}">이전</a>
         </c:if>
         <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
             <a href="friendBoardList?provider=${param.provider}&page=${pageNum}">${pageNum}</a>
         </c:forEach>
         <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.endPage+1}">다음</a>
+            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.endPage + 1}">다음</a>
         </c:if>
+        <div class="search">
+            <select name="searchType">
+                <option value="n"<c:out value=" ${scri.searchType == null ? 'selected' : ''}"/>>----</option>
+                <option value="t"<c:out value=" ${scri.searchType eq 't'  ? 'selected' : ''}"/>>제목</option>
+                <option value="c"<c:out value=" ${scri.searchType eq 'c'  ? 'selected' : ''}"/>>내용</option>
+                <option value="w"<c:out value=" ${scri.searchType eq 'w'  ? 'selected' : ''}"/>>작성자</option>
+                <option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+            </select>
+            <input type="text" name="keyword" id="keywordInput" value="${scri.keyword}">
+            <input type="submit" value="검색">
+        </div>
     </form>
 </div>
