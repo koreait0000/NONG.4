@@ -1,11 +1,13 @@
 package com.spring.nong4.board;
 
 import com.spring.nong4.board.model.*;
+import com.spring.nong4.common.MyFileUtils;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +18,7 @@ public class BoardService {
 
     @Autowired private BoardMapper mapper;
     @Autowired private IAuthenticationFacade auth;
+    @Autowired private MyFileUtils MyFileUtils;
 
     // 이메일 인증 처리
     public int auth(UserEntity param) {
@@ -37,8 +40,34 @@ public class BoardService {
         return mapper.freeBoardList();
     }
 
-    public int friendWrite(BoardDomain param) {
-        return mapper.friendWrite(param);
+    public Map<String, Object> friendWrite(BoardDomain param, MultipartFile[] imgArr) {
+        Map<String, Object> map = new HashMap<>();
+        if(imgArr == null && param.getTitle() == null && param.getCtnt() == null) { return null; }
+
+        int write = mapper.friendWrite(param);
+        System.out.println("write : " + mapper.friendWrite(param));
+        System.out.println("imgArr : "+imgArr);
+        System.out.println("getIboard" +param.getIboard());
+
+
+        // 파일 업로드
+        if(param.getIboard() > 0 && imgArr != null && imgArr.length > 0) {
+            BoardImgEntity paramImg = new BoardImgEntity();
+            paramImg.setIboard(param.getIboard());
+
+            String target = "board/" + param.getIboard();
+            for(MultipartFile img : imgArr) {
+                String saveFileNm = MyFileUtils.transferTo(img , target);
+                System.out.println("NM : "+saveFileNm);
+                if(saveFileNm != null) {
+                    paramImg.setImg(saveFileNm);
+                    System.out.println("IMG"+paramImg);
+                    map.put("data",mapper.friendWriteImg(paramImg));
+                }
+            }
+        }
+        map.put("data",write);
+        return map;
     }
 
     public Map<String,Object> friendList(BoardDomain param, SearchCriteria scri) {
