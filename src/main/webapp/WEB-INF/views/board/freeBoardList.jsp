@@ -17,6 +17,7 @@
 <%--    </div>--%>
     <div>
         ${data.iboard}
+                ${auth.iuser}
     </div>
 </c:forEach>
 </div>

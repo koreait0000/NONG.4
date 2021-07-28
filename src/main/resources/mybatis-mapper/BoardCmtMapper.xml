@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.nong4.cmt.BoardCmtMapper">
+    <insert id="insCmt">
+        INSERT INTO
+        t_cmt
+        (iuser
+        ,iboard
+        ,cmt)
+        VALUES
+        (#{iuser}
+        ,#{iboard}
+        ,#{cmt})
+    </insert>
+
+    <select id="cmtList" resultType="BoardCmtDomain">
+        SELECT A.cmt
+             , A.regdt
+             , B.nick AS userNick
+             , B.iuser
+        FROM t_cmt A
+        INNER JOIN t_user B
+        ON A.iuser = B.iuser
+        WHERE iboard = #{iboard}
+    </select>
+</mapper>

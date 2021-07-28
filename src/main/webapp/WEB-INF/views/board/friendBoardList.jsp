@@ -9,7 +9,7 @@
             <img src="/res/img/main.png">
             <div style="font-size: 50px; font-weight: bold"> Nong 4</div>
             <div><input type="text" class="searchtxt"><i class="fas fa-search pointer"></i></div>
-            <div><button class="writeBtn pointer"><a href="friendBoard"><i class="fas fa-pen"></i>글쓰기</a></button></div>
+            <div><a href="friendBoard"><button class="writeBtn pointer"><i class="fas fa-pen"></i>글쓰기</button></a></div>
             <div class="kategorieitem1">
                 <div class="title">알림판 <i class="fas fa-list"></i></div>
                 <div><a href="">공지사항</a></div>
@@ -55,16 +55,19 @@
                                 </tr>
                             </c:forEach>
                         </table>
-                        <c:if test="${pageMaker.prev}">
-                            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.startPage-1}">이전</a>
-                        </c:if>
-                        <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                            <a href="friendBoardList?provider=${param.provider}&page=${pageNum}">${pageNum}</a>
-                        </c:forEach>
-                        <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.endPage+1}">다음</a>
-                        </c:if>
+                        <div class="pagemaker">
+                            <c:if test="${pageMaker.prev}">
+                                <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.startPage-1}">이전</a>
+                            </c:if>
+                            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+                                <a href="friendBoardList?provider=${param.provider}&page=${pageNum}">${pageNum}</a>
+                            </c:forEach>
+                            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+                                <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.endPage+1}">다음</a>
+                            </c:if>
+                        </div>
                         <div class="search">
+                          <input type="hidden" name="provider" value="${param.provider}">
                           <select name="searchType">
                               <option value="n"<c:out value=" ${scri.searchType == null ? 'selected' : ''}"/>>----</option>
                               <option value="t"<c:out value=" ${scri.searchType eq 't'  ? 'selected' : ''}"/>>제목</option>
