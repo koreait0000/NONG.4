@@ -40,6 +40,17 @@
         ,#{provider});
     </insert>
 
+    <insert id="friendWriteImg">
+        INSERT INTO t_board_img
+        ( iboard
+        , img)
+        VALUES
+        ( #{iboard}
+        , #{img}
+        )
+
+    </insert>
+
     <select id="friendList" resultType="BoardDomain">
         SELECT A.iboard
              , A.title

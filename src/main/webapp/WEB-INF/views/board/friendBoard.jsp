@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 <div>
-    <form action="friendBoard" method="post">
+    <form action="friendBoard" method="post" enctype="multipart/form-data">
         <label for="provider"></label>
         <select id="provider" name="provider" size="1">
             <option value="freedom">자유게시판</option>
@@ -18,6 +19,9 @@
         </div>
         <div>
             <textarea name="ctnt" placeholder="내용" ></textarea>
+        </div>
+        <div>
+            <input type="file" name="img" multiple accept="image/*">
         </div>
         <div>
             <input type="submit" value="글쓰기">

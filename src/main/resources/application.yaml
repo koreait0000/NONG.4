@@ -29,5 +29,5 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
 mybatis:
-  mapper-locations: mybatis-mapper/**/*.xml
+  mapper-locations: mybatis-mapper/*.xml
   type-aliases-package: com.spring.nong4

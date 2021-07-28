@@ -44,9 +44,9 @@
                                 <th>작성일자</th>
                                 <th>게시판성격</th>
                             </tr>
-                            <c:forEach items="${list}" var="list"  varStatus="status">
+                            <c:forEach items="${list}" var="list" >
                                 <tr class="record pointer" onclick="moveToDetail(${list.iboard});">
-                                    <td>${status.count}</td>
+                                    <td>${list.iboard}</td>
                                     <td>${list.title}</td>
                                     <td>${list.ctnt}</td>
                                     <td>${list.userNick}</td>
@@ -56,15 +56,16 @@
                             </c:forEach>
                         </table>
                         <c:if test="${pageMaker.prev}">
-                            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.startPage-1}">이전</a>
+                            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.startPage - 1}&searchType=${param.searchType == null ? 'n' : param.searchType}&keyword=${param.keyword == null ? '' : param.keyword}">이전</a>
                         </c:if>
                         <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                            <a href="friendBoardList?provider=${param.provider}&page=${pageNum}">${pageNum}</a>
+                            <a href="friendBoardList?provider=${param.provider}&page=${pageNum}&searchType=${param.searchType == null ? 'n' : param.searchType}&keyword=${param.keyword == null ? '' : param.keyword}">${pageNum}</a>
                         </c:forEach>
                         <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.endPage+1}">다음</a>
+                            <a href="friendBoardList?provider=${param.provider}&page=${pageMaker.endPage + 1}&searchType=${param.searchType == null ? 'n' : param.searchType}&keyword=${param.keyword == null ? '' : param.keyword}">다음</a>
                         </c:if>
                         <div class="search">
+                          <input type="hidden" name="provider" value="${param.provider}">
                           <select name="searchType">
                               <option value="n"<c:out value=" ${scri.searchType == null ? 'selected' : ''}"/>>----</option>
                               <option value="t"<c:out value=" ${scri.searchType eq 't'  ? 'selected' : ''}"/>>제목</option>
