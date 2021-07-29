@@ -1,5 +1,6 @@
 package com.spring.nong4.cmt.model;
 
+import com.spring.nong4.board.model.BoardEntity;
 import lombok.Data;
 
 @Data

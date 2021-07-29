@@ -44,7 +44,7 @@
                             <textarea name="ctnt" placeholder="내용" ></textarea>
                         </div>
                         <div>
-                            <input type="file" name="img" multiple accept="image/*">
+                            <input type="file" name="imgArr" multiple accept="image/*">
                         </div>
                         <div>
                             <input type="submit" value="글쓰기">
