@@ -2,13 +2,16 @@
 .background-left { width: 320px; }
 .background-center { background-color: white;  display: flex; flex-grow: 1;}
 .background-right { width: 320px; }
-.kategorie { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding-top: 30px; }
-.kategorie div { padding: 3px;}
+.kategorie { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding: 30px 20px; }
 .kategorie img { border-radius: 10px; height: 100px; width: 100px; }
-.searchtxt { margin-top: 50px; margin-bottom: 2px; height: 30px; }
+
+.search-input{ position: relative; height: 40px; border: 1px solid #333; box-sizing: border-box; margin-right: 10%; margin-left: 10%; margin-bottom: 10px}
+.searchtxt{ border: 0 solid black; outline: none; width: 70%; height: 100%; font-size: large;}
+.fa-search{ position: absolute; overflow: hidden; font-size: 25px; margin-top: 6px;}
+
 .kategorie .writeBtn { height: 40px; font-size: 16px; background-color: darkgreen; }
 .kategorie .writeBtn a { color: white; }
-.kategorie .searchtxt, .writeBtn { width: 150px; }
+.kategorie .writeBtn { width: 80%; }
 .kategorie .kategorieitem1 { margin-top: 80px; }
 .kategorie .kategorieitem2 { margin-top: 100px; }
 .kategorie .title { font-size: 30px; font-weight: bold; }
