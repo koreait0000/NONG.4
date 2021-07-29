@@ -87,6 +87,10 @@
 
 - <a href="https://www.figma.com/proto/38NdKzLWRR9AeJ09VhGpkZ/%EC%82%B0%EB%A6%BC%EC%B2%AD?page-id=0%3A1&node-id=11%3A223&viewport=-187%2C156%2C0.10297423601150513&scaling=scale-down">UI구현 링크</a>
 
+## ERD-Diagram<br>
+
+<a href="https://github.com/koreait0000/NONG.4/issues/12">ERD-Diagram</a>
+
 ### 시장조사<br>
 
 <table align="center" >
