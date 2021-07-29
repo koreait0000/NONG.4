@@ -7,9 +7,14 @@
     <div class="background-center">
         <div class="kategorie">
             <img src="/res/img/main.png">
-            <div style="font-size: 50px; font-weight: bold"> Nong 4</div>
-            <div><input type="text" class="searchtxt"><i class="fas fa-search pointer"></i></div>
-            <div><a href="friendBoard"><button class="writeBtn pointer"><i class="fas fa-pen"></i>글쓰기</button></a></div>
+            <div style="font-size: 50px; font-weight: bold; margin-bottom: 50px;"> Nong 4</div>
+
+            <div class="search-input">
+                <input type="text" class="searchtxt">
+                <i class="fas fa-search pointer"></i>
+            </div>
+
+            <div><button class="writeBtn pointer"><a href="friendBoard"><i class="fas fa-pen"></i>글쓰기</a></button></div>
             <div class="kategorieitem1">
                 <div class="title">알림판 <i class="fas fa-list"></i></div>
                 <div><a href="">공지사항</a></div>
