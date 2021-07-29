@@ -11,6 +11,7 @@
 <div>
     <h1>
         자유게시판
+        ${auth.iuser}
     </h1>
 </div>
 

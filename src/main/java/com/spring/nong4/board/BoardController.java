@@ -72,12 +72,26 @@ public class BoardController {
     @GetMapping("/boardDetail")
     public String boardDetail(BoardDomain param, BoardCmtDomain cmtParam, BoardImgEntity imgParam, Model model){
         model.addAllAttributes(service.boardDetail(param, cmtParam, imgParam));
+
         return "board/boardDetail";
     }
 
-    @PostMapping("/insCmt")
-    public String insCmt(BoardCmtDomain param){
-        service.insCmt(param);
-        return "redirect:boardDetail?iboard=" + param.getIboard();
+    @ResponseBody
+    @RequestMapping(value = "/insCmt", method = RequestMethod.POST)
+    public Map<String, Integer> insCmt(@RequestBody BoardCmtDomain param){
+        int result = service.insCmt(param);
+
+        Map<String, Integer> data = new HashMap<>();
+        data.put("result", result);
+
+        return data;
+    }
+
+    @ResponseBody
+    @RequestMapping("/cmt/{iboard}")
+    public List<BoardCmtDomain> cmtList(@PathVariable("iboard") int iboard){
+        BoardCmtDomain param = new BoardCmtDomain();
+        param.setIboard(iboard);
+        return service.cmtList(param);
     }
 }

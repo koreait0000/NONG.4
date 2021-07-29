@@ -32,6 +32,7 @@
     </select>
 
 <!--keyProperty는 insert를 하고 동시에 해당 값이 필요한 경우 사용한다 useGeneratedKeys도 true를 줘야함.-->
+
     <insert id="friendWrite" useGeneratedKeys="true" keyProperty="iboard">
         INSERT INTO
             t_board
@@ -43,7 +44,7 @@
         (#{title}
         ,#{ctnt}
         ,#{iuser}
-        ,#{provider});
+        ,#{provider})
     </insert>
 
     <insert id="friendWriteImg">
@@ -61,7 +62,7 @@
              , A.title
              , A.ctnt
              , B.nick AS userNick
-             , B.regdt
+             , A.regdt
              , A.provider
         FROM t_board A
         INNER JOIN t_user B

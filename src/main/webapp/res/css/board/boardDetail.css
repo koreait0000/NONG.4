@@ -19,8 +19,9 @@
 .communityboard .userinfo { margin-top: 20px; border-bottom: 1px solid #d3d3d3; padding-bottom: 15px; }
 .communityboard .ctnt { margin-top: 20px; }
 .communityboard .cmtbox { margin-top: 40px; }
-.communityboard .cmtbox .cmttext { resize: none; }
-.communityboard .cmtbox .cmtbtn { height: 79px; }
-.communityboard .cmtlist { margin-top: 15px; }
-.communityboard .cmtlist .cmtRegdt { font-size: 13px; border-bottom: 1px solid #d3d3d3; padding-bottom: 15px; }
-.communityboard .cmtlist .cmt { font-size: 20px; }
+.communityboard .cmtbox #cmtFrm .cmttext { resize: none; }
+.communityboard .cmtbox #cmtFrm .cmtbtn { height: 79px; }
+.communityboard #cmtlist { margin-top: 15px; }
+.communityboard #cmtlist .cmtlistDiv { margin-bottom: 10px; }
+.communityboard #cmtlist .cmtlistDiv .cmtRegdt { font-size: 13px; border-bottom: 1px solid #d3d3d3; padding-bottom: 10px; }
+.communityboard #cmtlist .cmtlistDiv .cmt { font-size: 20px; }

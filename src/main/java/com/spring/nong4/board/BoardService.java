@@ -50,6 +50,7 @@ public class BoardService {
         int write = mapper.friendWrite(param);
         map.put("data1",write);
 
+
         if(imgArr == null && param.getTitle() == null && param.getCtnt() == null) { return null; }
 
         // 파일 업로드
@@ -88,6 +89,7 @@ public class BoardService {
         return map;
     }
 
+
     public Map<String,Object> boardDetail(BoardDomain param, BoardCmtDomain cmtParam, BoardImgEntity imgParam) {
         param.setIuser(auth.getLoginUserPk());
         Map<String,Object> map = new HashMap<>();
@@ -103,5 +105,9 @@ public class BoardService {
     public int insCmt(BoardCmtDomain param){
         param.setIuser(auth.getLoginUserPk());
         return cmtMapper.insCmt(param);
+    }
+
+    public List<BoardCmtDomain> cmtList(BoardCmtDomain param){
+        return cmtMapper.cmtList(param);
     }
 }
