@@ -48,7 +48,7 @@ public class BoardService {
         if(imgArr == null && param.getTitle() == null && param.getCtnt() == null) { return null; }
 
         int write = mapper.friendWrite(param);
-        System.out.println("write : " + mapper.friendWrite(param));
+
         System.out.println("imgArr : "+imgArr);
         System.out.println("getIboard" +param.getIboard());
 
@@ -90,17 +90,20 @@ public class BoardService {
         return map;
     }
 
-    public Map<String,Object> boardDetail(BoardDomain param, BoardCmtDomain cmtParam) {
+    public Map<String,Object> boardDetail(BoardDomain param) {
 
         Map<String,Object> map = new HashMap<>();
 
         map.put("detail", mapper.boardDetail(param));
-        map.put("cmt", cmtMapper.cmtList(cmtParam));
         return map;
     }
 
     public int insCmt(BoardCmtDomain param){
         param.setIuser(auth.getLoginUserPk());
         return cmtMapper.insCmt(param);
+    }
+
+    public List<BoardCmtDomain> cmtList(BoardCmtDomain param){
+        return cmtMapper.cmtList(param);
     }
 }

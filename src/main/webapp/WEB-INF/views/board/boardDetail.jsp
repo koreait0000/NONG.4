@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication property="principal.user" var="auth"></sec:authentication>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <div class="background">
@@ -50,24 +51,20 @@
                         <div>${detail.userNick}</div>
                         <div>${detail.regdt}</div>
                     </div>
+                    <c:if test="${auth.iuser eq detail.iuser}">
+                        <div>
+                            <span>삭제버튼 만들거임</span><span>수정버튼 만들거임</span>
+                        </div>
+                    </c:if>
                     <div class="ctnt">${detail.ctnt}</div>
                 </div>
                 <div class="cmtbox">
-                    <form action="insCmt" method="post">
-                        <input type="hidden" name="iboard" value="${param.iboard}">
-                        <textarea cols="120" rows="5" class="cmttext" name="cmt" placeholder="댓글을 입력하세요 ※위치 맞춰야함"></textarea>
-                        <input type="submit" class="cmtbtn" value="댓글달기">
+                    <form id="cmtFrm" onsubmit="return false;">
+                        <textarea cols="120" rows="5" class="cmttext" id="cmt" placeholder="댓글을 입력하세요 ※위치 맞춰야함"></textarea>
+                        <input type="button" class="cmtbtn" value="댓글달기" onclick="insCmt();">
                     </form>
                 </div>
-                <div class="cmtlist">
-                    <c:forEach items="${cmt}" var="cmt">
-                        <div>
-                            <div class="cmtUserNick">${cmt.userNick}</div>
-                            <div class="cmt">${cmt.cmt}</div>
-                            <div class="cmtRegdt">${cmt.regdt}</div>
-                        </div>
-                    </c:forEach>
-                </div>
+                <div id="cmtList" data-iboard="${param.iboard}"></div>
             </div>
         </div>
     </div>

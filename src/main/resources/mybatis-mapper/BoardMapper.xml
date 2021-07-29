@@ -26,7 +26,7 @@
     ON A.iuser = B.iuser;
     </select>
 
-    <insert id="friendWrite">
+    <insert id="friendWrite" useGeneratedKeys="true" keyProperty="iboard">
         INSERT INTO
             t_board
         (title
@@ -37,7 +37,7 @@
         (#{title}
         ,#{ctnt}
         ,#{iuser}
-        ,#{provider});
+        ,#{provider})
     </insert>
 
     <insert id="friendWriteImg">
@@ -56,7 +56,7 @@
              , A.title
              , A.ctnt
              , B.nick AS userNick
-             , B.regdt
+             , A.regdt
              , A.provider
         FROM t_board A
         INNER JOIN t_user B
@@ -78,6 +78,7 @@
             AND A.title LIKE CONCAT('%'+#{scri.keyword}+'%')
             OR   A.ctnt LIKE CONCAT('%',#{scri.keyword},'%')
         </if>
+        GROUP BY A.iboard DESC
         LIMIT #{scri.pageStart} , #{scri.perPageNum}
     </select>
     <select id="countBoardList" resultType="Integer">
