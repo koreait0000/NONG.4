@@ -51,6 +51,11 @@
                         <div>${detail.regdt}</div>
                     </div>
                     <div class="ctnt">${detail.ctnt}</div>
+                    <c:forEach items="${img}" var="img">
+                        <div>
+                           <div> ${img.iboard}</div>
+                        </div>
+                    </c:forEach>
                 </div>
                 <div class="cmtbox">
                     <form action="insCmt" method="post">

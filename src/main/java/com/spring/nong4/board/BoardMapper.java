@@ -21,4 +21,6 @@ public interface BoardMapper {
     int countBoardList(BoardDomain param);
 
     BoardDomain boardDetail(BoardDomain param);
+
+    List<BoardImgEntity> selBoardImgList(BoardImgEntity param);
 }

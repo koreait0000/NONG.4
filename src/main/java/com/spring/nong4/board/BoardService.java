@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,13 +46,11 @@ public class BoardService {
 
     public Map<String, Object> friendWrite(BoardDomain param, MultipartFile[] imgArr) {
         Map<String, Object> map = new HashMap<>();
-        if(imgArr == null && param.getTitle() == null && param.getCtnt() == null) { return null; }
 
         int write = mapper.friendWrite(param);
-        System.out.println("write : " + mapper.friendWrite(param));
-        System.out.println("imgArr : "+imgArr);
-        System.out.println("getIboard" +param.getIboard());
+        map.put("data1",write);
 
+        if(imgArr == null && param.getTitle() == null && param.getCtnt() == null) { return null; }
 
         // 파일 업로드
         if(param.getIboard() > 0 && imgArr != null && imgArr.length > 0) {
@@ -69,7 +68,6 @@ public class BoardService {
                 }
             }
         }
-        map.put("data",write);
         return map;
     }
 
@@ -90,12 +88,15 @@ public class BoardService {
         return map;
     }
 
-    public Map<String,Object> boardDetail(BoardDomain param, BoardCmtDomain cmtParam) {
-
+    public Map<String,Object> boardDetail(BoardDomain param, BoardCmtDomain cmtParam, BoardImgEntity imgParam) {
+        param.setIuser(auth.getLoginUserPk());
         Map<String,Object> map = new HashMap<>();
+        System.out.println("provider Service : "+param.getProvider());
 
         map.put("detail", mapper.boardDetail(param));
+        map.put("img", mapper.selBoardImgList(imgParam));
         map.put("cmt", cmtMapper.cmtList(cmtParam));
+        System.out.println("dkdkdkd : " + mapper.selBoardImgList(imgParam));
         return map;
     }
 
