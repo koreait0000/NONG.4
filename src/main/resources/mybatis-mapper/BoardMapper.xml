@@ -3,6 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spring.nong4.board.BoardMapper">
+<!--    <resultMap id="BoardDetailDomainMap" type="BoardDetailDomain">-->
+<!--        <result property="iboard" column="iboard"></result>-->
+<!--        <collection property="imgList" column="iboard" select="selBoardImgList"></collection>-->
+<!--        <collection property="cmtList" column="iboard" select="com.spring.nong4.cmt.BoardCmtMapper.cmtList"></collection>-->
+<!--    </resultMap>-->
     <insert id="freeBoard">
         INSERT INTO
             t_board
@@ -26,6 +31,8 @@
     ON A.iuser = B.iuser;
     </select>
 
+<!--keyProperty는 insert를 하고 동시에 해당 값이 필요한 경우 사용한다 useGeneratedKeys도 true를 줘야함.-->
+
     <insert id="friendWrite" useGeneratedKeys="true" keyProperty="iboard">
         INSERT INTO
             t_board
@@ -48,7 +55,6 @@
         ( #{iboard}
         , #{img}
         )
-
     </insert>
 
     <select id="friendList" resultType="BoardDomain">
@@ -78,8 +84,8 @@
             AND A.title LIKE CONCAT('%'+#{scri.keyword}+'%')
             OR   A.ctnt LIKE CONCAT('%',#{scri.keyword},'%')
         </if>
-        GROUP BY A.iboard DESC
-        LIMIT #{scri.pageStart} , #{scri.perPageNum}
+        ORDER BY A.iboard DESC
+        LIMIT #{scri.pageStart} , #{scri.perPageNum};
     </select>
     <select id="countBoardList" resultType="Integer">
         SELECT COUNT(*)
@@ -95,9 +101,19 @@
              , B.nick AS userNick
              , B.regdt
              , B.iuser
+             , C.img
         FROM t_board A
         INNER JOIN t_user B
-        ON A.iuser = B.iuser
-        WHERE iboard = #{iboard}
+        ON A.iuser  = B.iuser
+        INNER JOIN t_board_img C
+        ON A.iboard = C.iboard
+        WHERE A.iboard = #{iboard}
+    </select>
+    <select id="selBoardImgList" resultType="BoardImgEntity">
+    SELECT iboardimg
+         , iboard
+         , img
+    FROM   t_board_img
+    WHERE  iboard = #{iboard}
     </select>
 </mapper>

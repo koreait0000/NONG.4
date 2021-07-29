@@ -57,7 +57,8 @@ public class BoardController {
     @PostMapping("/friendBoard")
     public String friendWrite(@RequestParam(value="provider") String provider, BoardDomain param, MultipartFile[] imgArr,Model model ) {
         param.setIuser(auth.getLoginUserPk());
-        System.out.println("provider : "+param.getProvider());
+        System.out.println("imgArr : "+ imgArr);
+        System.out.println("imgArr : "+ imgArr.length);
         model.addAllAttributes(service.friendWrite(param,imgArr));
         return "redirect:/board/friendBoardList?provider=" + provider;
     }
@@ -69,8 +70,9 @@ public class BoardController {
     }
 
     @GetMapping("/boardDetail")
-    public String boardDetail(BoardDomain param, Model model){
-        model.addAllAttributes(service.boardDetail(param));
+    public String boardDetail(BoardDomain param, BoardCmtDomain cmtParam, BoardImgEntity imgParam, Model model){
+        model.addAllAttributes(service.boardDetail(param, cmtParam, imgParam));
+
         return "board/boardDetail";
     }
 

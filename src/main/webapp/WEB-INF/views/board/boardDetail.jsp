@@ -57,6 +57,11 @@
                         </div>
                     </c:if>
                     <div class="ctnt">${detail.ctnt}</div>
+                    <c:forEach items="${img}" var="img">
+                        <div>
+                           <div> ${img.iboard}</div>
+                        </div>
+                    </c:forEach>
                 </div>
                 <div class="cmtbox">
                     <form id="cmtFrm" onsubmit="return false;">
