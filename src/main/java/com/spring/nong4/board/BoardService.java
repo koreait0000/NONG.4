@@ -1,6 +1,8 @@
 package com.spring.nong4.board;
 
 import com.spring.nong4.board.model.*;
+import com.spring.nong4.cmt.BoardCmtMapper;
+import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.common.MyFileUtils;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
@@ -17,6 +19,7 @@ import java.util.Map;
 public class BoardService {
 
     @Autowired private BoardMapper mapper;
+    @Autowired private BoardCmtMapper cmtMapper;
     @Autowired private IAuthenticationFacade auth;
     @Autowired private MyFileUtils MyFileUtils;
 
@@ -87,8 +90,17 @@ public class BoardService {
         return map;
     }
 
-    public BoardDomain boardDetail(BoardDomain param){
+    public Map<String,Object> boardDetail(BoardDomain param, BoardCmtDomain cmtParam) {
 
-        return mapper.boardDetail(param);
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("detail", mapper.boardDetail(param));
+        map.put("cmt", cmtMapper.cmtList(cmtParam));
+        return map;
+    }
+
+    public int insCmt(BoardCmtDomain param){
+        param.setIuser(auth.getLoginUserPk());
+        return cmtMapper.insCmt(param);
     }
 }

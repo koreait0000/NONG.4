@@ -1,6 +1,7 @@
 package com.spring.nong4.board;
 
 import com.spring.nong4.board.model.*;
+import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.security.IAuthenticationFacade;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +68,15 @@ public class BoardController {
         return "board/friendBoardList";
     }
 
-    @GetMapping("boardDetail")
-    public String boardDetail(BoardDomain param, Model model){
-        model.addAttribute("detail", service.boardDetail(param));
-        System.out.println(service.boardDetail(param).getUserNick());
+    @GetMapping("/boardDetail")
+    public String boardDetail(BoardDomain param, BoardCmtDomain cmtParam, Model model){
+        model.addAllAttributes(service.boardDetail(param, cmtParam));
         return "board/boardDetail";
+    }
+
+    @PostMapping("/insCmt")
+    public String insCmt(BoardCmtDomain param){
+        service.insCmt(param);
+        return "redirect:boardDetail?iboard=" + param.getIboard();
     }
 }

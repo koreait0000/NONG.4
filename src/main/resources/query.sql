@@ -21,6 +21,15 @@ CREATE TABLE t_board(
   FOREIGN KEY (iuser) REFERENCES t_user (iuser)
 );
 
+CREATE TABLE t_cmt(
+  icmt INT UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '댓글번호',
+  iuser INT UNSIGNED COMMENT '회원번호',
+  iboard INT UNSIGNED COMMENT '게시물번호',
+  cmt VARCHAR(2000) NOT NULL COMMENT '댓글내용',
+  regdt DATETIME DEFAULT NOW() COMMENT '작성 날짜',
+  FOREIGN KEY (iuser) REFERENCES t_user (iuser),
+  FOREIGN KEY (iboard) REFERENCES t_board (iboard)
+);
 CREATE TABLE t_board_img (
  iboardimg INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '이미지번호',
  iboard INT UNSIGNED NOT NULL COMMENT '게시물번호',
@@ -29,4 +38,4 @@ CREATE TABLE t_board_img (
  FOREIGN KEY(iboard) REFERENCES t_board(iboard)
 );
 
- 
+

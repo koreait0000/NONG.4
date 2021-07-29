@@ -7,7 +7,7 @@
 .kategorie img { border-radius: 10px; height: 100px; width: 100px; }
 .searchtxt { margin-top: 50px; margin-bottom: 2px; height: 30px; }
 .kategorie .writeBtn { height: 40px; font-size: 16px; background-color: darkgreen; }
-.kategorie .writeBtn a { color: white; }
+.kategorie a .writeBtn { color: white; }
 .kategorie .searchtxt, .writeBtn { width: 150px; }
 .kategorie .kategorieitem1 { margin-top: 80px; }
 .kategorie .kategorieitem2 { margin-top: 100px; }
