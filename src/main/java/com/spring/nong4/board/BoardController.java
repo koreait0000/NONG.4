@@ -70,8 +70,8 @@ public class BoardController {
     }
 
     @GetMapping("/boardDetail")
-    public String boardDetail(BoardDomain param, BoardCmtDomain cmtParam, BoardImgEntity imgParam, Model model){
-        model.addAllAttributes(service.boardDetail(param, cmtParam, imgParam));
+    public String boardDetail(BoardDomain param, BoardImgEntity imgParam, Model model) {
+        model.addAllAttributes(service.boardDetail(param, imgParam));
 
         return "board/boardDetail";
     }
@@ -94,4 +94,5 @@ public class BoardController {
         param.setIboard(iboard);
         return service.cmtList(param);
     }
+
 }

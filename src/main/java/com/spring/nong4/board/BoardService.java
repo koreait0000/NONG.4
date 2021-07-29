@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,15 +89,12 @@ public class BoardService {
     }
 
 
-    public Map<String,Object> boardDetail(BoardDomain param, BoardCmtDomain cmtParam, BoardImgEntity imgParam) {
+    public Map<String,Object> boardDetail(BoardDomain param, BoardImgEntity imgParam) {
         param.setIuser(auth.getLoginUserPk());
         Map<String,Object> map = new HashMap<>();
-        System.out.println("provider Service : "+param.getProvider());
-
         map.put("detail", mapper.boardDetail(param));
         map.put("img", mapper.selBoardImgList(imgParam));
-        map.put("cmt", cmtMapper.cmtList(cmtParam));
-        System.out.println("dkdkdkd : " + mapper.selBoardImgList(imgParam));
+        System.out.println("img111 : " + mapper.selBoardImgList(imgParam));
         return map;
     }
 

@@ -59,7 +59,7 @@
                     <div class="ctnt">${detail.ctnt}</div>
                     <c:forEach items="${img}" var="img">
                         <div>
-                           <div> ${img.iboard}</div>
+                           <div> <img src="/pic/board/${detail.iboard}/${img.img}"></div>
                         </div>
                     </c:forEach>
                 </div>
