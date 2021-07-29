@@ -16,11 +16,4 @@
 .community-top { border-bottom: 2px solid #d3d3d3; height: 50px; }
 .communityboard { margin: 30px;}
 .communityboard .title { font-size: 30px; }
-.communityboard .userinfo { margin-top: 20px; border-bottom: 1px solid #d3d3d3; padding-bottom: 15px; }
-.communityboard .ctnt { margin-top: 20px; }
-.communityboard .cmtbox { margin-top: 40px; }
-.communityboard .cmtbox .cmttext { resize: none; }
-.communityboard .cmtbox .cmtbtn { height: 79px; }
-.communityboard .cmtlist { margin-top: 15px; }
-.communityboard .cmtlist .cmtRegdt { font-size: 13px; border-bottom: 1px solid #d3d3d3; padding-bottom: 15px; }
-.communityboard .cmtlist .cmt { font-size: 20px; }
+.communityboard .userinfo { margin-top: 10px; border-bottom: 1px solid #d3d3d3; }
