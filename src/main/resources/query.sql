@@ -30,6 +30,7 @@ CREATE TABLE t_cmt(
   FOREIGN KEY (iuser) REFERENCES t_user (iuser),
   FOREIGN KEY (iboard) REFERENCES t_board (iboard)
 );
+
 CREATE TABLE t_board_img (
  iboardimg INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '이미지번호',
  iboard INT UNSIGNED NOT NULL COMMENT '게시물번호',

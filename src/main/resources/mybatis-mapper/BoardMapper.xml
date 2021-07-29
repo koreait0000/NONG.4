@@ -101,19 +101,17 @@
              , B.nick AS userNick
              , B.regdt
              , B.iuser
-             , C.img
         FROM t_board A
         INNER JOIN t_user B
         ON A.iuser  = B.iuser
-        INNER JOIN t_board_img C
-        ON A.iboard = C.iboard
         WHERE A.iboard = #{iboard}
     </select>
+
     <select id="selBoardImgList" resultType="BoardImgEntity">
     SELECT iboardimg
          , iboard
          , img
-    FROM   t_board_img
-    WHERE  iboard = #{iboard}
+    FROM t_board_img
+    WHERE iboard = #{iboard}
     </select>
 </mapper>
