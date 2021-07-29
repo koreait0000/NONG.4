@@ -1,6 +1,8 @@
 package com.spring.nong4.board;
 
 import com.spring.nong4.board.model.*;
+import com.spring.nong4.cmt.BoardCmtMapper;
+import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.common.MyFileUtils;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,7 @@ import java.util.Map;
 public class BoardService {
 
     @Autowired private BoardMapper mapper;
+    @Autowired private BoardCmtMapper cmtMapper;
     @Autowired private IAuthenticationFacade auth;
     @Autowired private MyFileUtils MyFileUtils;
 
@@ -42,13 +46,11 @@ public class BoardService {
 
     public Map<String, Object> friendWrite(BoardDomain param, MultipartFile[] imgArr) {
         Map<String, Object> map = new HashMap<>();
-        if(imgArr == null && param.getTitle() == null && param.getCtnt() == null) { return null; }
 
         int write = mapper.friendWrite(param);
-        System.out.println("write : " + mapper.friendWrite(param));
-        System.out.println("imgArr : "+imgArr);
-        System.out.println("getIboard" +param.getIboard());
+        map.put("data1",write);
 
+        if(imgArr == null && param.getTitle() == null && param.getCtnt() == null) { return null; }
 
         // 파일 업로드
         if(param.getIboard() > 0 && imgArr != null && imgArr.length > 0) {
@@ -66,7 +68,6 @@ public class BoardService {
                 }
             }
         }
-        map.put("data",write);
         return map;
     }
 
@@ -87,8 +88,20 @@ public class BoardService {
         return map;
     }
 
-    public BoardDomain boardDetail(BoardDomain param){
+    public Map<String,Object> boardDetail(BoardDomain param, BoardCmtDomain cmtParam, BoardImgEntity imgParam) {
+        param.setIuser(auth.getLoginUserPk());
+        Map<String,Object> map = new HashMap<>();
+        System.out.println("provider Service : "+param.getProvider());
 
-        return mapper.boardDetail(param);
+        map.put("detail", mapper.boardDetail(param));
+        map.put("img", mapper.selBoardImgList(imgParam));
+        map.put("cmt", cmtMapper.cmtList(cmtParam));
+        System.out.println("dkdkdkd : " + mapper.selBoardImgList(imgParam));
+        return map;
+    }
+
+    public int insCmt(BoardCmtDomain param){
+        param.setIuser(auth.getLoginUserPk());
+        return cmtMapper.insCmt(param);
     }
 }

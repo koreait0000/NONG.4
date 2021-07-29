@@ -1,6 +1,7 @@
 package com.spring.nong4.board;
 
 import com.spring.nong4.board.model.*;
+import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.security.IAuthenticationFacade;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,8 @@ public class BoardController {
     @PostMapping("/friendBoard")
     public String friendWrite(@RequestParam(value="provider") String provider, BoardDomain param, MultipartFile[] imgArr,Model model ) {
         param.setIuser(auth.getLoginUserPk());
-        System.out.println("provider : "+param.getProvider());
+        System.out.println("imgArr : "+ imgArr);
+        System.out.println("imgArr : "+ imgArr.length);
         model.addAllAttributes(service.friendWrite(param,imgArr));
         return "redirect:/board/friendBoardList?provider=" + provider;
     }
@@ -67,10 +69,15 @@ public class BoardController {
         return "board/friendBoardList";
     }
 
-    @GetMapping("boardDetail")
-    public String boardDetail(BoardDomain param, Model model){
-        model.addAttribute("detail", service.boardDetail(param));
-        System.out.println(service.boardDetail(param).getUserNick());
+    @GetMapping("/boardDetail")
+    public String boardDetail(BoardDomain param, BoardCmtDomain cmtParam, BoardImgEntity imgParam, Model model){
+        model.addAllAttributes(service.boardDetail(param, cmtParam, imgParam));
         return "board/boardDetail";
+    }
+
+    @PostMapping("/insCmt")
+    public String insCmt(BoardCmtDomain param){
+        service.insCmt(param);
+        return "redirect:boardDetail?iboard=" + param.getIboard();
     }
 }
