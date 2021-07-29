@@ -29,7 +29,7 @@
             <div class="community-top"></div>
             <div class="communityboard">
                 <div>
-                    <form action="friendBoard" method="post">
+                    <form action="friendBoard" method="post" enctype="multipart/form-data">
                         <label for="provider"></label>
                         <select id="provider" name="provider" size="1">
                             <option value="freedom">자유게시판</option>
@@ -44,6 +44,9 @@
                             <textarea name="ctnt" placeholder="내용" ></textarea>
                         </div>
                         <div>
+                            <input type="file" name="img" multiple accept="image/*">
+                        </div>
+                        <div>
                             <input type="submit" value="글쓰기">
                             <input type="reset" value="초기화">
                         </div>
@@ -54,3 +57,5 @@
     </div>
     <div class="background-right"></div>
 </div>
+</body>
+</html>

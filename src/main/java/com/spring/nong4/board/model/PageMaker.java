@@ -38,8 +38,6 @@ public class PageMaker {
 
     public String makeSearch(int page) {
         UriComponents uriComponents = UriComponentsBuilder.newInstance()
-                .queryParam("provider",page)
-                .queryParam("page",cri.getPage())
                 .queryParam("perPageNum",cri.getPerPageNum())
                 .queryParam("searchType",((SearchCriteria)cri).getSearchType())
                 .queryParam("keyword",encoding(((SearchCriteria)cri).getKeyword()))

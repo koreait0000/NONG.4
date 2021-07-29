@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -54,10 +55,10 @@ public class BoardController {
     public String friendWrite() { return "board/friendBoard"; }
 
     @PostMapping("/friendBoard")
-    public String friendWrite(@RequestParam(value="provider") String provider, BoardDomain param) {
+    public String friendWrite(@RequestParam(value="provider") String provider, BoardDomain param, MultipartFile[] imgArr,Model model ) {
         param.setIuser(auth.getLoginUserPk());
         System.out.println("provider : "+param.getProvider());
-        service.friendWrite(param);
+        model.addAllAttributes(service.friendWrite(param,imgArr));
         return "redirect:/board/friendBoardList?provider=" + provider;
     }
 
