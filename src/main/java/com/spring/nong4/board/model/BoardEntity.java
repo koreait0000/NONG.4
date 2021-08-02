@@ -11,5 +11,6 @@ public class BoardEntity {
     private String regdt;    // 게시물 작성 날짜
     private String provider; // 게시물 성격 분리
     private String delYN;    // 게시물 삭제 유무
+    private int hitCount;    // 게시판 조회수
 
 }

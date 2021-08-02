@@ -106,6 +106,8 @@ public class BoardService {
     public Map<String,Object> boardDetail(BoardDomain param, BoardImgEntity imgParam) {
         param.setIuser(auth.getLoginUserPk());
         Map<String,Object> map = new HashMap<>();
+        map.put("hit",mapper.detailHitCount(param));
+        System.out.println(" 조회수 : "+param.getHitCount());
         map.put("detail", mapper.boardDetail(param));
         map.put("img", mapper.selBoardImgList(imgParam));
         return map;

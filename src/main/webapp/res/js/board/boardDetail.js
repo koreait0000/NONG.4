@@ -77,14 +77,10 @@ function boardUpd() {
                             break;
                         case 1:
                             console.log('titleInput real : ' + titleInput.value);
-                            cmtFrmElem.style.display      = 'block'; // 댓글 입력 div 활성화
-                            originTitleElem.style.display = 'block'; // 디테일 제목 div 활성화
-                            originCtntElem.style.display  = 'block'; // 디테일 내용 div 활성화
-                            updBtn.style.display   = 'block'; // 원래 수정 버튼 활성화
-                            realBtnU.style.display = 'none'   // 수정 trigger에 필요한 버튼 비활성하
+                            location.reload();
                             break;
-                    }
 
+                    }
                 })
         })
 

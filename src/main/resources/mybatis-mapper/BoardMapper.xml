@@ -57,6 +57,12 @@
         )
     </insert>
 
+    <update id="detailHitCount">
+        UPDATE t_board
+        SET    hitCount = hitCount + 1
+        WHERE    iboard = #{iboard}
+    </update>
+
     <update id="friendUpdate">
         UPDATE t_board
         SET    title = #{title}
