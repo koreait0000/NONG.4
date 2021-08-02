@@ -57,10 +57,28 @@ public class BoardController {
     @PostMapping("/friendBoard")
     public String friendWrite(@RequestParam(value="provider") String provider, BoardDomain param, MultipartFile[] imgArr,Model model ) {
         param.setIuser(auth.getLoginUserPk());
-        System.out.println("imgArr : "+ imgArr);
-        System.out.println("imgArr : "+ imgArr.length);
         model.addAllAttributes(service.friendWrite(param,imgArr));
         return "redirect:/board/friendBoardList?provider=" + provider;
+    }
+
+    @GetMapping("/boardUpdate")
+    public String boardUpdate() {
+        return "board/boardUpdate";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/boardUpdate", method = RequestMethod.PUT)
+    public Map<String,Object> boardUpdate(@RequestBody BoardDomain param, Model model) {
+        model.addAllAttributes(service.friendUpdate(param));
+        System.out.println("title : "+param.getTitle());
+        return service.friendUpdate(param);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/boardDelete",method = RequestMethod.DELETE)
+    public Map<String,Object> boardDelete(@RequestBody BoardDomain param, Model model) {
+        model.addAllAttributes(service.friendDelete(param));
+        System.out.println("title! : "+service.friendDelete(param));
+        return service.friendDelete(param);
     }
 
     @GetMapping("/friendBoardList")

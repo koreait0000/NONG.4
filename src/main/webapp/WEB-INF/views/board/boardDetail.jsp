@@ -46,17 +46,23 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <div class="title">${detail.title}</div>
-                    <div class="userinfo">
-                        <div>${detail.userNick}</div>
-                        <div>${detail.regdt}</div>
+                    <div id="updParentT">
+                        <div id="title">${detail.title}</div>
                     </div>
-                    <c:if test="${auth.iuser eq detail.iuser}">
-                        <div>
-                            <span>삭제버튼 만들거임</span><span>수정버튼 만들거임</span>
+                        <div class="userinfo">
+                            <div>${detail.userNick}</div>
+                            <div>${detail.regdt}</div>
                         </div>
-                    </c:if>
-                    <div class="ctnt">${detail.ctnt}</div>
+
+                        <c:if test="${auth.iuser eq detail.iuser}">
+                            <div>
+                                <form id="boardMod" data-iboard="${param.iboard}" data-provider="${detail.provider}" data-title="${detail.title}" data-ctnt="${detail.ctnt}" onsubmit="return false;">
+                                </form>
+                            </div>
+                        </c:if>
+                    <div id="updParentC">
+                        <div id="ctnt">${detail.ctnt}</div>
+                    </div>
                     <c:forEach items="${img}" var="img">
                         <div>
                            <div> <img src="/pic/board/${detail.iboard}/${img.img}"></div>

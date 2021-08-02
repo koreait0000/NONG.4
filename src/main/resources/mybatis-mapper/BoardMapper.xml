@@ -57,6 +57,20 @@
         )
     </insert>
 
+    <update id="friendUpdate">
+        UPDATE t_board
+        SET    title = #{title}
+        ,      ctnt  = #{ctnt}
+        WHERE iboard = #{iboard}
+    </update>
+
+
+    <update id="friendDelete">
+        UPDATE t_board
+        SET    delYN  = 'Y'
+        WHERE  iboard = #{iboard};
+    </update>
+
     <select id="friendList" resultType="BoardDomain">
         SELECT A.iboard
              , A.title
@@ -84,6 +98,7 @@
             AND A.title LIKE CONCAT('%'+#{scri.keyword}+'%')
             OR   A.ctnt LIKE CONCAT('%',#{scri.keyword},'%')
         </if>
+            AND  A.delYN = 'N'
         ORDER BY A.iboard DESC
         LIMIT #{scri.pageStart} , #{scri.perPageNum};
     </select>
