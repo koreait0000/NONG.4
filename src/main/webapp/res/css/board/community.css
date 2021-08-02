@@ -2,22 +2,22 @@
 .background-left { width: 320px; }
 .background-center { background-color: white;  display: flex; flex-grow: 1;}
 .background-right { width: 320px; }
-.kategorie { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding: 30px 20px; }
-.kategorie img { border-radius: 10px; height: 100px; width: 100px; }
 
 .search-input{ position: relative; height: 40px; border: 1px solid #333; box-sizing: border-box; margin-right: 10%; margin-left: 10%; margin-bottom: 10px}
 .searchtxt{ border: 0 solid black; outline: none; width: 70%; height: 100%; font-size: large;}
 .fa-search{ position: absolute; overflow: hidden; font-size: 25px; margin-top: 6px;}
 
-.kategorie .writeBtn { height: 40px; font-size: 16px; background-color: darkgreen; }
-.kategorie .writeBtn { width: 80%; }
-.kategorie a .writeBtn { color: white; }
+.kategorie { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding: 30px 20px; }
+.kategorie img { border-radius: 10px; height: 100px; width: 100px; }
+.kategorie .writeBtn { width: 80%; height: 40px; font-size: 16px; background-color: darkgreen; }
+.kategorie .writeBtn a{ color: white; }
 .kategorie .kategorieitem1 { margin-top: 80px; }
 .kategorie .kategorieitem2 { margin-top: 100px; }
 .kategorie .title { font-size: 30px; font-weight: bold; }
+
 .community { flex-grow: 1; }
 .community-top { border-bottom: 2px solid #d3d3d3; height: 50px; }
-.communityboard {}
+
 .level { height: 320px; }
 .level .swiper-container { height: 100%; width: 900px; }
 .level .swiper-slide { display: flex; justify-content: center; align-items: center; }
