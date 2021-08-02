@@ -27,12 +27,14 @@ function boardUpd() {
     realBtnU.innerText     = '진짜수정';
     realBtnU.style.display = 'none';
 
+    ctntInput.style.width = 300;
+    ctntInput.style.height = 200;
 
     updBtn.addEventListener('click',() => {
         cmtFrmElem.style.display      = 'none';
         originTitleElem.style.display = 'none';
         originCtntElem.style.display  = 'none';
-
+        cmtListElem.style.display     = 'none';
         updBtn.style.display   = 'none';
         realBtnU.style.display = 'block'
 
@@ -77,11 +79,7 @@ function boardUpd() {
                             break;
                         case 1:
                             console.log('titleInput real : ' + titleInput.value);
-                            cmtFrmElem.style.display      = 'block'; // 댓글 입력 div 활성화
-                            originTitleElem.style.display = 'block'; // 디테일 제목 div 활성화
-                            originCtntElem.style.display  = 'block'; // 디테일 내용 div 활성화
-                            updBtn.style.display   = 'block'; // 원래 수정 버튼 활성화
-                            realBtnU.style.display = 'none'   // 수정 trigger에 필요한 버튼 비활성하
+                            location.reload();
                             break;
                     }
 
@@ -124,16 +122,14 @@ function boardUpd() {
 
     boardModElem.append(updSpan,delSpan);
 }
-function boardDel() {
 
-}
-
-
+/**
 function enterInsCmt(){
     if(window.event.keyCode == 13){
         insCmt();
     }
 }
+**/
 
 function insCmt() {
     var cmtVal = cmtFrmElem.cmt.value;
@@ -203,7 +199,21 @@ function makeCmtElemList(data) {
         userNickDiv.append(item.userNick);
         cmtDiv.append(item.cmt);
         regdtDiv.append(item.regdt);
+        if(item.iuser == cmtListElem.dataset.iuser){
+            var cmtModSpan = document.createElement('span');
+            var updCmtBtn = document.createElement('button');
+            var delCmtBtn = document.createElement('button');
 
+            updCmtBtn.innerText = '수정';
+            delCmtBtn.innerText = '삭제';
+            cmtModSpan.append(updCmtBtn);
+            cmtModSpan.append(delCmtBtn);
+            cmtDiv.append(cmtModSpan);
+
+            updCmtBtn.addEventListener('click', () => {
+
+            });
+        }
         cmtListDiv.append(userNickDiv);
         cmtListDiv.append(cmtDiv);
         cmtListDiv.append(regdtDiv);

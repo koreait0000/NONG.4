@@ -75,7 +75,7 @@
                         <input type="button" class="cmtbtn" value="댓글달기" onclick="insCmt();">
                     </form>
                 </div>
-                <div id="cmtList" data-iboard="${param.iboard}"></div>
+                <div id="cmtList" data-iboard="${param.iboard}" data-iuser="${auth.iuser}"></div>
             </div>
         </div>
     </div>
