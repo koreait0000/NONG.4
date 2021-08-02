@@ -113,8 +113,8 @@
              , A.title
              , A.ctnt
              , A.provider
+             , A.regdt
              , B.nick AS userNick
-             , B.regdt
              , B.iuser
         FROM t_board A
         INNER JOIN t_user B
