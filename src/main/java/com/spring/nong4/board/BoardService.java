@@ -71,6 +71,20 @@ public class BoardService {
         return map;
     }
 
+    public Map<String, Object> friendUpdate(BoardDomain param) {
+        param.setIuser(auth.getLoginUserPk());
+        Map<String, Object> map = new HashMap<>();
+        map.put("data",mapper.friendUpdate(param));
+        return map;
+    }
+
+    public Map<String,Object> friendDelete(BoardDomain param) {
+        param.setIuser(auth.getLoginUserPk());
+        Map<String, Object> map = new HashMap<>();
+        map.put("data",mapper.friendDelete(param));
+        return map;
+    }
+
     public Map<String,Object> friendList(BoardDomain param, SearchCriteria scri) {
         param.setIuser(auth.getLoginUserPk());
 
@@ -94,7 +108,6 @@ public class BoardService {
         Map<String,Object> map = new HashMap<>();
         map.put("detail", mapper.boardDetail(param));
         map.put("img", mapper.selBoardImgList(imgParam));
-        System.out.println("img111 : " + mapper.selBoardImgList(imgParam));
         return map;
     }
 
@@ -102,6 +115,7 @@ public class BoardService {
         param.setIuser(auth.getLoginUserPk());
         return cmtMapper.insCmt(param);
     }
+
 
     public List<BoardCmtDomain> cmtList(BoardCmtDomain param){
         return cmtMapper.cmtList(param);
