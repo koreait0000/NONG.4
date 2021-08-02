@@ -5,11 +5,14 @@ import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.security.IAuthenticationFacade;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +25,10 @@ public class BoardController {
     @Autowired private IAuthenticationFacade auth;
 
     @GetMapping("/home")
-    public String home() { return "board/home";}
+    public String home() {
+        System.out.println("로그인 시도중이다");
+        return "board/home";
+    }
 
 
     @GetMapping("/community")
@@ -88,7 +94,15 @@ public class BoardController {
     }
 
     @GetMapping("/boardDetail")
-    public String boardDetail(BoardDomain param, BoardImgEntity imgParam, Model model) {
+    public String boardDetail(HttpServletResponse response, @CookieValue (value="hitCount1", required = false) Cookie cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
+//        cookie = new Cookie("hit",null);
+//        cookie.setComment("게시글 조회 확인중");
+//        System.out.println("조회 작업중 : " + cookie.getComment());
+//        cookie.setMaxAge(60*60*24);
+//        response.addCookie(cookie);
+//        System.out.println("cookie : "+cookie);
+        System.out.println("con Hit : "+param.getHitCount());
+
         model.addAllAttributes(service.boardDetail(param, imgParam));
 
         return "board/boardDetail";

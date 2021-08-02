@@ -15,9 +15,7 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/login")
-    public String login(){
-        return "user/login";
-    }
+    public String login(){ return "user/login"; }
 
     @GetMapping("/join")
     public String join(){

@@ -17,6 +17,7 @@ public interface BoardMapper {
     int friendWriteImg(BoardImgEntity param);
     int friendUpdate(BoardDomain param);
     int friendDelete(BoardDomain param);
+    int detailHitCount(BoardDomain param);
 
     List<BoardDomain> friendList(@Param("param") BoardDomain param, @Param("scri") SearchCriteria scri);
 

@@ -31,6 +31,7 @@
             <div class="communityboard">
                 <div>
                     <div>
+                        조회수 : ${hit.hitCount}
                         <c:choose>
                             <c:when test="${detail.provider == 'freedom'}">
                                 <div>[자유게시판]</div>

@@ -81,8 +81,8 @@ function boardUpd() {
                             console.log('titleInput real : ' + titleInput.value);
                             location.reload();
                             break;
-                    }
 
+                    }
                 })
         })
 

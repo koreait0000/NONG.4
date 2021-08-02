@@ -20,7 +20,7 @@ public class AuthCheckIntercepter implements HandlerInterceptor {
         System.out.println("uri : " + uri);
 
 //        if(Arrays.asList(needLoginUriArr).contains(uri)) { // 만약 needLoginUriArr의 주소값이 존재한다면 로그인이 필요하다는 뜻.
-            UserEntity loginUser = (UserEntity) request.getSession().getAttribute("loginUser");
+        UserEntity loginUser = (UserEntity) request.getSession().getAttribute("loginUser");
 
             if(loginUser == null) { //
                 System.out.println("viewName  : " + modelAndView.getViewName()); // 원래 가려고 한 주소값이 담겨있다
