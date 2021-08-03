@@ -18,12 +18,12 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mysql://localhost:3308/nong4
     username: root
-    password: 1234
+    password: koreait
   servlet:
     multipart:
       max-file-size: 5MB
       max-request-size: 30MB
-      location: D:/springImg
+      location: A:/Java/JavaBackendClass/JavaBackendClass/springImg
   mvc:
     view:
       prefix: /WEB-INF/views/

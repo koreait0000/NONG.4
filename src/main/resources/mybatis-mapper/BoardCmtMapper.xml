@@ -19,6 +19,7 @@
         SELECT A.cmt
              , A.icmt
              , A.regdt
+             , A.iboard
              , B.nick AS userNick
              , B.iuser
         FROM t_cmt A
