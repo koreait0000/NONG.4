@@ -3,6 +3,7 @@ package com.spring.nong4.board;
 import com.spring.nong4.board.model.*;
 import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.security.IAuthenticationFacade;
+import com.spring.nong4.user.model.UserEntity;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
@@ -70,13 +71,15 @@ public class BoardController {
 
     @GetMapping("/boardDetail")
     public String boardDetail(HttpServletResponse response, @CookieValue (value="hitCount1", required = false) Cookie cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
-//        cookie = new Cookie("hit",null);
-//        cookie.setComment("게시글 조회 확인중");
-//        System.out.println("조회 작업중 : " + cookie.getComment());
-//        cookie.setMaxAge(60*60*24);
-//        response.addCookie(cookie);
-//        System.out.println("cookie : "+cookie);
-        System.out.println("con Hit : "+param.getHitCount());
+        UserEntity userParam = new UserEntity();
+        cookie = new Cookie("hit",userParam.getEmail());
+        cookie.setComment("게시글 조회 확인중");
+        System.out.println("조회 작업중 : " + cookie.getComment());
+        cookie.setMaxAge(60*60*24);
+        response.addCookie(cookie);
+
+        System.out.println("cookie : "+cookie);
+        System.out.println("email : "+userParam.getEmail());
 
         model.addAllAttributes(service.boardDetail(param, imgParam));
 
@@ -101,5 +104,4 @@ public class BoardController {
         param.setIboard(iboard);
         return service.cmtList(param);
     }
-
 }

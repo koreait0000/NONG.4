@@ -27,7 +27,7 @@ function boardUpd() {
     realBtnU.innerText     = '진짜수정';
     realBtnU.style.display = 'none';
 
-    ctntInput.style.width = 300;
+    ctntInput.style.width  = 300;
     ctntInput.style.height = 200;
 
     updBtn.addEventListener('click',() => {
@@ -199,7 +199,8 @@ function makeCmtElemList(data) {
         userNickDiv.append(item.userNick);
         cmtDiv.append(item.cmt);
         regdtDiv.append(item.regdt);
-        if(item.iuser == cmtListElem.dataset.iuser){
+
+        if(item.iuser === parseInt(cmtListElem.dataset.iuser)){
             var cmtModSpan = document.createElement('span');
             var updCmtBtn = document.createElement('button');
             var delCmtBtn = document.createElement('button');

@@ -100,11 +100,12 @@
              , A.ctnt
              , A.provider
              , A.regdt
+             , A.hitCount
              , B.nick AS userNick
              , B.iuser
         FROM t_board A
         INNER JOIN t_user B
-        ON A.iuser  = B.iuser
+        ON    A.iuser  = B.iuser
         WHERE A.iboard = #{iboard}
     </select>
 

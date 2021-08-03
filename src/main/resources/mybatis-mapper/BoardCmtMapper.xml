@@ -24,5 +24,6 @@
         INNER JOIN t_user B
         ON A.iuser = B.iuser
         WHERE iboard = #{iboard}
+        ORDER BY A.regdt DESC;
     </select>
 </mapper>

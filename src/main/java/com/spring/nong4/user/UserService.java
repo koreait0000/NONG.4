@@ -18,7 +18,6 @@ public class UserService {
 
     public int join(UserEntity param) {
         String authCd = secUtils.getRandomDigit(5);
-        System.out.println(param);
 
         //비밀번호 암호화
         String hashedPw = passwordEncoder.encode(param.getPw());
