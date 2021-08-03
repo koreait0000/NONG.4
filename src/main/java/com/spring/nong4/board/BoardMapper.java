@@ -11,15 +11,13 @@ import java.util.Map;
 @Mapper
 public interface BoardMapper {
     int auth(UserEntity param);
-    int freeBoard(BoardEntity param);
-    List<BoardEntity> freeBoardList();
-    int friendWrite(BoardDomain param);
-    int friendWriteImg(BoardImgEntity param);
-    int friendUpdate(BoardDomain param);
-    int friendDelete(BoardDomain param);
+    int boardWrite(BoardDomain param);
+    int boardWriteImg(BoardImgEntity param);
+    int boardUpdate(BoardDomain param);
+    int boardDelete(BoardDomain param);
     int detailHitCount(BoardDomain param);
 
-    List<BoardDomain> friendList(@Param("param") BoardDomain param, @Param("scri") SearchCriteria scri);
+    List<BoardDomain> mainBoardList(@Param("param") BoardDomain param, @Param("scri") SearchCriteria scri);
 
     int countBoardList(BoardDomain param);
 
