@@ -81,10 +81,11 @@
                         </div>
                     </c:forEach>
                 </div>
-                <div class="cmtbox">
+                <div class="cmt-box">
                     <form id="cmtFrm" onsubmit="return false;">
-                        <textarea cols="120" rows="5" class="cmttext" id="cmt" placeholder="댓글을 입력하세요 ※위치 맞춰야함"></textarea>
-                        <input type="button" class="cmtbtn" value="댓글달기" onclick="insCmt();">
+
+                        <textarea class="cmt-text" id="cmt" placeholder="댓글을 입력하세요 ※위치 맞춰야함"></textarea>
+                        <input type="button" class="cmt-btn" value="댓글달기" onclick="insCmt();">
                     </form>
                 </div>
                 <div id="cmtList" data-iboard="${param.iboard}" data-iuser="${auth.iuser}"></div>

@@ -1,4 +1,4 @@
-.background { height: 100%; background-image: url("/res/img/main.png"); display: flex;  background-repeat : no-repeat; background-size : cover; }
+.background { height:100%; background-image: url("/res/img/main.png"); display: flex;  background-repeat : no-repeat; background-size : cover; }
 .background-left { width: 320px; }
 .background-center { background-color: white;  display: flex; flex-grow: 1;}
 .background-right { width: 320px; }

@@ -1,15 +1,16 @@
-.background { height: 100%; background-image: url("/res/img/main.png"); display: flex;  background-repeat : no-repeat; background-size : cover; }
+.background { background-image: url("/res/img/main.png"); display: flex;  background-repeat : no-repeat; background-size : cover; }
 .background-left { width: 320px; }
 .background-center { background-color: white;  display: flex; flex-grow: 1;}
 .background-right { width: 320px; }
 
-.category { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding-top: 30px; }
-.category div { padding: 3px;}
+.search-input{ position: relative; height: 40px; border: 1px solid #333; box-sizing: border-box; margin-right: 10%; margin-left: 10%; margin-bottom: 10px}
+.search-txt{ border: 0 solid black; outline: none; width: 70%; height: 100%; font-size: large;}
+.fa-search{ position: absolute; overflow: hidden; font-size: 25px; margin-top: 6px;}
+
+.category { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding: 30px 20px; }
 .category img { border-radius: 10px; height: 100px; width: 100px; }
-.category .search-txt { margin-top: 50px; margin-bottom: 2px; height: 30px; }
-.category .writeBtn { height: 40px; font-size: 16px; background-color: darkgreen; }
-.category a .writeBtn { color: white; }
-.category .search-txt, .writeBtn { width: 150px; }
+.category .writeBtn { width: 80%; height: 40px; font-size: 16px; background-color: darkgreen; }
+.category .writeBtn a{ color: white; }
 .category .cate-event { margin-top: 80px; }
 .category .cate-board { margin-top: 100px; }
 .category .title { font-size: 30px; font-weight: bold; }
@@ -20,10 +21,10 @@
 .community-board .title { font-size: 30px; }
 .community-board .userinfo { margin-top: 20px; border-bottom: 1px solid #d3d3d3; padding-bottom: 15px; }
 .community-board .ctnt { margin-top: 20px; }
-.community-board .cmtbox { margin-top: 40px; }
-.community-board .cmtbox #cmtFrm .cmttext { resize: none; }
-.community-board .cmtbox #cmtFrm .cmtbtn { height: 79px; }
-.community-board #cmtlist { margin-top: 15px; }
-.community-board #cmtlist .cmtlistDiv { margin-bottom: 10px; }
-.community-board #cmtlist .cmtlistDiv .cmtRegdt { font-size: 13px; border-bottom: 1px solid #d3d3d3; padding-bottom: 10px; }
-.community-board #cmtlist .cmtlistDiv .cmt { font-size: 20px; }
+.community-board .cmt-box { margin-top: 40px; }
+.community-board .cmt-box #cmtFrm .cmt-text { resize: none; width: 90%; height: 80px; }
+.community-board .cmt-box #cmtFrm .cmt-btn { height: 80px; float: right;}
+.community-board #cmtList { margin-top: 15px; }
+.community-board #cmtList .cmtListDiv { margin-bottom: 10px; }
+.community-board #cmtList .cmtListDiv .cmtRegdt { font-size: 13px; border-bottom: 1px solid #d3d3d3; padding-bottom: 10px; }
+.community-board #cmtList .cmtListDiv .cmt { font-size: 20px; }

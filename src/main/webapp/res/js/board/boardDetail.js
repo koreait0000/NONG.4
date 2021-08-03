@@ -189,7 +189,7 @@ function makeCmtElemList(data) {
         const cmtDiv = document.createElement('div');
         const regdtDiv = document.createElement('div');
 
-        cmtListDiv.className = 'cmtlistDiv';
+        cmtListDiv.className = 'cmtListDiv';
         userNickDiv.className = 'cmtUserNick'
         cmtDiv.className = 'cmt'
         regdtDiv.className = 'cmtRegdt'
@@ -223,6 +223,8 @@ function makeCmtElemList(data) {
     })
 }
 
+
 boardUpd();
 cmtListAjax();
+
 
