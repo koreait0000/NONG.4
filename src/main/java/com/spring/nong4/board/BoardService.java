@@ -28,25 +28,13 @@ public class BoardService {
         return mapper.auth(param);
     }
 
-    public int freeBoard(BoardEntity param) {
-        String chkTitle = param.getTitle();
-        String chkCtnt  = param.getCtnt();
+//    if(chkTitle == "" && chkCtnt == "" && chkTitle == null && chkCtnt == null) {return 0;}
 
-        System.out.println("ttitle : " + param.getTitle());
-        if(chkTitle == "" && chkCtnt == "" && chkTitle == null && chkCtnt == null) {
-            return 0;
-        }
-        return mapper.freeBoard(param);
-    }
 
-    public List<BoardEntity> freeBoardList() {
-        return mapper.freeBoardList();
-    }
-
-    public Map<String, Object> friendWrite(BoardDomain param, MultipartFile[] imgArr) {
+    public Map<String, Object> boardWrite(BoardDomain param, MultipartFile[] imgArr) {
         Map<String, Object> map = new HashMap<>();
 
-        int write = mapper.friendWrite(param);
+        int write = mapper.boardWrite(param);
         map.put("data1",write);
 
 
@@ -64,28 +52,28 @@ public class BoardService {
                 if(saveFileNm != null) {
                     paramImg.setImg(saveFileNm);
                     System.out.println("IMG"+paramImg);
-                    map.put("data",mapper.friendWriteImg(paramImg));
+                    map.put("data",mapper.boardWriteImg(paramImg));
                 }
             }
         }
         return map;
     }
 
-    public Map<String, Object> friendUpdate(BoardDomain param) {
+    public Map<String, Object> boardUpdate(BoardDomain param) {
         param.setIuser(auth.getLoginUserPk());
         Map<String, Object> map = new HashMap<>();
-        map.put("data",mapper.friendUpdate(param));
+        map.put("data",mapper.boardUpdate(param));
         return map;
     }
 
-    public Map<String,Object> friendDelete(BoardDomain param) {
+    public Map<String,Object> boardDelete(BoardDomain param) {
         param.setIuser(auth.getLoginUserPk());
         Map<String, Object> map = new HashMap<>();
-        map.put("data",mapper.friendDelete(param));
+        map.put("data",mapper.boardDelete(param));
         return map;
     }
 
-    public Map<String,Object> friendList(BoardDomain param, SearchCriteria scri) {
+    public Map<String,Object> mainBoardList(BoardDomain param, SearchCriteria scri) {
         param.setIuser(auth.getLoginUserPk());
 
         Map<String,Object> map = new HashMap<>();
@@ -97,7 +85,7 @@ public class BoardService {
         pageMaker.setTotalCount(total);
 
         map.put("pageMaker",pageMaker);
-        map.put("list",mapper.friendList(param,scri));
+        map.put("list",mapper.mainBoardList(param,scri));
 
         return map;
     }

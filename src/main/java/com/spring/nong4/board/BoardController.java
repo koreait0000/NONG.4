@@ -29,42 +29,17 @@ public class BoardController {
         System.out.println("로그인 시도중이다");
         return "board/home";
     }
-
-
     @GetMapping("/community")
     public String community() { return "board/community";}
 
-    @GetMapping("/freeBoard")
-    public String freeBoard() { return "board/freeBoard"; }
+    @GetMapping("/boardWrite")
+    public String boardWrite() { return "board/boardWrite"; }
 
-    @ResponseBody
-    @PostMapping("/freeBoard")
-    public Map<String, Object> freeBoard(@RequestBody BoardEntity param) {
-        Map<String, Object> res = new HashMap<>();
+    @PostMapping("/boardWrite")
+    public String boardWrite(@RequestParam(value="provider") String provider, BoardDomain param, MultipartFile[] imgArr,Model model ) {
         param.setIuser(auth.getLoginUserPk());
-        int result = service.freeBoard(param);
-        if(result == 1) {
-            res.put("result",result);
-        } else {
-            res.put("result",result);
-        }
-        return res;
-    }
-
-    @GetMapping("/freeBoardList")
-    public String freeBoardList(Model model) {
-        model.addAttribute("data", service.freeBoardList());
-        return "board/freeBoardList";
-    }
-
-    @GetMapping("/friendBoard")
-    public String friendWrite() { return "board/friendBoard"; }
-
-    @PostMapping("/friendBoard")
-    public String friendWrite(@RequestParam(value="provider") String provider, BoardDomain param, MultipartFile[] imgArr,Model model ) {
-        param.setIuser(auth.getLoginUserPk());
-        model.addAllAttributes(service.friendWrite(param,imgArr));
-        return "redirect:/board/friendBoardList?provider=" + provider;
+        model.addAllAttributes(service.boardWrite(param,imgArr));
+        return "redirect:/board/mainBoard?provider=" + provider;
     }
 
     @GetMapping("/boardUpdate")
@@ -75,22 +50,22 @@ public class BoardController {
     @ResponseBody
     @RequestMapping(value = "/boardUpdate", method = RequestMethod.PUT)
     public Map<String,Object> boardUpdate(@RequestBody BoardDomain param, Model model) {
-        model.addAllAttributes(service.friendUpdate(param));
+        model.addAllAttributes(service.boardUpdate(param));
         System.out.println("title : "+param.getTitle());
-        return service.friendUpdate(param);
+        return service.boardUpdate(param);
     }
     @ResponseBody
     @RequestMapping(value = "/boardDelete",method = RequestMethod.DELETE)
     public Map<String,Object> boardDelete(@RequestBody BoardDomain param, Model model) {
-        model.addAllAttributes(service.friendDelete(param));
-        System.out.println("title! : "+service.friendDelete(param));
-        return service.friendDelete(param);
+        model.addAllAttributes(service.boardDelete(param));
+        System.out.println("title! : "+service.boardDelete(param));
+        return service.boardDelete(param);
     }
 
-    @GetMapping("/friendBoardList")
-    public String friendList(BoardDomain param, SearchCriteria scri, Model model) {
-        model.addAllAttributes(service.friendList(param,scri));
-        return "board/friendBoardList";
+    @GetMapping("/mainBoard")
+    public String mainBoardList(BoardDomain param, SearchCriteria scri, Model model) {
+        model.addAllAttributes(service.mainBoardList(param,scri));
+        return "board/mainBoard";
     }
 
     @GetMapping("/boardDetail")
