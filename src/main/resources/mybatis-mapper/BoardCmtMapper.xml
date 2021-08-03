@@ -17,12 +17,14 @@
 
     <select id="cmtList" resultType="BoardCmtDomain">
         SELECT A.cmt
+             , A.icmt
              , A.regdt
              , B.nick AS userNick
              , B.iuser
         FROM t_cmt A
         INNER JOIN t_user B
         ON A.iuser = B.iuser
-        WHERE iboard = #{iboard}
+        WHERE A.iboard = #{iboard}
+        ORDER BY A.regdt
     </select>
 </mapper>
