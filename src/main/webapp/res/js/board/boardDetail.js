@@ -9,7 +9,6 @@ const originCtntElem = document.querySelector('#ctnt');
 const setTitle = boardModElem.dataset.title;
 const setCtnt  = boardModElem.dataset.ctnt;
 
-
 function boardUpd() {
     const updSpan    = document.createElement('span');
     const delSpan    = document.createElement('span');
@@ -132,8 +131,8 @@ function enterInsCmt(){
 **/
 
 function insCmt() {
-    var cmtVal = cmtFrmElem.cmt.value;
-    var param = {
+    const cmtVal = cmtFrmElem.cmt.value;
+    const param = {
         iboard: cmtListElem.dataset.iboard,
         cmt: cmtVal
     };
@@ -185,10 +184,10 @@ function makeCmtElemList(data) {
     cmtListElem.innerHTML = '';
 
     data.forEach(function (item){
-        var cmtListDiv = document.createElement('div');
-        var userNickDiv = document.createElement('div');
-        var cmtDiv = document.createElement('div');
-        var regdtDiv = document.createElement('div');
+        const cmtListDiv = document.createElement('div');
+        const userNickDiv = document.createElement('div');
+        const cmtDiv = document.createElement('div');
+        const regdtDiv = document.createElement('div');
 
         cmtListDiv.className = 'cmtListDiv';
         userNickDiv.className = 'cmtUserNick'
@@ -199,9 +198,9 @@ function makeCmtElemList(data) {
         cmtDiv.append(item.cmt);
         regdtDiv.append(item.regdt);
         if(item.iuser == cmtListElem.dataset.iuser){
-            var cmtModSpan = document.createElement('span');
-            var updCmtBtn = document.createElement('button');
-            var delCmtBtn = document.createElement('button');
+            const cmtModSpan = document.createElement('span');
+            const updCmtBtn = document.createElement('button');
+            const delCmtBtn = document.createElement('button');
 
             updCmtBtn.innerText = '수정';
             delCmtBtn.innerText = '삭제';
@@ -210,7 +209,10 @@ function makeCmtElemList(data) {
             cmtDiv.append(cmtModSpan);
 
             updCmtBtn.addEventListener('click', () => {
-
+                cmtDiv.innerHTML = '';
+                const cmtInput = document.createElement('textarea');
+                cmtInput.value = item.cmt;
+                cmtDiv.append(cmtInput);
             });
         }
         cmtListDiv.append(userNickDiv);
@@ -220,5 +222,9 @@ function makeCmtElemList(data) {
         cmtListElem.append(cmtListDiv);
     })
 }
-cmtListAjax();
+
+
 boardUpd();
+cmtListAjax();
+
+

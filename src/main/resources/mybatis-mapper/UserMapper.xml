@@ -22,6 +22,12 @@
      )
     </insert>
 
+    <update id="auth">
+        UPDATE t_user
+        SET authCd = null
+        WHERE email = #{email} AND authCd = #{authCd}
+    </update>
+
     <select id="selUser" resultType="UserEntity">
         SELECT *
         FROM t_user
