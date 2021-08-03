@@ -27,4 +27,10 @@ public class UserController {
         service.join(param);
         return "redirect:login?needEmail=1";
     }
+
+    @GetMapping("/auth")
+    public String auth(UserEntity param) {
+        int result = service.auth(param);
+        return "redirect:login?auth=" + result;
+    }
 }
