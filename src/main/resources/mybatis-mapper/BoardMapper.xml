@@ -8,32 +8,11 @@
 <!--        <collection property="imgList" column="iboard" select="selBoardImgList"></collection>-->
 <!--        <collection property="cmtList" column="iboard" select="com.spring.nong4.cmt.BoardCmtMapper.cmtList"></collection>-->
 <!--    </resultMap>-->
-    <insert id="freeBoard">
-        INSERT INTO
-            t_board
-            (title
-            ,ctnt
-            ,iuser)
-        VALUES
-            (#{title}
-            ,#{ctnt}
-            ,#{iuser});
-    </insert>
 
-    <select id="freeBoardList" resultType="BoardEntity">
-    SELECT B.nick AS userNick
-         , A.title
-         , A.ctnt
-         , A.regdt
-         , A.iboard
-    FROM t_board A
-    INNER JOIN t_user B
-    ON A.iuser = B.iuser;
-    </select>
 
 <!--keyProperty는 insert를 하고 동시에 해당 값이 필요한 경우 사용한다 useGeneratedKeys도 true를 줘야함.-->
 
-    <insert id="friendWrite" useGeneratedKeys="true" keyProperty="iboard">
+    <insert id="boardWrite" useGeneratedKeys="true" keyProperty="iboard">
         INSERT INTO
             t_board
         (title
@@ -47,7 +26,7 @@
         ,#{provider})
     </insert>
 
-    <insert id="friendWriteImg">
+    <insert id="boardWriteImg">
         INSERT INTO t_board_img
         ( iboard
         , img)
@@ -63,7 +42,7 @@
         WHERE    iboard = #{iboard}
     </update>
 
-    <update id="friendUpdate">
+    <update id="boardUpdate">
         UPDATE t_board
         SET    title = #{title}
         ,      ctnt  = #{ctnt}
@@ -71,13 +50,13 @@
     </update>
 
 
-    <update id="friendDelete">
+    <update id="boardDelete">
         UPDATE t_board
         SET    delYN  = 'Y'
         WHERE  iboard = #{iboard};
     </update>
 
-    <select id="friendList" resultType="BoardDomain">
+    <select id="mainBoardList" resultType="BoardDomain">
         SELECT A.iboard
              , A.title
              , A.ctnt
@@ -108,6 +87,7 @@
         ORDER BY A.iboard DESC
         LIMIT #{scri.pageStart} , #{scri.perPageNum};
     </select>
+
     <select id="countBoardList" resultType="Integer">
         SELECT COUNT(*)
         FROM  t_board

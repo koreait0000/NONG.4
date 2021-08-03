@@ -5,7 +5,7 @@
     <ul>
         <li><a href="/board/home">메인</a></li>
         <sec:authorize access="isAuthenticated()">
-            <li><a href="/board/friendBoard">글쓰기</a></li>
+            <li><a href="/board/boardWrite">글쓰기</a></li>
         </sec:authorize>
         <sec:authorize access="isAnonymous()"><!-- -->
         <li><a href="/user/login">로그인</a></li>

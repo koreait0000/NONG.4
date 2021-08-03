@@ -6,28 +6,39 @@
 <div class="background">
     <div class="background-left"></div>
     <div class="background-center">
-        <div class="kategorie">
+        <div class="category">
             <img src="/res/img/main.png">
             <div style="font-size: 50px; font-weight: bold"> Nong 4</div>
-            <div><input type="text" class="searchtxt"><i class="fas fa-search pointer"></i></div>
-            <div><a href="friendBoard"><button class="writeBtn pointer"><i class="fas fa-pen"></i>글쓰기</button></a></div>
-            <div class="kategorieitem1">
-                <div class="title">알림판 <i class="fas fa-list"></i></div>
+
+            <div class="search-input">
+                <input type="text" class="search-txt">
+                <i class="fas fa-search pointer"></i>
+            </div>
+
+            <div>
+                <button class="writeBtn pointer">
+                    <a href="boardWrite"><i class="fas fa-pen"></i>글쓰기</a>
+                </button>
+            </div>
+
+            <div class="cate-event">
+                <div class="title">알림판<i class="fas fa-list"></i></div>
                 <div><a href="">공지사항</a></div>
                 <div><a href="">이벤트</a></div>
             </div>
-            <div class="kategorieitem2">
+
+            <div class="cate-board">
                 <div class="title">커뮤니티 <i class="fas fa-list"></i></div>
-                <div><a href="">통합 게시판</a></div>
-                <div><a href="friendBoardList?provider=freedom">자유 게시판</a></div>
-                <div><a href="friendBoardList?provider=question">질문 게시판</a></div>
-                <div><a href="friendBoardList?provider=strategy">공략 게시판</a></div>
-                <div><a href="friendBoardList?provider=friend">친구 게시판</a></div>
+                <div><a href="mainBoard">통합 게시판</a></div>
+                <div><a href="mainBoard?provider=freedom">자유 게시판</a></div>
+                <div><a href="mainBoard?provider=question">질문 게시판</a></div>
+                <div><a href="mainBoard?provider=strategy">공략 게시판</a></div>
+                <div><a href="mainBoard?provider=friend">친구 게시판</a></div>
             </div>
         </div>
         <div class="community">
             <div class="community-top"></div>
-            <div class="communityboard">
+            <div class="community-board">
                 <div>
                     <form action="boardUpdate" method="post" enctype="multipart/form-data">
                         <label for="provider"></label>

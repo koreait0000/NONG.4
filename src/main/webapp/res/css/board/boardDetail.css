@@ -2,26 +2,28 @@
 .background-left { width: 320px; }
 .background-center { background-color: white;  display: flex; flex-grow: 1;}
 .background-right { width: 320px; }
-.kategorie { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding-top: 30px; }
-.kategorie div { padding: 3px;}
-.kategorie img { border-radius: 10px; height: 100px; width: 100px; }
-.kategorie .searchtxt { margin-top: 50px; margin-bottom: 2px; height: 30px; }
-.kategorie .writeBtn { height: 40px; font-size: 16px; background-color: darkgreen; }
-.kategorie a .writeBtn { color: white; }
-.kategorie .searchtxt, .writeBtn { width: 150px; }
-.kategorie .kategorieitem1 { margin-top: 80px; }
-.kategorie .kategorieitem2 { margin-top: 100px; }
-.kategorie .title { font-size: 30px; font-weight: bold; }
+
+.category { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding-top: 30px; }
+.category div { padding: 3px;}
+.category img { border-radius: 10px; height: 100px; width: 100px; }
+.category .search-txt { margin-top: 50px; margin-bottom: 2px; height: 30px; }
+.category .writeBtn { height: 40px; font-size: 16px; background-color: darkgreen; }
+.category a .writeBtn { color: white; }
+.category .search-txt, .writeBtn { width: 150px; }
+.category .cate-event { margin-top: 80px; }
+.category .cate-board { margin-top: 100px; }
+.category .title { font-size: 30px; font-weight: bold; }
+
 .community { flex-grow: 1; }
 .community-top { border-bottom: 2px solid #d3d3d3; height: 50px; }
-.communityboard { margin: 30px;}
-.communityboard .title { font-size: 30px; }
-.communityboard .userinfo { margin-top: 20px; border-bottom: 1px solid #d3d3d3; padding-bottom: 15px; }
-.communityboard .ctnt { margin-top: 20px; }
-.communityboard .cmtbox { margin-top: 40px; }
-.communityboard .cmtbox #cmtFrm .cmttext { resize: none; }
-.communityboard .cmtbox #cmtFrm .cmtbtn { height: 79px; }
-.communityboard #cmtlist { margin-top: 15px; }
-.communityboard #cmtlist .cmtlistDiv { margin-bottom: 10px; }
-.communityboard #cmtlist .cmtlistDiv .cmtRegdt { font-size: 13px; border-bottom: 1px solid #d3d3d3; padding-bottom: 10px; }
-.communityboard #cmtlist .cmtlistDiv .cmt { font-size: 20px; }
+.community-board { margin: 30px;}
+.community-board .title { font-size: 30px; }
+.community-board .userinfo { margin-top: 20px; border-bottom: 1px solid #d3d3d3; padding-bottom: 15px; }
+.community-board .ctnt { margin-top: 20px; }
+.community-board .cmtbox { margin-top: 40px; }
+.community-board .cmtbox #cmtFrm .cmttext { resize: none; }
+.community-board .cmtbox #cmtFrm .cmtbtn { height: 79px; }
+.community-board #cmtlist { margin-top: 15px; }
+.community-board #cmtlist .cmtlistDiv { margin-bottom: 10px; }
+.community-board #cmtlist .cmtlistDiv .cmtRegdt { font-size: 13px; border-bottom: 1px solid #d3d3d3; padding-bottom: 10px; }
+.community-board #cmtlist .cmtlistDiv .cmt { font-size: 20px; }
