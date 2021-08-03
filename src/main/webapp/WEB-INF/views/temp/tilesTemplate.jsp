@@ -18,10 +18,6 @@
         <section>
             <tiles:insertAttribute name="content" />
         </section>
-       <footer>
-                Copyright 2021.
-       </footer>
-
     </div>
 </body>
 </html>

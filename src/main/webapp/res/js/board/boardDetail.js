@@ -169,7 +169,7 @@ function insCmtAjax(param) {
 }
 
 function cmtListAjax() {
-    var iboard = cmtListElem.dataset.iboard;
+    const iboard = cmtListElem.dataset.iboard;
 
     fetch('cmt/' + iboard)
         .then(function(res){
@@ -177,7 +177,6 @@ function cmtListAjax() {
         })
         .then(function(myJson) {
             console.log(myJson);
-
             makeCmtElemList(myJson);
         });
 }
@@ -191,7 +190,7 @@ function makeCmtElemList(data) {
         var cmtDiv = document.createElement('div');
         var regdtDiv = document.createElement('div');
 
-        cmtListDiv.className = 'cmtlistDiv';
+        cmtListDiv.className = 'cmtListDiv';
         userNickDiv.className = 'cmtUserNick'
         cmtDiv.className = 'cmt'
         regdtDiv.className = 'cmtRegdt'
@@ -221,5 +220,5 @@ function makeCmtElemList(data) {
         cmtListElem.append(cmtListDiv);
     })
 }
-boardUpd();
 cmtListAjax();
+boardUpd();
