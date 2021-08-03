@@ -67,8 +67,8 @@
                         </div>
 
                         <c:if test="${auth.iuser eq detail.iuser}">
-                            <div id="boardMod" data-iboard="${param.iboard}" data-provider="${detail.provider}" data-title="${detail.title}" data-ctnt="${detail.ctnt}">
-                                <form onsubmit="return false;">
+                            <div>
+                                <form id="boardMod" data-iboard="${param.iboard}" data-provider="${detail.provider}" data-title="${detail.title}" data-ctnt="${detail.ctnt}" onsubmit="return false;">
                                 </form>
                             </div>
                         </c:if>

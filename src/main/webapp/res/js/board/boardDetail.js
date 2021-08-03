@@ -6,8 +6,8 @@ const updParentCElem = document.querySelector('#updParentC');
 const originTitleElem = document.querySelector('#title');
 const originCtntElem = document.querySelector('#ctnt');
 
-const setTitle = boardModElem.dataset.title;
-const setCtnt  = boardModElem.dataset.ctnt;
+//const setTitle = boardModElem.dataset.title;
+//const setCtnt  = boardModElem.dataset.ctnt;
 
 function boardUpd() {
     const updSpan    = document.createElement('span');
@@ -119,7 +119,7 @@ function boardUpd() {
     updSpan.append(realBtnU);
     delSpan.append(delBtn);
 
-    boardModElem.append(updSpan,delSpan);
+    //boardModElem.append(updSpan,delSpan);
 }
 
 /**
