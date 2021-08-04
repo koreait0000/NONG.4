@@ -110,4 +110,14 @@ public class BoardService {
     public List<BoardCmtDomain> cmtList(BoardCmtDomain param){
         return cmtMapper.cmtList(param);
     }
+
+    public int updCmt(BoardCmtDomain param) {
+        param.setIuser(auth.getLoginUserPk());
+        return cmtMapper.updCmt(param);
+    }
+
+    public int delCmt(BoardCmtDomain param){
+        param.setIuser(auth.getLoginUserPk());
+        return cmtMapper.delCmt(param);
+    }
 }

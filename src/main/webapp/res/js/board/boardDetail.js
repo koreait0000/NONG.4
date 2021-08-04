@@ -120,6 +120,7 @@ function boardUpd() {
     delSpan.append(delBtn);
 
     //boardModElem.append(updSpan,delSpan);
+
 }
 
 /**
@@ -129,6 +130,8 @@ function enterInsCmt(){
     }
 }
 **/
+
+//----------------------------댓글--------------------------------
 
 function insCmt() {
     const cmtVal = cmtFrmElem.cmt.value;
@@ -148,6 +151,7 @@ function insCmtAjax(param) {
             'content-type' : 'application/json;charset=UTF-8'
         }
     };
+
     fetch('insCmt', init)
         .then(function(res){
             return res.json();
@@ -208,13 +212,81 @@ function makeCmtElemList(data) {
             cmtModSpan.append(delCmtBtn);
             cmtDiv.append(cmtModSpan);
 
+            delCmtBtn.addEventListener('click', () => {
+                const icmt = item.icmt;
+                console.log(icmt);
+                if (confirm("정말 삭제하시겠습니까?") == true) {
+                fetch('delcmt/' + icmt, {method: 'DELETE'})
+                    .then(function (res){
+                        return res.json();
+                    })
+                    .then(function (myJson){
+                        console.log(myJson);
+                        switch (myJson.result) {
+                            case 0:
+                                alert('댓글 삭제 실패!');
+                                break;
+                            case 1:
+                                alert('댓글 삭제 완료!');
+                                cmtListAjax();
+                                break;
+                        }
+                    })
+                }
+            });
+
             updCmtBtn.addEventListener('click', () => {
                 cmtDiv.innerHTML = '';
                 const cmtInput = document.createElement('textarea');
+                const realUpdCmt = document.createElement('button');
+                const cancelBtn = document.createElement('button');
                 cmtInput.value = item.cmt;
+                realUpdCmt.innerText = '수정완료'
+                cancelBtn.innerText = '수정취소'
                 cmtDiv.append(cmtInput);
+                cmtDiv.append(realUpdCmt);
+                cmtDiv.append(cancelBtn);
+
+                cancelBtn.addEventListener('click', () => {
+                    cmtListAjax();
+                });
+
+                realUpdCmt.addEventListener('click', () => {
+                    const param = {
+                        icmt:   item.icmt,
+                        cmt:   cmtInput.value,
+                    };
+                    console.log(param);
+
+                    const init = {
+                        method: 'PUT',
+                        body: JSON.stringify(param),
+                        headers: {
+                            'accept' : 'application/json',
+                            'content-type' : 'application/json;charset=UTF-8'
+                        }
+                    };
+
+                    fetch('updcmt',init)
+                        .then(function (res){
+                            return res.json();
+                        })
+                        .then(function (myJson){
+                            console.log(myJson);
+                            switch (myJson.result) {
+                                case 0:
+                                    alert('댓글 수정 실패!');
+                                    break;
+                                case 1:
+                                    alert('댓글 수정 완료!');
+                                    cmtListAjax();
+                                    break;
+                            }
+                        })
+                });
             });
         }
+
         cmtListDiv.append(userNickDiv);
         cmtListDiv.append(cmtDiv);
         cmtListDiv.append(regdtDiv);
