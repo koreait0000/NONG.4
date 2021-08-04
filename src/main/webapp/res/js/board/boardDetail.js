@@ -295,7 +295,6 @@ function makeCmtElemList(data) {
     })
 }
 
-
 boardUpd();
 cmtListAjax();
 
