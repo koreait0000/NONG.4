@@ -83,6 +83,7 @@ public class BoardController {
         return "board/boardDetail";
     }
 
+    //댓글 삽입
     @ResponseBody
     @RequestMapping(value = "/insCmt", method = RequestMethod.POST)
     public Map<String, Integer> insCmt(@RequestBody BoardCmtDomain param){
@@ -94,6 +95,7 @@ public class BoardController {
         return data;
     }
 
+    //댓글 리스트
     @ResponseBody
     @RequestMapping("/cmt/{iboard}")
     public List<BoardCmtDomain> cmtList(@PathVariable("iboard") int iboard){
@@ -102,4 +104,30 @@ public class BoardController {
         return service.cmtList(param);
     }
 
+    //댓글 수정
+    @ResponseBody
+    @RequestMapping(value = "/updcmt", method = RequestMethod.PUT)
+    public Map<String, Integer> updCmt(@RequestBody BoardCmtDomain param) {
+        int result = service.updCmt(param);
+
+        Map<String, Integer> data = new HashMap<>();
+        data.put("result", result);
+
+        return data;
+    }
+
+    //댓글 삭제
+    @ResponseBody
+    @RequestMapping(value = "/delcmt/{icmt}", method = RequestMethod.DELETE)
+    public Map<String, Integer> delCmt(@PathVariable("icmt") int icmt) {
+        BoardCmtDomain param = new BoardCmtDomain();
+        param.setIcmt(icmt);
+
+        int result = service.delCmt(param);
+
+        Map<String, Integer> data = new HashMap<>();
+        data.put("result", result);
+
+        return data;
+    }
 }
