@@ -49,7 +49,7 @@
                                                            class="intermediate-class pointer"></div>
                             <div class="swiper-slide"><img src="/res/img/advanced.png" class="advanced-class pointer">
                             </div>
-                            <div class="swiper-slide"><img src="/res/img/master.png" class="master-class pointer"></div>
+                            <div class="swiper-slide"><img src="/res/img/master.png" class="master-class pointer"></div>1
                         </div>
                         <!-- If we need pagination -->
                         <div class="swiper-pagination"></div>
@@ -60,9 +60,11 @@
                 </div>
                 <div class="news">
                     <div>주요소식</div>
+                    <div id="comm-paging">
+                    </div>
                     <c:forEach items="${list}" var="list" begin="0" end="4">
                         <a class="record pointer" onclick="moveToDetail(${list.iboard});">
-                            <div>
+                            <div id="paging-list" data-iboard="${list.iboard}">
                                 <c:choose>
                                     <c:when test="${list.provider == 'freedom'}">
                                         <div>[자유게시판] ${list.title}</div>

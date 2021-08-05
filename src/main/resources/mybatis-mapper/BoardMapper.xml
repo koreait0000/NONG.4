@@ -49,7 +49,6 @@
         WHERE iboard = #{iboard}
     </update>
 
-
     <update id="boardDelete">
         UPDATE t_board
         SET    delYN  = 'Y'
