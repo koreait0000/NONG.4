@@ -40,8 +40,8 @@ function boardUpd() {
 
         titleInput.type  = 'text';
 
-        titleInput.value = setTitle;
-        ctntInput.value  = setCtnt;
+        titleInput.value = boardModElem.dataset.title;
+        ctntInput.value  =  boardModElem.dataset.ctnt;
 
         titleDiv.append(titleInput);
         ctntDiv .append(ctntInput);
@@ -169,7 +169,7 @@ function insCmtAjax(param) {
 }
 
 function cmtListAjax() {
-    var iboard = cmtListElem.dataset.iboard;
+    const iboard = cmtListElem.dataset.iboard;
 
     fetch('cmt/' + iboard)
         .then(function(res){
@@ -186,12 +186,12 @@ function makeCmtElemList(data) {
     cmtListElem.innerHTML = '';
 
     data.forEach(function (item){
-        var cmtListDiv = document.createElement('div');
-        var userNickDiv = document.createElement('div');
-        var cmtDiv = document.createElement('div');
-        var regdtDiv = document.createElement('div');
+        const cmtListDiv = document.createElement('div');
+        const userNickDiv = document.createElement('div');
+        const cmtDiv = document.createElement('div');
+        const regdtDiv = document.createElement('div');
 
-        cmtListDiv.className = 'cmtlistDiv';
+        cmtListDiv.className = 'cmtListDiv';
         userNickDiv.className = 'cmtUserNick'
         cmtDiv.className = 'cmt'
         regdtDiv.className = 'cmtRegdt'
@@ -211,10 +211,81 @@ function makeCmtElemList(data) {
             cmtModSpan.append(delCmtBtn);
             cmtDiv.append(cmtModSpan);
 
-            updCmtBtn.addEventListener('click', () => {
+            delCmtBtn.addEventListener('click', () => {
+                const icmt = item.icmt;
+                console.log(icmt);
+                if (confirm("정말 삭제하시겠습니까?") == true) {
+                fetch('delcmt/' + icmt, {method: 'DELETE'})
+                    .then(function (res){
+                        return res.json();
+                    })
+                    .then(function (myJson){
+                        console.log(myJson);
+                        switch (myJson.result) {
+                            case 0:
+                                alert('댓글 삭제 실패!');
+                                break;
+                            case 1:
+                                alert('댓글 삭제 완료!');
+                                cmtListAjax();
+                                break;
+                        }
+                    })
+                }
+            });
 
+            updCmtBtn.addEventListener('click', () => {
+                cmtDiv.innerHTML = '';
+                const cmtInput = document.createElement('textarea');
+                const realUpdCmt = document.createElement('button');
+                const cancelBtn = document.createElement('button');
+                cmtInput.value = item.cmt;
+                realUpdCmt.innerText = '수정완료'
+                cancelBtn.innerText = '수정취소'
+                cmtDiv.append(cmtInput);
+                cmtDiv.append(realUpdCmt);
+                cmtDiv.append(cancelBtn);
+
+                cancelBtn.addEventListener('click', () => {
+                    cmtListAjax();
+                });
+
+                realUpdCmt.addEventListener('click', () => {
+                    const param = {
+                        icmt:   item.icmt,
+                        cmt:   cmtInput.value,
+                    };
+                    console.log(param);
+
+                    const init = {
+                        method: 'PUT',
+                        body: JSON.stringify(param),
+                        headers: {
+                            'accept' : 'application/json',
+                            'content-type' : 'application/json;charset=UTF-8'
+                        }
+                    };
+
+                    fetch('updcmt',init)
+                        .then(function (res){
+                            return res.json();
+                        })
+                        .then(function (myJson){
+                            console.log(myJson);
+                            switch (myJson.result) {
+                                case 0:
+                                    alert('댓글 수정 실패!');
+                                    break;
+                                case 1:
+                                    alert('댓글 수정 완료!');
+                                    cmtListAjax();
+                                    break;
+                            }
+                        })
+                });
             });
         }
+
         cmtListDiv.append(userNickDiv);
         cmtListDiv.append(cmtDiv);
         cmtListDiv.append(regdtDiv);
@@ -222,5 +293,8 @@ function makeCmtElemList(data) {
         cmtListElem.append(cmtListDiv);
     })
 }
-boardUpd();
+
 cmtListAjax();
+boardUpd();
+
+

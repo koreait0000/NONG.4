@@ -10,4 +10,6 @@ import java.util.List;
 public interface BoardCmtMapper {
     int insCmt(BoardCmtDomain Param);
     List<BoardCmtDomain> cmtList(BoardCmtDomain param);
+    int updCmt(BoardCmtDomain param);
+    int delCmt(BoardCmtDomain param);
 }

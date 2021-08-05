@@ -104,4 +104,31 @@ public class BoardController {
         param.setIboard(iboard);
         return service.cmtList(param);
     }
+
+    //댓글 수정
+    @ResponseBody
+    @RequestMapping(value = "/updcmt", method = RequestMethod.PUT)
+    public Map<String, Integer> updCmt(@RequestBody BoardCmtDomain param) {
+        int result = service.updCmt(param);
+
+        Map<String, Integer> data = new HashMap<>();
+        data.put("result", result);
+
+        return data;
+    }
+
+    //댓글 삭제
+    @ResponseBody
+    @RequestMapping(value = "/delcmt/{icmt}", method = RequestMethod.DELETE)
+    public Map<String, Integer> delCmt(@PathVariable("icmt") int icmt) {
+        BoardCmtDomain param = new BoardCmtDomain();
+        param.setIcmt(icmt);
+
+        int result = service.delCmt(param);
+
+        Map<String, Integer> data = new HashMap<>();
+        data.put("result", result);
+
+        return data;
+    }
 }

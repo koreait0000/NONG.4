@@ -17,13 +17,27 @@
 
     <select id="cmtList" resultType="BoardCmtDomain">
         SELECT A.cmt
+             , A.icmt
              , A.regdt
+             , A.iboard
              , B.nick AS userNick
              , B.iuser
         FROM t_cmt A
         INNER JOIN t_user B
         ON A.iuser = B.iuser
-        WHERE iboard = #{iboard}
-        ORDER BY A.regdt DESC;
+        WHERE A.iboard = #{iboard}
+        ORDER BY A.regdt
     </select>
+
+    <update id="updCmt">
+        UPDATE t_cmt
+        SET cmt = #{cmt}, regdt = now()
+        WHERE icmt = #{icmt} AND iuser = #{iuser}
+    </update>
+
+    <delete id="delCmt">
+        DELETE
+        FROM t_cmt
+        WHERE icmt = #{icmt} AND iuser = #{iuser}
+    </delete>
 </mapper>

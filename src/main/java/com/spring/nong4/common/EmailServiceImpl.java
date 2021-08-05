@@ -10,7 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Component
-public class EmailServiceImpl implements com.spring.nong4.common.EmailService {
+public class EmailServiceImpl implements EmailService {
 
     @Autowired
     private JavaMailSender emailSender;
@@ -18,7 +18,7 @@ public class EmailServiceImpl implements com.spring.nong4.common.EmailService {
     @Override
     public void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("c01030249887@gmail.com");
+        message.setFrom("durk3501@gmail.com");
         message.setTo(to); //받는 사람 이메일 주소
         message.setSubject(subject); //제목
         message.setText(text); //내용
@@ -30,7 +30,7 @@ public class EmailServiceImpl implements com.spring.nong4.common.EmailService {
         try {
             MimeMessage message = emailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, false, "UTF-8");
-            helper.setFrom("c01030249887@gmail.com");
+            helper.setFrom("durk3501@gmail.com");
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(text, true);
