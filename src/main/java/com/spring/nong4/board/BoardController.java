@@ -36,6 +36,12 @@ public class BoardController {
         return "board/community";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/community", method = RequestMethod.POST)
+    public Map<String,Object> communityPost(BoardDomain param, SearchCriteria scri) {
+        System.out.println("comm : " + service.mainBoardList(param,scri));
+        return service.mainBoardList(param,scri);
+    }
     @GetMapping("/boardWrite")
     public String boardWrite() { return "board/boardWrite"; }
 

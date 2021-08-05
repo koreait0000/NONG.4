@@ -51,7 +51,7 @@
                                                            class="intermediate-class pointer"></div>
                             <div class="swiper-slide"><img src="/res/img/advanced.png" class="advanced-class pointer">
                             </div>
-                            <div class="swiper-slide"><img src="/res/img/master.png" class="master-class pointer"></div>
+                            <div class="swiper-slide"><img src="/res/img/master.png" class="master-class pointer"></div>1
                         </div>
                         <!-- If we need pagination -->
                         <div class="swiper-pagination"></div>
@@ -61,7 +61,12 @@
                     </div>
                 </div>
                 <div class="news">
-                    <div style="border-bottom: 1px solid #d3d3d3;">주요소식</div>
+
+                    <div style="border-bottom: 1px solid #d3d3d3;">주요소식</div> 
+              
+                    <div id="comm-paging">
+                    </div>
+              
                     <c:forEach items="${list}" var="list" begin="0" end="4">
                         <a class="record pointer" onclick="moveToDetail(${list.iboard});">
                             <div class="news-list">
