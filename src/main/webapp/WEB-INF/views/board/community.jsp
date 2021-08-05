@@ -16,9 +16,11 @@
             </div>
 
             <div>
-                <button class="writeBtn pointer">
-                    <a href="boardWrite"><i class="fas fa-pen"></i>글쓰기</a>
-                </button>
+                <a href="boardWrite">
+                    <button class="writeBtn pointer">
+                        <i class="fas fa-pen">글쓰기</i>
+                    </button>
+                </a>
             </div>
 
             <div class="cate-event">
@@ -59,10 +61,10 @@
                     </div>
                 </div>
                 <div class="news">
-                    <div>주요소식</div>
+                    <div style="border-bottom: 1px solid #d3d3d3;">주요소식</div>
                     <c:forEach items="${list}" var="list" begin="0" end="4">
                         <a class="record pointer" onclick="moveToDetail(${list.iboard});">
-                            <div>
+                            <div class="news-list">
                                 <c:choose>
                                     <c:when test="${list.provider == 'freedom'}">
                                         <div>[자유게시판] ${list.title}</div>
@@ -80,12 +82,12 @@
                                 <%--dl : 리스트--%>
                                 <%--dt : 메인 카테고리--%>
                                 <%--dd : 메인아래 카테고리--%>
-                                <dl>
-                                    <dt>writer</dt>
-                                    <dd>${list.userNick}</dd>
-                                    <dt>ctnt</dt>
+                                <dl class="news-dl">
+                                    <dt style="visibility: hidden; display: none;">writer</dt>
+                                    <dt style="visibility: hidden; display: none;" >ctnt</dt>
 
-                                    <dd>
+                                    <dd style="display: inline; margin-right: 30px;">${list.userNick}</dd>
+                                    <dd class="news-dd-span">
                                         <span>${list.regdt}</span>
                                         <span>조회수${list.hitCount}</span>
                                     </dd>

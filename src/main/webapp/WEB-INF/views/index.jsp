@@ -64,7 +64,9 @@
                     </div>
                     <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-29 u-layout-cell-2">
                         <div class="u-container-layout u-valign-bottom u-container-layout-2">
+                            <a href="/board/home">
                             <img class="u-expanded-width u-image u-image-1" src="/res/img/Group44.png" data-image-width="566" data-image-height="720">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +81,9 @@
                 <div class="u-layout-row">
                     <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-28 u-layout-cell-1">
                         <div class="u-container-layout u-valign-bottom u-container-layout-1">
+                            <a href="/board/community">+
                             <img class="u-expanded-width u-image u-image-default u-image-1" src="/res/img/image10.png" alt="" data-image-width="566" data-image-height="720">
+                            </a>
                         </div>
                     </div>
                     <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-32 u-layout-cell-2">

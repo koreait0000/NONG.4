@@ -1,4 +1,4 @@
-html, body{ margin: 0; padding: 0;}
+html, body, dl, dt, dd{ margin: 0; padding: 0;}
 
 section{ padding-top: 50px;}
 
