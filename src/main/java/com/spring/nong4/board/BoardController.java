@@ -31,7 +31,10 @@ public class BoardController {
         return "board/home";
     }
     @GetMapping("/community")
-    public String community() { return "board/community";}
+    public String community(BoardDomain param, SearchCriteria scri , Model model) {
+        model.addAllAttributes(service.mainBoardList(param,scri));
+        return "board/community";
+    }
 
     @GetMapping("/boardWrite")
     public String boardWrite() { return "board/boardWrite"; }
@@ -72,14 +75,19 @@ public class BoardController {
     @GetMapping("/boardDetail")
     public String boardDetail(HttpServletResponse response, @CookieValue (value="hitCount1", required = false) Cookie cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
         UserEntity userParam = new UserEntity();
-        cookie = new Cookie("hit",userParam.getEmail());
+        cookie = new Cookie("hit",null);
         cookie.setComment("게시글 조회 확인중");
+        System.out.println("경로 ㅣ:"+cookie.getPath());
         System.out.println("조회 작업중 : " + cookie.getComment());
         cookie.setMaxAge(60*60*24);
+
         response.addCookie(cookie);
 
         System.out.println("cookie : "+cookie);
-        System.out.println("email : "+userParam.getEmail());
+
+        if(cookie != null) {
+
+        }
 
         model.addAllAttributes(service.boardDetail(param, imgParam));
 
