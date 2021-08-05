@@ -23,7 +23,7 @@ spring:
     multipart:
       max-file-size: 5MB
       max-request-size: 30MB
-      location: A:/Java/JavaBackendClass/JavaBackendClass/springImg
+      location: D:/springImg
   mvc:
     view:
       prefix: /WEB-INF/views/

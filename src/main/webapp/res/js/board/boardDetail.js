@@ -6,6 +6,10 @@ const updParentCElem = document.querySelector('#updParentC');
 const originTitleElem = document.querySelector('#title');
 const originCtntElem = document.querySelector('#ctnt');
 
+const setTitle = boardModElem.dataset.title;
+const setCtnt  = boardModElem.dataset.ctnt;
+
+
 function boardUpd() {
     const updSpan    = document.createElement('span');
     const delSpan    = document.createElement('span');
@@ -15,6 +19,7 @@ function boardUpd() {
     const ctntDiv    = document.createElement('div');
     const titleInput = document.createElement('input');
     const ctntInput  = document.createElement('textarea');
+
     const realBtnU = document.createElement('button');
 
     updBtn.innerText       = '수정';
@@ -22,7 +27,7 @@ function boardUpd() {
     realBtnU.innerText     = '진짜수정';
     realBtnU.style.display = 'none';
 
-    ctntInput.style.width = 300;
+    ctntInput.style.width  = 300;
     ctntInput.style.height = 200;
 
     updBtn.addEventListener('click',() => {
@@ -116,7 +121,6 @@ function boardUpd() {
     delSpan.append(delBtn);
 
     boardModElem.append(updSpan,delSpan);
-
 }
 
 /**
@@ -127,20 +131,13 @@ function enterInsCmt(){
 }
 **/
 
-//----------------------------댓글--------------------------------
-
 function insCmt() {
-    const cmtVal = cmtFrmElem.cmt.value;
-    const param = {
+    var cmtVal = cmtFrmElem.cmt.value;
+    var param = {
         iboard: cmtListElem.dataset.iboard,
         cmt: cmtVal
     };
-
-    if(cmtVal == null || cmtVal == ''){
-        alert('댓글을 입력하세요');
-    } else {
-        insCmtAjax(param);
-    }
+    insCmtAjax(param);
 }
 
 function insCmtAjax(param) {
@@ -152,7 +149,6 @@ function insCmtAjax(param) {
             'content-type' : 'application/json;charset=UTF-8'
         }
     };
-
     fetch('insCmt', init)
         .then(function(res){
             return res.json();
@@ -181,6 +177,7 @@ function cmtListAjax() {
         })
         .then(function(myJson) {
             console.log(myJson);
+
             makeCmtElemList(myJson);
         });
 }
@@ -202,10 +199,11 @@ function makeCmtElemList(data) {
         userNickDiv.append(item.userNick);
         cmtDiv.append(item.cmt);
         regdtDiv.append(item.regdt);
-        if(item.iuser == cmtListElem.dataset.iuser){
-            const cmtModSpan = document.createElement('span');
-            const updCmtBtn = document.createElement('button');
-            const delCmtBtn = document.createElement('button');
+
+        if(item.iuser === parseInt(cmtListElem.dataset.iuser)){
+            var cmtModSpan = document.createElement('span');
+            var updCmtBtn = document.createElement('button');
+            var delCmtBtn = document.createElement('button');
 
             updCmtBtn.innerText = '수정';
             delCmtBtn.innerText = '삭제';

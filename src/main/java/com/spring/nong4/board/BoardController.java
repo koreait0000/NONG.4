@@ -3,6 +3,7 @@ package com.spring.nong4.board;
 import com.spring.nong4.board.model.*;
 import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.security.IAuthenticationFacade;
+import com.spring.nong4.user.model.UserEntity;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
@@ -30,7 +31,10 @@ public class BoardController {
         return "board/home";
     }
     @GetMapping("/community")
-    public String community() { return "board/community";}
+    public String community(BoardDomain param, SearchCriteria scri , Model model) {
+        model.addAllAttributes(service.mainBoardList(param,scri));
+        return "board/community";
+    }
 
     @GetMapping("/boardWrite")
     public String boardWrite() { return "board/boardWrite"; }
@@ -70,20 +74,26 @@ public class BoardController {
 
     @GetMapping("/boardDetail")
     public String boardDetail(HttpServletResponse response, @CookieValue (value="hitCount1", required = false) Cookie cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
-//        cookie = new Cookie("hit",null);
-//        cookie.setComment("게시글 조회 확인중");
-//        System.out.println("조회 작업중 : " + cookie.getComment());
-//        cookie.setMaxAge(60*60*24);
-//        response.addCookie(cookie);
-//        System.out.println("cookie : "+cookie);
-        System.out.println("con Hit : "+param.getHitCount());
+        UserEntity userParam = new UserEntity();
+        cookie = new Cookie("hit",null);
+        cookie.setComment("게시글 조회 확인중");
+        System.out.println("경로 ㅣ:"+cookie.getPath());
+        System.out.println("조회 작업중 : " + cookie.getComment());
+        cookie.setMaxAge(60*60*24);
+
+        response.addCookie(cookie);
+
+        System.out.println("cookie : "+cookie);
+
+        if(cookie != null) {
+
+        }
 
         model.addAllAttributes(service.boardDetail(param, imgParam));
 
         return "board/boardDetail";
     }
 
-    //댓글 삽입
     @ResponseBody
     @RequestMapping(value = "/insCmt", method = RequestMethod.POST)
     public Map<String, Integer> insCmt(@RequestBody BoardCmtDomain param){
@@ -95,7 +105,6 @@ public class BoardController {
         return data;
     }
 
-    //댓글 리스트
     @ResponseBody
     @RequestMapping("/cmt/{iboard}")
     public List<BoardCmtDomain> cmtList(@PathVariable("iboard") int iboard){

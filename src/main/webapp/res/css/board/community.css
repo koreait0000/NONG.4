@@ -23,7 +23,6 @@
 .level .swiper-slide { display: flex; justify-content: center; align-items: center; }
 .level .swiper-slide img { width: 350px; }
 .news { height: 320px; padding: 5px 30px;}
-.news div { padding: 15px 0px; border-bottom: 1px solid #d3d3d3; }
 .today-video { padding: 5px 30px; display: flex;  height: 310px; align-items: center; }
 .today-video .video-box { flex-grow: 1; }
 .today-video .video-box img { border-radius: 10px; height: 250px; }
