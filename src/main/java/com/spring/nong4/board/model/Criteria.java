@@ -39,6 +39,8 @@ public class Criteria {
         } else {
             this.perPageNum = pageCount;
         }
+        this.perPageNum = pageCount;
     }
+
 }
 

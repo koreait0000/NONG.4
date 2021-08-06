@@ -6,10 +6,6 @@ const updParentCElem = document.querySelector('#updParentC');
 const originTitleElem = document.querySelector('#title');
 const originCtntElem = document.querySelector('#ctnt');
 
-const setTitle = boardModElem.dataset.title;
-const setCtnt  = boardModElem.dataset.ctnt;
-
-
 function boardUpd() {
     const updSpan    = document.createElement('span');
     const delSpan    = document.createElement('span');
@@ -41,7 +37,7 @@ function boardUpd() {
         titleInput.type  = 'text';
 
         titleInput.value = boardModElem.dataset.title;
-        ctntInput.value  =  boardModElem.dataset.ctnt;
+        ctntInput.value  = boardModElem.dataset.ctnt;
 
         titleDiv.append(titleInput);
         ctntDiv .append(ctntInput);
@@ -137,7 +133,12 @@ function insCmt() {
         iboard: cmtListElem.dataset.iboard,
         cmt: cmtVal
     };
-    insCmtAjax(param);
+
+    if(cmtVal == null || cmtVal == ''){
+        alert('댓글을 입력하세요');
+    } else {
+        insCmtAjax(param);
+    }
 }
 
 function insCmtAjax(param) {

@@ -30,30 +30,23 @@ public class BoardController {
         System.out.println("로그인 시도중이다");
         return "board/home";
     }
+
     @GetMapping("/community")
-    public String community(HttpServletResponse response, BoardDomain param, SearchCriteria scri , Model model) {
-        UserEntity userParam = new UserEntity();
-        Cookie cookie = new Cookie("hit",null);
-        cookie.setComment("게시글 조회 확인중");
-        System.out.println("경로 ㅣ:"+cookie.getPath());
-        System.out.println("조회 작업중 : " + cookie.getComment());
-        cookie.setMaxAge(60*60*24);
 
-        response.addCookie(cookie);
-        System.out.println("controller 조회수: "+param.getHitCount());
-
-        System.out.println("cookie : "+cookie);
-
-        model.addAllAttributes(service.mainBoardList(param,scri));
+    public String community() {
         return "board/community";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/community", method = RequestMethod.POST)
-    public Map<String,Object> communityPost(BoardDomain param, SearchCriteria scri) {
-        System.out.println("comm : " + service.mainBoardList(param,scri));
-        return service.mainBoardList(param,scri);
+    @RequestMapping("/community/{currentPage}")
+    public List<BoardDomain> community(BoardDomain param, SearchCriteria scri, @PathVariable("currentPage") int currentPage) {
+
+        scri.setPage(currentPage);
+        scri.setPerPageNum(5);
+
+        return service.newsList(param,scri);
     }
+
     @GetMapping("/boardWrite")
     public String boardWrite() { return "board/boardWrite"; }
 
@@ -76,6 +69,7 @@ public class BoardController {
         System.out.println("title : "+param.getTitle());
         return service.boardUpdate(param);
     }
+
     @ResponseBody
     @RequestMapping(value = "/boardDelete",method = RequestMethod.DELETE)
     public Map<String,Object> boardDelete(@RequestBody BoardDomain param, Model model) {
@@ -85,7 +79,7 @@ public class BoardController {
     }
 
     @GetMapping("/mainBoard")
-    public String mainBoardList(BoardDomain param, SearchCriteria scri, Model model) {
+    public String mainBoardList(BoardDomain param, SearchCriteria scri, Model model ) {
         model.addAllAttributes(service.mainBoardList(param,scri));
         return "board/mainBoard";
     }

@@ -84,7 +84,13 @@
             OR   A.ctnt LIKE CONCAT('%',#{scri.keyword},'%')
         </if>
             AND  A.delYN = 'N'
-        ORDER BY A.iboard DESC
+        <if test="scri.perPageNum == 5">
+            AND A.regdt BETWEEN DATE_ADD(NOW(), interval -1 WEEK) AND NOW()
+            ORDER BY hitCount DESC
+        </if>
+        <if test="scri.perPageNum != 5">
+            ORDER BY A.iboard DESC
+        </if>
         LIMIT #{scri.pageStart} , #{scri.perPageNum};
     </select>
 
@@ -95,7 +101,7 @@
         <if test="provider != null and provider != ''">
             AND provider = #{provider}
         </if>
-        AND delYN = 'N';
+        AND delYN = 'N'
     </select>
 
     <select id="boardDetail" resultType="BoardDomain">
