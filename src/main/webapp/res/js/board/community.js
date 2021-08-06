@@ -1,6 +1,7 @@
 const comm_pagingElem = document.querySelector('#comm-paging');
 const commListDiv = document.createElement('div');
 
+
 function moveToDetail(iboard){
     location.href = 'boardDetail?iboard=' + iboard;
 }

@@ -32,6 +32,7 @@ public class BoardController {
     }
 
     @GetMapping("/community")
+
     public String community() {
         return "board/community";
     }
@@ -50,10 +51,10 @@ public class BoardController {
     public String boardWrite() { return "board/boardWrite"; }
 
     @PostMapping("/boardWrite")
-    public String boardWrite(@RequestParam(value="provider") String provider, BoardDomain param, MultipartFile[] imgArr,Model model ) {
+    public String boardWrite(BoardDomain param, MultipartFile[] imgArr,Model model ) {
         param.setIuser(auth.getLoginUserPk());
         model.addAllAttributes(service.boardWrite(param,imgArr));
-        return "redirect:/board/mainBoard?provider=" + provider;
+        return "redirect:/board/mainBoard?provider=" + param.getProvider();
     }
 
     @GetMapping("/boardUpdate")
@@ -84,24 +85,11 @@ public class BoardController {
     }
 
     @GetMapping("/boardDetail")
-    public String boardDetail(HttpServletResponse response, @CookieValue (value="hitCount1", required = false) Cookie cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
-        UserEntity userParam = new UserEntity();
-        cookie = new Cookie("hit",null);
-        cookie.setComment("게시글 조회 확인중");
-        System.out.println("경로 ㅣ:"+cookie.getPath());
-        System.out.println("조회 작업중 : " + cookie.getComment());
-        cookie.setMaxAge(60*60*24);
-
-        response.addCookie(cookie);
-
-        System.out.println("cookie : "+cookie);
-
-        if(cookie != null) {
-
-        }
-
+    public String boardDetail(@CookieValue (value="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model, int hitCount) {
+        System.out.println("쿠키 생성 확인 : "+cookie);
         model.addAllAttributes(service.boardDetail(param, imgParam));
-
+        System.out.println("폼 hit : "+hitCount);
+        System.out.println("hit : "+param.getHitCount());
         return "board/boardDetail";
     }
 
