@@ -62,6 +62,7 @@
              , B.nick AS userNick
              , A.regdt
              , A.provider
+             , A.hitCount
         FROM t_board A
         INNER JOIN t_user B
         ON A.iuser = B.iuser
@@ -90,7 +91,11 @@
     <select id="countBoardList" resultType="Integer">
         SELECT COUNT(*)
         FROM  t_board
-        WHERE provider = #{provider}
+        WHERE 1 = 1
+        <if test="provider != null and provider != ''">
+            AND provider = #{provider}
+        </if>
+        AND delYN = 'N';
     </select>
 
     <select id="boardDetail" resultType="BoardDomain">

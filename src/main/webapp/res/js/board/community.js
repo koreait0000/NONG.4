@@ -1,5 +1,6 @@
 const comm_pagingElem = document.querySelector('#comm-paging');
 
+
 function moveToDetail(iboard){
     location.href = 'boardDetail?iboard=' + iboard;
 }
@@ -29,7 +30,7 @@ function paging(param) {
             .then(myJson => {
                 console.log("myjson : "+myJson);
 
-                if(page == 1 || page > 1) {
+                if(page == 1) {
                     // prevBtn.disabled = true;
                     if(page != 1) {
                         page--;
@@ -38,6 +39,27 @@ function paging(param) {
                 }
             })
     })
+
+    nextBtn.addEventListener('click',() => {
+
+        if(page == 1) {
+            page++;
+            if(page > 4) {
+                // prevBtn.disabled = true;
+            }
+            console.log("page :" + page);
+        }
+
+        fetch('community', init)
+            .then(res => res.json())
+            .then(myJson => {
+                console.log("myjson : "+myJson);
+
+            })
+    })
+
+
+
     comm_pagingElem.append(prevBtn,nextBtn);
 }
 

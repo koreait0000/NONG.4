@@ -90,12 +90,10 @@ public class BoardService {
         return map;
     }
 
-
     public Map<String,Object> boardDetail(BoardDomain param, BoardImgEntity imgParam) {
         param.setIuser(auth.getLoginUserPk());
         Map<String,Object> map = new HashMap<>();
         mapper.detailHitCount(param);
-        System.out.println(" 조회수 : "+param.getHitCount());
         map.put("detail", mapper.boardDetail(param));
         map.put("img", mapper.selBoardImgList(imgParam));
         return map;
@@ -105,7 +103,6 @@ public class BoardService {
         param.setIuser(auth.getLoginUserPk());
         return cmtMapper.insCmt(param);
     }
-
 
     public List<BoardCmtDomain> cmtList(BoardCmtDomain param){
         return cmtMapper.cmtList(param);
