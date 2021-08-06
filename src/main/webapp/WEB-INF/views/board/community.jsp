@@ -51,7 +51,7 @@
                                                            class="intermediate-class pointer"></div>
                             <div class="swiper-slide"><img src="/res/img/advanced.png" class="advanced-class pointer">
                             </div>
-                            <div class="swiper-slide"><img src="/res/img/master.png" class="master-class pointer"></div>1
+                            <div class="swiper-slide"><img src="/res/img/master.png" class="master-class pointer"></div>
                         </div>
                         <!-- If we need pagination -->
                         <div class="swiper-pagination"></div>
@@ -64,9 +64,8 @@
 
                     <div style="border-bottom: 1px solid #d3d3d3;">주요소식</div> 
               
-                    <div id="comm-paging">
-                    </div>
-              
+                    <div id="comm-paging"></div>
+
                     <c:forEach items="${list}" var="list" begin="0" end="4">
                         <a class="record pointer" onclick="moveToDetail(${list.iboard});">
                             <div class="news-list">
@@ -113,26 +112,26 @@
     </div>
     <div class="background-right"></div>
 </div>
-<script type="module">
-    const swiper = new Swiper('.swiper-container', {
-        // Optional parameters
-        slidesPerView: 2, // 동시에 보여줄 슬라이드 갯수
-        spaceBetween: -60, // 슬라이드간 간격
-        direction: 'horizontal',
-        loop: true,
-        autoplay: {  // 자동 슬라이드 설정 , 비 활성화 시 false
-            delay: 3000,   // 시간 설정
-            disableOnInteraction: false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
-        },
-        // If we need pagination
-        pagination: {
-            el: '.swiper-pagination',
-        },
-        // Navigation arrows
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        }
-    });
-</script>
+<%--<script type="module"> 일단은 community.js로 옮겨놓음--%>
+<%--    const swiper = new Swiper('.swiper-container', {--%>
+<%--        // Optional parameters--%>
+<%--        slidesPerView: 2, // 동시에 보여줄 슬라이드 갯수--%>
+<%--        spaceBetween: -60, // 슬라이드간 간격--%>
+<%--        direction: 'horizontal',--%>
+<%--        loop: true,--%>
+<%--        autoplay: {  // 자동 슬라이드 설정 , 비 활성화 시 false--%>
+<%--            delay: 3000,   // 시간 설정--%>
+<%--            disableOnInteraction: false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음--%>
+<%--        },--%>
+<%--        // If we need pagination--%>
+<%--        pagination: {--%>
+<%--            el: '.swiper-pagination',--%>
+<%--        },--%>
+<%--        // Navigation arrows--%>
+<%--        navigation: {--%>
+<%--            nextEl: '.swiper-button-next',--%>
+<%--            prevEl: '.swiper-button-prev',--%>
+<%--        }--%>
+<%--    });--%>
+<%--</script>--%>
 

@@ -59,6 +59,9 @@ public class BoardService {
         return map;
     }
 
+    public List<BoardDomain> newsList(BoardDomain param, SearchCriteria scri){
+        return mapper.mainBoardList(param, scri);
+    }
     public Map<String, Object> boardUpdate(BoardDomain param) {
         param.setIuser(auth.getLoginUserPk());
         Map<String, Object> map = new HashMap<>();
