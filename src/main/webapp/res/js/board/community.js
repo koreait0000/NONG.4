@@ -1,4 +1,5 @@
 const comm_pagingElem = document.querySelector('#comm-paging');
+const commListDiv = document.createElement('div');
 
 function moveToDetail(iboard){
     location.href = 'boardDetail?iboard=' + iboard;
@@ -11,7 +12,6 @@ function communityPaging() {
 
     prevBtn.innerText = '이전';
     nextBtn.innerText = '다음';
-    comm_pagingElem.append(prevBtn,nextBtn);
 
     if(currentPage == 1){
         prevBtn.disabled = true;
@@ -45,9 +45,13 @@ function communityPaging() {
     console.log('paging c : ' + currentPage);
 
     communityPagingAjax(currentPage);
+
+    comm_pagingElem.append(prevBtn);
+    comm_pagingElem.append(nextBtn);
 }
 
 function communityPagingAjax(currentPage){
+
     var currentPage = currentPage;
 
     fetch('community/' + currentPage)
@@ -58,16 +62,45 @@ function communityPagingAjax(currentPage){
             console.log(myJson);
             makeCommunityPaging(myJson);
         });
-
 }
 
 function makeCommunityPaging(data){
-    comm_pagingElem.innerHTML = '';
+
+    commListDiv.innerHTML = '';
 
     data.forEach(function (item){
+        const commListElemDiv = document.createElement('div');
+        const commProviderDiv = document.createElement('div');
+        const commWiterSpan = document.createElement('span');
+        const commRegdtSpan = document.createElement('span');
+        const commHitCountSpan = document.createElement('span');
+
+        if(item.provider == 'freedom'){
+            commProviderDiv.append('자유게시판');
+        } else if (item.provider == 'question') {
+            commProviderDiv.append('질문게시판');
+        } else if (item.provider == 'strategy') {
+            commProviderDiv.append('공략게시판');
+        } else {
+            commProviderDiv.append('친구게시판');
+        }
+        commWiterSpan.append(item.userNick);
+        commRegdtSpan.append(item.regdt);
+        commHitCountSpan.append(item.hitCount);
+
+        commListElemDiv.append(commProviderDiv);
+        commListElemDiv.append(commWiterSpan);
+        commListElemDiv.append(commRegdtSpan);
+        commListElemDiv.append(commHitCountSpan);
+
+        commListDiv.append(commListElemDiv);
 
     })
+
+    comm_pagingElem.append(commListDiv);
+
 }
+
 function swiper(){
     const swiper = new Swiper('.swiper-container', {
         // Optional parameters
