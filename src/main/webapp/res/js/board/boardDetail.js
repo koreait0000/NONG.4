@@ -1,10 +1,40 @@
-const cmtFrmElem   = document.querySelector('#cmtFrm');
-const cmtListElem  = document.querySelector('#cmtList');
-const boardModElem = document.querySelector('#boardMod');
-const updParentTElem = document.querySelector('#updParentT');
-const updParentCElem = document.querySelector('#updParentC');
+const cmtFrmElem      = document.querySelector('#cmtFrm');
+const cmtListElem     = document.querySelector('#cmtList');
+const boardModElem    = document.querySelector('#boardMod');
+const updParentTElem  = document.querySelector('#updParentT');
+const updParentCElem  = document.querySelector('#updParentC');
 const originTitleElem = document.querySelector('#title');
-const originCtntElem = document.querySelector('#ctnt');
+const originCtntElem  = document.querySelector('#ctnt');
+const communityElem   = document.querySelector('.community');
+
+console.log('조회수 : '+communityElem.dataset.hitCount);
+
+// function hitAjax() {
+//     let iboard = boardModElem.dataset.iboard;
+//     let hitCount = communityElem.dataset.hitCount;
+//     const param = {
+//         iboard:   boardModElem.dataset.iboard,
+//         hitCount: communityElem.dataset.hitCount
+//     };
+//     console.log('iboard '+boardModElem.dataset.iboard);
+//
+//     // const init = {
+//     //     method: 'POST',
+//     //     body: JSON.stringify(param),
+//     //     iboard:   boardModElem.dataset.iboard,
+//     //     hitCount: communityElem.dataset.hitCount,
+//     //     headers: {
+//     //         'accept' : 'application/json',
+//     //         'content-type' : 'application/json;charset=UTF-8'
+//     //     }
+//     // };
+//     fetch('boardDetail',param)
+//         .then(res => res.json())
+//         .then(myJson => {
+//             console.log('통신 : '+myJson);
+//         })
+//
+// }
 
 function boardUpd() {
     const updSpan    = document.createElement('span');
@@ -297,5 +327,5 @@ function makeCmtElemList(data) {
 
 cmtListAjax();
 boardUpd();
-
+// hitAjax();
 

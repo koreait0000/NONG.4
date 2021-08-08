@@ -1,3 +1,11 @@
-function moveToDetail(iboard,hitCount){
-    location.href = 'boardDetail?iboard=' + iboard + '&hitCount=' + hitCount;
+const recordElem = document.querySelector('.record');
+
+console.log(recordElem.dataset.hitCount);
+
+function moveToDetail(iboard){
+    location.href = 'boardDetail?iboard=' + iboard;
+}
+
+function hitAjax(hitCount) {
+
 }

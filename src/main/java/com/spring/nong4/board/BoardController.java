@@ -24,6 +24,7 @@ public class BoardController {
 
     @Autowired private BoardService service;
     @Autowired private IAuthenticationFacade auth;
+    @Autowired HttpServletResponse response;
 
     @GetMapping("/home")
     public String home() {
@@ -32,8 +33,13 @@ public class BoardController {
     }
 
     @GetMapping("/community")
-
     public String community() {
+        Cookie cookie = new Cookie("hit",null);
+        cookie.setComment("게시글 조회수");
+        cookie.setMaxAge(10);
+        System.out.println("쿠키 커뮤니티 확인 : " + cookie);
+
+        response.addCookie(cookie); // 클라이언트에게 해당 쿠키를 추가
         return "board/community";
     }
 
@@ -85,13 +91,33 @@ public class BoardController {
     }
 
     @GetMapping("/boardDetail")
-    public String boardDetail(@CookieValue (value="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model, int hitCount) {
-        System.out.println("쿠키 생성 확인 : "+cookie);
+    public String boardDetail(BoardDomain param, BoardImgEntity imgParam, Model model) {
+        Cookie cookie = new Cookie("hit",null);
+        cookie.setComment("게시글 조회수");
+        cookie.setMaxAge(10);
+//        System.out.println("폼 hit : "+hitCount);
+        cookie.setValue(String.valueOf(param.getIboard()));
+        System.out.println("i : " + param.getIboard());
+
+//        if(!cookie.equals(String.valueOf(param.getIboard()))) {
+//            System.out.println("반가워요");
+//            response.addCookie(cookie);
+//            model.addAllAttributes(service.boardDetailHit(param));
+//        } else {
+//            model.addAllAttributes(service.boardDetail(param, imgParam));
+//        }
         model.addAllAttributes(service.boardDetail(param, imgParam));
-        System.out.println("폼 hit : "+hitCount);
+        System.out.println("쿠키 생성 확인 : "+cookie);
         System.out.println("hit : "+param.getHitCount());
         return "board/boardDetail";
     }
+//    @ResponseBody
+//    @RequestMapping(value = "/boardDetail",method = RequestMethod.POST)
+//    public Map<String,Object> boardDetail(BoardDomain param, BoardImgEntity imgParam) {
+//        System.out.println("조회수1 : " + param.getHitCount());
+//        System.out.println("조회수2 : " + param.getIboard());
+//        return service.boardDetail(param, imgParam);
+//    }
 
     @ResponseBody
     @RequestMapping(value = "/insCmt", method = RequestMethod.POST)
