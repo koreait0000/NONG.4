@@ -78,7 +78,6 @@ public class BoardService {
 
     public Map<String,Object> mainBoardList(BoardDomain param, SearchCriteria scri) {
         param.setIuser(auth.getLoginUserPk());
-
         Map<String,Object> map = new HashMap<>();
 
         int total = mapper.countBoardList(param);
@@ -96,9 +95,14 @@ public class BoardService {
     public Map<String,Object> boardDetail(BoardDomain param, BoardImgEntity imgParam) {
         param.setIuser(auth.getLoginUserPk());
         Map<String,Object> map = new HashMap<>();
-        mapper.detailHitCount(param);
         map.put("detail", mapper.boardDetail(param));
         map.put("img", mapper.selBoardImgList(imgParam));
+        return map;
+    }
+    public Map<String,Object> boardDetailHit(BoardDomain param) {
+        param.setIuser(auth.getLoginUserPk());
+        Map<String,Object> map = new HashMap<>();
+        map.put("detail", mapper.detailHitCount(param));
         return map;
     }
 
