@@ -24,18 +24,15 @@ public class BoardController {
 
     @Autowired private BoardService service;
     @Autowired private IAuthenticationFacade auth;
-    @Autowired HttpServletResponse response;
 
     @GetMapping("/home")
     public String home() {
-        Cookie cookie = new Cookie("hit",null); // 쿠키 생성(home에 접근할 경우에만 생성 됨)
-        cookie.setMaxAge(60*60*24);
-        response.addCookie(cookie); // response에 쿠키 전달
-
+        System.out.println("로그인 시도중이다");
         return "board/home";
     }
 
     @GetMapping("/community")
+
     public String community() {
         return "board/community";
     }
@@ -88,16 +85,11 @@ public class BoardController {
     }
 
     @GetMapping("/boardDetail")
-    public String boardDetail(@CookieValue(name ="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
-        // home에서 생성된 쿠키를 @CookieValue를 사용하여 detail에서 전달 받음
-
-        if(!(cookie.contains(String.valueOf(param.getIboard())))) { // 쿠키값에 iboard값이 포함이 되어 있지 않다면
-            cookie += param.getIboard() + "/"; // 쿠키에 iboard값 마다마다 누적
-            model.addAllAttributes(service.boardDetailHit(param)); // 조회수 증가
-        }
-
-        response.addCookie(new Cookie("hit",cookie));
+    public String boardDetail(@CookieValue (value="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model, int hitCount) {
+        System.out.println("쿠키 생성 확인 : "+cookie);
         model.addAllAttributes(service.boardDetail(param, imgParam));
+        System.out.println("폼 hit : "+hitCount);
+        System.out.println("hit : "+param.getHitCount());
         return "board/boardDetail";
     }
 
