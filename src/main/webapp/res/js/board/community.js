@@ -1,14 +1,9 @@
 const comm_pagingElem = document.querySelector('#comm-paging');
 const commListDiv = document.createElement('div');
-
-
-function moveToDetail(iboard){
-    location.href = 'boardDetail?iboard=' + iboard;
-}
+const prevBtn = document.createElement('button');
+const nextBtn = document.createElement('button');
 
 function communityPaging() {
-    const prevBtn = document.createElement('button');
-    const nextBtn = document.createElement('button');
     let currentPage = 1;
 
     prevBtn.innerText = '이전';
@@ -26,9 +21,7 @@ function communityPaging() {
         if(currentPage != 4){
             nextBtn.disabled = false;
         }
-        console.log('currentPage : ' + currentPage);
         communityPagingAjax(currentPage);
-
     });
 
     nextBtn.addEventListener('click', () => {
@@ -39,11 +32,8 @@ function communityPaging() {
         if(currentPage == 4) {
             nextBtn.disabled = true;
         }
-        console.log('currentPage : ' + currentPage);
         communityPagingAjax(currentPage);
-
     });
-    console.log('paging c : ' + currentPage);
 
     communityPagingAjax(currentPage);
 
@@ -60,7 +50,6 @@ function communityPagingAjax(currentPage){
             return res.json();
         })
         .then(function(myJson) {
-            console.log(myJson);
             makeCommunityPaging(myJson);
         });
 }
@@ -69,12 +58,18 @@ function makeCommunityPaging(data){
 
     commListDiv.innerHTML = '';
 
+    if(data.length < 5){
+        nextBtn.disabled = true;
+    }
+
     data.forEach(function (item){
         const commListElemDiv = document.createElement('div');
         const commProviderDiv = document.createElement('div');
         const commWiterSpan = document.createElement('span');
         const commRegdtSpan = document.createElement('span');
         const commHitCountSpan = document.createElement('span');
+
+        commListElemDiv.className = 'news-list pointer';
 
         if(item.provider == 'freedom'){
             commProviderDiv.append('자유게시판');
@@ -93,6 +88,10 @@ function makeCommunityPaging(data){
         commListElemDiv.append(commWiterSpan);
         commListElemDiv.append(commRegdtSpan);
         commListElemDiv.append(commHitCountSpan);
+
+        commListElemDiv.addEventListener('click', () => {
+            moveToDetail(item.iboard);
+        });
 
         commListDiv.append(commListElemDiv);
 

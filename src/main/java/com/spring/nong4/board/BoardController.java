@@ -36,6 +36,7 @@ public class BoardController {
     }
 
     @GetMapping("/community")
+
     public String community() {
         return "board/community";
     }
