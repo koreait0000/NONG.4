@@ -85,10 +85,9 @@ public class BoardController {
     }
 
     @GetMapping("/boardDetail")
-    public String boardDetail(@CookieValue (value="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model, int hitCount) {
+    public String boardDetail(@CookieValue (value="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
         System.out.println("쿠키 생성 확인 : "+cookie);
         model.addAllAttributes(service.boardDetail(param, imgParam));
-        System.out.println("폼 hit : "+hitCount);
         System.out.println("hit : "+param.getHitCount());
         return "board/boardDetail";
     }

@@ -15,3 +15,7 @@ advancedElem.addEventListener('click', () => {
 masterElem.addEventListener('click', () => {
     location.href="/level/master";
 });
+
+function moveToDetail(iboard){
+    location.href = 'boardDetail?iboard=' + iboard;
+}

@@ -57,7 +57,7 @@
                                 <th>게시판성격</th>
                             </tr>
                             <c:forEach items="${list}" var="list" >
-                                <tr class="record pointer" onclick="moveToDetail(${list.iboard},${list.hitCount});">
+                                <tr class="record pointer" onclick="moveToDetail(${list.iboard});">
                                     <td>${list.iboard}</td>
                                     <td>${list.title}</td>
                                     <td>${list.ctnt}</td>
