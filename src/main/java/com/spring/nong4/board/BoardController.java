@@ -28,18 +28,15 @@ public class BoardController {
 
     @GetMapping("/home")
     public String home() {
-        System.out.println("로그인 시도중이다");
+        Cookie cookie = new Cookie("hit",null); // 쿠키 생성(home에 접근할 경우에만 생성 됨)
+        cookie.setMaxAge(60*60*24);
+        response.addCookie(cookie); // response에 쿠키 전달
+
         return "board/home";
     }
 
     @GetMapping("/community")
     public String community() {
-        Cookie cookie = new Cookie("hit",null);
-        cookie.setComment("게시글 조회수");
-        cookie.setMaxAge(10);
-        System.out.println("쿠키 커뮤니티 확인 : " + cookie);
-
-        response.addCookie(cookie); // 클라이언트에게 해당 쿠키를 추가
         return "board/community";
     }
 
@@ -91,33 +88,18 @@ public class BoardController {
     }
 
     @GetMapping("/boardDetail")
-    public String boardDetail(BoardDomain param, BoardImgEntity imgParam, Model model) {
-        Cookie cookie = new Cookie("hit",null);
-        cookie.setComment("게시글 조회수");
-        cookie.setMaxAge(10);
-//        System.out.println("폼 hit : "+hitCount);
-        cookie.setValue(String.valueOf(param.getIboard()));
-        System.out.println("i : " + param.getIboard());
+    public String boardDetail(@CookieValue(name ="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
+        // home에서 생성된 쿠키를 @CookieValue를 사용하여 detail에서 전달 받음
 
-//        if(!cookie.equals(String.valueOf(param.getIboard()))) {
-//            System.out.println("반가워요");
-//            response.addCookie(cookie);
-//            model.addAllAttributes(service.boardDetailHit(param));
-//        } else {
-//            model.addAllAttributes(service.boardDetail(param, imgParam));
-//        }
+        if(!(cookie.contains(String.valueOf(param.getIboard())))) { // 쿠키값에 iboard값이 포함이 되어 있지 않다면
+            cookie += param.getIboard() + "/"; // 쿠키에 iboard값 마다마다 누적
+            model.addAllAttributes(service.boardDetailHit(param)); // 조회수 증가
+        }
+
+        response.addCookie(new Cookie("hit",cookie));
         model.addAllAttributes(service.boardDetail(param, imgParam));
-        System.out.println("쿠키 생성 확인 : "+cookie);
-        System.out.println("hit : "+param.getHitCount());
         return "board/boardDetail";
     }
-//    @ResponseBody
-//    @RequestMapping(value = "/boardDetail",method = RequestMethod.POST)
-//    public Map<String,Object> boardDetail(BoardDomain param, BoardImgEntity imgParam) {
-//        System.out.println("조회수1 : " + param.getHitCount());
-//        System.out.println("조회수2 : " + param.getIboard());
-//        return service.boardDetail(param, imgParam);
-//    }
 
     @ResponseBody
     @RequestMapping(value = "/insCmt", method = RequestMethod.POST)
