@@ -33,4 +33,9 @@ public class UserController {
         int result = service.auth(param);
         return "redirect:login?auth=" + result;
     }
+    // 프로필
+    @GetMapping("/profile")
+    public String profile(UserEntity param) {
+        return "user/profile";
+    }
 }

@@ -6,6 +6,7 @@ CREATE TABLE t_user(
    nick VARCHAR(8) NOT NULL COMMENT '닉네임',
    tel CHAR(13) COMMENT '연락처',
    authCd CHAR(5) COMMENT '회원가입 인증코드, null이면 인증받은 상태, 값이 있으면 인증해야 되는 상태',
+   profileImg VARCHAR(50) COMMENT '프로필사진',
    regdt DATETIME DEFAULT NOW() COMMENT '가입일자',
    INDEX idx_auth_cd (`authCd`)
 );
