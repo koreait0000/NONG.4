@@ -86,7 +86,8 @@
             AND  A.delYN = 'N'
         <if test="scri.perPageNum == 5">
             AND A.regdt BETWEEN DATE_ADD(NOW(), interval -1 WEEK) AND NOW()
-            ORDER BY hitCount DESC
+            AND A.hitCount > 0
+            ORDER BY A.hitCount DESC
         </if>
         <if test="scri.perPageNum != 5">
             ORDER BY A.iboard DESC
