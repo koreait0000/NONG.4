@@ -3,9 +3,15 @@ package com.spring.nong4.user;
 import com.spring.nong4.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -36,7 +42,15 @@ public class UserController {
 
     // 프로필
     @GetMapping("/profile")
-    public String profile(UserEntity param) {
+    public String profile(UserEntity param, Model model) {
+        model.addAllAttributes(service.selUserProfile(param));
         return "user/profile";
+    }
+
+    @PostMapping("/profile")
+    public String profile(MultipartFile[] imgArr, UserEntity param) {
+        System.out.println("프로필 확인용");
+        service.profileMod(imgArr, param);
+        return "redirect:profile";
     }
 }

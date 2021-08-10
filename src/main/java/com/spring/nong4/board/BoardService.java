@@ -48,10 +48,8 @@ public class BoardService {
             String target = "board/" + param.getIboard();
             for(MultipartFile img : imgArr) {
                 String saveFileNm = MyFileUtils.transferTo(img , target);
-                System.out.println("NM : "+saveFileNm);
                 if(saveFileNm != null) {
                     paramImg.setImg(saveFileNm);
-                    System.out.println("IMG"+paramImg);
                     map.put("data",mapper.boardWriteImg(paramImg));
                 }
             }
@@ -95,10 +93,17 @@ public class BoardService {
     public Map<String,Object> boardDetail(BoardDomain param, BoardImgEntity imgParam) {
         param.setIuser(auth.getLoginUserPk());
         Map<String,Object> map = new HashMap<>();
-        mapper.detailHitCount(param);
+
         map.put("detail", mapper.boardDetail(param));
         map.put("img", mapper.selBoardImgList(imgParam));
-        System.out.println("kim");
+
+        return map;
+    }
+
+    public Map<String,Object> boardDetailHit(BoardDomain param) {
+        param.setIuser(auth.getLoginUserPk());
+        Map<String,Object> map = new HashMap<>();
+        map.put("hit", mapper.detailHitCount(param));
         return map;
     }
 

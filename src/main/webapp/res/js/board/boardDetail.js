@@ -297,5 +297,3 @@ function makeCmtElemList(data) {
 
 cmtListAjax();
 boardUpd();
-
-
