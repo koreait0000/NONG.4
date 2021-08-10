@@ -62,7 +62,7 @@
                 </div>
                 <div class="news">
 
-                    <div style="border-bottom: 1px solid #d3d3d3;">주요소식</div> 
+                    <div style="border-bottom: 1px solid #d3d3d3;">주요소식</div>
               
                     <div id="comm-paging"></div>
 

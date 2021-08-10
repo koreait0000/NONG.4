@@ -114,6 +114,10 @@
              , A.hitCount
              , B.nick AS userNick
              , B.iuser
+             , CASE WHEN (SELECT iboard
+                          FROM t_board_fav
+                          WHERE iboard = #{iboard}
+                          AND iuser = #{iuser}) IS NULL THEN 0 ELSE 1 END AS isFav
         FROM t_board A
         INNER JOIN t_user B
         ON    A.iuser  = B.iuser
@@ -127,4 +131,17 @@
     FROM t_board_img
     WHERE iboard = #{iboard}
     </select>
+
+    <insert id="insFav">
+        INSERT INTO t_board_fav
+        (iboard, iuser)
+        VALUES
+        (#{iboard}, #{iuser})
+    </insert>
+
+    <delete id="delFav">
+        DELETE FROM t_board_fav
+        WHERE iuser = #{iuser} AND iboard = #{iboard}
+    </delete>
+
 </mapper>
