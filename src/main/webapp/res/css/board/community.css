@@ -8,9 +8,9 @@
 .fa-search{ position: absolute; overflow: hidden; font-size: 25px; margin-top: 6px;}
 
 .category { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding: 30px 20px; }
-.category i{ color: white;}
 .category img { border-radius: 10px; height: 100px; width: 100px; }
 .category .writeBtn { width: 80%; height: 40px; font-size: 16px; background-color: darkgreen; }
+.category .writeBtn i{ color: white;}
 .category .cate-event { margin-top: 80px; }
 .category .cate-board { margin-top: 100px; }
 .category .title { font-size: 30px; font-weight: bold; }
@@ -23,12 +23,13 @@
 .level .swiper-slide { display: flex; justify-content: center; align-items: center; }
 .level .swiper-slide img { width: 350px; }
 
+#news-paging-btn { padding-bottom: 5px;}
+#news-paging-btn button{ float:right;}
 
 .news { height: 320px; padding: 5px 30px;}
-.news-dl {position: relative;}
-.news-list { padding: 10px; border-bottom: 1px solid #d3d3d3; }
-.news-dd-span{ display: inline;  position:absolute; left:150px;}
-
+.news-list-detail { position: relative; padding: 10px; border-bottom: 1px solid #d3d3d3; }
+.news-regdt-span{ display: inline;  position:absolute; left:150px;}
+.news-count-span{ float: right; }
 
 .today-video { padding: 5px 30px; display: flex;  height: 310px; align-items: center; }
 .today-video .video-box { flex-grow: 1; }
