@@ -78,7 +78,6 @@ public class BoardService {
 
     public Map<String,Object> mainBoardList(BoardDomain param, SearchCriteria scri) {
         param.setIuser(auth.getLoginUserPk());
-
         Map<String,Object> map = new HashMap<>();
 
         int total = mapper.countBoardList(param);

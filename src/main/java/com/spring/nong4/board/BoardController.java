@@ -85,11 +85,17 @@ public class BoardController {
     }
 
     @GetMapping("/boardDetail")
-    public String boardDetail(@CookieValue (value="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model, int hitCount) {
-        System.out.println("쿠키 생성 확인 : "+cookie);
+
+    public String boardDetail(@CookieValue(name ="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
+        // home에서 생성된 쿠키를 @CookieValue를 사용하여 detail에서 전달 받음
+        if(!(cookie.contains(String.valueOf(param.getIboard())))) { // 쿠키값에 iboard값이 포함이 되어 있지 않다면
+            cookie += param.getIboard() + "/"; // 쿠키에 iboard값 마다마다 누적
+            model.addAllAttributes(service.boardDetailHit(param)); // 조회수 증가
+        }
+
+        response.addCookie(new Cookie("hit",cookie));
+
         model.addAllAttributes(service.boardDetail(param, imgParam));
-        System.out.println("폼 hit : "+hitCount);
-        System.out.println("hit : "+param.getHitCount());
         return "board/boardDetail";
     }
 
