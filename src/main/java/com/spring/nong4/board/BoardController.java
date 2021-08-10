@@ -24,6 +24,7 @@ public class BoardController {
 
     @Autowired private BoardService service;
     @Autowired private IAuthenticationFacade auth;
+    @Autowired private HttpServletResponse response;
 
     @GetMapping("/home")
     public String home() {
@@ -90,7 +91,7 @@ public class BoardController {
         // home에서 생성된 쿠키를 @CookieValue를 사용하여 detail에서 전달 받음
         if(!(cookie.contains(String.valueOf(param.getIboard())))) { // 쿠키값에 iboard값이 포함이 되어 있지 않다면
             cookie += param.getIboard() + "/"; // 쿠키에 iboard값 마다마다 누적
-            model.addAllAttributes(service.boardDetailHit(param)); // 조회수 증가
+//            model.addAllAttributes(service.boardDetailHit(param)); // 조회수 증가
         }
 
         response.addCookie(new Cookie("hit",cookie));

@@ -98,6 +98,7 @@ public class BoardService {
         mapper.detailHitCount(param);
         map.put("detail", mapper.boardDetail(param));
         map.put("img", mapper.selBoardImgList(imgParam));
+        System.out.println("kim");
         return map;
     }
 
