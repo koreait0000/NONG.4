@@ -60,13 +60,14 @@
                         <div class="swiper-button-next"></div>
                     </div>
                 </div>
+
                 <div class="news">
-
-                    <div style="border-bottom: 1px solid #d3d3d3;">주요소식</div>
-              
-                    <div id="comm-paging"></div>
-
+                    <div id="news-paging-btn" style="border-bottom: 1px solid #d3d3d3;">
+                        주요소식
+                    </div>
+                    <div id="news-list"></div>
                 </div>
+
                 <div class="today-video">
                     <div class="video-box"><img src="/res/img/main.png"></div>
                     <div class="video-cnt">
