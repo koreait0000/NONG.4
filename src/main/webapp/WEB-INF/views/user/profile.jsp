@@ -25,7 +25,7 @@
                 <td>${profile.tel}</td>
             </tr>
             <tr>
-                <th>가입일자</th>
+                <th>가입일자!</th>
                 <td>${profile.regdt}</td>
             </tr>
         </table>
