@@ -21,7 +21,7 @@ spring:
 #    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
 #    url: jdbc:log4jdbc:mysql://localhost:3308/nong4
     username: root
-    password: 1234
+    password: koreait
   servlet:
     multipart:
       max-file-size: 5MB
