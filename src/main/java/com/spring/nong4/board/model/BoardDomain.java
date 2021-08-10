@@ -6,4 +6,5 @@ import lombok.Data;
 public class BoardDomain extends BoardEntity{
     private String userNick;
     private String providerType;
+    private int isFav;
 }

@@ -66,7 +66,6 @@
                         주요소식
                     </div>
                     <div id="news-list"></div>
-
                 </div>
 
                 <div class="today-video">

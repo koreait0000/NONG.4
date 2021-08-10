@@ -24,4 +24,7 @@ public interface BoardMapper {
     BoardDomain boardDetail(BoardDomain param);
 
     List<BoardImgEntity> selBoardImgList(BoardImgEntity param);
+
+    int insFav(BoardDomain param);
+    int delFav(BoardDomain param);
 }
