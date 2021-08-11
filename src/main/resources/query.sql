@@ -47,4 +47,13 @@ CREATE TABLE t_board_fav(
     PRIMARY KEY(iuser, iboard),
     FOREIGN KEY(iboard) REFERENCES t_board(iboard),
     FOREIGN KEY(iuser) REFERENCES t_user(iuser)
-)
+);
+
+CREATE TABLE t_user_profile (
+    iprofile INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '회원프로필번호',
+    iuser INT(10) UNSIGNED NOT NULL COMMENT '회원번호',
+    profileImg VARCHAR(50) NOT NULL COMMENT '프로플사진',
+    regdt DATETIME DEFAULT NOW() COMMENT '작성 날짜',
+    PRIMARY KEY (iprofile),
+    FOREIGN KEY(iuser) REFERENCES t_user(iuser)
+);

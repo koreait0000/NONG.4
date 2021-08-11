@@ -5,6 +5,7 @@ import com.spring.nong4.common.MyFileUtils;
 import com.spring.nong4.common.MySecurityUtils;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
+import com.spring.nong4.user.model.UserProfileEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -56,23 +57,23 @@ public class UserService {
         return map;
     }
 
-    public void profileMod(MultipartFile[] imgArr, UserEntity param) {
+    public int profileMod(MultipartFile[] imgArr, UserProfileEntity param) {
+        if (imgArr == null) {
+            return 0;
+        }
         param.setIuser(auth.getLoginUserPk());
 
-        String target = "profile/" + param.getIuser(); // 프로필 사진 경로 + iuser
-
-        for (MultipartFile img : imgArr) {
-            String saveFileNm = myFileUtils.transferTo(img, target);
-            System.out.println("saveFileNm : " + saveFileNm);
-            if (saveFileNm != null) {
-
-                if (mapper.insUserProfile(param) == 1 && param.getProfileImg() == null) {
+        int result = 0;
+        if (imgArr != null && imgArr.length > 0) {
+            String target = "user/" + param.getIuser();
+            for (MultipartFile img : imgArr) {
+                String saveFileNm = myFileUtils.transferTo(img, target);
+                if (saveFileNm != null) { //이미지 정보 DB에 저장
                     param.setProfileImg(saveFileNm);
-                    if (mapper.updUserProfile(param) == 1) {
-                        param.setProfileImg(saveFileNm);
-                    }
+                    result = mapper.insUserProfile(param);
                 }
             }
         }
+        return result;
     }
 }
