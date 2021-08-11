@@ -37,7 +37,7 @@
                 <div><a href="mainBoard?provider=friend">친구 게시판</a></div>
             </div>
         </div>
-        <div class="community" data-hit-count="${detail.hitCount}">
+        <div class="community">
             <div class="community-top"></div>
             <div class="community-board">
                 <div>

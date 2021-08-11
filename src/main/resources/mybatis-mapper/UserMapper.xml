@@ -34,5 +34,4 @@
         WHERE email = #{email}
         AND authCd IS NULL
     </select>
-
 </mapper>

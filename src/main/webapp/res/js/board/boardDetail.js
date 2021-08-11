@@ -1,8 +1,8 @@
-const cmtFrmElem      = document.querySelector('#cmtFrm');
-const cmtListElem     = document.querySelector('#cmtList');
-const boardModElem    = document.querySelector('#boardMod');
-const updParentTElem  = document.querySelector('#updParentT');
-const updParentCElem  = document.querySelector('#updParentC');
+const cmtFrmElem   = document.querySelector('#cmtFrm');
+const cmtListElem  = document.querySelector('#cmtList');
+const boardModElem = document.querySelector('#boardMod');
+const updParentTElem = document.querySelector('#updParentT');
+const updParentCElem = document.querySelector('#updParentC');
 const originTitleElem = document.querySelector('#title');
 const originCtntElem  = document.querySelector('#ctnt');
 const favBtnElem = document.querySelector('#favBtn');
@@ -325,4 +325,3 @@ function makeCmtElemList(data) {
 cmtListAjax();
 makeFavBtn()
 boardUpd();
-
