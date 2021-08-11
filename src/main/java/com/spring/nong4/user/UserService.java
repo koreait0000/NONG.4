@@ -1,12 +1,17 @@
 package com.spring.nong4.user;
 
 import com.spring.nong4.common.EmailService;
+import com.spring.nong4.common.MyFileUtils;
 import com.spring.nong4.common.MySecurityUtils;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -15,6 +20,7 @@ public class UserService {
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private IAuthenticationFacade auth;
     @Autowired private UserMapper mapper;
+    @Autowired private MyFileUtils myFileUtils;
 
     public int join(UserEntity param) {
         String authCd = secUtils.getRandomDigit(5);
@@ -41,4 +47,32 @@ public class UserService {
         return mapper.auth(param);
     }
 
+    public Map<String, Object> selUserProfile(UserEntity param) {
+        param.setIuser(auth.getLoginUserPk());
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("profile",mapper.selUserProfile(param));
+
+        return map;
+    }
+
+    public void profileMod(MultipartFile[] imgArr, UserEntity param) {
+        param.setIuser(auth.getLoginUserPk());
+
+        String target = "profile/" + param.getIuser(); // 프로필 사진 경로 + iuser
+
+        for (MultipartFile img : imgArr) {
+            String saveFileNm = myFileUtils.transferTo(img, target);
+            System.out.println("saveFileNm : " + saveFileNm);
+            if (saveFileNm != null) {
+
+                if (mapper.insUserProfile(param) == 1 && param.getProfileImg() == null) {
+                    param.setProfileImg(saveFileNm);
+                    if (mapper.updUserProfile(param) == 1) {
+                        param.setProfileImg(saveFileNm);
+                    }
+                }
+            }
+        }
+    }
 }

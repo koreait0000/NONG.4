@@ -34,4 +34,35 @@
         WHERE email = #{email}
         AND authCd IS NULL
     </select>
+
+    <insert id="insUserProfile">
+        INSERT INTO t_board
+        (
+          iuser
+        , profileImg
+        )
+        VALUES
+        (
+          ${iuser}
+        , ${profileImg}
+        )
+    </insert>
+
+    <update id="updUserProfile">
+        UPDATE t_user
+        SET profileImg = #{profileImg}
+        WHERE iuser    = #{iuser}
+    </update>
+
+    <select id="selUserProfile" resultType="userEntity">
+        SELECT
+              iuser
+            , email
+            , nick AS userNick
+            , profileImg
+            , tel
+            , regdt
+        FROM  t_user
+        WHERE iuser = ${iuser}
+    </select>
 </mapper>

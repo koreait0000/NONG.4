@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication property="principal.user" var="auth"></sec:authentication>
-<c:if test="${auth.iuser eq detail.iuser}">
+auth : ${auth.iuser}
+profile : ${profile.iuser}
+<c:if test="${auth.iuser eq profile.iuser}">
     <form id="profileForm" action="profile" method="post">
         <div>
             이미지 : <input type="file" name="imgArr" multiple accept="image/*">
@@ -11,14 +13,14 @@
     </form>
     <div id="flexContainer">
         <table>
-            <img id="profileImg" src="/pic/board/${detail.iboard}/${img.img}" onerror="this.onerror=null; this.style.display='none';">
+            <img id="profile" src="/pic/profile/${profile.iuser}/${profile.profileImg}" onerror="this.onerror=null; this.style.display='none';">
             <tr>
                 <th>이메일</th>
                 <td>${profile.email}</td>
             </tr>
             <tr>
                 <th>닉네임</th>
-                <td>${profile.userNick}</td>
+                <td>${profile.nick}</td>
             </tr>
             <tr>
                 <th>휴대폰번호</th>
