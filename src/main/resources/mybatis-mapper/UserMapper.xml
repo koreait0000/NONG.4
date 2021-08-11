@@ -36,15 +36,15 @@
     </select>
 
     <insert id="insUserProfile">
-        INSERT INTO t_board
+        INSERT INTO t_user_profile
         (
           iuser
         , profileImg
         )
         VALUES
         (
-          ${iuser}
-        , ${profileImg}
+          #{iuser}
+        , #{profileImg}
         )
     </insert>
 

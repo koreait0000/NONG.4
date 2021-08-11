@@ -5,15 +5,14 @@
 auth : ${auth.iuser}
 profile : ${profile.iuser}
 <c:if test="${auth.iuser eq profile.iuser}">
-    <form id="profileForm" action="profile" method="post">
-        <div>
-            이미지 : <input type="file" name="imgArr" multiple accept="image/*">
-            <input type="submit" value="업로드">
-        </div>
-    </form>
+    <div>
+        이미지 : <input type="file" id="selectImgArr" multiple accept="image/*">
+        <input type="submit" id="submitUpload" value="업로드">
+    </div>
+    <div id="displayImgList"></div>
     <div id="flexContainer">
         <table>
-            <img id="profile" src="/pic/profile/${profile.iuser}/${profile.profileImg}" onerror="this.onerror=null; this.style.display='none';">
+<%--            <img id="profileImg" src="/pic/profile/${profile.iuser}/${profile.profileImg}" onerror="this.onerror=null; this.style.display='none';">--%>
             <tr>
                 <th>이메일</th>
                 <td>${profile.email}</td>
