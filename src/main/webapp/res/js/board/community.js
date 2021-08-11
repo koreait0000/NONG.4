@@ -1,4 +1,5 @@
-const comm_pagingElem = document.querySelector('#comm-paging');
+const comm_pagingElem = document.querySelector('#news-list');
+const comm_paging_btnElem = document.querySelector('#news-paging-btn');
 const commListDiv = document.createElement('div');
 const prevBtn = document.createElement('button');
 const nextBtn = document.createElement('button');
@@ -37,8 +38,8 @@ function communityPaging() {
 
     communityPagingAjax(currentPage);
 
-    comm_pagingElem.append(prevBtn);
-    comm_pagingElem.append(nextBtn);
+    comm_paging_btnElem.append(nextBtn);
+    comm_paging_btnElem.append(prevBtn);
 }
 
 function communityPagingAjax(currentPage){
@@ -69,7 +70,9 @@ function makeCommunityPaging(data){
         const commRegdtSpan = document.createElement('span');
         const commHitCountSpan = document.createElement('span');
 
-        commListElemDiv.className = 'news-list pointer';
+        commListElemDiv.className = 'news-list-detail pointer';
+        commRegdtSpan.className = 'news-regdt-span';
+        commHitCountSpan.className = 'news-count-span';
 
         if(item.provider == 'freedom'){
             commProviderDiv.append('자유게시판');
