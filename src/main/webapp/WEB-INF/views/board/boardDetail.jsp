@@ -41,6 +41,7 @@
             <div class="community-top"></div>
             <div class="community-board">
                 <div>
+                    <div id="favBtn" data-iboard="${param.iboard}" data-isfav="${detail.isFav}"></div>
                     <div>
                         조회수 : ${detail.hitCount}
                         <c:choose>

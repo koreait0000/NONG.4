@@ -99,6 +99,13 @@ public class BoardController {
         return "board/boardDetail";
     }
 
+    //좋아요
+    @ResponseBody
+    @GetMapping("/fav")
+    public int favProc(BoardDomain param){
+        return service.favProc(param);
+    }
+
     @ResponseBody
     @RequestMapping(value = "/insCmt", method = RequestMethod.POST)
     public Map<String, Integer> insCmt(@RequestBody BoardCmtDomain param){

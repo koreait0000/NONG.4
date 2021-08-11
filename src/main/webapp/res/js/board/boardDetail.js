@@ -4,7 +4,34 @@ const boardModElem = document.querySelector('#boardMod');
 const updParentTElem = document.querySelector('#updParentT');
 const updParentCElem = document.querySelector('#updParentC');
 const originTitleElem = document.querySelector('#title');
-const originCtntElem = document.querySelector('#ctnt');
+const originCtntElem  = document.querySelector('#ctnt');
+const favBtnElem = document.querySelector('#favBtn');
+
+function makeFavBtn(){
+    const favBtn = document.createElement('button');
+    const favBtnImg = document.createElement('i');
+    const isFav = favBtnElem.dataset.isfav;
+    const iboard = favBtnElem.dataset.iboard;
+
+    favBtnImg.className = '';
+
+    if(isFav == 1){
+        favBtnImg.className = 'fas fa-heart';
+    } else {
+        favBtnImg.className = 'far fa-heart';
+    }
+
+    favBtn.addEventListener('click', () => {
+        fetch('fav?isFav=' + isFav + '&iboard=' + iboard)
+            .then(res => res.json())
+            .then(myJson => {
+                console.log(myJson);
+                location.reload();
+            });
+    })
+    favBtn.append(favBtnImg);
+    favBtnElem.append(favBtn);
+}
 
 function boardUpd() {
     const updSpan    = document.createElement('span');
@@ -296,6 +323,5 @@ function makeCmtElemList(data) {
 }
 
 cmtListAjax();
+makeFavBtn()
 boardUpd();
-
-

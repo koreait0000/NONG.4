@@ -31,10 +31,10 @@
     <meta property="og:type" content="website">
 </head>
 <body class="u-body u-overlap u-overlap-contrast u-overlap-transparent"><header class="u-clearfix u-custom-color-1 u-header u-sticky u-header" id="sec-95a0"><div class="u-clearfix u-sheet u-sheet-1">
-    <a href="https://nicepage.com" class="u-image u-logo u-image-1">
+    <a href="index" class="u-image u-logo u-image-1">
         <img src="/res/img/default-logo.png" class="u-logo-image u-logo-image-1">
     </a>
-    <a href="https://nicepage.com/c/slider-website-templates" class="u-border-none u-btn u-button-style u-hover-palette-1-base u-none u-btn-1">로그인</a>
+    <a href="/user/login" class="u-border-none u-btn u-button-style u-hover-palette-1-base u-none u-btn-1">로그인</a>
 </div></header>
 <section class="u-align-center u-clearfix u-custom-color-1 u-section-1" id="carousel_b09e">
     <div class="u-clearfix u-image u-sheet u-image-1" data-image-width="1563" data-image-height="1600">
