@@ -107,13 +107,6 @@ public class BoardService {
         return map;
     }
 
-    public Map<String,Object> boardDetailHit(BoardDomain param) {
-        param.setIuser(auth.getLoginUserPk());
-        Map<String,Object> map = new HashMap<>();
-        map.put("detail", mapper.detailHitCount(param));
-        return map;
-    }
-
     public int favProc(BoardDomain param){
         param.setIuser(auth.getLoginUserPk());
         if(param.getIsFav() == 1){
