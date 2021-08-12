@@ -63,9 +63,17 @@
              , A.regdt
              , A.provider
              , A.hitCount
+        <if test="param.isFav == 1">
+            , CASE WHEN C.iboard IS NULL THEN 0 ELSE 1 END AS isFav
+        </if>
         FROM t_board A
         INNER JOIN t_user B
         ON A.iuser = B.iuser
+        <if test="param.isFav == 1">
+            LEFT JOIN t_board_fav C
+            ON C.iuser = #{param.iuser}
+            AND A.iboard = C.iboard
+        </if>
         WHERE 1 = 1
         <if test="param.provider != null and param.provider != ''">
             AND A.provider = #{param.provider}
@@ -97,7 +105,12 @@
 
     <select id="countBoardList" resultType="Integer">
         SELECT COUNT(*)
-        FROM  t_board
+        FROM  t_board A
+        <if test="isFav == 1">
+            INNER JOIN t_board_fav C
+            ON C.iuser = #{iuser}
+            AND A.iboard = C.iboard
+        </if>
         WHERE 1 = 1
         <if test="provider != null and provider != ''">
             AND provider = #{provider}
