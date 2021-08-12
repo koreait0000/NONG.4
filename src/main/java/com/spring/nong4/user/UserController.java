@@ -59,7 +59,7 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/profile")
-    public Map<String, Object> profile(MultipartFile[] imgArr, UserProfileEntity param) {
+    public Map<String, Object> profile(MultipartFile[] imgArr, UserEntity param) {
         Map<String, Object> map = new HashMap<>();
         map.put("result", service.profileMod(imgArr,param));
         return map;
