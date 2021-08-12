@@ -1,5 +1,8 @@
 package com.spring.nong4.user;
 
+import com.spring.nong4.board.BoardService;
+import com.spring.nong4.board.model.BoardDomain;
+import com.spring.nong4.board.model.SearchCriteria;
 import com.spring.nong4.user.model.UserEntity;
 import com.spring.nong4.user.model.UserProfileEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private BoardService boardService;
 
     @GetMapping("/login")
     public String login(){ return "user/login"; }
@@ -44,8 +50,10 @@ public class UserController {
 
     // 프로필
     @GetMapping("/profile")
-    public String profile(UserEntity param, Model model) {
+    public String profile(UserEntity param, BoardDomain boardParam, SearchCriteria scri, Model model) {
+        boardParam.setIsFav(1);
         model.addAllAttributes(service.selUserProfile(param));
+        model.addAllAttributes(boardService.mainBoardList(boardParam,scri));
         return "user/profile";
     }
 
