@@ -57,7 +57,7 @@ public class UserService {
         return map;
     }
 
-    public int profileMod(MultipartFile[] imgArr, UserProfileEntity param) {
+    public int profileMod(MultipartFile[] imgArr, UserEntity param) {
         if (imgArr == null) {
             return 0;
         }
@@ -65,12 +65,12 @@ public class UserService {
 
         int result = 0;
         if (imgArr != null && imgArr.length > 0) {
-            String target = "user/" + param.getIuser();
+            String target = "profileImg/" + param.getIuser();
             for (MultipartFile img : imgArr) {
                 String saveFileNm = myFileUtils.transferTo(img, target);
                 if (saveFileNm != null) { //이미지 정보 DB에 저장
                     param.setProfileImg(saveFileNm);
-                    result = mapper.insUserProfile(param);
+                    result = mapper.updUserProfile(param);
                 }
             }
         }

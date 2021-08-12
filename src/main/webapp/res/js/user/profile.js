@@ -2,6 +2,13 @@ const fileList = [];
 const selectImgArrElem    = document.querySelector('#selectImgArr');
 const submitUploadElem   = document.querySelector('#submitUpload');
 const displayImgListElem = document.querySelector('#displayImgList');
+const profileImgElem = document.querySelector('.profileImg');
+const titleElem = document.querySelector('#title');
+const modalElem = document.querySelector('section .modal');
+
+profileImgElem.addEventListener('click', () => {
+    modalElem.classList.remove('hide');
+})
 
 // 이미지들의 선택되면 fileList에 추가
 selectImgArrElem.addEventListener('change', ()=> {
@@ -60,6 +67,13 @@ submitUploadElem.addEventListener('click', () => {
     })
         .then(res => res.json())
         .then(myJson => {
-            console.log('myJson : '+myJson);
+            switch(myJson.result) {
+                case 0:
+                    alert('프로필 이미지 등록에 실패하셨습니다.');
+                    break;
+                case 1:
+                    location.href = '/user/profile';
+                    break;
+            }
         })
 })
