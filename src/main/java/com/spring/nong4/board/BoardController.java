@@ -36,7 +36,6 @@ public class BoardController {
     }
 
     @GetMapping("/community")
-
     public String community() {
         return "board/community";
     }
@@ -153,5 +152,11 @@ public class BoardController {
         data.put("result", result);
 
         return data;
+    }
+
+//-----------------------------서비스------------------------------
+    @GetMapping("/service")
+    public String service() {
+        return "board/service";
     }
 }

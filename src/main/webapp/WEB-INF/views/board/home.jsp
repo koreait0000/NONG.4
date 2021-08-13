@@ -23,7 +23,8 @@
             <img src="/res/img/master.png"/>
         </span>
     </div>
-    <a href="community">게시판 커뮤니티</a>
+    <button><a href="community">커뮤니티</a></button>
+    <button><a href="service">서비스</a></button>
 </div>
 
 

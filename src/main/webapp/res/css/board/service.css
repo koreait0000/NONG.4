@@ -1,0 +1,5 @@
+.hide { display: none !important; }
+.service_modal { z-index: 100; }
+.modal_close_parent { display: flex; justify-content: flex-end; padding: 20px 20px; }
+.modal_close { color: white; font-size: 20px; cursor: pointer; }
+.serviceBox {text-align: center; height: 30vw; width: 20vw;}

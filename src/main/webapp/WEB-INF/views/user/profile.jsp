@@ -5,6 +5,7 @@
 auth : ${auth.iuser}
 profile : ${profile.iuser}
 <c:if test="${auth.iuser eq profile.iuser}">
+
     <div class="modal-img">
         <div>
             <div class="container">
