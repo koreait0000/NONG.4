@@ -3,6 +3,11 @@ html, body, dl, dt, dd{ margin: 0; padding: 0;}
 section{ padding-top: 50px;}
 
 .pointer { cursor: pointer; }
+.hide { display: none !important; }
+.modal { z-index: 100; position: fixed; top: 0; left: 0; height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.87);}
+.modal_close_parent { display: flex; justify-content: flex-end; padding: 40px 60px; }
+.modal_close { color: white; font-size: 50px; cursor: pointer; }
+
 a { text-decoration: none; color: black; }
 header { position: fixed; width: 100%; z-index: 10;}
 /* z-index 는 우선순위이다 커뮤니티쪽 슬라이드 ajax를 덮기위해 z-index를 쓴다 */
