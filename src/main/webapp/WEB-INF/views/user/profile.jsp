@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication property="principal.user" var="auth"></sec:authentication>
 <c:if test="${auth.iuser eq profile.iuser}">
+
     <div class="pointer profileMod">프로필 수정</div>
         <div class="modal-img hide">
             <div>
@@ -11,6 +12,7 @@
                         <i id="modal-img-close" class="modal_close fas fa-times"></i>
                     </div>
                     <div class="profileCont"></div>
+
                 </div>
             </div>
         </div>
