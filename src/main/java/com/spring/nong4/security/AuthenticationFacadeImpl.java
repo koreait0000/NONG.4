@@ -1,5 +1,6 @@
 package com.spring.nong4.security;
 
+import com.spring.nong4.security.model.CustomUserPrincipal;
 import com.spring.nong4.user.model.UserEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +11,7 @@ public class AuthenticationFacadeImpl implements com.spring.nong4.security.IAuth
     @Override
     public UserEntity getLoginUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl)auth.getPrincipal();
+        CustomUserPrincipal userDetails = (CustomUserPrincipal)auth.getPrincipal();
         return userDetails.getUser();
     }
 
