@@ -19,7 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetails;
-
+    @Autowired
+    private CustomOAuth2UserService customOauth2UserService;
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -40,12 +41,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         http.formLogin()
-
                 .loginPage("/user/login")
                 .loginProcessingUrl("/login")
                 .usernameParameter("email")
                 .passwordParameter("pw")
                 .defaultSuccessUrl("/board/home");
+
+        http.oauth2Login()
+                .loginPage("/user/login")
+                .defaultSuccessUrl("/board/home")
+                .failureUrl("/user/login")
+                .userInfoEndpoint() //OAuth 2 로그인 성공 이후 사용자 정보를 가져올 때의 설정들을 담당합니다.
+                .userService(customOauth2UserService);
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
