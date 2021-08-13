@@ -2,20 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication property="principal.user" var="auth"></sec:authentication>
-auth : ${auth.iuser}
-profile : ${profile.iuser}
 <c:if test="${auth.iuser eq profile.iuser}">
-    <div class="modal-img">
-        <div>
-            <div class="container">
-                <div class="top">
-                    <div id="title">프로필 수정</div>
-                    <i id="modal-img-close" class="modal_close fas fa-times"></i>
+    <div class="pointer profileMod">프로필 수정</div>
+        <div class="modal-img hide">
+            <div>
+                <div class="container">
+                    <div class="top">
+                        <i id="modal-img-close" class="modal_close fas fa-times"></i>
+                    </div>
+                    <div class="profileCont"></div>
                 </div>
-                <div class="followCont"></div>
             </div>
         </div>
-    </div>
 
     <div class="modal hide">
         <div class="modal_close_parent"><i class="modal_close fas fa-times"></i></div>

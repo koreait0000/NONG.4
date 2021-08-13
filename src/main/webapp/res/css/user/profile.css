@@ -2,17 +2,19 @@ section { display: flex; flex-direction: column; align-items: center; }
 
 .wh100 { width: 100px; height: 100px; }
 
-.modal-follow { height: 100%; width: 100%; position: fixed; left: 0; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.87); }
-.modal-follow > div { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; }
-.modal-follow .container { position: relative; height: 400px; width: 400px; background-color: white; border-radius: 5px; }
-.modal-follow .container > div.top { height: 33px; }
-.modal-follow .container #title { text-align: center; padding-top: 5px; padding-bottom: 5px; }
-.modal-follow .container i { position: absolute; right: 5px; top: 5px; font-size: 25px; color: #5a5959; }
-.modal-follow .container .followCont { overflow-y: auto; height: 367px; border-top: #d3d3d3; }
-.modal-follow .container .followCont .follow-item { display: flex; padding-left: 8px; padding-right: 8px; margin-top: 7px; }
-.modal-follow .container .followCont .follow-item > div { flex-grow: 1; margin-inside: 5px; }
+.modal-img { height: 100%; width: 100%; position: fixed; left: 0; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.87); }
+.modal-img > div { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; }
+.modal-img .container { position: relative; height: 400px; width: 400px; background-color: white; border-radius: 5px; }
+.modal-img .container > div.top { height: 33px; }
+.modal-img .container #title { text-align: center; padding-top: 5px; padding-bottom: 5px; }
+.modal-img .container i { position: absolute; right: 5px; top: 5px; font-size: 25px; color: #5a5959; }
+.modal-img .container .profileCont { overflow-y: auto; height: 367px; border-top: #d3d3d3; }
+.modal-img .container .profileCont .follow-item { display: flex; padding-left: 8px; padding-right: 8px; margin-top: 7px; }
+.modal-img .container .profileCont .follow-item > div { flex-grow: 1; margin-inside: 5px; }
 
 .modal .swiper-container { height: 40vw; width: 90vw; }
 .modal .swiper-slide { display: flex; justify-content: center; }
 
 .modal .no-main-profile { font-size: 30px; }
+
+#displayImgList > img { width: 100px; height: 100px; }
