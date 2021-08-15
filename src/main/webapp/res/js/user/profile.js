@@ -1,27 +1,18 @@
 const fileList = [];
-const selectImgArrElem    = document.querySelector('#selectImgArr');
-const submitUploadElem   = document.querySelector('#submitUpload');
-const displayImgListElem = document.querySelector('#displayImgList');
-const profileImgElem = document.querySelector('.profileImg');
-const titleElem = document.querySelector('#title');
-const modalElem = document.querySelector('section .modal');
-const profileModElem = document.querySelector('.pointer.profileMod');
-const modalImgElem = document.querySelector('.modal-img');
-const modalImgCloseElem = document.querySelector('.modal-img #modal-img-close');
+const displayImgListElem  = document.querySelector('#displayImgList');
+const profileModElem      = document.querySelector('.pointer.profileMod');
+const modalImgElem        = document.querySelector('.modal-img');
+const modalImgCloseElem   = document.querySelector('.modal-img #modal-img-close');
 const profileItemContElem = document.querySelector('.profileCont');
-const initFileInput = () => {
-    const dt = new DataTransfer();
-    return;
-}
 
+const fileDiv     = document.createElement('div');
 const fileInput   = document.createElement('input');
 const submitInput = document.createElement('input');
 
+// 프로필수정 클릭 시 모달창 open
 profileModElem.addEventListener('click', () => {
     modalImgElem.classList.remove('hide');
     profileItemContElem.innerHTML = '';
-
-    const fileDiv = document.createElement('div');
 
     fileInput.type    = 'file';
     fileInput.id      = 'selectImgArr';
@@ -33,14 +24,12 @@ profileModElem.addEventListener('click', () => {
 
     fileDiv.append(fileInput,submitInput);
 
-    profileItemContElem.append(displayImgListElem);
     profileItemContElem.append(fileDiv);
+    profileItemContElem.append(displayImgListElem);
 
+    // 서버에 저장된 썸네일이 변경 될 시
     fileInput.addEventListener('change', ()=> {
         const files = fileInput.files;
-        console.log('files : ' + files.length);
-        console.log('fileName : ' + files);
-        console.log('벨류 : ' + fileInput.value);
         for(let i=0; i<files.length; i++) {
             fileList.pop(files[i-1]);
             fileList.push(files[i]);
@@ -53,24 +42,9 @@ profileModElem.addEventListener('click', () => {
 if(modalImgCloseElem) {
     modalImgCloseElem.addEventListener('click', () => {
         modalImgElem.classList.add('hide');
-        let file = document.getElementById('file').files = initFileInput.files;
-        console.log()
+        location.reload(true); // 서버에서 현재 페이지를 강제로 reload
     });
 }
-
-profileImgElem.addEventListener('click', () => {
-    modalElem.classList.remove('hide');
-})
-
-// 이미지들의 선택되면 fileList에 추가
-// selectImgArrElem.addEventListener('change', ()=> {
-//     const files = selectImgArrElem.files;
-//     console.log('files : ' + files.length);
-//     for(let i=0; i<files.length; i++) {
-//         fileList.push(files[i]);
-//     }
-//     displaySelectedImgArr();
-// });
 
 // fileList에 추가 된 이미지들을 디스플레이 처리
 function displaySelectedImgArr() {
@@ -88,9 +62,9 @@ function displaySelectedImgArr() {
                 fileList.splice(i,1);
                 displaySelectedImgArr();
                 fileInput.value = '';
-                console.log('files :: ' + selectImgArrElem.files.length);
             });
             img.src = reader.result;
+            displayImgListElem.innerHTML = '';
             displayImgListElem.append(img);
         };
     }
