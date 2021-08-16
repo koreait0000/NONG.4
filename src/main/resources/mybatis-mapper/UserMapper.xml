@@ -17,7 +17,7 @@
        #{email}
      , #{pw}
      , #{nm}
-     , #{nick}
+     , #{userNick}
      , #{tel}
      , #{authCd}
      , #{provider}
@@ -52,8 +52,19 @@
 
     <update id="updUserProfile">
         UPDATE t_user
-        SET profileImg = #{profileImg}
+        <trim prefix="SET" suffixOverrides=",">
+            profileImg = #{profileImg},
+            <if test="userNick != null">
+            </if>
+        </trim>
+
         WHERE iuser    = #{iuser}
+    </update>
+
+    <update id="updUserProfileNick">
+        UPDATE t_user
+        SET nick    = #{userNick}
+        WHERE iuser = #{iuser}
     </update>
 
     <select id="selUserProfile" resultType="userEntity">

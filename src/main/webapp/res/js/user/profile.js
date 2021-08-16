@@ -1,13 +1,17 @@
 const fileList = [];
 const displayImgListElem  = document.querySelector('#displayImgList');
+const displayImgElem      = document.querySelector('#displayImg');
 const profileModElem      = document.querySelector('.pointer.profileMod');
 const modalImgElem        = document.querySelector('.modal-img');
 const modalImgCloseElem   = document.querySelector('.modal-img #modal-img-close');
 const profileItemContElem = document.querySelector('.profileCont');
+const userNickData  = displayImgListElem.dataset.usernick;
 
+const nickDiv     = document.createElement('div');
 const fileDiv     = document.createElement('div');
 const fileInput   = document.createElement('input');
 const submitInput = document.createElement('input');
+const nickInput   = document.createElement('input');
 
 // 프로필수정 클릭 시 모달창 open
 profileModElem.addEventListener('click', () => {
@@ -18,13 +22,21 @@ profileModElem.addEventListener('click', () => {
     fileInput.id      = 'selectImgArr';
     fileInput.accept  = 'image/*';
 
+    nickInput.type        = 'text';
+    nickInput.id          = 'profile-nickname';
+    nickInput.placeholder = userNickData;
+
     submitInput.type  = 'submit';
     submitInput.id    = 'submitUpload';
-    submitInput.value = '업로드';
+    submitInput.value = '확인';
 
-    fileDiv.append(fileInput,submitInput);
+    // nickDiv.append();
+    fileDiv.append(fileInput,submitInput,nickInput);
 
-    profileItemContElem.append(fileDiv);
+    displayImgListElem.append(fileDiv,nickDiv);
+
+    // profileItemContElem.append(fileDiv);
+    profileItemContElem.append(displayImgElem);
     profileItemContElem.append(displayImgListElem);
 
     // 서버에 저장된 썸네일이 변경 될 시
@@ -48,8 +60,8 @@ if(modalImgCloseElem) {
 
 // fileList에 추가 된 이미지들을 디스플레이 처리
 function displaySelectedImgArr() {
-    togglesubmitUpload();
-    displayImgListElem.innerHTML = '';
+    // togglesubmitUpload();
+    displayImgElem.innerHTML = '';
 
     for(let i=0; i<fileList.length; i++) {
         const item   = fileList[i];
@@ -64,19 +76,20 @@ function displaySelectedImgArr() {
                 fileInput.value = '';
             });
             img.src = reader.result;
-            displayImgListElem.innerHTML = '';
-            displayImgListElem.append(img);
+            displayImgElem.innerHTML = '';
+            displayImgElem.append(img);
+            displayImgListElem.append(displayImgElem);
         };
     }
 }
 
 // submit버튼 활성화/비활성화
-function togglesubmitUpload() {
-    submitInput.disabled = true;
-    if(fileList.length > 0) {
-        submitInput.disabled = false;
-    }
-}
+// function togglesubmitUpload() {
+//     submitInput.disabled = true;
+//     if(fileList.length > 0 ) {
+//         submitInput.disabled = false;
+//     }
+// }
 
 // Ajax 파일 업로드
 submitInput.addEventListener('click', () => {
@@ -87,6 +100,7 @@ submitInput.addEventListener('click', () => {
             data.append('imgArr', fileList[i]);
         }
     }
+    // data.append('nick',nickInput.value);
 
     fetch('profile', {
         method: 'POST',
@@ -99,9 +113,10 @@ submitInput.addEventListener('click', () => {
                     alert('프로필 이미지 등록에 실패하셨습니다.');
                     break;
                 case 1:
+                    console.log('myjson.result' + myJson);
                     location.href = '/user/profile';
                     break;
             }
         })
 })
-togglesubmitUpload();
+// togglesubmitUpload();

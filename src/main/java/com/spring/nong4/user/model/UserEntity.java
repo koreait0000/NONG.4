@@ -15,7 +15,7 @@ public class UserEntity {
     private String provider;   // 사용자 로그인(소셜)
     private String pw;         // 사용자 비밀번호
     private String nm;         // 사용자 이름
-    private String nick;       // 사용자 닉네임
+    private String userNick;   // 사용자 닉네임
     private String tel;        // 사용자 번호
     private String authCd;     // 인증번호
     private String profileImg; // 프로필사진

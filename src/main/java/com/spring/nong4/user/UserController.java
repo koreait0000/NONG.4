@@ -62,6 +62,7 @@ public class UserController {
     public Map<String, Object> profile(MultipartFile[] imgArr, UserEntity param) {
         Map<String, Object> map = new HashMap<>();
         map.put("result", service.profileMod(imgArr,param));
+        System.out.println("userNick : " + param.getUserNick());
         return map;
     }
 }
