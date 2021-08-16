@@ -26,7 +26,7 @@
             <div class="cate-event">
                 <div class="title">알림판<i class="fas fa-list"></i></div>
                 <div><a href="">공지사항</a></div>
-                <div><a href="">이벤트</a></div>
+                <div><a href="">산들장터</a></div>
             </div>
 
             <div class="cate-board">
@@ -38,11 +38,12 @@
                 <div><a href="mainBoard?provider=friend">친구 게시판</a></div>
             </div>
         </div>
+
         <div class="community">
             <div class="community-top"></div>
             <div class="community-board">
                 <div class="level">
-                    <div class="swiper-container">
+                    <div class="swiper-container levelSwip">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
@@ -53,8 +54,6 @@
                             </div>
                             <div class="swiper-slide"><img src="/res/img/master.png" class="master-class pointer"></div>
                         </div>
-                        <!-- If we need pagination -->
-                        <div class="swiper-pagination"></div>
                         <!-- If we need navigation buttons -->
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
@@ -68,15 +67,27 @@
                     <div id="news-list"></div>
                 </div>
 
-                <div class="today-video">
-                    <div class="video-box"><img src="/res/img/main.png"></div>
-                    <div class="video-cnt">
-                        <div>오늘의 영상</div>
-                        <div>오늘의 영상에 대한 약간의 설명? 동영상 크기 더 키워야함</div>
+                <div class="hotItem">
+                    <div class="hotItemBox">
+                        <div>산들장터 HOT 아이템(임시 이미지)</div>
+                        <div class="swiper-container hotItemSwip">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Slides -->
+                                <div class="swiper-slide"><img src="/res/img/junior.png" class="junior-class pointer"></div>
+                                <div class="swiper-slide"><img src="/res/img/intermediate.png"
+                                                               class="intermediate-class pointer"></div>
+                                <div class="swiper-slide"><img src="/res/img/advanced.png" class="advanced-class pointer">
+                                </div>
+                                <div class="swiper-slide"><img src="/res/img/master.png" class="master-class pointer"></div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="hotItemMore"><a href="/notice/market"><i class="fas fa-chevron-right"></i>장터 둘러보기</a></div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="background-right"></div>
 </div>

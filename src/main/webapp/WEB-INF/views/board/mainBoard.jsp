@@ -24,7 +24,7 @@
             <div class="cate-event">
                 <div class="title">알림판<i class="fas fa-list"></i></div>
                 <div><a href="">공지사항</a></div>
-                <div><a href="">이벤트</a></div>
+                <div><a href="">산들장터</a></div>
             </div>
 
             <div class="cate-board">
@@ -36,6 +36,7 @@
                 <div><a href="mainBoard?provider=friend">친구 게시판</a></div>
             </div>
         </div>
+
         <div class="community">
             <div class="community-top"></div>
             <div class="community-board">
@@ -95,5 +96,6 @@
             </div>
         </div>
     </div>
+
    <div class="background-right"></div>
 </div>
