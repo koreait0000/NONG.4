@@ -31,8 +31,9 @@
 .news-regdt-span{ display: inline;  position:absolute; left:150px;}
 .news-count-span{ float: right; }
 
-.today-video { padding: 5px 30px; display: flex;  height: 310px; align-items: center; }
-.today-video .video-box { flex-grow: 1; }
-.today-video .video-box img { border-radius: 10px; height: 250px; }
-.today-video .video-cnt { flex-grow: 1; }
-.today-video .video-cnt div { padding: 15px;}
+.hotItem { padding: 40px 30px; height: 310px; text-align: center; display: flex; }
+.hotItem .hotItemBox { justify-content: center; align-items: center; }
+.hotItem .hotItemMore { }
+.hotItem .hotItemBox .swiper-container { height: 100%; width: 900px; }
+.hotItem .hotItemBox .swiper-slide { display: flex; justify-content: center; align-items: center; }
+.hotItem .hotItemBox .swiper-slide img { width: 350px; }

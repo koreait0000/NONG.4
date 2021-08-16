@@ -104,8 +104,8 @@ function makeCommunityPaging(data){
 
 }
 
-function swiper(){
-    const swiper = new Swiper('.swiper-container', {
+function levelSwiper(){
+    const swiper = new Swiper('.levelSwip', {
         // Optional parameters
         slidesPerView: 2, // 동시에 보여줄 슬라이드 갯수
         spaceBetween: -60, // 슬라이드간 간격
@@ -115,10 +115,6 @@ function swiper(){
             delay: 3000,   // 시간 설정
             disableOnInteraction: false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
         },
-        // If we need pagination
-        pagination: {
-            el: '.swiper-pagination',
-        },
         // Navigation arrows
         navigation: {
             nextEl: '.swiper-button-next',
@@ -127,5 +123,20 @@ function swiper(){
     });
 }
 
-swiper();
+function hotItemSwiper(){
+    const swiper = new Swiper('.hotItemSwip', {
+        // Optional parameters
+        slidesPerView: 2, // 동시에 보여줄 슬라이드 갯수
+        spaceBetween: -60, // 슬라이드간 간격
+        direction: 'horizontal',
+        loop: true,
+        autoplay: {  // 자동 슬라이드 설정 , 비 활성화 시 false
+            delay: 3000,   // 시간 설정
+            disableOnInteraction: false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
+        }
+    });
+}
+
+levelSwiper();
+hotItemSwiper();
 communityPaging();
