@@ -26,6 +26,7 @@
         <div id="displayImg">d</div>
     </div>
     </div>
+
     <div id="flexContainer">
         <table>
             <img class="profileImg wh100" src="/pic/profileImg/${profile.iuser}/${profile.profileImg}" onerror="this.onerror=null; this.style.display='none';">
@@ -47,8 +48,8 @@
             </tr>
         </table>
     </div>
-    <div id="FavBoardList">
 
+    <div id="FavBoardList">
         <div>내가 좋아요한 글 리스트</div>
             <table>
                 <tr>
@@ -58,6 +59,7 @@
                     <th>작성일자</th>
                     <th>게시판성격</th>
                 </tr>
+
                 <c:forEach items="${list}" var="list" >
                     <c:if test="${list.isFav == 1}">
                         <tr class="record pointer" onclick="moveToDetail(${list.iboard});">
@@ -70,6 +72,7 @@
                     </c:if>
                 </c:forEach>
             </table>
+
             <div class="pagemaker">
                 <c:if test="${pageMaker.prev}">
                     <a href="profile?page=${pageMaker.startPage - 1}">이전</a>
