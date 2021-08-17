@@ -17,5 +17,5 @@ masterElem.addEventListener('click', () => {
 });
 
 function moveToDetail(iboard){
-    location.href = 'boardDetail?iboard=' + iboard;
+    location.href = '/board/boardDetail?iboard=' + iboard;
 }

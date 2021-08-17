@@ -26,7 +26,7 @@
             <div class="cate-event">
                 <div class="title">알림판<i class="fas fa-list"></i></div>
                 <div><a href="">공지사항</a></div>
-                <div><a href="">산들장터</a></div>
+                <div><a href="/notice/market">산들장터</a></div>
             </div>
 
             <div class="cate-board">
