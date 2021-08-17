@@ -78,6 +78,9 @@
         <if test="param.provider != null and param.provider != ''">
             AND A.provider = #{param.provider}
         </if>
+        <if test="param.isFav == 1">
+            AND C.iboard IS NOT NULL
+        </if>
         <if test='scri.searchType == "t"'>
             AND A.title LIKE CONCAT('%',#{scri.keyword},'%')
         </if>

@@ -21,7 +21,6 @@
         <div class="modal_close_parent"><i class="modal_close fas fa-times"></i></div>
         <div style="background-color: white;"></div>
 
-
     <div id="displayImgList" data-usernick="${profile.userNick}">
         <div id="displayImg">d</div>
     </div>
@@ -60,15 +59,15 @@
                     <th>게시판성격</th>
                 </tr>
 
-                <c:forEach items="${list}" var="list" >
+                <c:forEach items="${list}" var="list">
                     <c:if test="${list.isFav == 1}">
-                        <tr class="record pointer" onclick="moveToDetail(${list.iboard});">
-                            <td>${list.iboard}</td>
-                            <td>${list.title}</td>
-                            <td>${list.userNick}</td>
-                            <td>${list.regdt}</td>
-                            <td>${list.provider}</td>
-                        </tr>
+                            <tr class="record pointer" onclick="moveToDetail(${list.iboard});">
+                                <td>${list.iboard}</td>
+                                <td>${list.title}</td>
+                                <td>${list.userNick}</td>
+                                <td>${list.regdt}</td>
+                                <td>${list.provider}</td>
+                            </tr>
                     </c:if>
                 </c:forEach>
             </table>
