@@ -52,13 +52,15 @@
 
     <update id="updUserProfile">
         UPDATE t_user
-        <trim prefix="SET" suffixOverrides=",">
-            profileImg = #{profileImg},
-            <if test="userNick != null">
-            </if>
-        </trim>
-
-        WHERE iuser    = #{iuser}
+        <set>
+<!--            <if test="param.profileImg != null">-->
+                profileImg = #{param.profileImg}
+<!--            </if>-->
+<!--        <if test="userNick != null and userNick != '' ">-->
+            , nick = #{userNick}
+<!--        </if>-->
+        </set>
+        WHERE iuser    = #{param.iuser}
     </update>
 
     <update id="updUserProfileNick">

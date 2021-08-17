@@ -94,16 +94,19 @@ function displaySelectedImgArr() {
 // Ajax 파일 업로드
 submitInput.addEventListener('click', () => {
     const data = new FormData();
+    console.log('nickLeng : ' + nickInput.value.length)
+    if(fileList.length > 0 || nickInput.value.length > 2) {
+        data.append('nick',nickInput.value);
 
-    if(fileList.length > 0) {
         for(let i=0; i<fileList.length; i++) {
             data.append('imgArr', fileList[i]);
+            console.log('NickValue' + nickInput.value)
         }
     }
     // data.append('nick',nickInput.value);
 
     fetch('profile', {
-        method: 'POST',
+        method: 'PUT',
         body: data
     })
         .then(res => res.json())
@@ -114,6 +117,7 @@ submitInput.addEventListener('click', () => {
                     break;
                 case 1:
                     console.log('myjson.result' + myJson);
+                    alert('프로필 이미지 등록에  성공하셨습니다.');
                     location.href = '/user/profile';
                     break;
             }
