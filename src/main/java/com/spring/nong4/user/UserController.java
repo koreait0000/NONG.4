@@ -3,15 +3,13 @@ package com.spring.nong4.user;
 import com.spring.nong4.board.BoardService;
 import com.spring.nong4.board.model.BoardDomain;
 import com.spring.nong4.board.model.SearchCriteria;
+import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
 import com.spring.nong4.user.model.UserProfileEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
@@ -27,6 +25,8 @@ public class UserController {
 
     @Autowired
     private BoardService boardService;
+
+    @Autowired private IAuthenticationFacade auth;
 
     @GetMapping("/login")
     public String login(){ return "user/login"; }
@@ -58,11 +58,14 @@ public class UserController {
     }
 
     @ResponseBody
-    @PostMapping("/profile")
-    public Map<String, Object> profile(MultipartFile[] imgArr, UserEntity param) {
+    @PutMapping("/profile")
+    public Map<String, Object> profile(MultipartFile[] imgArr, UserEntity param, @RequestParam("nick") String userNick) {
         Map<String, Object> map = new HashMap<>();
-        map.put("result", service.profileMod(imgArr,param));
+        param.setUserNick(userNick);
+        map.put("result", service.profileMod(imgArr,param,userNick));
         System.out.println("userNick : " + param.getUserNick());
+        System.out.println("userNickRequest : " + userNick);
+        System.out.println("Img : " + auth.getLoginUser().getProfileImg());
         return map;
     }
 }

@@ -57,20 +57,31 @@ public class UserService {
         return map;
     }
 
-    public int profileMod(MultipartFile[] imgArr, UserEntity param) {
-        if (imgArr == null) {
-            return 0;
-        }
+    public int profileMod(MultipartFile[] imgArr, UserEntity param, String userNick) {
+//        if (imgArr == null) {
+//            return 0;
+//        }
         param.setIuser(auth.getLoginUserPk());
-
+//        System.out.println("NickLeng : " + userNick.length());
         int result = 0;
+//        if(userNick != null && !userNick.equals(auth.getLoginUser().getUserNick())) {
+//            result = mapper.updUserProfile(param, userNick);
+//        }
+        System.out.println("imgArr :" + imgArr);
+        System.out.println("auth :" + auth.getLoginUser().getProfileImg());
+        if(imgArr == null) {
+            param.setProfileImg(auth.getLoginUser().getProfileImg());
+        }
         if (imgArr != null && imgArr.length > 0) {
+//            || userNick != null && userNick.length() > 0
             String target = "profileImg/" + param.getIuser();
             for (MultipartFile img : imgArr) {
                 String saveFileNm = myFileUtils.transferTo(img, target);
+                System.out.println("saveFileNm : " + saveFileNm);
                 if (saveFileNm != null) { //이미지 정보 DB에 저장
                     param.setProfileImg(saveFileNm);
-                    result = mapper.updUserProfile(param);
+                    System.out.println("getProfileImg : " + param.getProfileImg());
+                    result = mapper.updUserProfile(param,userNick);
                 }
             }
         }

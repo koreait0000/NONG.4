@@ -12,6 +12,6 @@ public interface UserMapper {
     UserEntity selUser(UserEntity param);
     int insUserProfile(UserProfileEntity param);
     UserEntity selUserProfile(UserEntity param);
-    int updUserProfile(UserEntity param);
+    int updUserProfile(UserEntity param, String userNick);
     int updUserProfileNick(UserEntity param);
 }
