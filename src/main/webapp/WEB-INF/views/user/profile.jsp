@@ -20,14 +20,12 @@
     <div class="modal hide">
         <div class="modal_close_parent"><i class="modal_close fas fa-times"></i></div>
         <div style="background-color: white;"></div>
-    </div>
 
-    <div>
-        이미지 : <input type="file" id="selectImgArr" accept="image/*">
-        <input type="submit" id="submitUpload" value="업로드">
-    </div>
 
-    <div id="displayImgList"></div>
+    <div id="displayImgList" data-usernick="${profile.userNick}">
+        <div id="displayImg">d</div>
+    </div>
+    </div>
 
     <div id="flexContainer">
         <table>
@@ -38,7 +36,7 @@
             </tr>
             <tr>
                 <th>닉네임</th>
-                <td>${profile.nick}</td>
+                <td>${profile.userNick}</td>
             </tr>
             <tr>
                 <th>휴대폰번호</th>
