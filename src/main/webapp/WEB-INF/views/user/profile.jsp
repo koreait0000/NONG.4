@@ -8,11 +8,7 @@
         <div class="modal-img hide">
             <div>
                 <div class="container">
-                    <div class="top">
-                        <i id="modal-img-close" class="modal_close fas fa-times"></i>
-                    </div>
                     <div class="profileCont"></div>
-
                 </div>
             </div>
         </div>
@@ -21,8 +17,12 @@
         <div class="modal_close_parent"><i class="modal_close fas fa-times"></i></div>
         <div style="background-color: white;"></div>
 
+
     <div id="displayImgList" data-usernick="${profile.userNick}" data-iuser="${profile.iuser}" data-profile="${profile.profileImg}">
-        <div id="displayImg"></div>
+        <h2>SanDeul</h2>
+        <p> 커뮤니티에 사용하실 닉네임을 설정해 주세요 ! </p>
+        <div id="displayImg">d</div>
+        <div id="btnCont"></div>
     </div>
     </div>
 

@@ -23,7 +23,6 @@ spring:
 #    url: jdbc:log4jdbc:mysql://localhost:3308/nong4
     username: root
     password: 데이터베이스비밀번호
-    driver-class-name: org.mariadb.jdbc.Driver
   servlet:
     multipart:
       max-file-size: 5MB
@@ -33,7 +32,7 @@ spring:
       view:
         prefix: /WEB-INF/views/
         suffix: .jsp
- security:
+  security:
       oauth2:
         client:
           registration:

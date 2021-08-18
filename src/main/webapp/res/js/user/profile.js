@@ -1,16 +1,18 @@
 const fileList = [];
 const displayImgListElem  = document.querySelector('#displayImgList');
 const displayImgElem      = document.querySelector('#displayImg');
+const btnContElem         = document.querySelector('#btnCont');
 const profileModElem      = document.querySelector('.pointer.profileMod');
 const modalImgElem        = document.querySelector('.modal-img');
-const modalImgCloseElem   = document.querySelector('.modal-img #modal-img-close');
 const profileItemContElem = document.querySelector('.profileCont');
 const userNickData  = displayImgListElem.dataset.usernick;
 
 const nickDiv     = document.createElement('div');
 const fileDiv     = document.createElement('div');
+const btnDiv      = document.createElement('div'); // 확인, 취소 버튼
 const fileInput   = document.createElement('input');
-const submitInput = document.createElement('input');
+const submitInput = document.createElement('input'); // 확인
+const cancelInput = document.createElement('input'); // 취소
 const nickInput   = document.createElement('input');
 
 const iuserData = displayImgListElem.dataset.iuser;
@@ -39,17 +41,26 @@ profileModElem.addEventListener('click', () => {
     submitInput.id    = 'submitUpload';
     submitInput.value = '확인';
 
-    console.log('iuserData : ' +iuserData);
-    console.log('profileD : ' +profileData);
+
+    cancelInput.type  = 'button';
+    cancelInput.id    = 'cancelInput';
+    cancelInput.value = '취소';
+
 
     // nickDiv.append();
-    fileDiv.append(fileInput,submitInput,nickInput);
-
+    fileDiv.append(displayImgElem,fileInput,nickInput);
+    btnDiv.append(cancelInput,submitInput);
     displayImgListElem.append(fileDiv,nickDiv);
+    btnContElem.append(btnDiv);
+
+    //className()
+    btnDiv.className = 'btnDiv';
+    fileDiv.className = 'profile-box';
+    displayImgElem.className = 'profileImg';
 
     // profileItemContElem.append(fileDiv);
-    profileItemContElem.append(displayImgElem);
     profileItemContElem.append(displayImgListElem);
+    profileItemContElem.append(btnContElem);
 
     // 서버에 저장된 썸네일이 변경 될 시
     fileInput.addEventListener('change', ()=> {
@@ -63,8 +74,8 @@ profileModElem.addEventListener('click', () => {
 })
 
 // 모달창 닫기
-if(modalImgCloseElem) {
-    modalImgCloseElem.addEventListener('click', () => {
+if(btnDiv) {
+    btnDiv.addEventListener('click', () => {
         modalImgElem.classList.add('hide');
         location.reload(true); // 서버에서 현재 페이지를 강제로 reload
     });
