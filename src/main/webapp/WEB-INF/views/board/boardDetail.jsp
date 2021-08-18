@@ -25,7 +25,7 @@
             <div class="cate-event">
                 <div class="title">알림판<i class="fas fa-list"></i></div>
                 <div><a href="">공지사항</a></div>
-                <div><a href="">산들장터</a></div>
+                <div><a href="/notice/market">산들장터</a></div>
             </div>
 
             <div class="cate-board">
@@ -85,7 +85,7 @@
                 </div>
                 <div class="cmt-box">
                     <form id="cmtFrm" onsubmit="return false;">
-                        <textarea class="cmt-text" id="cmt" placeholder="댓글을 입력하세요 ※위치 맞춰야함"></textarea>
+                        <textarea class="cmt-text" id="cmt" placeholder="댓글을 입력하세요"></textarea>
                         <input type="button" class="cmt-btn" value="댓글달기" onclick="insCmt();">
                     </form>
                 </div>

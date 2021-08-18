@@ -129,7 +129,7 @@ public class BoardController {
 
     //댓글 수정
     @ResponseBody
-    @RequestMapping(value = "/updcmt", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updCmt", method = RequestMethod.PUT)
     public Map<String, Integer> updCmt(@RequestBody BoardCmtDomain param) {
         int result = service.updCmt(param);
 
@@ -141,7 +141,7 @@ public class BoardController {
 
     //댓글 삭제
     @ResponseBody
-    @RequestMapping(value = "/delcmt/{icmt}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delCmt/{icmt}", method = RequestMethod.DELETE)
     public Map<String, Integer> delCmt(@PathVariable("icmt") int icmt) {
         BoardCmtDomain param = new BoardCmtDomain();
         param.setIcmt(icmt);

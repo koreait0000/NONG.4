@@ -243,7 +243,7 @@ function makeCmtElemList(data) {
                 const icmt = item.icmt;
                 console.log(icmt);
                 if (confirm("정말 삭제하시겠습니까?") == true) {
-                fetch('delcmt/' + icmt, {method: 'DELETE'})
+                fetch('delCmt/' + icmt, {method: 'DELETE'})
                     .then(function (res){
                         return res.json();
                     })
@@ -294,7 +294,7 @@ function makeCmtElemList(data) {
                         }
                     };
 
-                    fetch('updcmt',init)
+                    fetch('updCmt',init)
                         .then(function (res){
                             return res.json();
                         })

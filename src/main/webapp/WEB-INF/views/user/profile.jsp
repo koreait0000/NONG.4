@@ -21,7 +21,6 @@
         <div class="modal_close_parent"><i class="modal_close fas fa-times"></i></div>
         <div style="background-color: white;"></div>
 
-
     <div id="displayImgList" data-usernick="${profile.userNick}" data-iuser="${profile.iuser}" data-profile="${profile.profileImg}">
         <div id="displayImg"></div>
     </div>
