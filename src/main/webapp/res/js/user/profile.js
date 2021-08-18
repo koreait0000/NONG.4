@@ -24,8 +24,14 @@ profileModElem.addEventListener('click', () => {
     modalImgElem.classList.remove('hide');
     profileItemContElem.innerHTML = '';
 
-    img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
-    displayImgElem.append(img);
+    if(profileData == '') { // null아님 '' 이거임
+        img.src = '/res/img/BasicProfile.png';
+        displayImgElem.append(img);
+    }else{
+        img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
+        displayImgElem.append(img);
+    }
+
 
     console.log('TEST : ' + '/pic/profileImg/' + iuserData + '/' + profileData);
 
@@ -102,7 +108,7 @@ function displaySelectedImgArr() {
             img.src = reader.result;
             displayImgElem.innerHTML = '';
             displayImgElem.append(img);
-            displayImgListElem.append(displayImgElem);
+            displayImgListElem.append(displayImgElem,fileDiv,nickDiv);
         };
     }
 }
