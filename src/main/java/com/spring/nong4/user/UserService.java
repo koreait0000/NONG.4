@@ -69,9 +69,22 @@ public class UserService {
 //        }
         System.out.println("imgArr :" + imgArr);
         System.out.println("auth :" + auth.getLoginUser().getProfileImg());
-        if(imgArr == null) {
-            param.setProfileImg(auth.getLoginUser().getProfileImg());
+        System.out.println("getProfileImg[1] : " + param.getProfileImg());
+        if(imgArr == null ) {
+//            param.setProfileImg(param.getProfileImg());
+//            System.out.println("getImgAuth : " + param.getProfileImg());
+//            result = mapper.updUserProfile(param,userNick);
+            UserEntity param2 = mapper.selUserProfile(param);
+            param.setProfileImg(param2.getProfileImg());
+            result = mapper.updUserProfile(param,userNick);
         }
+
+        if(userNick != null && userNick != ""){
+            UserEntity param2 = mapper.selUserProfile(param);
+            userNick = param2.getUserNick();
+            result = mapper.updUserProfile(param,userNick);
+        }
+
         if (imgArr != null && imgArr.length > 0) {
 //            || userNick != null && userNick.length() > 0
             String target = "profileImg/" + param.getIuser();
@@ -80,7 +93,7 @@ public class UserService {
                 System.out.println("saveFileNm : " + saveFileNm);
                 if (saveFileNm != null) { //이미지 정보 DB에 저장
                     param.setProfileImg(saveFileNm);
-                    System.out.println("getProfileImg : " + param.getProfileImg());
+                    System.out.println("getProfileImg[2] : " + param.getProfileImg());
                     result = mapper.updUserProfile(param,userNick);
                 }
             }
