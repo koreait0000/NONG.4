@@ -13,10 +13,19 @@ const fileInput   = document.createElement('input');
 const submitInput = document.createElement('input');
 const nickInput   = document.createElement('input');
 
+const iuserData = displayImgListElem.dataset.iuser;
+const profileData = displayImgListElem.dataset.profile;
+const img = document.createElement('img');
+
 // 프로필수정 클릭 시 모달창 open
 profileModElem.addEventListener('click', () => {
     modalImgElem.classList.remove('hide');
     profileItemContElem.innerHTML = '';
+
+    img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
+    displayImgElem.append(img);
+
+    console.log('TEST : ' + '/pic/profileImg/' + iuserData + '/' + profileData);
 
     fileInput.type    = 'file';
     fileInput.id      = 'selectImgArr';
@@ -29,6 +38,9 @@ profileModElem.addEventListener('click', () => {
     submitInput.type  = 'submit';
     submitInput.id    = 'submitUpload';
     submitInput.value = '확인';
+
+    console.log('iuserData : ' +iuserData);
+    console.log('profileD : ' +profileData);
 
     // nickDiv.append();
     fileDiv.append(fileInput,submitInput,nickInput);
@@ -69,11 +81,12 @@ function displaySelectedImgArr() {
         reader.readAsDataURL(item);
         // 파일을 로드 한 후
         reader.onload = () => {
-            const img = document.createElement('img');
             img.addEventListener('click', () => {
                 fileList.splice(i,1);
                 displaySelectedImgArr();
                 fileInput.value = '';
+                img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
+                displayImgElem.append(img);
             });
             img.src = reader.result;
             displayImgElem.innerHTML = '';

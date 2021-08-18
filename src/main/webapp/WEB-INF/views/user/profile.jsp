@@ -22,8 +22,8 @@
         <div style="background-color: white;"></div>
 
 
-    <div id="displayImgList" data-usernick="${profile.userNick}">
-        <div id="displayImg">d</div>
+    <div id="displayImgList" data-usernick="${profile.userNick}" data-iuser="${profile.iuser}" data-profile="${profile.profileImg}">
+        <div id="displayImg"></div>
     </div>
     </div>
 

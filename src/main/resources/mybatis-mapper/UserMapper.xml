@@ -61,6 +61,9 @@
 <!--        </if>-->
         </set>
         WHERE iuser    = #{param.iuser}
+<!--        <selectKey order="BEFORE" resultType="String" keyColumn="profileImg" keyProperty="profileImg">-->
+<!--            SELECT profileImg FROM t_user WHERE iuser = #{param.iuser}-->
+<!--        </selectKey>-->
     </update>
 
     <update id="updUserProfileNick">
