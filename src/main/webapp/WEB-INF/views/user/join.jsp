@@ -14,7 +14,7 @@
             <input type="text" name="nm" placeholder="회원이름" required>
             <p> <strong>이름</strong>을 입력해주세요 </p>
         </div>
-        <div class="join-nick"><input type="text" name="nick" placeholder="닉네임" required>
+        <div class="join-nick"><input type="text" name="userNick" placeholder="닉네임" required>
             <p> <strong>별명</strong>을 입력해주세요 </p>
         </div>
         <div class="join-tel"><input type="tel" name="tel" placeholder="휴대폰번호" required>
@@ -23,6 +23,6 @@
         <div class="join-submit-reset">
             <div class="join-submit"><input class="pointer" type="submit" value="회원가입"></div>
             <div class="join-reset"><input class="pointer" type="reset" value="새로입력"></div>
-            <div>
+        </div>
     </form>
 </div>

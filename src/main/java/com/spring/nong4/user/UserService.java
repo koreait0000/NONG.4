@@ -31,6 +31,7 @@ public class UserService {
         param.setPw(hashedPw);
         param.setAuthCd(authCd);
         System.out.println(param);
+        System.out.println("USERNICK TEST : "+param.getUserNick());
         int result = mapper.join(param);
 
         if(result == 1) {
