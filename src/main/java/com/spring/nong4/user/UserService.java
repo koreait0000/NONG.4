@@ -58,6 +58,17 @@ public class UserService {
         return map;
     }
 
+    //이메일 중복 체크 (중복이메일 이라면 0, 아니라면 1)
+    public int chkEmail(UserEntity param) {
+        UserEntity emailChk = mapper.chkEmail(param);
+        System.out.println("emailChk : "+emailChk);
+
+        if(emailChk == null) {
+            return 1;
+        }
+        return 0;
+    }
+
     public int profileMod(MultipartFile[] imgArr, UserEntity param, String userNick) {
 //        if (imgArr == null) {
 //            return 0;

@@ -83,4 +83,11 @@
         FROM  t_user
         WHERE iuser = ${iuser}
     </select>
+
+    <select id="chkEmail" resultType="userEntity">
+        SELECT
+              email
+        FROM  t_user
+        WHERE email = #{email}
+    </select>
 </mapper>

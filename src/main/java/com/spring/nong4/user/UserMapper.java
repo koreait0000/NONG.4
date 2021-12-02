@@ -14,4 +14,5 @@ public interface UserMapper {
     UserEntity selUserProfile(UserEntity param);
     int updUserProfile(UserEntity param, String userNick);
     int updUserProfileNick(UserEntity param);
+    UserEntity chkEmail(UserEntity param);
 }
