@@ -37,10 +37,13 @@ public class UserController {
         return "user/join";
     }
 
+    @ResponseBody
     @PostMapping("/join")
-    public String join(UserEntity param){
-        service.join(param);
-        return "redirect:login?needEmail=1";
+    public Map<String,Object> join(@RequestBody UserEntity param){
+        Map<String,Object> returnValue = new HashMap<>();
+        System.out.println("join : " + param.getUserNick());
+        returnValue.put("result", service.join(param));
+        return returnValue;
     }
 
     // 이메일,닉네임,휴대전화번호 중복확인 체크

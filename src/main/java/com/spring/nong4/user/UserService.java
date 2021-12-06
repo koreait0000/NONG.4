@@ -33,17 +33,13 @@ public class UserService {
         String hashedPw = passwordEncoder.encode(param.getPw());
         param.setPw(hashedPw);
         param.setAuthCd(authCd);
-        System.out.println(param);
-        System.out.println("USERNICK TEST : "+param.getUserNick());
         int result = mapper.join(param);
 
         if(result == 1) {
             String subject = "NONG4 인증 메일 입니다.";
             String txt = String.format("<a href=\"http://localhost:8090/user/auth?email=%s&authCd=%s\">인증하기</a>"
                     , param.getEmail(), authCd);
-            System.out.println("txt : " + txt);
             email.sendMimeMessage(param.getEmail(), subject, txt);
-            System.out.println("sub : " + subject);
         }
         return result;
     }

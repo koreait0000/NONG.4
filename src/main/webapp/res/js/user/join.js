@@ -3,6 +3,7 @@ const frmElem = document.querySelector('#joinForm');
 const idCheckElem = document.querySelector('#idCheck')
 const userNickElem = document.querySelector('#userNick');
 const telElem = document.querySelector('#tel');
+const nmElem = document.querySelector('#nm');
 
 function onlyNumber() {
     if((event.keyCode > 48 && event.keyCode < 57 )
@@ -33,29 +34,40 @@ if(joinBtnElem) {
     const userNickJ = /^[A-Za-z가-힣0-9]{2,8}$/; //A-Z,a~z,가~힣,0~9로 이뤄진 2~8자리
     const phoneJ = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-    // function ajax() {
-    //
-    //     const param = {
-    //         pw : pwElem.value
-    //     }
-    //     fetch('/user/join', {
-    //         method: 'post',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(param)
-    //     })
-    //         .then(res => res.json())
-    //         .then(myJson => {
-    //             proc(myJson);
-    //         })
-    // }
-    // function proc (myJson) {
-    //     if(myJson.result === 1) {
-    //         alert('회원가입 성공')
-    //         location.href="/user/login";
-    //     }
-    // }
+    function emptyCheck() {
+        if(EmailElem.value != "") {
+            joinBtnElem.removeAttribute('disabled');
+        }
+    }
+
+     function ajax() {
+
+         const param = {
+             email : EmailElem.value,
+             pw : pwElem.value,
+             nm : nmElem.value,
+             userNick : userNickElem.value,
+             tel : telElem.value
+         }
+         console.log('nick : '+userNickElem.value);
+         fetch('/user/join', {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json',
+             },
+             body: JSON.stringify(param)
+         })
+             .then(res => res.json())
+             .then(myJson => {
+                 proc(myJson);
+             })
+     }
+     function proc (myJson) {
+         if(myJson.result === 1) {
+             alert('회원가입 성공')
+             location.href="/user/login?needEmail=1";
+         }
+     }
     function formCheck() {
         if(!pwJ.test(pwElem.value)) {
             alert('비밀번호는 영문 대,소문자 및 숫자만 가능합니다.');
@@ -67,10 +79,11 @@ if(joinBtnElem) {
             pwReElem.focus();
             return;
         }
-        // ajax();
+        ajax();
     }
 
     joinBtnElem.addEventListener('click', ()=> {
+        console.log('회원가입 버튼');
         formCheck();
     })
 
@@ -91,7 +104,7 @@ if(joinBtnElem) {
 
             if(userNickJ.test(userNickElem.value)) {
                 // Todo, 211202 닉네임 중복체크 추가
-                console.log('userNick : '+userNickElem.value)
+                console.log('userNick : '+userNickElem.value);
                 userNickCheckProc();
                 msgUserNickElem.innerText = '';
             }
@@ -114,7 +127,7 @@ if(joinBtnElem) {
             .then(myJson => {
                 if(myJson.result === 1) {
                     msgUserNickElem.innerText = '사용가능한 닉네임 입니다.';
-                    console.log(myJson.result);
+                    console.log('result Nick : '+myJson.result);
                 }
                 else {
                     msgUserNickElem.innerText = '중복된 닉네임 입니다.';
@@ -131,15 +144,40 @@ if(joinBtnElem) {
             telElem.value.replace(/[^0-9]/g,'');
             if(phoneJ.test(telElem.value)) {
                 msgTelElem.innerText = '';
+                phoneCheckProc();
             }
         })
     }
-
+    function phoneCheckProc() {
+        const param = {
+            tel : telElem.value
+        }
+        fetch('/user/chkOverlap',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(param)
+            })
+            .then(res => res.json())
+            .then(myJson => {
+                if(myJson.result === 1) {
+                    msgTelElem.innerText = '';
+                }
+                else {
+                    msgTelElem.innerText = '중복된 휴대번호 입니다.';
+                    msgTelElem.focus();
+                    return;
+                }
+            })
+    }
 }
 
 // 이메일 중복확인 체크
 const EmailElem = document.querySelector('#email');
 const msgElem = document.querySelector('#msg');
+
 idCheckElem.addEventListener('keyup',()=> {
     msgElem.innerText = '이메일을 확인 해주세요.';
     // joinBtnElem.setAttribute('disabled','disabled');
@@ -183,11 +221,11 @@ if(idCheckElem) {
                     msgElem.style.color = '#14148C';
                     // joinBtnElem.removeAttribute('disabled');
                     joinBtnElem.classList.add('pointer');
-                } else if(myJson.result === 3) {
-                    console.log('result : ' + myJson.result);
+                    console.log('result email : '+myJson.result);
                 }
                 else {
                     msgElem.innerText = '중복된 이메일이 있습니다.';
+                    joinBtnElem.classList.remove('pointer');
                     msgElem.style.color = '#BE2457';
                 }
             })
@@ -201,3 +239,5 @@ idCheckElem.addEventListener('click',()=> {
 // userNickElem.addEventListener('keyUp', ()=> {
 //     userNickCheckProc();
 // })
+
+emptyCheck();
