@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.transform.Result;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +41,16 @@ public class UserController {
     public String join(UserEntity param){
         service.join(param);
         return "redirect:login?needEmail=1";
+    }
+
+    // 이메일,닉네임,휴대전화번호 중복확인 체크
+    @ResponseBody
+    @PostMapping("/chkOverlap")
+    public Map<String,Object> chkOverlap(@RequestBody UserEntity param) {
+        Map<String,Object> returnValue = new HashMap<>();
+        returnValue.put("result", service.chkOverlap(param));
+        System.out.println("Eamil 확인 : "+param.getEmail());
+        return returnValue;
     }
 
     @GetMapping("/auth")

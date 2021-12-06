@@ -6,6 +6,8 @@ import com.spring.nong4.common.MySecurityUtils;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
 import com.spring.nong4.user.model.UserProfileEntity;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -31,6 +34,7 @@ public class UserService {
         param.setPw(hashedPw);
         param.setAuthCd(authCd);
         System.out.println(param);
+        System.out.println("USERNICK TEST : "+param.getUserNick());
         int result = mapper.join(param);
 
         if(result == 1) {
@@ -55,6 +59,19 @@ public class UserService {
         map.put("profile",mapper.selUserProfile(param));
 
         return map;
+    }
+
+    // 이메일,닉네임,휴대전화번호 중복확인 체크(중복이면 return 0, 중복이 아니라면 return 1)
+    public int chkOverlap(UserEntity param) {
+        UserEntity chkOverlap = mapper.chkOverlap(param);
+        int result = 0;
+
+        if(chkOverlap == null) { // email이 null(중복이 아닐때)
+            result = 1;
+//            System.out.println("이메일 : "+chkOverlap.getEmail());
+            return result;
+        }
+        return 0;
     }
 
     public int profileMod(MultipartFile[] imgArr, UserEntity param, String userNick) {

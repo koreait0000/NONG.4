@@ -37,7 +37,6 @@ public class BoardService {
         int write = mapper.boardWrite(param);
         map.put("data1",write);
 
-
         if(imgArr == null && param.getTitle() == null && param.getCtnt() == null) { return null; }
 
         // 파일 업로드

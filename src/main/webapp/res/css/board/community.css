@@ -21,7 +21,7 @@
 .level { height: 320px; }
 .level .swiper-container { height: 100%; width: 900px; }
 .level .swiper-slide { display: flex; justify-content: center; align-items: center; }
-.level .swiper-slide img { width: 350px; }
+.level .swiper-slide img { width: 250px; }
 
 #news-paging-btn { padding-bottom: 5px;}
 #news-paging-btn button{ float:right;}
@@ -36,4 +36,4 @@
 .hotItem .hotItemMore { }
 .hotItem .hotItemBox .swiper-container { height: 100%; width: 900px; }
 .hotItem .hotItemBox .swiper-slide { display: flex; justify-content: center; align-items: center; }
-.hotItem .hotItemBox .swiper-slide img { width: 350px; }
+.hotItem .hotItemBox .swiper-slide img { width: 250px; }
