@@ -65,29 +65,37 @@ function makeCommunityPaging(data){
 
     data.forEach(function (item){
         const commListElemDiv = document.createElement('div');
-        const commProviderDiv = document.createElement('div');
+        const commFirstLine = document.createElement('div');
+        const commProviderSpan = document.createElement('span');
+        const commTitleSpan = document.createElement('span');
         const commWiterSpan = document.createElement('span');
         const commRegdtSpan = document.createElement('span');
         const commHitCountSpan = document.createElement('span');
 
         commListElemDiv.className = 'news-list-detail pointer';
+        commProviderSpan.className = 'news-provider-span';
+        commTitleSpan.className = 'news-title-span';
         commRegdtSpan.className = 'news-regdt-span';
         commHitCountSpan.className = 'news-count-span';
 
         if(item.provider == 'freedom'){
-            commProviderDiv.append('자유게시판');
+            commProviderSpan.append('자유게시판');
         } else if (item.provider == 'question') {
-            commProviderDiv.append('질문게시판');
+            commProviderSpan.append('질문게시판');
         } else if (item.provider == 'strategy') {
-            commProviderDiv.append('공략게시판');
+            commProviderSpan.append('공략게시판');
         } else {
-            commProviderDiv.append('친구게시판');
+            commProviderSpan.append('친구게시판');
         }
+        commTitleSpan.append(item.title);
         commWiterSpan.append(item.userNick);
         commRegdtSpan.append(item.regdt);
         commHitCountSpan.append(item.hitCount);
 
-        commListElemDiv.append(commProviderDiv);
+        commFirstLine.append(commProviderSpan);
+        commFirstLine.append(commTitleSpan);
+
+        commListElemDiv.append(commFirstLine);
         commListElemDiv.append(commWiterSpan);
         commListElemDiv.append(commRegdtSpan);
         commListElemDiv.append(commHitCountSpan);
