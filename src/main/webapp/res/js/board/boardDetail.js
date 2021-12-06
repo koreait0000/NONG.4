@@ -133,7 +133,7 @@ function boardUpd() {
                 if (confirm("정말 삭제하시겠습니까?") == true) {
                     location.href = `/board/mainBoard?provider=${param.provider}`;
                     myJson.submit();
-                } else {   //취소
+                } else {   //취소aaaaaa
                     return false;
                 }
             })
