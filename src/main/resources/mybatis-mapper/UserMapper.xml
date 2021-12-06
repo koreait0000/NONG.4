@@ -84,10 +84,18 @@
         WHERE iuser = ${iuser}
     </select>
 
-    <select id="chkEmail" resultType="userEntity">
-        SELECT
-              email
+    <select id="chkOverlap" resultType="userEntity">
+        SELECT *
         FROM  t_user
-        WHERE email = #{email}
+        WHERE 1 = 1
+        <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(email)">
+            AND email = #{email}
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(userNick)">
+            AND nick = #{userNick}
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(tel)">
+            AND tel  = #{tel}
+        </if>
     </select>
 </mapper>

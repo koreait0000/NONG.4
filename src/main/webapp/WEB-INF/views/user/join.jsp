@@ -24,14 +24,18 @@
     </div>
     <div class="join-nick">
     <h1>기본정보입력</h1>
-    <input type="text" name="userNick" id="userNick" placeholder="닉네임" required>
+        <input type="text" name="userNick" id="userNick" placeholder="닉네임" required>
+        <div id="msgUserNick">
             <p> <strong>별명</strong>을 입력해주세요 </p>
         </div>
-        <div class="join-tel"><input type="tel" name="tel" placeholder="휴대폰번호" required>
-            <p> <strong>전화번호</strong>를 입력해주세요 </p>
+    </div>
+        <div class="join-tel"><input type="tel" id="tel" name="tel" maxlength="11" placeholder="휴대폰번호" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" required>
+            <div id="msgTel">
+                <p> <strong>전화번호</strong>를 입력해주세요 </p>
+            </div>
         </div>
         <div class="join-submit-reset">
-            <div class="join-submit"><input class="pointer" id= "joinBtn" type="submit" value="회원가입"></div>
+            <div class="join-submit"><input id="joinBtn" type="button" disabled="disabled" value="회원가입"></div>
             <div class="join-reset"><input class="pointer" type="reset" value="새로입력"></div>
         </div>
     </form>
