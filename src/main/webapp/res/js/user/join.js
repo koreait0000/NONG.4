@@ -4,18 +4,30 @@ const idCheckElem = document.querySelector('#idCheck')
 const userNickElem = document.querySelector('#userNick');
 const telElem = document.querySelector('#tel');
 const nmElem = document.querySelector('#nm');
+const EmailElem = document.querySelector('#email');
+const msgElem = document.querySelector('#msg');
 
-function onlyNumber() {
-    if((event.keyCode > 48 && event.keyCode < 57 )
-        || event.keyCode == 8 // backspace
-        || event.keyCode == 37 || event.keyCode == 39 //  방향키 →, ←
-        || event.keyCode == 46 // delete키
-    || event.keyCode == 39){
-    }else{
-        event.returnValue = false;
-    }
+
+
+
+function emptyCheck() {
+     if(EmailElem.value.length > 1) {
+         joinBtnElem.removeAttribute('disabled');
+         console.log('빈값이 아닙니다');
+         console.log(EmailElem.value);
+         // joinBtnElem.setAttribute('disabled','disabled');
+     }
+ }
+
+function disabledRemove() {
+    joinBtnElem.removeAttribute('disabled');
+    joinBtnElem.classList.add('pointer');
 }
 
+function disabledAdd() {
+    joinBtnElem.setAttribute('disabled','disabled');
+    joinBtnElem.classList.remove('pointer');
+}
 
 // 회원가입 체크
 if(joinBtnElem) {
@@ -34,12 +46,6 @@ if(joinBtnElem) {
     const userNickJ = /^[A-Za-z가-힣0-9]{2,8}$/; //A-Z,a~z,가~힣,0~9로 이뤄진 2~8자리
     const phoneJ = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-    function emptyCheck() {
-        if(EmailElem.value != "") {
-            joinBtnElem.removeAttribute('disabled');
-        }
-    }
-
      function ajax() {
 
          const param = {
@@ -49,7 +55,18 @@ if(joinBtnElem) {
              userNick : userNickElem.value,
              tel : telElem.value
          }
-         console.log('nick : '+userNickElem.value);
+         if(EmailElem.value == '' || pwElem.value == '' || nmElem.value == '' || userNickElem.value == '' || telElem.value == '') {
+             disabledAdd();
+             alert('전부 입력 해주세요!');
+             if(nmElem.value == '') {
+                 setTimeout(function(){nmElem.focus();}, 1);
+             } else if(userNickElem.value == '') {
+                 setTimeout(function(){userNickElem.focus();}, 1);
+             } else {
+                 setTimeout(function(){telElem.focus();}, 1);
+             }
+             return false;
+         }
          fetch('/user/join', {
              method: 'POST',
              headers: {
@@ -126,10 +143,12 @@ if(joinBtnElem) {
             .then(res => res.json())
             .then(myJson => {
                 if(myJson.result === 1) {
+                    disabledRemove();
                     msgUserNickElem.innerText = '사용가능한 닉네임 입니다.';
                     console.log('result Nick : '+myJson.result);
                 }
                 else {
+                    disabledAdd();
                     msgUserNickElem.innerText = '중복된 닉네임 입니다.';
                     msgUserNickElem.focus();
                     return;
@@ -163,9 +182,20 @@ if(joinBtnElem) {
             .then(res => res.json())
             .then(myJson => {
                 if(myJson.result === 1) {
+                    // Todo 211206, 휴대번호가 자릿수 이상하게 해도 submit 됨
+                    disabledRemove();
                     msgTelElem.innerText = '';
                 }
                 else {
+                    telElem.addEventListener('keyup',()=> {
+                        if(telElem.value.length > 7) {
+                            disabledAdd();
+                            msgTelElem.innerText = '휴대번호는 7자리 이상을 입력해주세요!';
+                            msgTelElem.focus();
+                            return;
+                        }
+                    })
+                    disabledAdd();
                     msgTelElem.innerText = '중복된 휴대번호 입니다.';
                     msgTelElem.focus();
                     return;
@@ -175,8 +205,6 @@ if(joinBtnElem) {
 }
 
 // 이메일 중복확인 체크
-const EmailElem = document.querySelector('#email');
-const msgElem = document.querySelector('#msg');
 
 idCheckElem.addEventListener('keyup',()=> {
     msgElem.innerText = '이메일을 확인 해주세요.';
@@ -202,7 +230,8 @@ if(idCheckElem) {
             email: EmailElem.value
         }
 
-        console.log(param);
+        console.log('email : '+EmailElem.value);
+
         fetch('/user/chkOverlap',
             {
                 credentials: 'include',
@@ -217,15 +246,13 @@ if(idCheckElem) {
             })
             .then(function(myJson) {
                 if(myJson.result === 1) {
+                    disabledRemove();
                     msgElem.innerText = '사용 가능한 이메일 입니다.';
                     msgElem.style.color = '#14148C';
-                    // joinBtnElem.removeAttribute('disabled');
-                    joinBtnElem.classList.add('pointer');
-                    console.log('result email : '+myJson.result);
                 }
                 else {
+                    disabledAdd();
                     msgElem.innerText = '중복된 이메일이 있습니다.';
-                    joinBtnElem.classList.remove('pointer');
                     msgElem.style.color = '#BE2457';
                 }
             })
@@ -241,3 +268,4 @@ idCheckElem.addEventListener('click',()=> {
 // })
 
 emptyCheck();
+

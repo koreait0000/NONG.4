@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="join-submit-reset">
-            <div class="join-submit"><input id="joinBtn" type="button" value="회원가입" disabled="disabled"></div>
+            <div class="join-submit"><input type="button" id="joinBtn" value="회원가입" disabled="disabled"></div>
             <div class="join-reset"><input class="pointer" type="reset" value="새로입력"></div>
         </div>
     </form>
