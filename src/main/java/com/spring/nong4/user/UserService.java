@@ -62,13 +62,15 @@ public class UserService {
         UserEntity chkOverlap = mapper.chkOverlap(param);
         int result = 0;
 
-        if(chkOverlap == null) { // email이 null(중복이 아닐때)
+        System.out.println("chkOverlap2 : "+chkOverlap);
+        System.out.println("nick(param) : " + param.getUserNick());
+        System.out.println("email(param) : "+ param.getEmail());
+        if(chkOverlap == null) { // email이 null (중복이 아닐때)
             result = 1;
-//            System.out.println("이메일 : "+chkOverlap.getEmail());
             return result;
         }
-        return 0;
-    }
+            return 0;
+        }
 
     public int profileMod(MultipartFile[] imgArr, UserEntity param, String userNick) {
 //        if (imgArr == null) {
