@@ -1,21 +1,9 @@
-const joinBtnElem = document.querySelector('#joinBtn')
+const joinBtnElem = document.querySelector('#joinBtn');
 const frmElem = document.querySelector('#joinForm');
-const idCheckElem = document.querySelector('#idCheck')
+const idCheckElem = document.querySelector('#idCheck');
 const userNickElem = document.querySelector('#userNick');
 const telElem = document.querySelector('#tel');
 const nmElem = document.querySelector('#nm');
-
-function onlyNumber() {
-    if((event.keyCode > 48 && event.keyCode < 57 )
-        || event.keyCode == 8 // backspace
-        || event.keyCode == 37 || event.keyCode == 39 //  방향키 →, ←
-        || event.keyCode == 46 // delete키
-    || event.keyCode == 39){
-    }else{
-        event.returnValue = false;
-    }
-}
-
 
 // 회원가입 체크
 if(joinBtnElem) {
@@ -32,13 +20,7 @@ if(joinBtnElem) {
     const pwJ = /^[A-Za-z0-9]{4,12}$/;  //A-Z,a~z,0~9로 시작하는 4~12자리 비밀번호
     const nameJ = /^[가-힣]{2,6}$/; //가~힣,한글로 이뤄진 문자열 이름 2~6자리
     const userNickJ = /^[A-Za-z가-힣0-9]{2,8}$/; //A-Z,a~z,가~힣,0~9로 이뤄진 2~8자리
-    const phoneJ = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-
-    function emptyCheck() {
-        if(EmailElem.value != "") {
-            joinBtnElem.removeAttribute('disabled');
-        }
-    }
+    const phoneJ = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
 
      function ajax() {
 
@@ -66,6 +48,9 @@ if(joinBtnElem) {
          if(myJson.result === 1) {
              alert('회원가입 성공')
              location.href="/user/login?needEmail=1";
+         } else {
+             alert('실패');
+             return;
          }
      }
     function formCheck() {
@@ -163,7 +148,7 @@ if(joinBtnElem) {
             .then(res => res.json())
             .then(myJson => {
                 if(myJson.result === 1) {
-                    msgTelElem.innerText = '';
+                    msgTelElem.innerText = '중복된 휴대번호가 없습니다.';
                 }
                 else {
                     msgTelElem.innerText = '중복된 휴대번호 입니다.';
@@ -219,13 +204,10 @@ if(idCheckElem) {
                 if(myJson.result === 1) {
                     msgElem.innerText = '사용 가능한 이메일 입니다.';
                     msgElem.style.color = '#14148C';
-                    // joinBtnElem.removeAttribute('disabled');
-                    joinBtnElem.classList.add('pointer');
                     console.log('result email : '+myJson.result);
                 }
                 else {
                     msgElem.innerText = '중복된 이메일이 있습니다.';
-                    joinBtnElem.classList.remove('pointer');
                     msgElem.style.color = '#BE2457';
                 }
             })
@@ -235,9 +217,3 @@ if(idCheckElem) {
 idCheckElem.addEventListener('click',()=> {
     formMailCheck();
 })
-
-// userNickElem.addEventListener('keyUp', ()=> {
-//     userNickCheckProc();
-// })
-
-emptyCheck();

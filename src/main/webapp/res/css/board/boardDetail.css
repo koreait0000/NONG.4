@@ -10,7 +10,7 @@
 .category { border-right: 2px solid #d3d3d3; width: 240px; text-align: center; padding: 30px 20px; }
 .category img { border-radius: 10px; height: 100px; width: 100px; }
 .category .writeBtn { width: 80%; height: 40px; font-size: 16px; background-color: darkgreen; }
-.category .writeBtn a{ color: white; }
+.category .writeBtn i{ color: white;}
 .category .cate-event { margin-top: 80px; }
 .category .cate-board { margin-top: 100px; }
 .category .title { font-size: 30px; font-weight: bold; }
