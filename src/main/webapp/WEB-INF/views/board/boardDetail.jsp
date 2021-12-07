@@ -17,8 +17,8 @@
             </div>
 
             <div>
-                <button class="writeBtn pointer">
-                    <a href="boardWrite"><i class="fas fa-pen"></i>글쓰기</a>
+                <button class="writeBtn pointer" onclick="location.href='boardWrite'">
+                    <i class="fas fa-pen">글쓰기</i>
                 </button>
             </div>
 

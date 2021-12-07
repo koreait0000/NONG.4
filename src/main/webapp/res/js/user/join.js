@@ -1,16 +1,17 @@
-const joinBtnElem = document.querySelector('#joinBtn')
+const joinBtnElem = document.querySelector('#joinBtn');
 const frmElem = document.querySelector('#joinForm');
-const idCheckElem = document.querySelector('#idCheck')
+const idCheckElem = document.querySelector('#idCheck');
 const userNickElem = document.querySelector('#userNick');
 const telElem = document.querySelector('#tel');
 const nmElem = document.querySelector('#nm');
 const EmailElem = document.querySelector('#email');
 const msgElem = document.querySelector('#msg');
 
-
 const mailJ = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 const userNickJ = /^[A-Za-z가-힣0-9]{2,8}$/; //A-Z,a~z,가~힣,0~9로 이뤄진 2~8자리
 const phoneJ = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
+const pwJ = /^[A-Za-z0-9]{4,12}$/;  //A-Z,a~z,0~9로 시작하는 4~12자리 비밀번호
+const nameJ = /^[가-힣]{2,6}$/; //가~힣,한글로 이뤄진 문자열 이름 2~6자리
 
 function emptyCheck() {
      if(EmailElem.value.length > 1) {
@@ -111,6 +112,9 @@ if(joinBtnElem) {
          if(myJson.result === 1) {
              alert('회원가입 성공')
              location.href="/user/login?needEmail=1";
+         } else {
+             alert('실패');
+             return;
          }
      }
     function formCheck() {
@@ -221,7 +225,7 @@ function userNickKeyupProc() {
             .then(myJson => {
                 if(myJson.result === 1) {
                     // Todo 211206, 휴대번호가 자릿수 이상하게 해도 submit 됨
-                    msgTelElem.innerText = '';
+                    msgTelElem.innerText = '중복된 휴대번호가 없습니다.';
                 }
                 else {
                     msgTelElem.innerText = '휴대번호는 7자리 이상을 입력해주세요!';
@@ -286,6 +290,7 @@ if(idCheckElem) {
                     emailKeyupProc();
                     msgElem.innerText = '사용 가능한 이메일 입니다.';
                     msgElem.style.color = '#14148C';
+
                 }
                 else {
                     emailKeyupProc();
@@ -299,16 +304,3 @@ idCheckElem.addEventListener('click',()=> {
     formMailCheck();
 })
 
-
-// userNickElem.addEventListener('keyup',()=> {
-//     mailCheckProc();
-// })
-// telElem.addEventListener('keyup',()=> {
-//     mailCheckProc();
-// })
-
-// userNickElem.addEventListener('keyUp', ()=> {
-//     userNickCheckProc();
-// })
-
-emptyCheck();
