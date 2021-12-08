@@ -62,11 +62,9 @@ public class UserService {
         UserEntity chkOverlap = mapper.chkOverlap(param);
         int result = 0;
 
-        System.out.println("chkOverlap2 : "+chkOverlap);
-        System.out.println("nick(param) : " + param.getUserNick());
-        System.out.println("email(param) : "+ param.getEmail());
         if(chkOverlap == null) { // email이 null (중복이 아닐때)
             result = 1;
+
             return result;
         }
             return 0;
