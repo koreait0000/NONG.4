@@ -105,4 +105,18 @@
             AND tel  = #{tel}
         </if>
     </select>
+
+    <select id="findEmail" resultType="userEntity">
+        SELECT email
+        FROM   t_user
+        WHERE 1 = 1
+        AND nm  = #{nm}
+        AND tel = #{tel}
+    </select>
+
+    <update id="changePw">
+        UPDATE t_user
+        SET   pw    = #{pw}
+        WHERE email = #{email}
+    </update>
 </mapper>

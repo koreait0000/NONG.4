@@ -13,52 +13,13 @@ const phoneJ = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
 const pwJ = /^[A-Za-z0-9]{4,12}$/;  //A-Z,a~z,0~9로 시작하는 4~12자리 비밀번호
 const nameJ = /^[가-힣]{2,6}$/; //가~힣,한글로 이뤄진 문자열 이름 2~6자리
 
-function emptyCheck() {
-     if(EmailElem.value.length > 1) {
-         joinBtnElem.removeAttribute('disabled');
-         console.log('빈값이 아닙니다');
-         console.log(EmailElem.value);
-         // joinBtnElem.setAttribute('disabled','disabled');
-     }
- }
-
-function disabledRemove() {
-    joinBtnElem.removeAttribute('disabled');
-    joinBtnElem.classList.add('pointer');
-}
-
-function disabledAdd() {
-    joinBtnElem.setAttribute('disabled','disabled');
-    joinBtnElem.classList.remove('pointer');
-}
+let emailChk = 0;
+let nickChk = 0;
+let telChk = 0;
 
 // 회원가입 체크
 if(joinBtnElem) {
     joinBtnElem.addEventListener('click', ()=> {
-        const param = {
-            EmailElem : EmailElem.value,
-            userNick : userNickElem.value,
-            tel : telElem.value
-        }
-        fetch('/user/chkOverlap',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(param)
-            })
-            .then(res => res.json())
-            .then(myJson => {
-                if(myJson.result === 1) {
-                    alert('회원가입 성공할때');
-                    location.reload();
-                }
-                else {
-                    alert('실패');
-                    location.reload();
-                }
-            })
     })
     const pwElem = document.querySelector('#pw');
     const pwReElem = document.querySelector('#pwRe');
@@ -72,41 +33,30 @@ if(joinBtnElem) {
     const nameJ = /^[가-힣]{2,6}$/; //가~힣,한글로 이뤄진 문자열 이름 2~6자리
 
      function ajax() {
-
-         const param = {
-             email : EmailElem.value,
-             pw : pwElem.value,
-             nm : nmElem.value,
-             userNick : userNickElem.value,
-             tel : telElem.value
-         }
-         if(EmailElem.value == '' || pwElem.value == '' || nmElem.value == '' || userNickElem.value == '' || telElem.value == '') {
-             if(EmailElem.value == '') {
-                 setTimeout(function(){EmailElem.focus();}, 1);
-             } else if(pwElem.value == '') {
-                 setTimeout(function(){pwElem.focus();}, 1);
-             } else if(pwReElem.value == '') {
-                 setTimeout(function(){pwReElem.focus();}, 1);
-             } else if(nmElem.value == '') {
-                 setTimeout(function(){nmElem.focus();}, 1);
-             } else if(userNickElem.value == '') {
-                 setTimeout(function(){userNickElem.focus();}, 1);
-             } else {
-                 setTimeout(function(){telElem.focus();}, 1);
+         var sum = emailChk + nickChk + telChk;
+         if (sum == 3) {
+             const param = {
+                 email: EmailElem.value,
+                 pw: pwElem.value,
+                 nm: nmElem.value,
+                 userNick: userNickElem.value,
+                 tel: telElem.value
              }
-             return false;
-         }
-         fetch('/user/join', {
-             method: 'POST',
-             headers: {
-                 'Content-Type': 'application/json',
-             },
-             body: JSON.stringify(param)
-         })
-             .then(res => res.json())
-             .then(myJson => {
-                 proc(myJson);
+             fetch('/user/join', {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json',
+                 },
+                 body: JSON.stringify(param)
              })
+                 .then(res => res.json())
+                 .then(myJson => {
+                     proc(myJson);
+                 })
+         } else {
+             alert('중복확인해주세요.')
+             return;
+         }
      }
      function proc (myJson) {
          if(myJson.result === 1) {
@@ -115,6 +65,7 @@ if(joinBtnElem) {
          } else {
              alert('실패');
              return;
+             // 데이터전송막기?
          }
      }
     function formCheck() {
@@ -127,6 +78,22 @@ if(joinBtnElem) {
             alert('비밀번호가 일치 하지 않습니다.');
             pwReElem.focus();
             return;
+        }
+        if(EmailElem.value == '' || pwElem.value == '' || nmElem.value == '' || userNickElem.value == '' || telElem.value == '') {
+            if(EmailElem.value == '') {
+                setTimeout(function(){EmailElem.focus();}, 1);
+            } else if(pwElem.value == '') {
+                setTimeout(function(){pwElem.focus();}, 1);
+            } else if(pwReElem.value == '') {
+                setTimeout(function(){pwReElem.focus();}, 1);
+            } else if(nmElem.value == '') {
+                setTimeout(function(){nmElem.focus();}, 1);
+            } else if(userNickElem.value == '') {
+                setTimeout(function(){userNickElem.focus();}, 1);
+            } else {
+                setTimeout(function(){telElem.focus();}, 1);
+            }
+            return false;
         }
         ajax();
     }
@@ -186,11 +153,13 @@ function userNickKeyupProc() {
                 if(myJson.result === 1) {
                     userNickKeyupProc();
                     msgUserNickElem.innerText = '사용가능한 닉네임 입니다.';
+                    nickChk = 1;
                     console.log('result Nick : '+myJson.result);
                 }
                 else {
                     userNickKeyupProc();
                     msgUserNickElem.innerText = '중복된 닉네임 입니다.';
+                    nickChk = 0;
                     msgUserNickElem.focus();
                     return;
                 }
@@ -226,9 +195,11 @@ function userNickKeyupProc() {
                 if(myJson.result === 1) {
                     // Todo 211206, 휴대번호가 자릿수 이상하게 해도 submit 됨
                     msgTelElem.innerText = '중복된 휴대번호가 없습니다.';
+                    telChk = 1;
                 }
                 else {
-                    msgTelElem.innerText = '휴대번호는 7자리 이상을 입력해주세요!';
+                    msgTelElem.innerText = '중복된 휴대번호가 존재합니다.';
+                    telChk = 0;
                     msgTelElem.focus();
                     return;
                 }
@@ -237,70 +208,48 @@ function userNickKeyupProc() {
 }
 
 // 이메일 중복확인 체크
-
-idCheckElem.addEventListener('keyup',()=> {
-    msgElem.innerText = '이메일을 확인 해주세요.';
-    // joinBtnElem.setAttribute('disabled','disabled');
-})
-
-function emailKeyupProc() {
-    EmailElem.addEventListener('keyup',()=> {
-        msgElem.innerText = '이메일 확인을 다시 해주세요!';
-        msgElem.style.color = '#BE2457';
+function formMailCheck() {
+    if (!mailJ.test(EmailElem.value) ) {
+        msgElem.innerText = '이메일형식에 맞게 작성해주세요'
         EmailElem.focus();
         return;
-    })
+    }
+    mailCheckProc();
 }
 
-if(idCheckElem) {
-    function formMailCheck() {
-        if (!mailJ.test(EmailElem.value) ) {
-            alert('이메일을 ~~~~형식에 맞게 바꿔주세요')
-            EmailElem.focus();
-            return;
-        }
-        mailCheckProc();
+function mailCheckProc(){
+    const param = {
+        // Todo, 닉네임, 휴대전화 추가
+        email: EmailElem.value,
+        nick : userNickElem.value,
+        tel : telElem.value
     }
+    fetch('/user/chkOverlap',
+        {
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(param)
+        })
+        .then(function(res){
+            return res.json();
+        })
+        .then(function(myJson) {
+            if(myJson.result === 1) {
+                msgElem.innerText = '사용 가능한 이메일 입니다.';
+                emailChk = 1;
+                msgElem.style.color = '#14148C';
 
-    function mailCheckProc(){
-        const mailElem = EmailElem.value;
-        const param = {
-            // Todo, 닉네임, 휴대전화 추가
-            email: EmailElem.value,
-            nick : userNickElem.value,
-            tel : telElem.value
-        }
-
-        console.log('email : '+EmailElem.value);
-
-        fetch('/user/chkOverlap',
-            {
-                credentials: 'include',
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(param)
-            })
-            .then(function(res){
-                return res.json();
-            })
-            .then(function(myJson) {
-                if(myJson.result === 1) {
-                    emailKeyupProc();
-                    msgElem.innerText = '사용 가능한 이메일 입니다.';
-                    msgElem.style.color = '#14148C';
-
-                }
-                else {
-                    emailKeyupProc();
-                    msgElem.innerText = '중복된 이메일이 있습니다.';
-                    msgElem.style.color = '#BE2457';
-                }
-            })
-    }
+            } else {
+                msgElem.innerText = '중복된 이메일이 있습니다.';
+                emailChk = 0;
+                msgElem.style.color = '#BE2457';
+            }
+        })
 }
-idCheckElem.addEventListener('click',()=> {
+
+EmailElem.addEventListener('keyup',()=> {
     formMailCheck();
 })
-

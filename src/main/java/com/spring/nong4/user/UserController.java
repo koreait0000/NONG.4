@@ -37,6 +37,9 @@ public class UserController {
         return "user/join";
     }
 
+    @GetMapping("/findUser")
+    public String findUser() { return "user/findUser"; }
+
     @ResponseBody
     @PostMapping("/join")
     public Map<String,Object> join(@RequestBody UserEntity param){
@@ -53,6 +56,24 @@ public class UserController {
         Map<String,Object> returnValue = new HashMap<>();
         returnValue.put("result", service.chkOverlap(param));
         System.out.println("Eamil 확인 : "+param.getEmail());
+        return returnValue;
+    }
+
+    // 이메일 찾기
+    @ResponseBody
+    @PostMapping("/findEmail")
+    public Map<String, Object> findEmail(@RequestBody UserEntity param) {
+        Map<String, Object> returnValue = new HashMap<>();
+        returnValue.put("result",service.findEmail(param));
+        return returnValue;
+    }
+
+    // 비밀번호 찾기
+    @ResponseBody
+    @PostMapping("/findPw")
+    public Map<String, Object> findPw(@RequestBody UserEntity param) {
+        Map<String, Object> returnValue = new HashMap<>();
+        returnValue.put("result",service.findPw(param));
         return returnValue;
     }
 

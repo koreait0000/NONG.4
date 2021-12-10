@@ -26,6 +26,7 @@ public class UserService {
     @Autowired private UserMapper mapper;
     @Autowired private MyFileUtils myFileUtils;
 
+
     public int join(UserEntity param) {
         String authCd = secUtils.getRandomDigit(5);
 
@@ -33,6 +34,11 @@ public class UserService {
         String hashedPw = passwordEncoder.encode(param.getPw());
         param.setPw(hashedPw);
         param.setAuthCd(authCd);
+
+        System.out.println("email!! : " + param.getEmail());
+        System.out.println("UserNick!! : " + param.getUserNick());
+        System.out.println("Tel!! : " + param.getTel());
+
         int result = mapper.join(param);
 
         if(result == 1) {
@@ -62,15 +68,50 @@ public class UserService {
         UserEntity chkOverlap = mapper.chkOverlap(param);
         int result = 0;
 
-        System.out.println("chkOverlap2 : "+chkOverlap);
-        System.out.println("nick(param) : " + param.getUserNick());
-        System.out.println("email(param) : "+ param.getEmail());
         if(chkOverlap == null) { // email이 null (중복이 아닐때)
             result = 1;
             return result;
         }
             return 0;
         }
+
+    // 이메일 찾기
+    public UserEntity findEmail(UserEntity param) {
+        UserEntity dbData = mapper.findEmail(param);
+
+        if(dbData == null) {
+            return null;
+        }
+        return dbData;
+    }
+
+    // 비밀번호 찾기
+    public int findPw(UserEntity param) {
+        UserEntity emailChk = mapper.chkOverlap(param);
+
+        if(!emailChk.getEmail().equals(param.getEmail())) {
+            System.out.println("등록되지 않은 이메일입니다.");
+            return 0;
+        }
+
+        // 난수 생성(임시비밀번호)
+        String code = secUtils.getRandomDigit(8);
+
+        // 비밀번호 암호화
+        String hashedPw = passwordEncoder.encode(code);
+        emailChk.setPw(hashedPw);
+        mapper.changePw(emailChk);
+
+        // 유저가 보는 임시비밀번호로 설정 후 해당 이메일로 발송
+        emailChk.setPw(code);
+        String subject = "NONG4 임시비밀번호 메일 입니다.";
+
+        String txt = String.format("회원님의 임시 비밀번호는 : "+"<a href=\"http://localhost:8090/user/login\" onclick=\"clipboard(\"emailChk.getPw()\"); return false;\">"+emailChk.getPw()+"</a>"
+                , param.getEmail(),email);
+        email.sendMimeMessage(param.getEmail(), subject, txt);
+
+        return 1;
+    }
 
     public int profileMod(MultipartFile[] imgArr, UserEntity param, String userNick) {
 //        if (imgArr == null) {
