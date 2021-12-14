@@ -92,12 +92,9 @@
               ,tel
         FROM  t_user
         WHERE 1 = 1
-        <if test="email != null">
+        <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(email)">
             AND email = #{email}
         </if>
-        <!--<if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(email)">
-            AND email = #{email}
-        </if>-->
         <if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(userNick)">
             AND nick = #{userNick}
         </if>

@@ -74,6 +74,7 @@ public class UserService {
 
         if(chkOverlap == null) { // email이 null (중복이 아닐때)
             result = 1;
+
             return result;
         }
             return 0;

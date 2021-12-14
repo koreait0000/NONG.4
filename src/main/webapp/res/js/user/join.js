@@ -13,6 +13,10 @@ const phoneJ = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
 const pwJ = /^[A-Za-z0-9]{4,12}$/;  //A-Z,a~z,0~9로 시작하는 4~12자리 비밀번호
 const nameJ = /^[가-힣]{2,6}$/; //가~힣,한글로 이뤄진 문자열 이름 2~6자리
 
+
+// 회원가입 체크
+if(joinBtnElem) {
+
 let emailChk = 0;
 let nickChk = 0;
 let telChk = 0;
@@ -33,6 +37,27 @@ if(joinBtnElem) {
     const nameJ = /^[가-힣]{2,6}$/; //가~힣,한글로 이뤄진 문자열 이름 2~6자리
 
      function ajax() {
+
+
+         const param = {
+             email : EmailElem.value,
+             pw : pwElem.value,
+             nm : nmElem.value,
+             userNick : userNickElem.value,
+             tel : telElem.value
+         }
+
+         fetch('/user/join', {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json',
+             },
+             body: JSON.stringify(param)
+         })
+             .then(res => res.json())
+             .then(myJson => {
+                 proc(myJson);
+
          var sum = emailChk + nickChk + telChk;
          console.log('회원가입체크1')
          if (sum == 3) {
@@ -49,6 +74,7 @@ if(joinBtnElem) {
                      'Content-Type': 'application/json',
                  },
                  body: JSON.stringify(param)
+
              })
                  .then(res => res.json())
                  .then(myJson => {
@@ -80,6 +106,10 @@ if(joinBtnElem) {
             pwReElem.focus();
             return;
         }
+
+
+
+
         if(EmailElem.value == '' || pwElem.value == '' || nmElem.value == '' || userNickElem.value == '' || telElem.value == '') {
             if(EmailElem.value == '') {
                 setTimeout(function(){EmailElem.focus();}, 1);
@@ -96,6 +126,10 @@ if(joinBtnElem) {
             }
             return false;
         }
+
+
+
+
         ajax();
     }
 
@@ -199,8 +233,11 @@ function userNickKeyupProc() {
                     telChk = 1;
                 }
                 else {
+                    msgTelElem.innerText = '중복된 휴대번호 입니다.';
+
                     msgTelElem.innerText = '중복된 휴대번호가 존재합니다.';
                     telChk = 0;
+
                     msgTelElem.focus();
                     return;
                 }
