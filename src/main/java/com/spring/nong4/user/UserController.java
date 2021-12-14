@@ -6,6 +6,7 @@ import com.spring.nong4.board.model.SearchCriteria;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
 import com.spring.nong4.user.model.UserProfileEntity;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,9 @@ public class UserController {
         return "user/join";
     }
 
+    @GetMapping("/findUser")
+    public String findUser() { return "user/findUser"; }
+
     @ResponseBody
     @PostMapping("/join")
     public Map<String,Object> join(@RequestBody UserEntity param){
@@ -56,6 +60,24 @@ public class UserController {
         return returnValue;
     }
 
+    // 이메일 찾기
+    @ResponseBody
+    @PostMapping("/findEmail")
+    public Map<String, Object> findEmail(@RequestBody UserEntity param) {
+        Map<String, Object> returnValue = new HashMap<>();
+        returnValue.put("result",service.findEmail(param));
+        return returnValue;
+    }
+
+    // 비밀번호 찾기
+    @ResponseBody
+    @PostMapping("/findPw")
+    public Map<String, Object> findPw(@RequestBody UserEntity param) {
+        Map<String, Object> returnValue = new HashMap<>();
+        returnValue.put("result",service.findPw(param));
+        return returnValue;
+    }
+
     @GetMapping("/auth")
     public String auth(UserEntity param) {
         int result = service.auth(param);
@@ -72,6 +94,16 @@ public class UserController {
     }
 
     @ResponseBody
+    @PostMapping("/profile")
+    public Map<String, Object> profile(@RequestBody String currentInput) {
+        Map<String, Object> returnValue = new HashMap<>();
+        UserEntity param = new UserEntity();
+
+        returnValue.put("result",service.currentPw(param,currentInput));
+        return returnValue;
+    }
+
+    @ResponseBody
     @PutMapping("/profile")
     public Map<String, Object> profile(MultipartFile[] imgArr, UserEntity param, @RequestParam("nick") String userNick) {
         Map<String, Object> map = new HashMap<>();
@@ -81,5 +113,17 @@ public class UserController {
         System.out.println("userNickRequest : " + userNick);
         System.out.println("Img : " + auth.getLoginUser().getProfileImg());
         return map;
+    }
+
+    @ResponseBody
+    @PostMapping("/changePw")
+    public Map<String, Object> changePw(@RequestBody String changeInput, String changePwReInput, String currentInput) {
+        Map<String, Object> returnValue = new HashMap<>();
+        UserEntity param = new UserEntity();
+        System.out.println("changeInput(변경할 비밀번호)_Cont : "+changeInput);
+        System.out.println("changePwReInput(변경할 비밀번호확인)_Cont : "+changePwReInput);
+        returnValue.put("result",service.changePw(param,changeInput,currentInput));
+        returnValue.put("result",service.changePw1(param,changeInput));
+        return returnValue;
     }
 }

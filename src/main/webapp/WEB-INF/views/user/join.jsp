@@ -6,7 +6,6 @@
         <div id="msg">
             <p> <strong>이메일</strong>을 입력해주세요 </p>
         </div>
-            <button id="idCheck" type="button">중복확인</button>
     </div>
     <div class="join-pw">
         <input type="password" name="pw" id="pw" placeholder="password" required>

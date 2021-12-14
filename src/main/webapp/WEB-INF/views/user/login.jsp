@@ -16,6 +16,7 @@
             <div><input class="u-login-pw" type="password" name="pw" placeholder="password" required></div>
             <div><input class="u-login-submit pointer" type="submit" value="로그인"></div>
             <div><a href="join">회원가입</a></div>
+            <div><a href="findUser">이메일 / 비밀번호 찾기</a></div>
         </div>
     </form>
 </div>
