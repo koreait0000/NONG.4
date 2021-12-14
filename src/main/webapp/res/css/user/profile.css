@@ -12,6 +12,24 @@ section { display: flex; flex-direction: column; align-items: center; }
 .modal-img .container .profileCont .follow-item { display: flex; padding-left: 8px; padding-right: 8px; margin-top: 7px; }
 .modal-img .container .profileCont .follow-item > div { flex-grow: 1; margin-inside: 5px; }
 
+.pwModal-img { height: 100%; width: 100%; position: fixed; left: 0; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.87); }
+.pwModal-img > div { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; }
+.pwModal-img .container { position: relative; height: 400px; width: 680px; background-color: white; border-radius: 5px; }
+.pwModal-img .container > div.top { height: 33px; }
+.pwModal-img .container #title { text-align: center; padding-top: 5px; padding-bottom: 5px; }
+.pwModal-img .container i { position: absolute; right: 5px; top: 5px; font-size: 25px; color: #5a5959; }
+.pwModal-img .container .pwChangeCont { overflow-y: auto; height: 367px; border-top: #d3d3d3; }
+
+
+.pwChangeCont .pw-box { justify-content: center; align-items: center; position: relative; margin-bottom: 35px; }
+/*.pwChangeCont .pw-box .class-cont .class-pw-div { display: flex; justify-content: space-around; }*/
+.pwChangeCont .pw-box .class-current-cont { margin: 20px 0px 20px 0px; display: flex; justify-content: space-around; }
+.pwChangeCont .pw-box .class-current-cont .class-msg-pw { display: table-cell; vertical-align: middle; }
+.pwChangeCont .pw-box .class-current-cont { margin: 20px 0px 20px 0px; display: flex; justify-content: space-around; }
+.pwChangeCont .pw-box .class-current-cont .class-msg-pw { display: table-cell; vertical-align: middle; }
+.pwChangeCont .class-pw { width: 440px; padding-left: 20px; margin-bottom: 10px; }
+.pwChangeCont .class-pw { height: 44px; padding: 0 10px; border: 1px solid #d1d1d1; }
+
 .modal .swiper-container { height: 40vw; width: 90vw; }
 .modal .swiper-slide { display: flex; justify-content: center; }
 
@@ -34,5 +52,8 @@ section { display: flex; flex-direction: column; align-items: center; }
 
 .profileCont .btnDiv { margin-top: 70px; text-align: center; }
 .profileCont .btnDiv > input { opacity: 0.6; width: 105px; height: 45px; padding: 0; margin: 0 4px; background-color: #fff; border: 1px solid #333; border-radius: 0; cursor:pointer; }
+
+.pwChangeCont .btnDiv { margin-top: 70px; text-align: center; }
+.pwChangeCont .btnDiv > input { opacity: 0.6; width: 105px; height: 45px; padding: 0; margin: 0 4px; background-color: #fff; border: 1px solid #333; border-radius: 0; cursor:pointer; }
 
 

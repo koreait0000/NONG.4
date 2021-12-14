@@ -1,5 +1,6 @@
 package com.spring.nong4.user;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.spring.nong4.common.EmailService;
 import com.spring.nong4.common.MyFileUtils;
 import com.spring.nong4.common.MySecurityUtils;
@@ -9,8 +10,10 @@ import com.spring.nong4.user.model.UserProfileEntity;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -67,6 +70,7 @@ public class UserService {
     public int chkOverlap(UserEntity param) {
         UserEntity chkOverlap = mapper.chkOverlap(param);
         int result = 0;
+        System.out.println("get.email : " + param.getEmail());
 
         if(chkOverlap == null) { // email이 null (중복이 아닐때)
             result = 1;
@@ -100,7 +104,7 @@ public class UserService {
         // 비밀번호 암호화
         String hashedPw = passwordEncoder.encode(code);
         emailChk.setPw(hashedPw);
-        mapper.changePw(emailChk);
+        mapper.temporaryPw(emailChk);
 
         // 유저가 보는 임시비밀번호로 설정 후 해당 이메일로 발송
         emailChk.setPw(code);
@@ -109,6 +113,50 @@ public class UserService {
         String txt = String.format("회원님의 임시 비밀번호는 : "+"<a href=\"http://localhost:8090/user/login\" onclick=\"clipboard(\"emailChk.getPw()\"); return false;\">"+emailChk.getPw()+"</a>"
                 , param.getEmail(),email);
         email.sendMimeMessage(param.getEmail(), subject, txt);
+
+        return 1;
+    }
+
+    // 현재 비밀번호와 입력된 비밀번호 확인
+    public int currentPw(UserEntity param, String currentInput) {
+        String decoderPw;
+        param.setIuser(auth.getLoginUserPk());
+        UserEntity currentPw = mapper.currentPw(param,currentInput);
+        param.setPw(currentInput); // 입력된 비밀번호를 param에 넣음
+        decoderPw = param.getPw().replaceAll("\"",""); // currentInput이 json형태로 넘어오기때문에 ""을 제거
+
+        passwordEncoder.matches(param.getPw(),currentPw.getPw()); // 입력받은 비밀번호, 이미 암호화된 비밀번호를 비교
+
+        if(!passwordEncoder.matches(decoderPw,currentPw.getPw())) {
+            System.out.println("비밀번호가 틀립니다.");
+            return 0;
+        }
+        return 1;
+    }
+
+    public int changePw(UserEntity param, String changeInput, String currentInput) {
+        String decoderPw;
+        param.setIuser(auth.getLoginUserPk());
+        UserEntity currentPw = mapper.currentPw(param,currentInput);
+
+        passwordEncoder.matches(changeInput,currentPw.getPw()); // 기존비밀번호와 새로운비밀번호를 비교
+
+        decoderPw = changeInput.replaceAll("\"","");
+
+//        if(passwordEncoder.matches(decoderPw,currentPw.getPw())) { // 기존비밀번호와 새로운비밀번호를 비교
+//            System.out.println("decoderPw : "+decoderPw);
+//            System.out.println("currentPw.getPw() : "+currentPw.getPw());
+//            System.out.println("현재비밀번호와 동일합니다.");
+//        }
+        return 0;
+    }
+    public int changePw1(UserEntity param, String changeInput) {
+        String decoderPw;
+        decoderPw = changeInput.replaceAll("\"","");
+        String hashedPw = passwordEncoder.encode(decoderPw);
+        param.setPw(hashedPw);
+
+        mapper.changePw1(param);
 
         return 1;
     }

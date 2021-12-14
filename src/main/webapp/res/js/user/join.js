@@ -34,6 +34,7 @@ if(joinBtnElem) {
 
      function ajax() {
          var sum = emailChk + nickChk + telChk;
+         console.log('회원가입체크1')
          if (sum == 3) {
              const param = {
                  email: EmailElem.value,

@@ -114,9 +114,22 @@
         AND tel = #{tel}
     </select>
 
-    <update id="changePw">
+    <update id="temporaryPw">
         UPDATE t_user
         SET   pw    = #{pw}
         WHERE email = #{email}
+    </update>
+
+    <select id="currentPw" resultType="userEntity">
+        SELECT pw,email,nm,nick AS userNick,tel
+        FROM t_user
+        WHERE   1 = 1
+        AND iuser = #{param.iuser}
+    </select>
+
+    <update id="changePw1">
+        UPDATE t_user
+        SET   pw    = #{pw}
+        WHERE iuser = #{iuser}
     </update>
 </mapper>
