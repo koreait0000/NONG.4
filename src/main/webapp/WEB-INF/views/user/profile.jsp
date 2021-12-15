@@ -18,7 +18,7 @@
         <div style="background-color: white;"></div>
 
 
-    <div id="displayImgList" data-usernick="${profile.userNick}" data-iuser="${profile.iuser}" data-profile="${profile.profileImg}">
+    <div id="displayImgList" data-usernick="${profile.userNick}" data-iuser="${profile.iuser}" data-profile="${profile.profileImg}" data-provider="${profile.provider}">
         <h2>SanDeul</h2>
         <p> 커뮤니티에 사용하실 닉네임을 설정해 주세요 ! </p>
         <div id="displayImg"></div>
@@ -36,7 +36,7 @@
             <tr>
                 <th>비밀번호</th>
                 <td>
-                    <div class="pointer pwChange">비밀번호 변경</div>
+                    <button class="pwChange pointer">비밀번호 변경</button>
                     <div class="pwModal-img hide">
                         <div>
                             <div class="container">

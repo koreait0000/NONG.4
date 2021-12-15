@@ -38,9 +38,9 @@ public class UserService {
         param.setPw(hashedPw);
         param.setAuthCd(authCd);
 
-        System.out.println("email!! : " + param.getEmail());
-        System.out.println("UserNick!! : " + param.getUserNick());
-        System.out.println("Tel!! : " + param.getTel());
+        if(param.getProvider() == null){
+            param.setProvider("nong4");
+        }
 
         int result = mapper.join(param);
 
@@ -70,7 +70,6 @@ public class UserService {
     public int chkOverlap(UserEntity param) {
         UserEntity chkOverlap = mapper.chkOverlap(param);
         int result = 0;
-        System.out.println("get.email : " + param.getEmail());
 
         if(chkOverlap == null) { // email이 null (중복이 아닐때)
             result = 1;
@@ -154,13 +153,16 @@ public class UserService {
     }
     public int changePw1(UserEntity param, String changeInput) {
         String decoderPw;
+        param.setIuser(auth.getLoginUserPk());
         decoderPw = changeInput.replaceAll("\"","");
         String hashedPw = passwordEncoder.encode(decoderPw);
         param.setPw(hashedPw);
 
-        mapper.changePw1(param);
+        int result = 0;
+        result = mapper.changePw1(param);
+        //mapper.changePw1(param);
 
-        return 1;
+        return result;
     }
 
     public int profileMod(MultipartFile[] imgArr, UserEntity param, String userNick) {
