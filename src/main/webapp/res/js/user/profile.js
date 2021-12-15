@@ -104,19 +104,22 @@ pwChangeElem.addEventListener('click', () => {
         switch(myJson.result) {
             case 0:
                 if(!pwJ.test(currentInput.value)) {
-                    msgCurrentPwDiv.innerText = '비밀번호는 영문 대,소문자 및 숫자만 가능합니다.';
+                    msgCurrentPwDiv.innerText   = '비밀번호는 영문 대,소문자 및 숫자만 가능합니다.';
                     msgCurrentPwDiv.style.color = msgErrorColor;
-                    currentInput.focus();
-                }
-                else if(pwJ.test(currentInput.value)) {
-                    msgCurrentPwDiv.innerText = '비밀번호를 확인해주세요.';
+                    // currentInput.focus();
+                } else if(pwJ.test(currentInput.value)) {
+                    msgCurrentPwDiv.innerText   = '비밀번호를 확인해주세요.';
                     msgCurrentPwDiv.style.color = msgErrorColor;
-                    currentInput.focus();
+                    // currentInput.focus();
                 }
+                console.log('focus CHK');
+                console.log(myJson.result.pw);
+                currentInput.focus();
+                // submitInput.disabled = true;
                 break;
             case 1:
                 msgCurrentPwDiv.innerText = '';
-                currentInput.disabled     = true; // 기존 비밀번호의 값이 맞다면 기존 비밀번호 text 비활성화
+                currentInput.disabled     = true; // 기존 비밀번호의 값이 맞다면 기존 비밀번호 input 비활성화
                 break;
         }
     }
@@ -150,11 +153,11 @@ pwChangeElem.addEventListener('click', () => {
         if(!pwJ.test(changePwInput.value)) {
             msgChangePwDiv.innerText   = '비밀번호는 영문 대,소문자 및 숫자만 가능합니다.';
             msgChangePwDiv.style.color = msgErrorColor;
-            changePwInput.focus();
+            // changePwInput.focus();
         } else if(currentInput.value == changePwInput.value) {
             msgChangePwDiv.innerText   = '현재 비밀번호와 동일합니다.';
             msgChangePwDiv.style.color = msgErrorColor;
-            changePwInput.focus();
+            // changePwInput.focus();
         } else if(pwJ.test(changePwInput.value)) {
             msgChangePwDiv.innerText = '';
         }
@@ -174,7 +177,7 @@ pwChangeElem.addEventListener('click', () => {
     changePwReTh.type      = 'th';
     changePwReTh.innerText = '새 비밀번호 확인';
 
-    msgChangePwReContDiv.className ='class-msg-pw';
+    msgChangePwReContDiv.className = 'class-msg-pw';
 
     msgChangePwReDiv.innerText = '변경할 비밀번호를 확인해주세요.';
     msgChangePwReDiv.className = 'class-msg';
@@ -195,6 +198,11 @@ pwChangeElem.addEventListener('click', () => {
         } else {
             submitInput.disabled = false;
             msgChangePwReDiv.innerText = '';
+            // 최종적으로 새 비밀번호 확인 입력 후 submit 버튼을 누르지 않고
+            // 다시 새 비밀번호를 변경하자마자 submit 버튼을 누르는 경우를 막기 위한 validation
+            changePwInput.addEventListener('change', () => {
+                submitInput.disabled = true;
+            })
         }
     }
 
@@ -206,6 +214,7 @@ pwChangeElem.addEventListener('click', () => {
     submitInput.type  = 'submit';
     submitInput.id    = 'submitUpload';
     submitInput.value = '확인';
+    submitInput.disabled = true;
 
     cancelInput.type  = 'button';
     cancelInput.id    = 'cancelInput';
@@ -214,19 +223,20 @@ pwChangeElem.addEventListener('click', () => {
     // 확인 버튼을 눌렀을 때
     submitInput.addEventListener('click', () => {
         formCheck();
-        submitAjax();
     })
 
     // Controller로 보내기 전 formValidation check
     function formCheck() {
         if(currentInput.value == changePwInput.value) {
             alert('기존 비밀번호와 새 비밀번호가 같습니다.');
-            changePwInput.focus();
             return false;
+            changePwInput.focus();
         } else if(changePwInput.value != changePwReInput.value) {
             alert('새 비밀번호를 다시 확인해주세요.')
             changePwInput.focus();
             return false;
+        } else {
+            submitAjax();
         }
     }
 
@@ -251,12 +261,13 @@ pwChangeElem.addEventListener('click', () => {
             case 0:
                 if (!pwJ.test(changePwReInput.value)) {
                     msgChangePwReDiv.innerText = '비밀번호는 영문 대,소문자 및 숫자만 가능합니다.';
-                    changePwReInput.focus();
                 } else if (pwJ.test(changePwReInput.value) && changePwInput.value != changePwReInput.value) {
                     msgChangePwReDiv.innerText = '비밀번호가 다릅니다.';
                 }
+                changePwReInput.focus();
                 break;
             case 1:
+                alert('비밀번호가 변경되었습니다.');
                 if (pwJ.test(changePwReInput.value) && changePwInput.value == changePwReInput.value) {
                     msgChangePwReDiv.innerText = '';
                 }
