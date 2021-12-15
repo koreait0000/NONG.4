@@ -140,6 +140,7 @@ public class UserService {
         param.setIuser(auth.getLoginUserPk());
         UserEntity currentPw = mapper.currentPw(param,currentInput);
 
+        System.out.println(currentPw);
         passwordEncoder.matches(changeInput,currentPw.getPw()); // 기존비밀번호와 새로운비밀번호를 비교
 
         decoderPw = changeInput.replaceAll("\"","");

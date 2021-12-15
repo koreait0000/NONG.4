@@ -118,7 +118,7 @@
     </update>
 
     <select id="currentPw" resultType="userEntity">
-        SELECT pw,email,nm,nick AS userNick,tel
+        SELECT pw
         FROM t_user
         WHERE   1 = 1
         AND iuser = #{param.iuser}

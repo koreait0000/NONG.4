@@ -93,6 +93,7 @@ public class UserController {
         return "user/profile";
     }
 
+    // 비밀번호 변경
     @ResponseBody
     @PostMapping("/profile")
     public Map<String, Object> profile(@RequestBody String currentInput) {
@@ -122,7 +123,7 @@ public class UserController {
         UserEntity param = new UserEntity();
         System.out.println("changeInput(변경할 비밀번호)_Cont : "+changeInput);
         System.out.println("changePwReInput(변경할 비밀번호확인)_Cont : "+changePwReInput);
-        returnValue.put("result",service.changePw(param,changeInput,currentInput));
+        returnValue.put("result",service.currentPw(param,changeInput));
         returnValue.put("result",service.changePw1(param,changeInput));
         return returnValue;
     }
