@@ -80,6 +80,7 @@
             , profileImg
             , tel
             , regdt
+            , provider
         FROM  t_user
         WHERE iuser = ${iuser}
     </select>
