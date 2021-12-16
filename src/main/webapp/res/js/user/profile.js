@@ -7,8 +7,9 @@ const modalImgElem         = document.querySelector('.modal-img');
 const pwModalImgElem       = document.querySelector('.pwModal-img');
 const profileItemContElem  = document.querySelector('.profileCont');
 const pwChangeItemContElem = document.querySelector('.pwChangeCont');
-const pwChangeElem         = document.querySelector('.pointer.pwChange');
+const pwChangeElem         = document.querySelector('.pwChange');
 const userNickData  = displayImgListElem.dataset.usernick;
+const userProvider = displayImgListElem.dataset.provider;
 
 const nickDiv     = document.createElement('div');
 const fileDiv     = document.createElement('div');
@@ -17,6 +18,7 @@ const btnDivPw    = document.createElement('div');
 const fileInput   = document.createElement('input');
 const submitPwInput = document.createElement('input');
 const submitInput = document.createElement('input'); // 확인
+const submitPwInput = document.createElement('input');
 const cancelInput = document.createElement('input'); // 취소
 const nickInput   = document.createElement('input');
 
@@ -193,7 +195,6 @@ pwChangeElem.addEventListener('click', () => {
             submitPwInput.disabled = true;
             msgChangePwReDiv.innerText = '새 비밀번호와 다릅니다.';
             msgChangePwReDiv.style.color = msgErrorColor;
-            changePwReInput.focus();
             return false;
         } else {
             submitPwInput.disabled = false;
@@ -231,11 +232,15 @@ pwChangeElem.addEventListener('click', () => {
         if(currentInput.value == changePwInput.value) {
             alert('기존 비밀번호와 새 비밀번호가 같습니다.');
             // return false;
+            return;
             changePwInput.focus();
         } else if(changePwInput.value != changePwReInput.value) {
             alert('새 비밀번호를 다시 확인해주세요.')
             changePwInput.focus();
             // return false;
+            return;
+        } else {
+            submitAjax();
         }
     }
 
@@ -426,4 +431,10 @@ submitInput.addEventListener('click', () => {
             }
         })
 })
+
+if(userProvider != 'nong4'){
+    pwChangeElem.innerHTML = '여기서 못바꿈';
+    pwChangeElem.setAttribute('disabled','disabled');
+    pwChangeElem.classList.remove('pointer');
+}
 // togglesubmitUpload();
