@@ -38,6 +38,10 @@ public class UserService {
         param.setPw(hashedPw);
         param.setAuthCd(authCd);
 
+        if(param.getProvider() == null) {
+            param.setProvider("nong4");
+        }
+
         System.out.println("email!! : " + param.getEmail());
         System.out.println("UserNick!! : " + param.getUserNick());
         System.out.println("Tel!! : " + param.getTel());
@@ -52,6 +56,7 @@ public class UserService {
         }
         return result;
     }
+
     //이메일 인증 처리
     public int auth(UserEntity param) {
         return mapper.auth(param);
@@ -121,6 +126,7 @@ public class UserService {
     // 현재 비밀번호와 입력된 비밀번호 확인
     public int currentPw(UserEntity param, String currentInput) {
         String decoderPw;
+        int result = 0;
         param.setIuser(auth.getLoginUserPk());
         UserEntity currentPw = mapper.currentPw(param,currentInput);
         param.setPw(currentInput); // 입력된 비밀번호를 param에 넣음
@@ -130,28 +136,28 @@ public class UserService {
 
         if(!passwordEncoder.matches(decoderPw,currentPw.getPw())) {
             System.out.println("비밀번호가 틀립니다.");
-            return 0;
+            return result;
         }
         return 1;
     }
 
-    public int changePw(UserEntity param, String changeInput, String currentInput) {
-        String decoderPw;
-        param.setIuser(auth.getLoginUserPk());
-        UserEntity currentPw = mapper.currentPw(param,currentInput);
-
-        System.out.println(currentPw);
-        passwordEncoder.matches(changeInput,currentPw.getPw()); // 기존비밀번호와 새로운비밀번호를 비교
-
-        decoderPw = changeInput.replaceAll("\"","");
-
-//        if(passwordEncoder.matches(decoderPw,currentPw.getPw())) { // 기존비밀번호와 새로운비밀번호를 비교
-//            System.out.println("decoderPw : "+decoderPw);
-//            System.out.println("currentPw.getPw() : "+currentPw.getPw());
-//            System.out.println("현재비밀번호와 동일합니다.");
-//        }
-        return 0;
-    }
+//    public int changePw(UserEntity param, String changeInput, String currentInput) {
+//        String decoderPw;
+//        param.setIuser(auth.getLoginUserPk());
+//        UserEntity currentPw = mapper.currentPw(param,currentInput);
+//
+//        System.out.println(currentPw);
+//        passwordEncoder.matches(changeInput,currentPw.getPw()); // 기존비밀번호와 새로운비밀번호를 비교
+//
+//        decoderPw = changeInput.replaceAll("\"","");
+//
+////        if(passwordEncoder.matches(decoderPw,currentPw.getPw())) { // 기존비밀번호와 새로운비밀번호를 비교
+////            System.out.println("decoderPw : "+decoderPw);
+////            System.out.println("currentPw.getPw() : "+currentPw.getPw());
+////            System.out.println("현재비밀번호와 동일합니다.");
+////        }
+//        return 0;
+//    }
     public int changePw1(UserEntity param, String changeInput) {
         String decoderPw;
         decoderPw = changeInput.replaceAll("\"","");

@@ -13,7 +13,9 @@ const userNickData  = displayImgListElem.dataset.usernick;
 const nickDiv     = document.createElement('div');
 const fileDiv     = document.createElement('div');
 const btnDiv      = document.createElement('div'); // 확인, 취소 버튼
+const btnDivPw    = document.createElement('div');
 const fileInput   = document.createElement('input');
+const submitPwInput = document.createElement('input');
 const submitInput = document.createElement('input'); // 확인
 const cancelInput = document.createElement('input'); // 취소
 const nickInput   = document.createElement('input');
@@ -112,8 +114,6 @@ pwChangeElem.addEventListener('click', () => {
                     msgCurrentPwDiv.style.color = msgErrorColor;
                     // currentInput.focus();
                 }
-                console.log('focus CHK');
-                console.log(myJson.result.pw);
                 currentInput.focus();
                 // submitInput.disabled = true;
                 break;
@@ -190,18 +190,18 @@ pwChangeElem.addEventListener('click', () => {
     // 새 비밀번호 확인 Validation check
     function changePwReValid() {
         if(changePwInput.value != changePwReInput.value) {
-            submitInput.disabled = true;
+            submitPwInput.disabled = true;
             msgChangePwReDiv.innerText = '새 비밀번호와 다릅니다.';
             msgChangePwReDiv.style.color = msgErrorColor;
             changePwReInput.focus();
             return false;
         } else {
-            submitInput.disabled = false;
+            submitPwInput.disabled = false;
             msgChangePwReDiv.innerText = '';
             // 최종적으로 새 비밀번호 확인 입력 후 submit 버튼을 누르지 않고
             // 다시 새 비밀번호를 변경하자마자 submit 버튼을 누르는 경우를 막기 위한 validation
             changePwInput.addEventListener('change', () => {
-                submitInput.disabled = true;
+                submitPwInput.disabled = true;
             })
         }
     }
@@ -211,32 +211,31 @@ pwChangeElem.addEventListener('click', () => {
     changePwReContDiv.append(changePwReDiv,msgChangePwReContDiv);
 
 
-    submitInput.type  = 'submit';
-    submitInput.id    = 'submitUpload';
-    submitInput.value = '확인';
-    submitInput.disabled = true;
+    submitPwInput.type  = 'submit';
+    submitPwInput.id    = 'submitUpload';
+    submitPwInput.value = '확인';
+    submitPwInput.disabled = true;
 
     cancelInput.type  = 'button';
     cancelInput.id    = 'cancelInput';
     cancelInput.value = '취소';
 
     // 확인 버튼을 눌렀을 때
-    submitInput.addEventListener('click', () => {
+    submitPwInput.addEventListener('click', () => {
         formCheck();
+        submitAjax();
     })
 
     // Controller로 보내기 전 formValidation check
     function formCheck() {
         if(currentInput.value == changePwInput.value) {
             alert('기존 비밀번호와 새 비밀번호가 같습니다.');
-            return false;
+            // return false;
             changePwInput.focus();
         } else if(changePwInput.value != changePwReInput.value) {
             alert('새 비밀번호를 다시 확인해주세요.')
             changePwInput.focus();
-            return false;
-        } else {
-            submitAjax();
+            // return false;
         }
     }
 
@@ -267,7 +266,8 @@ pwChangeElem.addEventListener('click', () => {
                 changePwReInput.focus();
                 break;
             case 1:
-                alert('비밀번호가 변경되었습니다.');
+                alert('다시 로그인 해주세요!!!');
+                location.href = '/user/logout';
                 if (pwJ.test(changePwReInput.value) && changePwInput.value == changePwReInput.value) {
                     msgChangePwReDiv.innerText = '';
                 }
@@ -275,16 +275,24 @@ pwChangeElem.addEventListener('click', () => {
         }
     }
 
-    btnDiv.append(cancelInput,submitInput);
-    btnContElem.append(btnDiv);
+    btnDivPw.append(cancelInput,submitPwInput);
+    btnContElem.append(btnDivPw);
 
-    btnDiv.className   = 'btnDiv';
+    btnDivPw.className   = 'btnDiv';
     pwBoxDiv.className = 'pw-box';
 
     pwBoxDiv.append(currentContDiv,changePwContDiv,changePwReContDiv);
     pwChangeItemContElem.append(pwBoxDiv);
     pwChangeItemContElem.append(btnContElem);
 })
+
+// 모달창 닫기
+if(btnDivPw) {
+    btnDivPw.addEventListener('click', () => {
+        pwModalImgElem.classList.add('hide');
+        // location.reload(true); // 서버에서 현재 페이지를 강제로 reload
+    });
+}
 
 // 프로필수정 클릭 시 모달창 open
 profileModElem.addEventListener('click', () => {

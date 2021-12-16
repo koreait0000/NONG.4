@@ -118,11 +118,10 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/changePw")
-    public Map<String, Object> changePw(@RequestBody String changeInput, String changePwReInput, String currentInput) {
+    public Map<String, Object> changePw(@RequestBody String changeInput) {
         Map<String, Object> returnValue = new HashMap<>();
         UserEntity param = new UserEntity();
-        System.out.println("changeInput(변경할 비밀번호)_Cont : "+changeInput);
-        System.out.println("changePwReInput(변경할 비밀번호확인)_Cont : "+changePwReInput);
+
         returnValue.put("result",service.currentPw(param,changeInput));
         returnValue.put("result",service.changePw1(param,changeInput));
         return returnValue;
