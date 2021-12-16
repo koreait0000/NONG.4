@@ -62,7 +62,7 @@ if(joinBtnElem) {
     }
         function proc(myJson) {
             if (myJson.result === 1) {
-                alert('회원가입 성공')
+                alert('해당 이메일로 메세지를 발송하였습니다.')
                 location.href = "/user/login?needEmail=1";
             } else {
                 alert('실패');
