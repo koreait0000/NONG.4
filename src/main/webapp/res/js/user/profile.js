@@ -16,7 +16,6 @@ const fileDiv     = document.createElement('div');
 const btnDiv      = document.createElement('div'); // 확인, 취소 버튼
 const btnDivPw    = document.createElement('div');
 const fileInput   = document.createElement('input');
-const submitPwInput = document.createElement('input');
 const submitInput = document.createElement('input'); // 확인
 const submitPwInput = document.createElement('input');
 const cancelInput = document.createElement('input'); // 취소
@@ -224,7 +223,6 @@ pwChangeElem.addEventListener('click', () => {
     // 확인 버튼을 눌렀을 때
     submitPwInput.addEventListener('click', () => {
         formCheck();
-        submitAjax();
     })
 
     // Controller로 보내기 전 formValidation check
