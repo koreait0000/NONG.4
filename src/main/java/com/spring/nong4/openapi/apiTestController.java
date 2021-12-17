@@ -1,7 +1,5 @@
 package com.spring.nong4.openapi;
 
-
-import com.sun.deploy.net.URLEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+import java.net.URLEncoder;
 
 @RestController
 @RequestMapping("/openapi")
@@ -20,9 +18,8 @@ public class apiTestController {
     public String callApiHttp() {
 //        StringBuffer result = new StringBuffer();
 //        try {
-//            String urlstr = "http://api.nongsaro.go.kr/service/cropEbook/videoList?" +
-//                    "apiKey=20210713ZU1XHCDLCGWITY5LN99HBW" +
-//                    "&pageNo=1" +
+//            String urlstr = "http://api.nongsaro.go.kr/service/cropEbook/videoList?" + "apiKey=20210713ZU1XHCDLCGWITY5LN99HBW" +
+//                    "&type=json"+
 //                    "&numOfRows=1000";
 //            URL url = new URL(urlstr);
 //            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
