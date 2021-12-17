@@ -20,7 +20,7 @@ function apiTest() {
         +'&type=json'
         +'&numOfRows=1000'
     })
-        .then(res => res.json)
+        .then(res => res.json())
         .then(myJson => {
             console.log(myJson);
             let videoImg = myJson['videoImg'];
