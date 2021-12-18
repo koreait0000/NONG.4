@@ -93,6 +93,5 @@
             </div>
         </div>
     </div>
-
     <div class="background-right"></div>
 </div>

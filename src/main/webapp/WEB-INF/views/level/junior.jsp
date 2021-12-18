@@ -39,9 +39,15 @@
         <div class="community">
             <div class="community-top"></div>
             <div class="community-board">
-                <div id="videoApi">
-                    <div>주제별 짧은 기술동영상 페이지</div>
-                </div>
+                <div>주제별 짧은 기술동영상 페이지</div>
+                <c:choose>
+                    <c:when test="${empty param.videoLink}">
+                        <div id="videoApi"></div>
+                    </c:when>
+                    <c:otherwise>
+                        <iframe width="854" height="800" src="${param.videoLink}"></iframe>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

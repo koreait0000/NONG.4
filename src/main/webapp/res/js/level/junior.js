@@ -43,7 +43,7 @@ function testF(data){
 
 
         videoListDiv.addEventListener('click', () => {
-            location.href = item.videoLink;
+            location.href = 'junior?videoLink=' + item.videoLink;
         })
 
         videoListElem.append(videoListDiv);
