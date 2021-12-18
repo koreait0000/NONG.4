@@ -59,6 +59,7 @@ public class apiTestController {
             while((line = rd.readLine()) != null) {
                 result.append(line + "\n");
             }
+            System.out.println("result : ");
             rd.close();
             conn.disconnect();
         } catch (Exception e) {
