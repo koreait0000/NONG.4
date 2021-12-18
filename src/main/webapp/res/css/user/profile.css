@@ -1,4 +1,6 @@
-section { display: flex; flex-direction: column; align-items: center; }
+/*section { display: flex; flex-direction: column; align-items: center; }*/
+.background { height:100%; }
+.community-board { margin: 30px;  display: flex; flex-direction: column; align-items: center; text-align: center; }
 
 .wh100 { width: 100px; height: 100px; }
 
@@ -55,5 +57,4 @@ section { display: flex; flex-direction: column; align-items: center; }
 
 .pwChangeCont .btnDiv { margin-top: 70px; text-align: center; }
 .pwChangeCont .btnDiv > input { opacity: 0.6; width: 105px; height: 45px; padding: 0; margin: 0 4px; background-color: #fff; border: 1px solid #333; border-radius: 0; cursor:pointer; }
-
 

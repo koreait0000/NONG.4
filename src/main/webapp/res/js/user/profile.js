@@ -425,6 +425,7 @@ submitInput.addEventListener('click', () => {
                     console.log('myjson.result' + myJson);
                     alert('프로필 이미지 등록에  성공하셨습니다.');
                     location.href = '/user/profile';
+                    location.reload();
                     break;
             }
         })
