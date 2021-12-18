@@ -15,4 +15,12 @@
 
 <div id="videoApi">
     <div>비디오 API</div>
+    <c:forEach items="${itemList}" var="itemList">
+        <tr>
+            <td><c:out value="${itemList.videoImg}" /></td>
+            <td>${itemList}</td>
+            <td>${itemList.videoOriginInstt}</td>
+            <td>${itemList.videoTitme}</td>
+        </tr>
+    </c:forEach>
 </div>
