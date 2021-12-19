@@ -21,7 +21,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override // jsp에서
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity param = new UserEntity();
-        System.out.println("email--Security-- : " + email);
         param.setEmail(email);
         UserEntity loginUser = mapper.selUser(param);
         if(loginUser == null) {

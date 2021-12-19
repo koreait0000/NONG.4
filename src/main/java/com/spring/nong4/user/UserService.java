@@ -1,24 +1,17 @@
 package com.spring.nong4.user;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.spring.nong4.common.EmailService;
 import com.spring.nong4.common.MyFileUtils;
 import com.spring.nong4.common.MySecurityUtils;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
-import com.spring.nong4.user.model.UserProfileEntity;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class UserService {
@@ -37,10 +30,7 @@ public class UserService {
         String hashedPw = passwordEncoder.encode(param.getPw());
         param.setPw(hashedPw);
         param.setAuthCd(authCd);
- 
-        System.out.println("email!! : " + param.getEmail());
-        System.out.println("UserNick!! : " + param.getUserNick());
-        System.out.println("Tel!! : " + param.getTel());
+
         if(param.getProvider() == null){
             param.setProvider("nong4");
         }
@@ -98,7 +88,7 @@ public class UserService {
         UserEntity emailChk = mapper.chkOverlap(param);
 
         if(!emailChk.getEmail().equals(param.getEmail())) {
-            System.out.println("등록되지 않은 이메일입니다.");
+
             return 0;
         }
 
@@ -133,29 +123,11 @@ public class UserService {
         passwordEncoder.matches(param.getPw(),currentPw.getPw()); // 입력받은 비밀번호, 이미 암호화된 비밀번호를 비교
 
         if(!passwordEncoder.matches(decoderPw,currentPw.getPw())) {
-            System.out.println("비밀번호가 틀립니다.");
             return result;
         }
         return 1;
     }
 
-//    public int changePw(UserEntity param, String changeInput, String currentInput) {
-//        String decoderPw;
-//        param.setIuser(auth.getLoginUserPk());
-//        UserEntity currentPw = mapper.currentPw(param,currentInput);
-//
-//        System.out.println(currentPw);
-//        passwordEncoder.matches(changeInput,currentPw.getPw()); // 기존비밀번호와 새로운비밀번호를 비교
-//
-//        decoderPw = changeInput.replaceAll("\"","");
-//
-////        if(passwordEncoder.matches(decoderPw,currentPw.getPw())) { // 기존비밀번호와 새로운비밀번호를 비교
-////            System.out.println("decoderPw : "+decoderPw);
-////            System.out.println("currentPw.getPw() : "+currentPw.getPw());
-////            System.out.println("현재비밀번호와 동일합니다.");
-////        }
-//        return 0;
-//    }
     public int changePw1(UserEntity param, String changeInput) {
         String decoderPw;
         param.setIuser(auth.getLoginUserPk());
@@ -165,28 +137,15 @@ public class UserService {
 
         int result = 0;
         result = mapper.changePw1(param);
-        //mapper.changePw1(param);
 
         return result;
     }
 
     public int profileMod(MultipartFile[] imgArr, UserEntity param, String userNick) {
-//        if (imgArr == null) {
-//            return 0;
-//        }
         param.setIuser(auth.getLoginUserPk());
-//        System.out.println("NickLeng : " + userNick.length());
         int result = 0;
-//        if(userNick != null && !userNick.equals(auth.getLoginUser().getUserNick())) {
-//            result = mapper.updUserProfile(param, userNick);
-//        }
-        System.out.println("imgArr :" + imgArr);
-        System.out.println("auth :" + auth.getLoginUser().getProfileImg());
-        System.out.println("getProfileImg[1] : " + param.getProfileImg());
+
         if(imgArr == null ) {
-//            param.setProfileImg(param.getProfileImg());
-//            System.out.println("getImgAuth : " + param.getProfileImg());
-//            result = mapper.updUserProfile(param,userNick);
             UserEntity param2 = mapper.selUserProfile(param);
             param.setProfileImg(param2.getProfileImg());
             result = mapper.updUserProfile(param,userNick);
@@ -199,14 +158,11 @@ public class UserService {
         }
 
         if (imgArr != null && imgArr.length > 0) {
-//            || userNick != null && userNick.length() > 0
             String target = "profileImg/" + param.getIuser();
             for (MultipartFile img : imgArr) {
                 String saveFileNm = myFileUtils.transferTo(img, target);
-                System.out.println("saveFileNm : " + saveFileNm);
                 if (saveFileNm != null) { //이미지 정보 DB에 저장
                     param.setProfileImg(saveFileNm);
-                    System.out.println("getProfileImg[2] : " + param.getProfileImg());
                     result = mapper.updUserProfile(param,userNick);
                 }
             }

@@ -23,8 +23,6 @@ public class MyFileUtils {
     public String getSavePath(String path) {
 
         return uploadImagePath + "/" + path;
-        //return "D:/springImg" + "/" + "profile/10"
-        //return "D:/springImg/profile/10";
     }
 
     //랜덤 파일명 생성
@@ -35,8 +33,6 @@ public class MyFileUtils {
     //랜덤 파일명 생성 (with 확장자)    "aaa.jpg"
     public String getRandomFileNm(String originFileNm) {
         return getRandomFileNm() + "." + getExt(originFileNm);
-        //return "aslkdfjaslkf2130asdwds" + "." + "jpg"
-        //return "aslkdfjaslkf2130asdwds.jpg"
     }
 
     //랜덤 파일명 생성

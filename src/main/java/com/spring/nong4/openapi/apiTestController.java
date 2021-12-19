@@ -1,9 +1,5 @@
 package com.spring.nong4.openapi;
 
-import com.sun.deploy.xml.XMLParser;
-import org.json.simple.ItemList;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +10,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import javax.xml.crypto.dsig.XMLObject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.stream.events.EndElement;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -95,18 +89,10 @@ public class apiTestController {
                     itemMap.put("videoOriginInstt", getTagValue("videoOriginInstt",eElement));
                     itemMap.put("videoTitle", getTagValue("videoTitle",eElement));
 
-//                    System.out.println("################");
-//                    System.out.println("videoImg : " + getTagValue("videoImg",eElement));
-//                    System.out.println("videoLink : " + getTagValue("videoLink",eElement));
-//                    System.out.println("videoOriginInstt : " + getTagValue("videoOriginInstt",eElement));
-//                    System.out.println("videoTitle : " + getTagValue("videoTitle",eElement));
-
                     mv.addObject("itemList",itemList);
                     itemList.add(itemMap);
-
                 }
             }
-//            System.out.println("itemList : " + itemList);
             rd.close();
             conn.disconnect();
         } catch (Exception e) {

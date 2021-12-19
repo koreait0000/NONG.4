@@ -45,7 +45,6 @@ public class UserController {
     @PostMapping("/join")
     public Map<String,Object> join(@RequestBody UserEntity param){
         Map<String,Object> returnValue = new HashMap<>();
-        System.out.println("join : " + param.getUserNick());
         returnValue.put("result", service.join(param));
         return returnValue;
     }
@@ -56,7 +55,6 @@ public class UserController {
     public Map<String,Object> chkOverlap(@RequestBody UserEntity param) {
         Map<String,Object> returnValue = new HashMap<>();
         returnValue.put("result", service.chkOverlap(param));
-        System.out.println("Eamil 확인 : "+param.getEmail());
         return returnValue;
     }
 
@@ -99,7 +97,6 @@ public class UserController {
     public Map<String, Object> profile(@RequestBody String currentInput) {
         Map<String, Object> returnValue = new HashMap<>();
         UserEntity param = new UserEntity();
-
         returnValue.put("result",service.currentPw(param,currentInput));
         return returnValue;
     }
@@ -110,9 +107,7 @@ public class UserController {
         Map<String, Object> map = new HashMap<>();
         param.setUserNick(userNick);
         map.put("result", service.profileMod(imgArr,param,userNick));
-        System.out.println("userNick : " + param.getUserNick());
-        System.out.println("userNickRequest : " + userNick);
-        System.out.println("Img : " + auth.getLoginUser().getProfileImg());
+
         return map;
     }
 

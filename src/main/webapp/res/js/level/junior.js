@@ -9,8 +9,6 @@ function apiTest() {
     })
         .then(res => res.json())
         .then(myJson => {
-            //console.log(myJson);
-            let videoImg = myJson['videoImg'];
             testF(myJson);
         })
 }

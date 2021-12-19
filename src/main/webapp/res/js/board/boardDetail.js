@@ -25,7 +25,6 @@ function makeFavBtn(){
         fetch('fav?isFav=' + isFav + '&iboard=' + iboard)
             .then(res => res.json())
             .then(myJson => {
-                console.log(myJson);
                 location.reload();
             });
     })
@@ -71,8 +70,6 @@ function boardUpd() {
 
         updParentTElem.append(titleDiv);
         updParentCElem.append(ctntDiv);
-        console.log('originT  ! : '+ originTitleElem.innerHTML);
-        console.log('titleInput !! : ' + titleInput.value);
 
         realBtnU.addEventListener('click',()=> {
             const param = {
@@ -81,7 +78,6 @@ function boardUpd() {
                 title:    titleInput.value,
                 ctnt:     ctntInput.value
             };
-            console.log(param);
 
             const init = {
                 method: 'PUT',
@@ -95,13 +91,11 @@ function boardUpd() {
             fetch('boardUpdate',init)
                 .then(res => res.json())
                 .then(myJson => {
-                    console.log('json : '+myJson.data)
                     switch (myJson.data) {
                         case 0:
                             alert('오류입니다.');
                             break;
                         case 1:
-                            console.log('titleInput real : ' + titleInput.value);
                             location.reload();
                             break;
 
@@ -117,7 +111,6 @@ function boardUpd() {
             title:    titleInput.value,
             ctnt:     ctntInput.value
         };
-        console.log(param);
 
         const init = {
             method: 'DELETE',
@@ -182,7 +175,6 @@ function insCmtAjax(param) {
             return res.json();
         })
         .then(function(myJson){
-            console.log(myJson);
             switch(myJson.result){
                 case 0:
                     alert('댓글 등록 실패!');
@@ -204,8 +196,6 @@ function cmtListAjax() {
             return res.json();
         })
         .then(function(myJson) {
-            console.log(myJson);
-
             makeCmtElemList(myJson);
         });
 }
@@ -241,14 +231,12 @@ function makeCmtElemList(data) {
 
             delCmtBtn.addEventListener('click', () => {
                 const icmt = item.icmt;
-                console.log(icmt);
                 if (confirm("정말 삭제하시겠습니까?") == true) {
                 fetch('delCmt/' + icmt, {method: 'DELETE'})
                     .then(function (res){
                         return res.json();
                     })
                     .then(function (myJson){
-                        console.log(myJson);
                         switch (myJson.result) {
                             case 0:
                                 alert('댓글 삭제 실패!');
@@ -283,7 +271,6 @@ function makeCmtElemList(data) {
                         icmt:   item.icmt,
                         cmt:   cmtInput.value,
                     };
-                    console.log(param);
 
                     const init = {
                         method: 'PUT',
@@ -299,7 +286,6 @@ function makeCmtElemList(data) {
                             return res.json();
                         })
                         .then(function (myJson){
-                            console.log(myJson);
                             switch (myJson.result) {
                                 case 0:
                                     alert('댓글 수정 실패!');

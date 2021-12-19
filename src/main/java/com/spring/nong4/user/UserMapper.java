@@ -2,10 +2,8 @@ package com.spring.nong4.user;
 
 import com.spring.nong4.user.model.UserEntity;
 import com.spring.nong4.user.model.UserProfileEntity;
-import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Mapper
 public interface UserMapper {

@@ -8,7 +8,6 @@ import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -27,9 +26,6 @@ public class BoardService {
     public int auth(UserEntity param) {
         return mapper.auth(param);
     }
-
-//    if(chkTitle == "" && chkCtnt == "" && chkTitle == null && chkCtnt == null) {return 0;}
-
 
     public Map<String, Object> boardWrite(BoardDomain param, MultipartFile[] imgArr) {
         Map<String, Object> map = new HashMap<>();
