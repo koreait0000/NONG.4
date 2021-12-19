@@ -34,7 +34,6 @@ if(joinBtnElem) {
 
     function ajax() {
         var sum = emailChk + nickChk + telChk;
-        console.log('회원가입체크1')
         if (sum == 3) {
             const param = {
                 email: EmailElem.value,
@@ -118,7 +117,6 @@ if(joinBtnElem) {
         }
 
         joinBtnElem.addEventListener('click', () => {
-            console.log('회원가입 버튼');
             formCheck();
         })
 
@@ -148,7 +146,6 @@ if(joinBtnElem) {
 
                 if (userNickJ.test(userNickElem.value)) {
                     // Todo, 211202 닉네임 중복체크 추가
-                    console.log('userNick : ' + userNickElem.value);
                     userNickCheckProc();
                     msgUserNickElem.innerText = '';
                 }
@@ -159,7 +156,6 @@ if(joinBtnElem) {
             const param = {
                 userNick: userNickElem.value
             }
-            console.log('userNick! : ' + param);
             fetch('/user/chkOverlap',
                 {
                     method: 'POST',
@@ -174,7 +170,6 @@ if(joinBtnElem) {
                         userNickKeyupProc();
                         msgUserNickElem.innerText = '사용가능한 닉네임 입니다.';
                         nickChk = 1;
-                        console.log('result Nick : ' + myJson.result);
                     } else {
                         userNickKeyupProc();
                         msgUserNickElem.innerText = '중복된 닉네임 입니다.';
@@ -187,9 +182,7 @@ if(joinBtnElem) {
 
         // 휴대폰 번호 중복 확인 체크
         if (!phoneJ.test(telElem.value)) {
-            console.log('tel key chk1')
             telElem.addEventListener('keyup', () => {
-                console.log('tel key chk2')
                 msgTelElem.innerText = '휴대폰번호는 "-" 제외 숫자만 입력 가능합니다.';
                 if (phoneJ.test(telElem.value)) {
                     msgTelElem.innerText = '';

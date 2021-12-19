@@ -3,10 +3,7 @@ package com.spring.nong4.board;
 import com.spring.nong4.board.model.*;
 import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.security.IAuthenticationFacade;
-import com.spring.nong4.user.model.UserEntity;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -69,7 +66,6 @@ public class BoardController {
     @RequestMapping(value = "/boardUpdate", method = RequestMethod.PUT)
     public Map<String,Object> boardUpdate(@RequestBody BoardDomain param, Model model) {
         model.addAllAttributes(service.boardUpdate(param));
-        System.out.println("title : "+param.getTitle());
         return service.boardUpdate(param);
     }
 
@@ -77,7 +73,6 @@ public class BoardController {
     @RequestMapping(value = "/boardDelete",method = RequestMethod.DELETE)
     public Map<String,Object> boardDelete(@RequestBody BoardDomain param, Model model) {
         model.addAllAttributes(service.boardDelete(param));
-        System.out.println("title! : "+service.boardDelete(param));
         return service.boardDelete(param);
     }
 
@@ -91,7 +86,6 @@ public class BoardController {
     public String boardDetail(@CookieValue(name ="hit", required = false) String cookie, BoardDomain param, BoardImgEntity imgParam, Model model) {
         // home에서 생성된 쿠키를 @CookieValue를 사용하여 detail에서 전달 받음
         if(!(cookie.contains(String.valueOf(param.getIboard())))) { // 쿠키값에 iboard값이 포함이 되어 있지 않다면
-            System.out.println("나오면 안돼요");
             cookie += param.getIboard() + "/"; // 쿠키에 iboard값 마다마다 누적
             model.addAllAttributes(service.boardDetailHit(param)); // 조회수 증가
         }

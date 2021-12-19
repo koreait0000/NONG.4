@@ -311,8 +311,6 @@ profileModElem.addEventListener('click', () => {
         displayImgElem.append(img);
     }
 
-    console.log('TEST : ' + '/pic/profileImg/' + iuserData + '/' + profileData);
-
     fileInput.type    = 'file';
     fileInput.id      = 'selectImgArr';
     fileInput.accept  = 'image/*';
@@ -400,13 +398,11 @@ function displaySelectedImgArr() {
 // Ajax 파일 업로드
 submitInput.addEventListener('click', () => {
     const data = new FormData();
-    console.log('nickLeng : ' + nickInput.value.length)
     if(fileList.length > 0 || nickInput.value.length > 2) {
         data.append('nick',nickInput.value);
 
         for(let i=0; i<fileList.length; i++) {
             data.append('imgArr', fileList[i]);
-            console.log('NickValue' + nickInput.value)
         }
     }
     // data.append('nick',nickInput.value);
@@ -422,7 +418,6 @@ submitInput.addEventListener('click', () => {
                     alert('프로필 이미지 등록에 실패하셨습니다.');
                     break;
                 case 1:
-                    console.log('myjson.result' + myJson);
                     alert('프로필 이미지 등록에  성공하셨습니다.');
                     location.href = '/user/profile';
                     location.reload();

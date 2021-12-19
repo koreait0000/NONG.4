@@ -6,8 +6,8 @@
     <div class="background-left"></div>
     <div class="background-center">
         <div class="category">
-            <a href="/board/community"><img src="/res/img/nong4logo.png"></a>
-            <div style="font-size: 50px; margin-bottom: 8px; font-weight: bold"> Nong 4</div>
+            <a href="/board/community"><img src="/res/img/nong4logo.png">
+            <div style="font-size: 50px; margin-bottom: 8px; font-weight: bold"> Nong 4</div></a>
 
             <div class="search-input">
                 <input type="text" class="search-txt">
