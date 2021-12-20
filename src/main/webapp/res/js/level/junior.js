@@ -10,10 +10,11 @@ function apiTest() {
         .then(res => res.json())
         .then(myJson => {
             testF(myJson);
+            console.log(myJson.data);
         })
 }
-function testF(data){
-    data.forEach(function (item){
+function testF(myJson){
+    myJson.data.forEach(function (item){
         const videoListDiv = document.createElement('div');
         const videoImgSpan = document.createElement('span');
         const videoLetterSpan = document.createElement('span')
@@ -26,6 +27,11 @@ function testF(data){
         videoLetterSpan.className = 'videoLetterSpan';
         videoTitleDiv.className = 'videoTitleDiv';
         videoOriginDiv.className = 'videoOriginDiv';
+
+        // // console.log('videoImg length : '+ item.videoImg.length)
+        // console.log('pageNo  : ' + item.pageNo);
+        // console.log('totalCount : ' + item.totalCount)
+
 
         img.src = item.videoImg;
 

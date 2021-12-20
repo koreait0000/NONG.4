@@ -1,5 +1,8 @@
 package com.spring.nong4.openapi;
 
+import com.spring.nong4.openapi.model.apiReqDomain;
+import org.apache.commons.collections.ArrayStack;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +15,7 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.stream.events.EndElement;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -37,11 +41,11 @@ public class apiTestController {
 
     @ResponseBody
     @GetMapping("/apiTest")
-    public List<Map<String, Object>> callApiHttp(Model model) {
+    public apiReqDomain callApiHttp() {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         List<Map<String, Object>> itemList = new ArrayList<>();
-        ModelAndView mv = new ModelAndView();
+        apiReqDomain reqDomain = new apiReqDomain();
 
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/cropEbook/videoList");
@@ -49,6 +53,11 @@ public class apiTestController {
             urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("json","UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
+
+            String reqUrl = "http://api.nongsaro.go.kr/service/curationMvp/curationMvpList";
+
+            System.out.println(reqUrl);
+
 
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -67,15 +76,24 @@ public class apiTestController {
             }
             urlParse = result.toString();
 
+            System.out.println("urlParse : "+urlParse);
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document document = dBuilder.parse(new InputSource(new StringReader(urlParse)));
+
+            System.out.println("parse : " +dBuilder.parse(new InputSource(new StringReader(urlParse))));
+
 
             //root tag(<response>)
             document.getDocumentElement().normalize();
 
             // node tag name
             NodeList nList = document.getElementsByTagName("item");
+            NodeList itemsList = document.getElementsByTagName("items");
+
+            List<apiReqDomain.itemTag> videoList = new ArrayList<>();
+            apiReqDomain.itemTag itemTag;
 
             for(int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
@@ -84,21 +102,36 @@ public class apiTestController {
 
                 if(nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    itemMap.put("videoImg", getTagValue("videoImg",eElement));
-                    itemMap.put("videoLink", getTagValue("videoLink",eElement));
-                    itemMap.put("videoOriginInstt", getTagValue("videoOriginInstt",eElement));
-                    itemMap.put("videoTitle", getTagValue("videoTitle",eElement));
 
-                    mv.addObject("itemList",itemList);
+                    itemTag = new apiReqDomain.itemTag();
+
+                    itemTag.setVideoImg(getTagValue("videoImg",eElement));
+                    itemTag.setVideoLink(getTagValue("videoLink",eElement));
+                    itemTag.setVideoOriginInstt(getTagValue("videoOriginInstt",eElement));
+                    itemTag.setVideoTitle(getTagValue("videoTitle",eElement));
+
+                    videoList.add(itemTag);
+
                     itemList.add(itemMap);
                 }
             }
+
+            Node nNode = itemsList.item(0);
+            Element eElement = (Element) nNode;
+            reqDomain.setPageNo(getTagValue("pageNo",eElement));
+            reqDomain.setNumOfRows(getTagValue("numOfRows",eElement));
+            reqDomain.setTotalCount(getTagValue("totalCount",eElement));
+            reqDomain.setVideoItemList(videoList);
+
+            System.out.println("reqdomain : " + reqDomain);
+
             rd.close();
             conn.disconnect();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
-        return itemList;
+        return reqDomain;
     }
 }
