@@ -37,7 +37,6 @@ public class apiTestController {
     public apiReqDomain callApiHttp() {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
-        List<Map<String, Object>> itemList = new ArrayList<>();
         apiReqDomain reqDomain = new apiReqDomain();
 
         try {
@@ -83,8 +82,6 @@ public class apiTestController {
             for(int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
 
-                Map<String, Object> itemMap = new HashMap<>();
-
                 if(nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
 
@@ -108,6 +105,8 @@ public class apiTestController {
             reqDomain.setNumOfRows(getTagValue("numOfRows",eElement));
             reqDomain.setTotalCount(getTagValue("totalCount",eElement));
             reqDomain.setVideoItemList(videoList);
+
+            System.out.println("reqDomain : "+reqDomain);
 
             rd.close();
             conn.disconnect();
