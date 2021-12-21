@@ -18,6 +18,7 @@ public class apiReqDomain { // <items> 하위 태그
     private String pageNo; // 조회할 페이지 번호
     private String numOfRows; // 한 페이지에 제공할 건수
     private String totalCount; // 토탈 카운트
+    private String stdPrdlstCodeNm;
 
     @JsonProperty("data")
     private List<itemTag> videoItemList; // <item> 하위 태그 리스트
