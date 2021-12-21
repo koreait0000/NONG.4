@@ -10,7 +10,7 @@ function apiTest() {
         .then(res => res.json())
         .then(myJson => {
             testF(myJson);
-            console.log(myJson.data);
+            console.log(myJson);
         })
 }
 function testF(myJson){
@@ -27,11 +27,6 @@ function testF(myJson){
         videoLetterSpan.className = 'videoLetterSpan';
         videoTitleDiv.className = 'videoTitleDiv';
         videoOriginDiv.className = 'videoOriginDiv';
-
-        // // console.log('videoImg length : '+ item.videoImg.length)
-        // console.log('pageNo  : ' + item.pageNo);
-        // console.log('totalCount : ' + item.totalCount)
-
 
         img.src = item.videoImg;
 
@@ -53,6 +48,7 @@ function testF(myJson){
         videoListElem.append(videoListDiv);
 
     })
+
 }
 
 apiTest();

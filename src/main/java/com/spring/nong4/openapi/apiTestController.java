@@ -48,7 +48,7 @@ public class apiTestController {
         apiReqDomain reqDomain = new apiReqDomain();
 
         try {
-            StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/cropEbook/videoList");
+            StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/curationMvp/curationMvpList");
             urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20210713ZU1XHCDLCGWITY5LN99HBW");
             urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("json","UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
@@ -107,12 +107,10 @@ public class apiTestController {
 
                     itemTag.setVideoImg(getTagValue("videoImg",eElement));
                     itemTag.setVideoLink(getTagValue("videoLink",eElement));
-                    itemTag.setVideoOriginInstt(getTagValue("videoOriginInstt",eElement));
-                    itemTag.setVideoTitle(getTagValue("videoTitle",eElement));
+//                    itemTag.setVideoOriginInstt(getTagValue("videoOriginInstt",eElement));
+//                    itemTag.setVideoTitle(getTagValue("videoTitle",eElement));
 
                     videoList.add(itemTag);
-
-                    itemList.add(itemMap);
                 }
             }
 
