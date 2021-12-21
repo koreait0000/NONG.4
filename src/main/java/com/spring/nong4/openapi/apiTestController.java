@@ -1,21 +1,14 @@
 package com.spring.nong4.openapi;
 
 import com.spring.nong4.openapi.model.apiReqDomain;
-import org.apache.commons.collections.ArrayStack;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.web.servlet.ModelAndView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.stream.events.EndElement;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -56,9 +49,6 @@ public class apiTestController {
 
             String reqUrl = "http://api.nongsaro.go.kr/service/curationMvp/curationMvpList";
 
-            System.out.println(reqUrl);
-
-
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -76,14 +66,9 @@ public class apiTestController {
             }
             urlParse = result.toString();
 
-            System.out.println("urlParse : "+urlParse);
-
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document document = dBuilder.parse(new InputSource(new StringReader(urlParse)));
-
-            System.out.println("parse : " +dBuilder.parse(new InputSource(new StringReader(urlParse))));
-
 
             //root tag(<response>)
             document.getDocumentElement().normalize();
@@ -105,10 +90,13 @@ public class apiTestController {
 
                     itemTag = new apiReqDomain.itemTag();
 
+                    itemTag.setMvpCipNo(getTagValue("mvpCipNo",eElement));
+                    itemTag.setMvpClipSj(getTagValue("mvpClipSj",eElement));
+                    itemTag.setMvpNo(getTagValue("mvpNo",eElement));
+                    itemTag.setSj(getTagValue("sj",eElement));
+                    itemTag.setStdPrdlstCodeNm(getTagValue("stdPrdlstCodeNm",eElement));
                     itemTag.setVideoImg(getTagValue("videoImg",eElement));
                     itemTag.setVideoLink(getTagValue("videoLink",eElement));
-//                    itemTag.setVideoOriginInstt(getTagValue("videoOriginInstt",eElement));
-//                    itemTag.setVideoTitle(getTagValue("videoTitle",eElement));
 
                     videoList.add(itemTag);
                 }
@@ -120,8 +108,6 @@ public class apiTestController {
             reqDomain.setNumOfRows(getTagValue("numOfRows",eElement));
             reqDomain.setTotalCount(getTagValue("totalCount",eElement));
             reqDomain.setVideoItemList(videoList);
-
-            System.out.println("reqdomain : " + reqDomain);
 
             rd.close();
             conn.disconnect();
