@@ -45,7 +45,7 @@
                         <div id="videoApi"></div>
                     </c:when>
                     <c:otherwise>
-                        <iframe width="854" height="800" src="${param.videoLink}"></iframe>
+                        <iframe width="854" height="800" src="${param.videoLink}&mvpClipNo=${param.mvpClipNo}"></iframe>
                     </c:otherwise>
                 </c:choose>
             </div>

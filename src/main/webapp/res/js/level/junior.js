@@ -1,6 +1,6 @@
 const videoListElem = document.querySelector('#videoApi');
 
-function apiTest() {
+function apiVideo() {
     fetch('/openapi/apiTest', {
         method: 'GET',
         headers: {
@@ -9,46 +9,57 @@ function apiTest() {
     })
         .then(res => res.json())
         .then(myJson => {
-            testF(myJson);
-            console.log(myJson);
+            makeVideoList(myJson);
         })
 }
-function testF(myJson){
+function makeVideoList(myJson){
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+
+    const headTr = document.createElement('tr');
+    const heading1 = document.createElement('th');
+    const heading2 = document.createElement('th');
+    const heading3 = document.createElement('th');
+    const heading4 = document.createElement('th');
+
+    heading1.append('동영상');
+    heading2.append('품목분류');
+    heading3.append('주제목');
+    heading4.append('짧은 기술동영상 제목');
+
+    headTr.append(heading1, heading2, heading3, heading4);
+
     myJson.data.forEach(function (item){
-        const videoListDiv = document.createElement('div');
-        const videoImgSpan = document.createElement('span');
-        const videoLetterSpan = document.createElement('span')
-        const videoTitleDiv = document.createElement('div');
-        const videoOriginDiv = document.createElement('div');
+        const bodyTr = document.createElement('tr');
+        const videoImgCol = document.createElement('th');
+        const stdPrdlstCodeNmCol = document.createElement('th');
+        const sjCol = document.createElement('th');
+        const mvpClipSjCol = document.createElement('th');
         const img = document.createElement('img');
 
-        videoListDiv.className = 'videoListDiv pointer';
-        videoImgSpan.className = 'videoImgSpan';
-        videoLetterSpan.className = 'videoLetterSpan';
-        videoTitleDiv.className = 'videoTitleDiv';
-        videoOriginDiv.className = 'videoOriginDiv';
+        bodyTr.className = 'bodyTr pointer';
 
         img.src = item.videoImg;
+        videoImgCol.append(img);
+        stdPrdlstCodeNmCol.append(item.stdPrdlstCodeNm);
+        sjCol.append(item.sj);
+        mvpClipSjCol.append(item.mvpClipSj);
+        console.log('link : ' + item.videoLink);
+        bodyTr.append(videoImgCol, stdPrdlstCodeNmCol, sjCol, mvpClipSjCol);
 
-        videoImgSpan.append(img);
-        videoTitleDiv.append(item.videoTitle);
-        videoOriginDiv.append(item.videoOriginInstt);
-
-        videoLetterSpan.append(videoTitleDiv);
-        videoLetterSpan.append(videoOriginDiv);
-
-        videoListDiv.append(videoImgSpan);
-        videoListDiv.append(videoLetterSpan);
-
-
-        videoListDiv.addEventListener('click', () => {
+        bodyTr.addEventListener('click', () => {
             location.href = 'junior?videoLink=' + item.videoLink;
         })
-
-        videoListElem.append(videoListDiv);
-
+        tbody.append(bodyTr);
     })
 
+    thead.append(headTr);
+    table.append(thead, tbody);
+
+    console.log(myJson.totalCount);
+
+    videoListElem.append(table);
 }
 
-apiTest();
+apiVideo();
