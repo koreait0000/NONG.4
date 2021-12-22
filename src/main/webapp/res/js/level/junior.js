@@ -31,6 +31,10 @@ function makeVideoList(myJson){
     const sType = document.createElement('select');
     const sText = document.createElement('input');
 
+    const innerSubmit = document.createElement('div');
+    const submitStrong = document.createElement('strong');
+    const submitA = document.createElement('a');
+
     const innerRoundBottom = document.createElement('div');
     const innerCategory = document.createElement('div');
     const nTitle = document.createElement('strong');
@@ -59,6 +63,15 @@ function makeVideoList(myJson){
     sText.innerText = 'sText';
 
     innerInput.className = 'innerInput';
+
+    innerSubmit.className = 'innerSubmit';
+    submitStrong.className = 'button'
+    submitA.type = 'onclick';
+    submitA.return = 'false';
+    submitA.innerText = '조회';
+    submitA.addEventListener('click', () => {
+        console.log('조회 클릭');
+    })
 
     innerRoundBottom.className = 'innerRound';
 
@@ -132,7 +145,9 @@ function makeVideoList(myJson){
     innerCategory.append(nTitle,mainCategory);
     innerRoundBottom.append(innerCategory);
     innerInput.append(sType,sText);
-    innerRoundTop.append(innerInput);
+    submitStrong.append(submitA);
+    innerSubmit.append(submitStrong);
+    innerRoundTop.append(innerInput,innerSubmit);
     outerRound.append(innerRoundTop,innerRoundBottom);
     communityBoardElem.append(outerRound);
 
