@@ -1,16 +1,38 @@
 const videoListElem = document.querySelector('#videoApi');
 const communityBoardElem = document.querySelector('.community-board');
 
-function apiVideo() {
+function apiVideo(mainCategory) {
+    console.log('mainCategory_apiVideo : ' + mainCategory);
     fetch('/openapi/apiTest', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+        },
+        data : {
+            mainCategory : mainCategory
         }
     })
         .then(res => res.json())
         .then(myJson => {
-            makeVideoList(myJson);
+            makeVideoList(myJson,mainCategory);
+        })
+}
+function category(option, text) {
+    const param = {
+        mainCategory : option,
+        stdPrdlstCodeNm : text
+    }
+    fetch('/openapi/category', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(param)
+    })
+        .then(res => res.json())
+        .then(myJson => {
+            console.log('AJAX TEXT : ' + myJson.text)
+            apiVideo(myJson.mainCategory);
         })
 }
 function makeVideoList(myJson){
@@ -23,6 +45,7 @@ function makeVideoList(myJson){
     const heading2 = document.createElement('th');
     const heading3 = document.createElement('th');
     const heading4 = document.createElement('th');
+    // console.log('CODE : ' + categoryCode);
 
     const outerRound = document.createElement('div');
 
@@ -39,6 +62,8 @@ function makeVideoList(myJson){
     const innerCategory = document.createElement('div');
     const nTitle = document.createElement('strong');
     const mainCategory = document.createElement('select');
+
+    // console.log('categoryCode : ' + categoryCode)
 
     outerRound.className = 'outerRound';
 
@@ -70,7 +95,10 @@ function makeVideoList(myJson){
     submitA.return = 'false';
     submitA.innerText = '조회';
     submitA.addEventListener('click', () => {
-        console.log('조회 클릭');
+        console.log('submit Click : ' + mainCategory.value);
+        let mainCategoryText = mainCategory.options[mainCategory.selectedIndex].text;
+        console.log('TEXT : ' + mainCategoryText)
+        category(mainCategory.value, mainCategoryText);
     })
 
     innerRoundBottom.className = 'innerRound';
@@ -159,13 +187,14 @@ function makeVideoList(myJson){
 
     headTr.append(heading1, heading2, heading3, heading4);
 
-    myJson.data.forEach(function (item){
+    myJson.data.forEach(function (item,mainCategory){
         const bodyTr = document.createElement('tr');
         const videoImgCol = document.createElement('th');
         const stdPrdlstCodeNmCol = document.createElement('th');
         const sjCol = document.createElement('th');
         const mvpClipSjCol = document.createElement('th');
         const img = document.createElement('img');
+        console.log('mainCategory_foreach : ' + mainCategory)
 
         bodyTr.className = 'bodyTr pointer';
 

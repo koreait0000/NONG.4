@@ -22,6 +22,8 @@ public class apiReqDomain { // <items> 하위 태그
     @JsonProperty("data")
     private List<itemTag> videoItemList; // <item> 하위 태그 리스트
 
+    private List<apiReqDomain> apiReqDomains;
+
     @Data
     public static class itemTag { // <itmes>의 하위 태그인 <item>의 하위 태그
         private String mvpCipNo;  // 동영상 클립 번호
