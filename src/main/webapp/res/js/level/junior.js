@@ -1,8 +1,9 @@
 const videoListElem = document.querySelector('#videoApi');
 const communityBoardElem = document.querySelector('.community-board');
 
-function apiVideo(mainCategory) {
+function apiVideo(mainCategory, stdPrdlstCodeNm) {
     console.log('mainCategory_apiVideo : ' + mainCategory);
+    console.log('stdPrdlstCodeNm_apiVideo : ' + stdPrdlstCodeNm);
     fetch('/openapi/apiTest', {
         method: 'GET',
         headers: {
@@ -14,7 +15,9 @@ function apiVideo(mainCategory) {
     })
         .then(res => res.json())
         .then(myJson => {
-            makeVideoList(myJson,mainCategory);
+            console.log('mainCategory_apiVideo_ajax: '+mainCategory)
+            console.log('stdPrdlstCodeNm_apiVideo_ajax: '+stdPrdlstCodeNm)
+            makeVideoList(myJson, mainCategory, stdPrdlstCodeNm);
         })
 }
 function category(option, text) {
@@ -31,11 +34,12 @@ function category(option, text) {
     })
         .then(res => res.json())
         .then(myJson => {
-            console.log('AJAX TEXT : ' + myJson.text)
-            apiVideo(myJson.mainCategory);
+            let stdPrdlstCodeNm = myJson.data[0].stdPrdlstCodeNm;
+            let mainCategory = myJson.mainCategory;
+            apiVideo(mainCategory, stdPrdlstCodeNm);
         })
 }
-function makeVideoList(myJson){
+function makeVideoList(myJson, mainCategory, stdPrdlstCodeNm){
     const table = document.createElement('table');
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
@@ -45,7 +49,6 @@ function makeVideoList(myJson){
     const heading2 = document.createElement('th');
     const heading3 = document.createElement('th');
     const heading4 = document.createElement('th');
-    // console.log('CODE : ' + categoryCode);
 
     const outerRound = document.createElement('div');
 
@@ -61,7 +64,7 @@ function makeVideoList(myJson){
     const innerRoundBottom = document.createElement('div');
     const innerCategory = document.createElement('div');
     const nTitle = document.createElement('strong');
-    const mainCategory = document.createElement('select');
+    const mainCategorySelect = document.createElement('select');
 
     // console.log('categoryCode : ' + categoryCode)
 
@@ -95,10 +98,11 @@ function makeVideoList(myJson){
     submitA.return = 'false';
     submitA.innerText = '조회';
     submitA.addEventListener('click', () => {
-        console.log('submit Click : ' + mainCategory.value);
-        let mainCategoryText = mainCategory.options[mainCategory.selectedIndex].text;
+        console.log('submit Click : ' + mainCategorySelect.value);
+        let mainCategoryText = mainCategorySelect.options[mainCategorySelect.selectedIndex].text;
         console.log('TEXT : ' + mainCategoryText)
-        category(mainCategory.value, mainCategoryText);
+        console.log('mainCategorySelect.value : ' + mainCategorySelect.value);
+        category(mainCategorySelect.value, mainCategoryText);
     })
 
     innerRoundBottom.className = 'innerRound';
@@ -126,8 +130,8 @@ function makeVideoList(myJson){
     const optionAs = document.createElement('option'); // 농업재해예방
     const optionCa = document.createElement('option'); // 도시농업
     const optionBt = document.createElement('option'); // 생명공학
-    mainCategory.className = 'mainCategory';
-    mainCategory.id = 'mainCategory';
+    mainCategorySelect.className = 'mainCategory';
+    mainCategorySelect.id = 'mainCategory';
     optionFc.value = 'FC';
     optionIc.value = 'IC';
     optionVc.value = 'VC';
@@ -166,11 +170,11 @@ function makeVideoList(myJson){
     optionCa.text = '도시농업';
     optionBt.text = '생명공학';
 
-    mainCategory.append(optionDefault, optionFc, optionIc, optionVc, optionFt, optionFl, optionLp, optionIn, optionAe, optionRe, optionEe, optionSf, optionCs, optionMi, optionFr, optionAs, optionCa, optionBt);
+    mainCategorySelect.append(optionDefault, optionFc, optionIc, optionVc, optionFt, optionFl, optionLp, optionIn, optionAe, optionRe, optionEe, optionSf, optionCs, optionMi, optionFr, optionAs, optionCa, optionBt);
 
     sType.append(optionsSj,optionsMvpClipSj);
 
-    innerCategory.append(nTitle,mainCategory);
+    innerCategory.append(nTitle,mainCategorySelect);
     innerRoundBottom.append(innerCategory);
     innerInput.append(sType,sText);
     submitStrong.append(submitA);
@@ -187,6 +191,10 @@ function makeVideoList(myJson){
 
     headTr.append(heading1, heading2, heading3, heading4);
 
+    console.log('data_stdPrdlstCodeNm : ' + myJson.data[0].stdPrdlstCodeNm)
+    console.log('data_totalCount : ' + myJson.totalCount);
+    console.log('JUST_stdPrdlstCodeNm : ' + stdPrdlstCodeNm)
+
     myJson.data.forEach(function (item,mainCategory){
         const bodyTr = document.createElement('tr');
         const videoImgCol = document.createElement('th');
@@ -194,7 +202,7 @@ function makeVideoList(myJson){
         const sjCol = document.createElement('th');
         const mvpClipSjCol = document.createElement('th');
         const img = document.createElement('img');
-        console.log('mainCategory_foreach : ' + mainCategory)
+        console.log('item : ' + item.stdPrdlstCodeNm);
 
         bodyTr.className = 'bodyTr pointer';
 
