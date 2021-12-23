@@ -2,9 +2,6 @@ package com.spring.nong4.openapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import java.util.List;
 
@@ -28,7 +25,6 @@ public class apiReqDomain { // <items> 하위 태그
         private String mvpClipSj; // 동영상 클립 제목
         private String mvpNo;     // 동영상 번호
         private String sj;        // (주)제목
-        @JsonProperty("stdPrdlstCodeNm")
         private String stdPrdlstCodeNm; // 품목분류
         private String videoImg;  // 동영상 이미지
         private String videoLink; // 동영상 링크

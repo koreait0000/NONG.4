@@ -1,7 +1,6 @@
 const videoListElem = document.querySelector('#videoApi');
 const communityBoardElem = document.querySelector('.community-board');
 
-
 function apiVideo() {
     fetch('/openapi/apiTest', {
         method: 'GET',
@@ -14,9 +13,12 @@ function apiVideo() {
             makeVideoList(myJson);
         })
 }
-function category(option) {
+
+function category(mainCategory, sType, sText) {
     const param = {
-        mainCategory : option
+        mainCategory : mainCategory,
+        sType : sType,
+        sText : sText
     }
     fetch('/openapi/category', {
         method: 'POST',
@@ -27,6 +29,7 @@ function category(option) {
     })
         .then(res => res.json())
         .then(myJson => {
+            console.log('myJson : ' + myJson);
             makeVideoList(myJson);
         })
 }
@@ -91,7 +94,7 @@ function makeVideoList(myJson){
     submitA.return = 'false';
     submitA.innerText = '조회';
     submitA.addEventListener('click', () => {
-        category(mainCategory.value);
+        category(mainCategory.value, sType.value, sText.value);
     })
 
     innerRoundBottom.className = 'innerRound';
@@ -121,6 +124,7 @@ function makeVideoList(myJson){
     const optionBt = document.createElement('option'); // 생명공학
     mainCategorySelect.className = 'mainCategory';
     mainCategorySelect.id = 'mainCategory';
+    optionDefault.value = 'DF';
     optionFc.value = 'FC';
     optionIc.value = 'IC';
     optionVc.value = 'VC';
