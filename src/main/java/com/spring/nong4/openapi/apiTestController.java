@@ -118,7 +118,6 @@ public class apiTestController {
     public apiReqDomain category (//@RequestBody apiReqDomain reqDomain,
                                   @RequestBody Map<String, Object> param) {
         apiReqDomain reqDomain = new apiReqDomain();
-
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         reqDomain = new apiReqDomain();
@@ -147,6 +146,7 @@ public class apiTestController {
                 result.append(line + "\n");
             }
             urlParse = result.toString();
+
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -195,7 +195,6 @@ public class apiTestController {
         catch (Exception e) {
             e.printStackTrace();
         }
-
         return reqDomain;
     }
 }

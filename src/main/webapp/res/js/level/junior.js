@@ -1,6 +1,7 @@
 const videoListElem = document.querySelector('#videoApi');
 const communityBoardElem = document.querySelector('.community-board');
 
+
 function apiVideo() {
     fetch('/openapi/apiTest', {
         method: 'GET',
@@ -56,7 +57,7 @@ function makeVideoList(myJson){
     const innerRoundBottom = document.createElement('div');
     const innerCategory = document.createElement('div');
     const nTitle = document.createElement('strong');
-    const mainCategory = document.createElement('select');
+    const mainCategorySelect = document.createElement('select');
 
     // console.log('categoryCode : ' + categoryCode)
 
@@ -118,8 +119,8 @@ function makeVideoList(myJson){
     const optionAs = document.createElement('option'); // 농업재해예방
     const optionCa = document.createElement('option'); // 도시농업
     const optionBt = document.createElement('option'); // 생명공학
-    mainCategory.className = 'mainCategory';
-    mainCategory.id = 'mainCategory';
+    mainCategorySelect.className = 'mainCategory';
+    mainCategorySelect.id = 'mainCategory';
     optionFc.value = 'FC';
     optionIc.value = 'IC';
     optionVc.value = 'VC';
@@ -158,11 +159,11 @@ function makeVideoList(myJson){
     optionCa.text = '도시농업';
     optionBt.text = '생명공학';
 
-    mainCategory.append(optionDefault, optionFc, optionIc, optionVc, optionFt, optionFl, optionLp, optionIn, optionAe, optionRe, optionEe, optionSf, optionCs, optionMi, optionFr, optionAs, optionCa, optionBt);
+    mainCategorySelect.append(optionDefault, optionFc, optionIc, optionVc, optionFt, optionFl, optionLp, optionIn, optionAe, optionRe, optionEe, optionSf, optionCs, optionMi, optionFr, optionAs, optionCa, optionBt);
 
     sType.append(optionsSj,optionsMvpClipSj);
 
-    innerCategory.append(nTitle,mainCategory);
+    innerCategory.append(nTitle,mainCategorySelect);
     innerRoundBottom.append(innerCategory);
     innerInput.append(sType,sText);
     submitStrong.append(submitA);
@@ -175,7 +176,6 @@ function makeVideoList(myJson){
     heading2.append('품목분류');
     heading3.append('주제목');
     heading4.append('짧은 기술동영상 제목');
-
 
     headTr.append(heading1, heading2, heading3, heading4);
 
