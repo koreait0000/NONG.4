@@ -29,7 +29,7 @@ function category(mainCategory, sType, sText) {
     })
         .then(res => res.json())
         .then(myJson => {
-            console.log('myJson : ' + myJson);
+            console.log('myJsonSJ : ' + myJson.sj);
             makeVideoList(myJson);
         })
 }
@@ -95,6 +95,9 @@ function makeVideoList(myJson){
     submitA.innerText = '조회';
     submitA.addEventListener('click', () => {
         category(mainCategory.value, sType.value, sText.value);
+        let temp = 'sText.contains("' + sText.value + '")';
+        console.log('search : ' + sText.value.search(sText.value)); // 검색 구현중
+        console.log('temp : '+temp)
     })
 
     innerRoundBottom.className = 'innerRound';

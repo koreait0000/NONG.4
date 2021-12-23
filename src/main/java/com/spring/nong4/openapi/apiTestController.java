@@ -115,13 +115,13 @@ public class apiTestController {
     }
     @ResponseBody
     @PostMapping("/category")
-    public apiReqDomain category (@RequestBody Map<String, Object> param2) {
+    public apiReqDomain category (@RequestBody Map<String, Object> ajaxValue) {
         apiReqDomain reqDomain = new apiReqDomain();
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         String DEFAULT_CODE = "DF";
         apiReqDomain param = new apiReqDomain();
-        System.out.println("param2 : " + param2);
+        System.out.println("ajaxValue : " + ajaxValue);
 
 //        System.out.println("항목 : " + param2.getMainCategory());
 //        System.out.println("타입 : " + param2.getSType());
@@ -130,15 +130,15 @@ public class apiTestController {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/curationMvp/curationMvpList");
             urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20210713ZU1XHCDLCGWITY5LN99HBW");
             urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("json","UTF-8"));
-            if(!param.getMainCategory().equals(DEFAULT_CODE)) {
-                urlBuilder.append("&" + URLEncoder.encode("mainCategory", "UTF-8") + "=" + URLEncoder.encode(param.getMainCategory(), "UTF-8"));
+            if(!ajaxValue.get("mainCategory").toString().equals(DEFAULT_CODE)) {
+                urlBuilder.append("&" + URLEncoder.encode("mainCategory", "UTF-8") + "=" + URLEncoder.encode(ajaxValue.get("mainCategory").toString(), "UTF-8"));
             }
-//            if("".equals(param.getSType())){
-//                urlBuilder.append("&" + URLEncoder.encode("sType", "UTF-8") + "=" + URLEncoder.encode(param.getSType(), "UTF-8"));
-//            }
-//            if("".equals(param.getSText())){
-//                urlBuilder.append("&" + URLEncoder.encode("sText", "UTF-8") + "=" + URLEncoder.encode(param.getSType(), "UTF-8"));
-//            }
+            if("".equals(ajaxValue.get("sType").toString())){
+                urlBuilder.append("&" + URLEncoder.encode("sType", "UTF-8") + "=" + URLEncoder.encode(param.getSType(), "UTF-8"));
+            }
+            if("".equals(ajaxValue.get("sText").toString())){
+                urlBuilder.append("&" + URLEncoder.encode("sText", "UTF-8") + "=" + URLEncoder.encode(param.getSType(), "UTF-8"));
+            }
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
 
@@ -199,7 +199,12 @@ public class apiTestController {
             reqDomain.setPageNo(getTagValue("pageNo",eElement));
             reqDomain.setNumOfRows(getTagValue("numOfRows",eElement));
             reqDomain.setTotalCount(getTagValue("totalCount",eElement));
+            reqDomain.setSType(ajaxValue.get("sType").toString());
+            reqDomain.setSText(ajaxValue.get("sText").toString());
+            reqDomain.setMainCategory(ajaxValue.get("mainCategory").toString());
             reqDomain.setVideoItemList(videoList);
+
+            System.out.println("reqDomain : " + reqDomain);
 
             rd.close();
             conn.disconnect();
