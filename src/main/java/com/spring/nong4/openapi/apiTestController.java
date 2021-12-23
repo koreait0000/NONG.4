@@ -2,7 +2,6 @@ package com.spring.nong4.openapi;
 
 import com.spring.nong4.openapi.model.apiReqDomain;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.Controller;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,7 +16,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,13 +38,11 @@ public class apiTestController {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         apiReqDomain reqDomain = new apiReqDomain();
-        System.out.println("Code : " + reqDomain.getMainCategory());
-//        reqDomain.setMainCategory();
+
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/curationMvp/curationMvpList");
             urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20210713ZU1XHCDLCGWITY5LN99HBW");
             urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("json","UTF-8"));
-
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
 
@@ -108,8 +104,6 @@ public class apiTestController {
             reqDomain.setTotalCount(getTagValue("totalCount",eElement));
             reqDomain.setVideoItemList(videoList);
 
-            System.out.println("reqDomain : "+reqDomain);
-
             rd.close();
             conn.disconnect();
         }
@@ -124,11 +118,6 @@ public class apiTestController {
     public apiReqDomain category (//@RequestBody apiReqDomain reqDomain,
                                   @RequestBody Map<String, Object> param) {
         apiReqDomain reqDomain = new apiReqDomain();
-
-        System.out.println("Category : " +reqDomain.getMainCategory());
-        System.out.println("param : "+param);
-        System.out.println("TEXT : " + param.get("stdPrdlstCodeNm")); // select text값
-
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         reqDomain = new apiReqDomain();
@@ -168,21 +157,37 @@ public class apiTestController {
 
             // node tag name
             NodeList nList = document.getElementsByTagName("item");
+            NodeList itemsList = document.getElementsByTagName("items");
 
             List<apiReqDomain.itemTag> videoList = new ArrayList<>();
-            apiReqDomain.itemTag itemTag = new apiReqDomain.itemTag();
+            apiReqDomain.itemTag itemTag;
 
-            Node nNode = nList.item(0);
+            for(int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
 
-            if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+                if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
 
-                reqDomain.setMainCategory(param.get("mainCategory").toString());
-                itemTag.setStdPrdlstCodeNm(param.get("stdPrdlstCodeNm").toString());
-                videoList.add(itemTag);
-                reqDomain.setVideoItemList(videoList);
+                    itemTag = new apiReqDomain.itemTag();
 
-                System.out.println("품목분류 : " +itemTag.getStdPrdlstCodeNm());
+                    itemTag.setMvpCipNo(getTagValue("mvpCipNo",eElement));
+                    itemTag.setMvpClipSj(getTagValue("mvpClipSj",eElement));
+                    itemTag.setMvpNo(getTagValue("mvpNo",eElement));
+                    itemTag.setSj(getTagValue("sj",eElement));
+                    itemTag.setStdPrdlstCodeNm(getTagValue("stdPrdlstCodeNm",eElement));
+                    itemTag.setVideoImg(getTagValue("videoImg",eElement));
+                    itemTag.setVideoLink(getTagValue("videoLink",eElement));
+
+                    videoList.add(itemTag);
+                }
             }
+
+            Node nNode = itemsList.item(0);
+            Element eElement = (Element) nNode;
+            reqDomain.setPageNo(getTagValue("pageNo",eElement));
+            reqDomain.setNumOfRows(getTagValue("numOfRows",eElement));
+            reqDomain.setTotalCount(getTagValue("totalCount",eElement));
+            reqDomain.setVideoItemList(videoList);
 
             rd.close();
             conn.disconnect();
@@ -190,9 +195,6 @@ public class apiTestController {
         catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("MainCategory : " + reqDomain.getMainCategory());
-        System.out.println("domain : " + reqDomain);
         return reqDomain;
     }
 }
