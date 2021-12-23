@@ -1,26 +1,21 @@
 const videoListElem = document.querySelector('#videoApi');
 const communityBoardElem = document.querySelector('.community-board');
 
-function apiVideo(mainCategory) {
-    console.log('mainCategory_apiVideo : ' + mainCategory);
+function apiVideo() {
     fetch('/openapi/apiTest', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-        },
-        data : {
-            mainCategory : mainCategory
         }
     })
         .then(res => res.json())
         .then(myJson => {
-            makeVideoList(myJson,mainCategory);
+            makeVideoList(myJson);
         })
 }
-function category(option, text) {
+function category(option) {
     const param = {
-        mainCategory : option,
-        stdPrdlstCodeNm : text
+        mainCategory : option
     }
     fetch('/openapi/category', {
         method: 'POST',
@@ -31,11 +26,12 @@ function category(option, text) {
     })
         .then(res => res.json())
         .then(myJson => {
-            console.log('AJAX TEXT : ' + myJson.text)
-            apiVideo(myJson.mainCategory);
+            makeVideoList(myJson);
         })
 }
 function makeVideoList(myJson){
+    videoListElem.innerHTML = '';
+    communityBoardElem.innerHTML = '';
     const table = document.createElement('table');
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
@@ -45,7 +41,6 @@ function makeVideoList(myJson){
     const heading2 = document.createElement('th');
     const heading3 = document.createElement('th');
     const heading4 = document.createElement('th');
-    // console.log('CODE : ' + categoryCode);
 
     const outerRound = document.createElement('div');
 
@@ -95,10 +90,7 @@ function makeVideoList(myJson){
     submitA.return = 'false';
     submitA.innerText = '조회';
     submitA.addEventListener('click', () => {
-        console.log('submit Click : ' + mainCategory.value);
-        let mainCategoryText = mainCategory.options[mainCategory.selectedIndex].text;
-        console.log('TEXT : ' + mainCategoryText)
-        category(mainCategory.value, mainCategoryText);
+        category(mainCategory.value);
     })
 
     innerRoundBottom.className = 'innerRound';
@@ -187,14 +179,13 @@ function makeVideoList(myJson){
 
     headTr.append(heading1, heading2, heading3, heading4);
 
-    myJson.data.forEach(function (item,mainCategory){
+    myJson.data.forEach(function (item){
         const bodyTr = document.createElement('tr');
         const videoImgCol = document.createElement('th');
         const stdPrdlstCodeNmCol = document.createElement('th');
         const sjCol = document.createElement('th');
         const mvpClipSjCol = document.createElement('th');
         const img = document.createElement('img');
-        console.log('mainCategory_foreach : ' + mainCategory)
 
         bodyTr.className = 'bodyTr pointer';
 
@@ -203,7 +194,6 @@ function makeVideoList(myJson){
         stdPrdlstCodeNmCol.append(item.stdPrdlstCodeNm);
         sjCol.append(item.sj);
         mvpClipSjCol.append(item.mvpClipSj);
-        console.log('link : ' + item.videoLink);
         bodyTr.append(videoImgCol, stdPrdlstCodeNmCol, sjCol, mvpClipSjCol);
 
         bodyTr.addEventListener('click', () => {
@@ -214,8 +204,6 @@ function makeVideoList(myJson){
 
     thead.append(headTr);
     table.append(thead, tbody);
-
-    console.log(myJson.totalCount);
 
     videoListElem.append(table);
     communityBoardElem.after(videoListElem);
