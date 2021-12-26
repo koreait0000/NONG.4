@@ -2,11 +2,14 @@ package com.spring.nong4.openapi;
 
 import com.spring.nong4.openapi.model.apiReqDomain;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.Controller;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import sun.invoke.empty.Empty;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
@@ -33,7 +36,7 @@ public class apiTestController {
 
     @ResponseBody
     @GetMapping("/apiTest")
-    public apiReqDomain callApiHttp()
+    public static apiReqDomain callApiHttp()
     {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
@@ -44,7 +47,7 @@ public class apiTestController {
             urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20210713ZU1XHCDLCGWITY5LN99HBW");
             urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("json","UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("20","UTF-8"));
 
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -121,11 +124,19 @@ public class apiTestController {
         String urlParse = "";
         String DEFAULT_CODE = "DF";
         apiReqDomain param = new apiReqDomain();
+        apiReqDomain.itemTag itemTag = new apiReqDomain.itemTag();
+//        System.out.println("getVideoItemList_getList : " + apiTestController.callApiHttp().getVideoItemList().get(0).getSj().contains(ajaxValue.get("sText").toString()));
         System.out.println("ajaxValue : " + ajaxValue);
+        System.out.println("SJ : " + itemTag.getSj());
+        System.out.println("size : " + apiTestController.callApiHttp().getVideoItemList().size());
+        int listSize = apiTestController.callApiHttp().getVideoItemList().size();
 
-//        System.out.println("항목 : " + param2.getMainCategory());
-//        System.out.println("타입 : " + param2.getSType());
-//        System.out.println("내용 : " + param2.getSText());
+//        for(int i = 0; i < listSize; i++) {
+//            if(apiTestController.callApiHttp().getVideoItemList().get(i).getSj().contains(ajaxValue.get("sText").toString())) {
+//                System.out.println(i+1 + "번째 " + apiTestController.callApiHttp().getVideoItemList().get(i).getSj() + "\n");
+//            }
+//        }
+
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/curationMvp/curationMvpList");
             urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20210713ZU1XHCDLCGWITY5LN99HBW");
@@ -133,11 +144,9 @@ public class apiTestController {
             if(!ajaxValue.get("mainCategory").toString().equals(DEFAULT_CODE)) {
                 urlBuilder.append("&" + URLEncoder.encode("mainCategory", "UTF-8") + "=" + URLEncoder.encode(ajaxValue.get("mainCategory").toString(), "UTF-8"));
             }
-            if("".equals(ajaxValue.get("sType").toString())){
-                urlBuilder.append("&" + URLEncoder.encode("sType", "UTF-8") + "=" + URLEncoder.encode(param.getSType(), "UTF-8"));
-            }
-            if("".equals(ajaxValue.get("sText").toString())){
-                urlBuilder.append("&" + URLEncoder.encode("sText", "UTF-8") + "=" + URLEncoder.encode(param.getSType(), "UTF-8"));
+                urlBuilder.append("&" + URLEncoder.encode("sType", "UTF-8") + "=" + URLEncoder.encode(ajaxValue.get("sType").toString(), "UTF-8"));
+            if((!ajaxValue.get("sText").toString().isEmpty())){
+                urlBuilder.append("&" + URLEncoder.encode("sText", "UTF-8") + "=" + URLEncoder.encode(ajaxValue.get("sText").toString(), "UTF-8"));
             }
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
@@ -159,6 +168,7 @@ public class apiTestController {
             }
             urlParse = result.toString();
 
+            System.out.println("urlParse : " +urlParse);
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -172,7 +182,6 @@ public class apiTestController {
             NodeList itemsList = document.getElementsByTagName("items");
 
             List<apiReqDomain.itemTag> videoList = new ArrayList<>();
-            apiReqDomain.itemTag itemTag;
 
             for(int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);

@@ -81,6 +81,7 @@ function makeVideoList(myJson){
     optionsMvpClipSj.value = 'sMvpClipSj';
     optionsMvpClipSj.innerText = '짧은 기술동영상 제목';
 
+    const regExp = /^[가-힣|a-z|A-Z|0-9|\s]*$/; // 한글,영문,숫자만 입력가능
     sText.className = 'sText';
     sText.id = 'sText';
     sText.type = 'text';
@@ -94,10 +95,20 @@ function makeVideoList(myJson){
     submitA.return = 'false';
     submitA.innerText = '조회';
     submitA.addEventListener('click', () => {
+        console.log(sText.value.length)
+        if(sText.value === ' ') {
+            alert('첫 글자는 공백을 사용할 수 없습니다.');
+            sText.focus();
+            sText.value = sText.value.replace(' ',''); // 공백 제거
+            return false;
+        }
+        if(!regExp.test(sText.value) || sText.value !== '' && sText.value.length < 2) {
+            alert('한영 및 숫자만 혹은 2글자 이상만 입력이 가능합니다');
+            sText.focus();
+            return false;
+        }
+        console.log('sText : ' + sText.value)
         category(mainCategory.value, sType.value, sText.value);
-        let temp = 'sText.contains("' + sText.value + '")';
-        console.log('search : ' + sText.value.search(sText.value)); // 검색 구현중
-        console.log('temp : '+temp)
     })
 
     innerRoundBottom.className = 'innerRound';
