@@ -79,7 +79,6 @@ public class BoardController {
     @GetMapping("/mainBoard")
     public String mainBoardList(BoardDomain param, SearchCriteria scri, Model model ) {
         model.addAllAttributes(service.mainBoardList(param,scri));
-        System.out.println("service : " + service.mainBoardList(param,scri));
         return "board/mainBoard";
     }
 

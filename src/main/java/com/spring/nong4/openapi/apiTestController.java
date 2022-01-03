@@ -11,7 +11,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import sun.invoke.empty.Empty;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -133,12 +132,8 @@ public class apiTestController {
 
     @GetMapping("/junior")
     public String category (apiReqDomain reqDomain, Model model, SearchCriteria scri) {
-//        System.out.println("ajaxValue : " + ajaxValue);
-//        apiReqDomain reqDomain = new apiReqDomain();
-        System.out.println("reqDomain!! : " + reqDomain);
         StringBuffer result = new StringBuffer();
         String urlParse = "";
-        String DEFAULT_CODE = "DF";
         apiReqDomain param = new apiReqDomain();
         apiReqDomain.itemTag itemTag = new apiReqDomain.itemTag();
 
@@ -146,13 +141,15 @@ public class apiTestController {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/curationMvp/curationMvpList");
             urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20210713ZU1XHCDLCGWITY5LN99HBW");
             urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("json","UTF-8"));
-//            if(!reqDomain.getMainCategory().equals(DEFAULT_CODE)) {
-//                urlBuilder.append("&" + URLEncoder.encode("mainCategory", "UTF-8") + "=" + URLEncoder.encode(reqDomain.getMainCategory(), "UTF-8"));
-//            }
-//                urlBuilder.append("&" + URLEncoder.encode("sType", "UTF-8") + "=" + URLEncoder.encode(reqDomain.getSType(), "UTF-8"));
-//            if((!reqDomain.getSText().isEmpty())){
-//                urlBuilder.append("&" + URLEncoder.encode("sText", "UTF-8") + "=" + URLEncoder.encode(reqDomain.getSText(), "UTF-8"));
-//            }
+            if(reqDomain.getMainCategory() != null) {
+                urlBuilder.append("&" + URLEncoder.encode("mainCategory", "UTF-8") + "=" + URLEncoder.encode(reqDomain.getMainCategory(), "UTF-8"));
+            }
+            if(reqDomain.getSType() != null) {
+                urlBuilder.append("&" + URLEncoder.encode("sType", "UTF-8") + "=" + URLEncoder.encode(reqDomain.getSType(), "UTF-8"));
+            }
+            if(reqDomain.getSText() != null){
+                urlBuilder.append("&" + URLEncoder.encode("sText", "UTF-8") + "=" + URLEncoder.encode(reqDomain.getSText(), "UTF-8"));
+            }
 //            if((!ajaxValue.get("pageNo").toString().isEmpty())) {
 //                urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(ajaxValue.get("pageNo").toString(), "UTF-8"));
 //            } else
@@ -177,8 +174,6 @@ public class apiTestController {
                 result.append(line + "\n");
             }
             urlParse = result.toString();
-
-            System.out.println("urlParse : " +urlParse);
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -225,7 +220,7 @@ public class apiTestController {
             reqDomain.setVideoItemList(videoList);
 
             PageMaker pageMaker = new PageMaker();
-            pageMaker.setCri(scri);
+//            pageMaker.setCri(scri);
 //            pageMaker.setTotalCount(reqDomain.getTotalCount().toString());
 
             Map<String, Object> map = new HashMap<>();
