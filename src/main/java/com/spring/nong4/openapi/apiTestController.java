@@ -1,8 +1,9 @@
 package com.spring.nong4.openapi;
 
 import com.spring.nong4.openapi.model.apiReqDomain;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.Controller;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -19,11 +20,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/openapi")
+@Controller
+@RequestMapping("/level")
 public class apiTestController {
 
     private static String getTagValue(String tag, Element eElement) {
@@ -34,9 +36,8 @@ public class apiTestController {
         return nValue.getNodeValue();
     }
 
-    @ResponseBody
-    @GetMapping("/apiTest")
-    public apiReqDomain callApiHttp(apiReqDomain reqDomain)
+    @GetMapping("/junior")
+    public String callApiHttp(apiReqDomain reqDomain, Model model)
     {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
@@ -113,6 +114,11 @@ public class apiTestController {
 
             reqDomain.setVideoItemList(videoList);
 
+            Map<String, Object> map = new HashMap<>();
+            map.put("reqDomain", reqDomain);
+            model.addAllAttributes(map);
+            System.out.println("reqDomain : " + reqDomain);
+
             rd.close();
             conn.disconnect();
         }
@@ -120,7 +126,7 @@ public class apiTestController {
             e.printStackTrace();
         }
 
-        return reqDomain;
+        return "level/junior";
     }
     @ResponseBody
     @PostMapping("/category")

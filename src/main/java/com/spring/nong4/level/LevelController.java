@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/level")
 public class LevelController {
 
-    @GetMapping("/junior")
-    public String junior() {
-        return "level/junior";
-    }
+//    @GetMapping("/junior")
+//    public String junior() {
+//        return "level/junior";
+//    }
     @GetMapping("/intermediate")
     public String intermediate() {
         return "level/intermediate";
