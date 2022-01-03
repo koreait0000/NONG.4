@@ -1,8 +1,25 @@
 const videoListElem = document.querySelector('#videoApi');
 const communityBoardElem = document.querySelector('.community-board');
+const communityElem = document.querySelector('.community');
 
-function apiVideo() {
-    fetch('/openapi/apiTest', {
+console.log('첫번째 getItem :  : ' + sessionStorage.getItem('sText'))
+
+// let mainCategoryS = '';
+// let sTypeS = 'sSj';
+// let sTextS = sessionStorage.getItem('sText');
+// let sTextS = '';
+// let currentPageS = 1;
+
+// let sText = 'TEST';
+
+function locationValid(sTypeS, sTextS) {
+    if(sTypeS != '') {
+        location.href = 'junior?sType=' + sTypeS + '&sText=' + sTextS;
+    }
+}
+
+function apiVideo(sType, sText) {
+    fetch('/openapi/apiTest?sType=' + sType + '&sText=' + sText, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -10,15 +27,20 @@ function apiVideo() {
     })
         .then(res => res.json())
         .then(myJson => {
+            // myJson.sText = sTextS;
+            console.log('myJson.sText : ' + myJson.sText)
+            // location.href = 'junior?sType=' + sType + '&sText=' + sText;
             makeVideoList(myJson);
         })
 }
 
-function category(mainCategory, sType, sText) {
+function category(mainCategory, sType, sText, currentPage) {
+    console.log('currentPage ::::: ' + currentPage)
     const param = {
         mainCategory : mainCategory,
         sType : sType,
-        sText : sText
+        sText : sText,
+        pageNo : currentPage
     }
     fetch('/openapi/category', {
         method: 'POST',
@@ -29,13 +51,17 @@ function category(mainCategory, sType, sText) {
     })
         .then(res => res.json())
         .then(myJson => {
-            console.log('myJsonSJ : ' + myJson.sj);
+            myJson.sText = sessionStorage.getItem('sText');
+            console.log('length : ' + sessionStorage.length)
+            console.log('myJsonPageNo : ' + myJson.pageNo);
             makeVideoList(myJson);
         })
 }
 function makeVideoList(myJson){
+    console.log('makeVideoList_Text : ' +myJson.sText)
     videoListElem.innerHTML = '';
     communityBoardElem.innerHTML = '';
+
     const table = document.createElement('table');
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
@@ -96,6 +122,7 @@ function makeVideoList(myJson){
     submitA.innerText = '조회';
     submitA.addEventListener('click', () => {
         console.log(sText.value.length)
+        console.log('clickPageNo : ' + myJson.pageNo)
         if(sText.value === ' ') {
             alert('첫 글자는 공백을 사용할 수 없습니다.');
             sText.focus();
@@ -108,7 +135,21 @@ function makeVideoList(myJson){
             return false;
         }
         console.log('sText : ' + sText.value)
-        category(mainCategory.value, sType.value, sText.value);
+        sessionStorage.setItem('sText', sText.value);
+        console.log('getItem_after : ' + sessionStorage.getItem('sText'));
+        mainCategoryS = mainCategory.value;
+        let sTextS = '';
+        let sTypeS = '';
+        sTextS = sText.value;
+
+        sTypeS = sType.value;
+
+        locationValid(sTypeS, sTextS);
+        // location.href = 'junior?sType=' + sTypeS + '&sText=' + sTextS;
+
+        // apiVideo(sTypeS, sTextS);
+
+        // category(mainCategoryS, sTypeS, sTextS, currentPageS);
     })
 
     innerRoundBottom.className = 'innerRound';
@@ -223,8 +264,115 @@ function makeVideoList(myJson){
     thead.append(headTr);
     table.append(thead, tbody);
 
-    videoListElem.append(table);
+    const pageMakerDiv = document.createElement('div');
+    pageMakerDiv.className = 'pageMaker';
+    const pageNum = document.createElement('a');
+    const prevBtn = document.createElement('button');
+    const nextBtn = document.createElement('button');
+
+    let totalData = myJson.totalCount; // 총 데이터 수
+    let dataPerPage = myJson.numOfRows; // 한 페이지에 나타낼 글 수
+    let pageCount = 10; // 페이징에 나타낼 페이지 수
+    let globalCurrentPage = 1; // 현재 페이지
+
+    // 글 목록 표시 호출(테이블 생성)
+    // dispalyData(1, dataPerPage);
+
+    // 페이징 표시 호출
+    pageMaker(totalData, dataPerPage, pageCount, myJson.pageNo);
+
+    function pageMaker(totalData, dataPerPage, pageCount, currentPage) {
+        pageMakerDiv.innerHTML = '';
+        console.log('currentPage! : ' + currentPage)
+
+        let totalPage = Math.ceil(totalData / dataPerPage); // 총 페이지 수
+        console.log('totalPage : ' + totalPage)
+        if(totalPage < pageCount) {
+            pageCount = totalPage;
+        }
+
+        let pageGroup = Math.ceil(currentPage / pageCount); // 페이지 그룹
+        console.log('pageGroup : ' + pageGroup);
+        let endPage = pageGroup * pageCount; // 화면에 보여질 마지막 페이지 번호
+
+        if(endPage > totalPage) {
+            endPage = totalPage;
+        }
+
+        let startPage = endPage - (pageCount - 1); // 화면에 보여질 첫번째 페이지 번호
+        console.log('startPage : '+ startPage);
+        let prev = startPage - 1;
+        let next = endPage + 1;
+        prevBtn.innerHTML = '이전';
+
+        console.log('next : ' + next);
+        console.log('endPage : ' + endPage);
+        let temp;
+
+        if(prev > 0) {
+            prevBtn.style.display = 'block';
+        } else {
+            prevBtn.style.display = 'none';
+        }
+        if(endPage < next) {
+            nextBtn.innerHTML = '다음';
+            nextBtn.style.display = 'block';
+        }
+        if(totalPage <= endPage) {
+            nextBtn.style.display = 'none';
+        }
+        console.log('currentPage### : '+currentPage)
+        console.log('startPage1234 : '+ startPage);
+
+        let mainCategoryS = '';
+        let sTypeS = '';
+        let sTextS = '';
+
+        for(temp = startPage; temp <= endPage; temp++) {
+            if(currentPage == temp) {
+                pageNum.innerHTML += `<a href="#" onclick="category(${mainCategoryS}, sTypeS, sTextS, ${temp});" id="${temp}">${temp}</a>`;
+                currentPage = temp;
+            } else {
+                pageNum.innerHTML += `<a href="#" onclick="category(mainCategoryS, sTypeS, sTextS, ${temp});" id="${temp}">${temp}</a>`;
+                currentPage = temp;
+            }
+        }
+
+        pageMakerDiv.append(prevBtn,pageNum, nextBtn);
+    }
+    prevBtn.addEventListener('click', () => {
+        pageNum.innerHTML = '';
+        myJson.pageNo = parseInt(myJson.pageNo) - 10;
+        console.log('myJson.pageNo_prevBtn : ' + myJson.pageNo)
+        pageMaker(totalData, dataPerPage, pageCount, myJson.pageNo);
+    })
+    nextBtn.addEventListener('click', () => {
+        pageNum.innerHTML = '';
+        myJson.pageNo = parseInt(myJson.pageNo) + 10;
+        console.log('myJson.pageNo ::' + myJson.pageNo)
+        pageMaker(totalData, dataPerPage, pageCount, myJson.pageNo);
+    })
+
+    function getItem(key) {
+        const value = sessionStorage.getItem(key);
+
+        if(key === 'sText') return value === null ? null : JSON.parse(value);
+        else return value === null ? [] : JSON.parse(value);
+    }
+    function setItem(key, value) {
+        if(value === null || value === undefined) return;
+
+        const toJson = JSON.stringify(value);
+
+        sessionStorage.setItem(key, toJson)
+    }
+
+    console.log('PAGE_NO' + myJson.pageNo)
+    console.log('TOTAL_COUNT' + myJson.totalCount)
+
+    videoListElem.append(table, pageMakerDiv);
     communityBoardElem.after(videoListElem);
 }
 
 apiVideo();
+// category(mainCategoryS, sTypeS, sText, currentPageS);

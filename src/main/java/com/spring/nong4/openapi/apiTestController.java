@@ -36,18 +36,21 @@ public class apiTestController {
 
     @ResponseBody
     @GetMapping("/apiTest")
-    public static apiReqDomain callApiHttp()
+    public apiReqDomain callApiHttp(apiReqDomain reqDomain)
     {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
-        apiReqDomain reqDomain = new apiReqDomain();
+        System.out.println("reqDomain : " + reqDomain);
+        System.out.println("get.sText ! : " + reqDomain.getSText());
+//        apiReqDomain reqDomain = new apiReqDomain();
+        System.out.println("reqDomain.getPageNo() : " + reqDomain.getPageNo());
 
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/curationMvp/curationMvpList");
             urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20210713ZU1XHCDLCGWITY5LN99HBW");
             urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("json","UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("20","UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
 
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -65,6 +68,8 @@ public class apiTestController {
                 result.append(line + "\n");
             }
             urlParse = result.toString();
+
+            System.out.println("urlParse : " + urlParse);
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -105,6 +110,7 @@ public class apiTestController {
             reqDomain.setPageNo(getTagValue("pageNo",eElement));
             reqDomain.setNumOfRows(getTagValue("numOfRows",eElement));
             reqDomain.setTotalCount(getTagValue("totalCount",eElement));
+
             reqDomain.setVideoItemList(videoList);
 
             rd.close();
@@ -119,23 +125,13 @@ public class apiTestController {
     @ResponseBody
     @PostMapping("/category")
     public apiReqDomain category (@RequestBody Map<String, Object> ajaxValue) {
+        System.out.println("ajaxValue : " + ajaxValue);
         apiReqDomain reqDomain = new apiReqDomain();
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         String DEFAULT_CODE = "DF";
         apiReqDomain param = new apiReqDomain();
         apiReqDomain.itemTag itemTag = new apiReqDomain.itemTag();
-//        System.out.println("getVideoItemList_getList : " + apiTestController.callApiHttp().getVideoItemList().get(0).getSj().contains(ajaxValue.get("sText").toString()));
-        System.out.println("ajaxValue : " + ajaxValue);
-        System.out.println("SJ : " + itemTag.getSj());
-        System.out.println("size : " + apiTestController.callApiHttp().getVideoItemList().size());
-        int listSize = apiTestController.callApiHttp().getVideoItemList().size();
-
-//        for(int i = 0; i < listSize; i++) {
-//            if(apiTestController.callApiHttp().getVideoItemList().get(i).getSj().contains(ajaxValue.get("sText").toString())) {
-//                System.out.println(i+1 + "번째 " + apiTestController.callApiHttp().getVideoItemList().get(i).getSj() + "\n");
-//            }
-//        }
 
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/curationMvp/curationMvpList");
@@ -148,7 +144,11 @@ public class apiTestController {
             if((!ajaxValue.get("sText").toString().isEmpty())){
                 urlBuilder.append("&" + URLEncoder.encode("sText", "UTF-8") + "=" + URLEncoder.encode(ajaxValue.get("sText").toString(), "UTF-8"));
             }
-            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
+            if((!ajaxValue.get("pageNo").toString().isEmpty())) {
+                urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(ajaxValue.get("pageNo").toString(), "UTF-8"));
+            } else {
+                urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
+            }
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
 
             URL url = new URL(urlBuilder.toString());
@@ -211,6 +211,7 @@ public class apiTestController {
             reqDomain.setSType(ajaxValue.get("sType").toString());
             reqDomain.setSText(ajaxValue.get("sText").toString());
             reqDomain.setMainCategory(ajaxValue.get("mainCategory").toString());
+            reqDomain.setPageNo(ajaxValue.get("pageNo").toString());
             reqDomain.setVideoItemList(videoList);
 
             System.out.println("reqDomain : " + reqDomain);
