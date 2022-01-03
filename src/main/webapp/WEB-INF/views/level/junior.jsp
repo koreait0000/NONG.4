@@ -47,7 +47,7 @@
                             <div class="innerRound">
                                 <div class="innerInput">
                                     <select class="sType" id="sType" name="sType">
-                                        <option value="sSj" selected>주제목</option>
+                                        <option value="sSj">주제목</option>
                                         <option value="sMvpClipSj">짧은 기술동영상 제목</option>
                                     </select>
                                     <input class="sText" id="sText" type="text" name="sText">
@@ -62,24 +62,24 @@
                                 <div class="innerCategory">
                                     <strong class="nTitle">품목 분류</strong>
                                     <select class="mainCategory" id="mainCategory" name="mainCategory">
-                                        <option value="DF" selected>선택하세요</option>
-                                        <option value="FC">식량작물</option>
-                                        <option value="IC">특용작물</option>
-                                        <option value="VC">채소</option>
-                                        <option value="FT">과수</option>
-                                        <option value="FL">화훼</option>
-                                        <option value="LP">축산</option>
-                                        <option value="IN">곤충</option>
-                                        <option value="AE">농업공학</option>
-                                        <option value="RE">농촌환경</option>
-                                        <option value="EE">환경생태</option>
-                                        <option value="SF">토양비료</option>
-                                        <option value="CS">농산물안정성</option>
-                                        <option value="MI">농업경영 · 정보</option>
-                                        <option value="FR">농식품자원</option>
-                                        <option value="AS">농업재해예방</option>
-                                        <option value="CA">도시농업</option>
-                                        <option value="BT">생명공학</option>
+                                        <option value="" selected>선택하세요</option>
+                                        <option value="FC" <c:if test="${reqDomain.mainCategory == 'FC'}">selected='selected'</c:if>>식량작물</option>
+                                        <option value="IC" <c:if test="${reqDomain.mainCategory == 'IC'}">selected='selected'</c:if> >특용작물</option>
+                                        <option value="VC" <c:if test="${reqDomain.mainCategory == 'VC'}">selected='selected'</c:if>>채소</option>
+                                        <option value="FT" <c:if test="${reqDomain.mainCategory == 'FT'}">selected='selected'</c:if>>과수</option>
+                                        <option value="FL" <c:if test="${reqDomain.mainCategory == 'FL'}">selected='selected'</c:if>>화훼</option>
+                                        <option value="LP" <c:if test="${reqDomain.mainCategory == 'LP'}">selected='selected'</c:if>>축산</option>
+                                        <option value="IN" <c:if test="${reqDomain.mainCategory == 'IN'}">selected='selected'</c:if>>곤충</option>
+                                        <option value="AE" <c:if test="${reqDomain.mainCategory == 'AE'}">selected='selected'</c:if>>농업공학</option>
+                                        <option value="RE" <c:if test="${reqDomain.mainCategory == 'RE'}">selected='selected'</c:if>>농촌환경</option>
+                                        <option value="EE" <c:if test="${reqDomain.mainCategory == 'EE'}">selected='selected'</c:if>>환경생태</option>
+                                        <option value="SF" <c:if test="${reqDomain.mainCategory == 'SF'}">selected='selected'</c:if>>토양비료</option>
+                                        <option value="CS" <c:if test="${reqDomain.mainCategory == 'CS'}">selected='selected'</c:if>>농산물안정성</option>
+                                        <option value="MI" <c:if test="${reqDomain.mainCategory == 'MI'}">selected='selected'</c:if>>농업경영 · 정보</option>
+                                        <option value="FR" <c:if test="${reqDomain.mainCategory == 'FR'}">selected='selected'</c:if>>농식품자원</option>
+                                        <option value="AS" <c:if test="${reqDomain.mainCategory == 'AS'}">selected='selected'</c:if>>농업재해예방</option>
+                                        <option value="CA" <c:if test="${reqDomain.mainCategory == 'CA'}">selected='selected'</c:if>>도시농업</option>
+                                        <option value="BT" <c:if test="${reqDomain.mainCategory == 'BT'}">selected='selected'</c:if>>생명공학</option>
                                     </select>
                                 </div>
                             </div>
