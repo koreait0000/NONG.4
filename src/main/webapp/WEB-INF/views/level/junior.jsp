@@ -38,19 +38,17 @@
 
         <div class="community">
             <div class="community-top"></div>
-            <div class="community-board">
+            <div class="community-board" id="community-board">
                 <form action="junior">
-                    <input type="hidden" name="pageNo" value="${reqDomain.pageNo}">
-                    <input type="hidden" name="totalCount" value="${reqDomain.totalCount}">
                     <div id="videoSearch">
                         <div class="outerRound">
                             <div class="innerRound">
                                 <div class="innerInput">
                                     <select class="sType" id="sType" name="sType">
-                                        <option value="sSj">주제목</option>
-                                        <option value="sMvpClipSj">짧은 기술동영상 제목</option>
+                                        <option value="sSj" <c:if test="${reqDomain.SType == 'sSj'}">selected='selected'</c:if>>주제목</option>
+                                        <option value="sMvpClipSj" <c:if test="${reqDomain.SType == 'sMvpClipSj'}">selected='selected'</c:if>>짧은 기술동영상 제목</option>
                                     </select>
-                                    <input class="sText" id="sText" type="text" name="sText">
+                                    <input class="sText" id="sText" type="text" name="sText" value="${reqDomain.SText}">
                                 </div>
                                 <div class="innerSubmit">
                                     <strong class="button">
@@ -93,7 +91,7 @@
                         <th>짧은 기술동영상 제목</th>
                     </tr>
                     <c:forEach items="${reqDomain.videoItemList}" var="videoList">
-                        <tr class="bodyTr pointer" onclick="location.href='${videoList.videoLink}'">
+                        <tr class="bodyTr pointer" onclick="iframeFunc('${videoList.videoLink}');">
                             <th><img src=${videoList.videoImg}></th>
                             <th>${videoList.stdPrdlstCodeNm}</th>
                             <th>${videoList.sj}</th>
@@ -103,13 +101,13 @@
                 </table>
                 <div class="pagemaker">
                     <c:if test="${pageMaker.prev}">
-                        <a href="mainBoard?provider=${param.provider}&page=${pageMaker.startPage - 1}&searchType=${param.searchType == null ? 'n' : param.searchType}&keyword=${param.keyword == null ? '' : param.keyword}">이전</a>
+                        <a href="junior?pageNo=${pageMaker.startPage - 1}&page=${pageMaker.startPage - 1}&mainCategory=${reqDomain.mainCategory}&sType=${reqDomain.SType}&sText=${reqDomain.SText}">이전</a>
                     </c:if>
                     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                        <a href="mainBoard?provider=${param.provider}&page=${pageNum}&searchType=${param.searchType == null ? 'n' : param.searchType}&keyword=${param.keyword == null ? '' : param.keyword}">${pageNum}</a>
+                        <a href="junior?pageNo=${pageNum}&mainCategory=${reqDomain.mainCategory}&page=${pageNum}&sType=${reqDomain.SType}&sText=${reqDomain.SText}"}>${pageNum}</a>
                     </c:forEach>
                     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                        <a href="mainBoard?provider=${param.provider}&page=${pageMaker.endPage + 1}&searchType=${param.searchType == null ? 'n' : param.searchType}&keyword=${param.keyword == null ? '' : param.keyword}">다음</a>
+                        <a href="junior?pageNo=${pageMaker.endPage + 1}&page=${pageMaker.endPage + 1}&mainCategory=${reqDomain.mainCategory}&sType=${reqDomain.SType}&sText=${reqDomain.SText}">다음</a>
                     </c:if>
                 </div>
                 </form>
