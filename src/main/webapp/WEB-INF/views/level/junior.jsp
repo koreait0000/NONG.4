@@ -40,6 +40,14 @@
             <div class="community-top"></div>
             <div class="community-board">
                 <div>주제별 짧은 기술동영상 페이지</div>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </table>
                 <c:choose>
                     <c:when test="${empty param.videoLink}">
                         <div id="videoApi"></div>

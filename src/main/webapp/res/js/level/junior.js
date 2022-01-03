@@ -4,17 +4,28 @@ const communityElem = document.querySelector('.community');
 
 console.log('첫번째 getItem :  : ' + sessionStorage.getItem('sText'))
 
+console.log('현재 URL : ' + document.location.href)
+const link = document.location.href;
+const currentLink = 'http://localhost:8090/level/junior';
+
 // let mainCategoryS = '';
-// let sTypeS = 'sSj';
+let sTypeS = 'sSj';
 // let sTextS = sessionStorage.getItem('sText');
-// let sTextS = '';
+let sTextS = '조회기능';
 // let currentPageS = 1;
 
-// let sText = 'TEST';
+if(link == currentLink) {
+    sTextS = sessionStorage.removeItem('sText');
+} else {
+    sTextS = sessionStorage.getItem('sText');
+
+}
+
 
 function locationValid(sTypeS, sTextS) {
     if(sTypeS != '') {
         location.href = 'junior?sType=' + sTypeS + '&sText=' + sTextS;
+        location.reload(true);
     }
 }
 
@@ -144,10 +155,9 @@ function makeVideoList(myJson){
 
         sTypeS = sType.value;
 
-        locationValid(sTypeS, sTextS);
-        // location.href = 'junior?sType=' + sTypeS + '&sText=' + sTextS;
+        // locationValid(sTypeS, sTextS);
 
-        // apiVideo(sTypeS, sTextS);
+        apiVideo(sTypeS, sTextS);
 
         // category(mainCategoryS, sTypeS, sTextS, currentPageS);
     })
@@ -374,5 +384,5 @@ function makeVideoList(myJson){
     communityBoardElem.after(videoListElem);
 }
 
-apiVideo();
+//apiVideo(sTypeS, sTextS);
 // category(mainCategoryS, sTypeS, sText, currentPageS);
