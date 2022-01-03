@@ -1,11 +1,4 @@
-const videoSearchElem = document.querySelector('#videoSearch');
-const pageMakerElem = document.querySelector('#pageMaker');
-
-let mainCategoryS = '';
-let sTypeS = 'sSj';
-// let sTextS = sessionStorage.getItem('sText');
-let sTextS = '';
-let currentPageS = 1;
+const iframeElem = document.querySelector('#community-board');
 
 function apiVideo(sType, sText) {
     fetch('/openapi/apiTest?sType=' + sType + '&sText=' + sText, {
