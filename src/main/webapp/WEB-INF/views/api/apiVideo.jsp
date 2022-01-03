@@ -62,7 +62,7 @@
                                         <div class="innerCategory">
                                             <strong class="nTitle">품목 분류</strong>
                                             <select class="mainCategory" id="mainCategory" name="mainCategory">
-                                                <option value="" selected>선택하세요</option>
+                                                <option value="" selected>선택하세요.</option>
                                                 <option value="FC" <c:if test="${apiVideoDomain.mainCategory == 'FC'}">selected='selected'</c:if>>식량작물</option>
                                                 <option value="IC" <c:if test="${apiVideoDomain.mainCategory == 'IC'}">selected='selected'</c:if> >특용작물</option>
                                                 <option value="VC" <c:if test="${apiVideoDomain.mainCategory == 'VC'}">selected='selected'</c:if>>채소</option>
