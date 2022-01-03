@@ -40,6 +40,7 @@ function category(mainCategory, sType, sText, currentPage) {
     })
         .then(res => res.json())
         .then(myJson => {
+            console.log('myJson  : ' + myJson)
             myJson.sText = sessionStorage.getItem('sText');
         })
 }
@@ -387,5 +388,5 @@ function pageMaker1(){
 }
 //apiVideo(sTypeS, sTextS);
 //category(mainCategoryS, sTypeS, sText, currentPageS);
-makeVideoList();
+// makeVideoList();
 pageMaker1();
