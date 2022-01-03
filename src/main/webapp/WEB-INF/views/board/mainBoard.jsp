@@ -68,7 +68,7 @@
                                 </tr>
                             </c:forEach>
                         </table>
-                        <div class="pagemaker">
+                        <div class="pageMaker">
                             <c:if test="${pageMaker.prev}">
                                 <a href="mainBoard?provider=${param.provider}&page=${pageMaker.startPage - 1}&searchType=${param.searchType == null ? 'n' : param.searchType}&keyword=${param.keyword == null ? '' : param.keyword}">이전</a>
                             </c:if>

@@ -7,7 +7,7 @@
         <img src="/res/img/main.png"/>
     </div>
     <div class="form-img">
-        <span class="junior-class pointer">
+        <span class="apiVideo-class pointer">
             <img src="/res/img/junior.png" id="junior-img"/>
         </span>
 
