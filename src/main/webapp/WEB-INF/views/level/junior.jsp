@@ -39,23 +39,24 @@
         <div class="community">
             <div class="community-top"></div>
             <div class="community-board">
-                <div>주제별 짧은 기술동영상 페이지</div>
+                <div id="videoSearch"></div>
                 <table>
                     <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>동영상</th>
+                        <th>품목분류</th>
+                        <th>주제목</th>
+                        <th>짧은 기술동영상 제목</th>
                     </tr>
+                    <c:forEach items="${reqDomain.videoItemList}" var="videoList">
+                        <tr class="bodyTr pointer" onclick="location.href='${videoList.videoLink}'">
+                            <th><img src=${videoList.videoImg}></th>
+                            <th>${videoList.stdPrdlstCodeNm}</th>
+                            <th>${videoList.sj}</th>
+                            <th>${videoList.mvpClipSj}</th>
+                        </tr>
+                    </c:forEach>
                 </table>
-                <c:choose>
-                    <c:when test="${empty param.videoLink}">
-                        <div id="videoApi"></div>
-                    </c:when>
-                    <c:otherwise>
-                        <iframe width="854" height="800" src="${param.videoLink}&mvpClipNo=${param.mvpClipNo}"></iframe>
-                    </c:otherwise>
-                </c:choose>
+                <div id="pageMaker" data-totalcount="${reqDomain.totalCount}" data-pageno="${reqDomain.pageNo}"></div>
             </div>
         </div>
     </div>

@@ -130,7 +130,7 @@ public class apiTestController {
     }
     @ResponseBody
     @PostMapping("/category")
-    public apiReqDomain category (@RequestBody Map<String, Object> ajaxValue) {
+    public String category (@RequestBody Map<String, Object> ajaxValue, Model model) {
         System.out.println("ajaxValue : " + ajaxValue);
         apiReqDomain reqDomain = new apiReqDomain();
         StringBuffer result = new StringBuffer();
@@ -222,12 +222,18 @@ public class apiTestController {
 
             System.out.println("reqDomain : " + reqDomain);
 
+            Map<String, Object> map = new HashMap<>();
+            map.put("reqDomain", reqDomain);
+            model.addAllAttributes(map);
+            System.out.println("reqDomain : " + reqDomain);
+
             rd.close();
             conn.disconnect();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return reqDomain;
+
+        return "level/junior";
     }
 }
