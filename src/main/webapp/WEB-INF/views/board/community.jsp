@@ -40,12 +40,12 @@
         <div class="community">
             <div class="community-top"></div>
             <div class="community-board">
-                <div class="level">
-                    <div class="swiper-container levelSwip">
+                <div class="api">
+                    <div class="swiper-container apiSwip">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide"><img src="/res/img/junior.png" class="junior-class pointer"></div>
+                            <div class="swiper-slide"><img src="/res/img/junior.png" class="apiVideo-class pointer"></div>
                             <div class="swiper-slide"><img src="/res/img/intermediate.png"
                                                            class="intermediate-class pointer"></div>
                             <div class="swiper-slide"><img src="/res/img/advanced.png" class="advanced-class pointer">
@@ -72,7 +72,7 @@
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
                                 <!-- Slides -->
-                                <div class="swiper-slide"><img src="/res/img/junior.png" class="junior-class pointer"></div>
+                                <div class="swiper-slide"><img src="/res/img/junior.png" class="apiVideo-class pointer"></div>
                                 <div class="swiper-slide"><img src="/res/img/intermediate.png"
                                                                class="intermediate-class pointer"></div>
                                 <div class="swiper-slide"><img src="/res/img/advanced.png" class="advanced-class pointer">

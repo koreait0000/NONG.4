@@ -1,19 +1,19 @@
-const juniorElem = document.querySelector('.junior-class');
+const apiVideoElem = document.querySelector('.apiVideo-class');
 const intermediateElem = document.querySelector('.intermediate-class');
 const advancedElem = document.querySelector('.advanced-class');
 const masterElem = document.querySelector('.master-class');
 
-juniorElem.addEventListener('click', () => {
-    location.href="/level/junior";
+apiVideoElem.addEventListener('click', () => {
+    location.href="/api/apiVideo";
 });
 intermediateElem.addEventListener('click', () => {
-    location.href="/level/intermediate";
+    location.href="/api/intermediate";
 });
 advancedElem.addEventListener('click', () => {
-    location.href="/level/advanced";
+    location.href="/api/advanced";
 });
 masterElem.addEventListener('click', () => {
-    location.href="/level/master";
+    location.href="/api/master";
 });
 
 function moveToDetail(iboard){

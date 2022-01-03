@@ -112,8 +112,8 @@ function makeCommunityPaging(data){
 
 }
 
-function levelSwiper(){
-    const swiper = new Swiper('.levelSwip', {
+function apiSwiper(){
+    const swiper = new Swiper('.apiSwip', {
         // Optional parameters
         slidesPerView: 2, // 동시에 보여줄 슬라이드 갯수
         spaceBetween: -60, // 슬라이드간 간격
@@ -145,6 +145,6 @@ function hotItemSwiper(){
     });
 }
 
-levelSwiper();
+apiSwiper();
 hotItemSwiper();
 communityPaging();

@@ -121,7 +121,7 @@
                             </c:forEach>
                         </table>
 
-                        <div class="pagemaker">
+                        <div class="pageMaker">
                             <c:if test="${pageMaker.prev}">
                                 <a href="profile?page=${pageMaker.startPage - 1}">이전</a>
                             </c:if>

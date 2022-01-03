@@ -1,4 +1,4 @@
-package com.spring.nong4.openapi.model;
+package com.spring.nong4.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class apiReqDomain { // <items> 하위 태그
+public class apiVideoDomain { // <items> 하위 태그
 
     private String apiKey; // 발급받은 Open API 인증키
     private String sType;  // 검색 항목
