@@ -9,7 +9,9 @@ import java.util.List;
 public class apiReqDomain { // <items> 하위 태그
 
     private String apiKey; // 발급받은 Open API 인증키
+    @JsonProperty("sType")
     private String sType;  // 검색 항목
+    @JsonProperty("sText")
     private String sText;  // 검색 단어
     private String mainCategory; // 품목 분류 코드
     private String pageNo; // 조회할 페이지 번호
