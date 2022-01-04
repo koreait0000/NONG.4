@@ -8,13 +8,13 @@ section{ padding-top: 50px;}
 .modal_close_parent { display: flex; justify-content: flex-end; padding: 40px 60px; }
 .modal_close { color: white; font-size: 50px; cursor: pointer; }
 
-a { text-decoration: none; color: black; }
+a { text-decoration: none; color: black;font-family: 'Gamja Flower', cursive; font-weight: 100;  font-size: 24px; letter-spacing: 8px; }
 header { position: fixed; width: 100%; z-index: 10;}
 /* z-index 는 우선순위이다 커뮤니티쪽 슬라이드 ajax를 덮기위해 z-index를 쓴다 */
-header ul { list-style-type: none; margin: 0; padding: 0; background-color: darkgreen; }
+header ul { display: flex; justify-content: space-around; list-style-type: none; margin: 0; padding: 0; background-color: darkgreen; }
 header ul:after{ content:''; display: block; clear:both; }
 header ul li { float: left; height: 50px;}
-header ul li a { display: block; color: white; text-align: center; padding: 14px 16px; }
+header ul li a { display: block; font-size: 24px; font-family: 'Nanum Gothic', sans-serif; color: white; text-align: center; padding-top: 12px; width: 180px; height: 75%; }
 header ul li a:hover:not(.active) { background-color: forestgreen; }
 
 #container{ position: relative; margin: 0 auto; }
@@ -38,5 +38,5 @@ img{ width: inherit; max-width: 100%; height: auto;}
 .category .title { font-size: 30px; font-weight: bold; }
 
 .community { flex-grow: 1; }
-.community-top { border-bottom: 2px solid #d3d3d3; height: 50px; }
+.community-top { border-bottom: 2px solid #d3d3d3; height: 50px; width: 1000px;}
 .community-board { margin: 30px;}

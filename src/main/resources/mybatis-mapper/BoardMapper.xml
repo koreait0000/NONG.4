@@ -60,7 +60,7 @@
              , A.title
              , A.ctnt
              , B.nick AS userNick
-             , date_format(A.regdt, '%Y-%m-%d %h:%i') AS regdt
+             , DATE_FORMAT(A.regdt, '%Y-%m-%d %H:%i') AS regdt
              , A.provider
              , A.hitCount
         <if test="param.isFav == 1">
@@ -126,7 +126,7 @@
              , A.title
              , A.ctnt
              , A.provider
-             , date_format(A.regdt, '%Y-%m-%d %h:%i') AS regdt
+             , DATE_FORMAT(A.regdt, '%Y-%m-%d %H:%i') AS regdt
              , A.hitCount
              , B.nick AS userNick
              , B.iuser

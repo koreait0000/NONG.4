@@ -40,7 +40,9 @@
             <div class="community-top"></div>
             <div class="community-board">
                 <c:if test="${auth.iuser eq profile.iuser}">
-                    <div class="pointer profileMod"><button>프로필 수정</button></div>
+                    <div class="pointer profileMod">
+                        <button class="profileModBtn">프로필 수정</button>
+                    </div>
                     <div class="modal-img hide">
                         <div>
                             <div class="container">

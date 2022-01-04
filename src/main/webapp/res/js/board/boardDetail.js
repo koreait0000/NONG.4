@@ -33,6 +33,7 @@ function makeFavBtn(){
 }
 
 function boardUpd() {
+    const btnDiv     = document.createElement('div');
     const updSpan    = document.createElement('span');
     const delSpan    = document.createElement('span');
     const updBtn     = document.createElement('button');
@@ -44,9 +45,11 @@ function boardUpd() {
 
     const realBtnU = document.createElement('button');
 
+    btnDiv.className       = 'modBtn';
+
     updBtn.innerText       = '수정';
     delBtn.innerText       = '삭제';
-    realBtnU.innerText     = '진짜수정';
+    realBtnU.innerText     = '수정';
     realBtnU.style.display = 'none';
 
     ctntInput.style.width  = 300;
@@ -136,7 +139,9 @@ function boardUpd() {
     updSpan.append(realBtnU);
     delSpan.append(delBtn);
 
-    boardModElem.append(updSpan,delSpan);
+    btnDiv.append(updSpan, delSpan);
+
+    boardModElem.append(btnDiv);
 }
 
 /**
