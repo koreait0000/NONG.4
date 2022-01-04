@@ -39,4 +39,5 @@ img{ width: inherit; max-width: 100%; height: auto;}
 
 .community { flex-grow: 1; }
 .community-top { border-bottom: 2px solid #d3d3d3; height: 50px; width: 1000px;}
-.community-board { margin: 30px;}
+.community-board { margin: 30px; }
+

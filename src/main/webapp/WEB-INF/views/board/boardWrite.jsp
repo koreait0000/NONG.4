@@ -40,7 +40,7 @@
         <div class="community">
             <div class="community-top"></div>
             <div class="community-board">
-                <div>
+                <div class="write-parents">
                     <form action="boardWrite" method="post" enctype="multipart/form-data">
                         <label for="provider"></label>
                         <select id="provider" name="provider" size="1">
@@ -50,15 +50,15 @@
                             <option value="friend">친구게시판</option>
                         </select>
                         <div>
-                            <input type="text" name="title" placeholder="제목">
+                            <input type="text" name="title" placeholder="제목을 작성해주세요" class="write-title">
                         </div>
                         <div>
-                            <textarea name="ctnt" placeholder="내용" ></textarea>
+                            <textarea name="ctnt" placeholder="궁금한 내용을 질문해 주세요" class="write-ctnt"></textarea>
                         </div>
-                        <div>
+                        <div class="write-file">
                             <input type="file" name="imgArr" multiple accept="image/*">
                         </div>
-                        <div>
+                        <div class="write-btn">
                             <input type="submit" value="글쓰기">
                             <input type="reset" value="초기화">
                         </div>

@@ -2,3 +2,9 @@
 
 .community-board .title { font-size: 30px; }
 .community-board .userinfo { margin-top: 10px; border-bottom: 1px solid #d3d3d3; }
+
+.write-parents { padding-left: 160px; }
+.write-title { width: 80%; margin-top: 5px; margin-bottom: 5px; padding-left: 10px; }
+.write-ctnt { width: 80%; height: 350px; resize: none; padding: 10px; }
+.write-file { margin-top: 5px; margin-bottom: 5px; }
+.write-btn { padding-left: 240px;}

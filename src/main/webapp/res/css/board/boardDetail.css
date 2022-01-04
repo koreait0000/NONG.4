@@ -1,8 +1,9 @@
 .background { height:100%; }
 
-.community-board .title { font-size: 30px; }
+.community-board #title { font-size: 30px; padding-top: 10px; }
 .community-board .userinfo { margin-top: 20px; border-bottom: 1px solid #d3d3d3; padding-bottom: 15px; }
-.community-board .ctnt { margin-top: 20px; }
+.community-board .userinfo .detail-userNick { margin-bottom: 5px; }
+.community-board #ctnt { margin-top: 20px; padding-top: 10px; }
 .community-board .modBtn button { opacity: 0.6; width: 105px; height: 45px; padding: 0; margin: 10px 8px; background-color: #fff; border: 1px solid #333; border-radius: 0; cursor:pointer; }
 .community-board .cmt-box { margin-top: 40px; }
 .community-board .cmt-box #cmtFrm .cmt-text { resize: none; width: 90%; height: 80px; }
