@@ -148,6 +148,13 @@ public class BoardController {
         return data;
     }
 
+    // 통합 검색
+    @GetMapping("/totalSearch")
+    public String totalSearch(BoardEntity param) {
+        System.out.println("param : " + param);
+        return "board/totalSearch";
+    }
+
 //-----------------------------서비스------------------------------
     @GetMapping("/service")
     public String service() {

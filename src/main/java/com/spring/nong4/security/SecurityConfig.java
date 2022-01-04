@@ -1,5 +1,6 @@
 package com.spring.nong4.security;
 
+import com.spring.nong4.security.CustomOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -21,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetails;
     @Autowired
     private CustomOAuth2UserService customOauth2UserService;
+
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -46,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .usernameParameter("email")
                 .passwordParameter("pw")
+//                .successHandler(authenticationSuccessHandler)
                 .defaultSuccessUrl("/board/home");
 
         http.oauth2Login()

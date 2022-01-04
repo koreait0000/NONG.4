@@ -11,8 +11,11 @@
                 <div style="font-size: 50px; margin-bottom: 8px; font-weight: bold"> Nong 4</div></a>
 
             <div class="search-input">
-                <input type="text" class="search-txt">
-                <i class="fas fa-search pointer"></i>
+                <form action="totalSearch">
+                    <input type="text" class="search-txt" name="title">
+                    <%--<input type="submit" class="fas fa-search pointer" value="&#xf002;">--%>
+                    <i class="fas fa-search pointer" onclick="location.href='totalSearch'"></i>
+                </form>
             </div>
 
             <div>
@@ -29,7 +32,7 @@
 
             <div class="cate-board">
                 <div class="title">커뮤니티 <i class="fas fa-list"></i></div>
-                <div><a href="mainBoard">통합 게시판</a></div>
+                <div><a href="mainBoard?provider=">통합 게시판</a></div>
                 <div><a href="mainBoard?provider=freedom">자유 게시판</a></div>
                 <div><a href="mainBoard?provider=question">질문 게시판</a></div>
                 <div><a href="mainBoard?provider=strategy">공략 게시판</a></div>
