@@ -11,8 +11,11 @@
                 <div style="font-size: 50px; margin-bottom: 8px; font-weight: bold"> Nong 4</div></a>
 
             <div class="search-input">
-                <input type="text" class="search-txt">
-                <i class="fas fa-search pointer"></i>
+                <form action="totalSearch">
+                    <input type="text" class="search-txt" name="title">
+                    <%--<input type="submit" class="fas fa-search pointer" value="&#xf002;">--%>
+                    <i class="fas fa-search pointer" onclick="location.href='totalSearch'"></i>
+                </form>
             </div>
 
             <div>
