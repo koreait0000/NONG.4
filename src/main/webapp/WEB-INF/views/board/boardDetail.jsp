@@ -30,7 +30,7 @@
 
             <div class="cate-board">
                 <div class="title">커뮤니티 <i class="fas fa-list"></i></div>
-                <div><a href="mainBoard">통합 게시판</a></div>
+                <div><a href="mainBoard?provider=">통합 게시판</a></div>
                 <div><a href="mainBoard?provider=freedom">자유 게시판</a></div>
                 <div><a href="mainBoard?provider=question">질문 게시판</a></div>
                 <div><a href="mainBoard?provider=strategy">공략 게시판</a></div>

@@ -427,7 +427,7 @@ submitInput.addEventListener('click', () => {
 })
 
 if(userProvider != 'nong4'){
-    pwChangeElem.innerHTML = '여기서 못바꿈';
+    pwChangeElem.innerHTML = '여기서 변경할 수 없습니다.';
     pwChangeElem.setAttribute('disabled','disabled');
     pwChangeElem.classList.remove('pointer');
 }

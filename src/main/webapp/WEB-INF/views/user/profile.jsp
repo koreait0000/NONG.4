@@ -28,7 +28,7 @@
 
             <div class="cate-board">
                 <div class="title">커뮤니티 <i class="fas fa-list"></i></div>
-                <div><a href="/board/mainBoard">통합 게시판</a></div>
+                <div><a href="/board/mainBoard?provider=">통합 게시판</a></div>
                 <div><a href="/board/mainBoard?provider=freedom">자유 게시판</a></div>
                 <div><a href="/board/mainBoard?provider=question">질문 게시판</a></div>
                 <div><a href="/board/mainBoard?provider=strategy">공략 게시판</a></div>
@@ -40,7 +40,7 @@
             <div class="community-top"></div>
             <div class="community-board">
                 <c:if test="${auth.iuser eq profile.iuser}">
-                    <div class="pointer profileMod">프로필 수정</div>
+                    <div class="pointer profileMod"><button>프로필 수정</button></div>
                     <div class="modal-img hide">
                         <div>
                             <div class="container">
@@ -64,7 +64,7 @@
 
                     <div id="flexContainer">
                         <table>
-                            <img class="profileImg wh100" src="/pic/profileImg/${profile.iuser}/${profile.profileImg}" onerror="this.onerror=null; this.style.display='none';">
+                            <img class="profileImg wh150" src="/pic/profileImg/${profile.iuser}/${profile.profileImg}" onerror="this.onerror=null; this.style.display='none';">
                             <tr>
                                 <th>이메일</th>
                                 <td>${profile.email}</td>
@@ -101,11 +101,11 @@
                         <div>내가 좋아요한 글 리스트</div>
                         <table>
                             <tr>
-                                <th>글번호</th>
-                                <th>제목</th>
-                                <th>작성자</th>
-                                <th>작성일자</th>
-                                <th>게시판성격</th>
+                                <th style="width: 10%;">글번호</th>
+                                <th style="width: 50%;">제목</th>
+                                <th style="width: 10%;">작성자</th>
+                                <th style="width: 20%;">작성일자</th>
+                                <th style="width: 10%;">게시판성격</th>
                             </tr>
 
                             <c:forEach items="${list}" var="list" >
@@ -141,6 +141,5 @@
             </div>
         </div>
     </div>
-
     <div class="background-right"></div>
 </div>

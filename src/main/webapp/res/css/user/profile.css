@@ -2,8 +2,8 @@
 .background { height:100%; }
 .community-board { margin: 30px;  display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-.wh100 { width: 100px; height: 100px; }
-
+.wh150 { width: 150px; height: 150px; }
+.profileMod { margin-bottom: 5px; }
 .modal-img { height: 100%; width: 100%; position: fixed; left: 0; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.87); }
 .modal-img > div { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; }
 .modal-img .container { position: relative; height: 400px; width: 680px; background-color: white; border-radius: 5px; }
@@ -58,3 +58,7 @@
 .pwChangeCont .btnDiv { margin-top: 70px; text-align: center; }
 .pwChangeCont .btnDiv > input { opacity: 0.6; width: 105px; height: 45px; padding: 0; margin: 0 4px; background-color: #fff; border: 1px solid #333; border-radius: 0; cursor:pointer; }
 
+#flexContainer table { width: 300px; }
+#FavBoardList { margin-top: 15px;}
+#FavBoardList table {width: 800px; border-top: 1px solid black; border-collapse: collapse; text-align: center; margin-bottom: 5px; }
+#FavBoardList th { border-bottom: 1px solid black; }
