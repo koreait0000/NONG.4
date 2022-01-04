@@ -22,7 +22,7 @@ img{ width: inherit; max-width: 100%; height: auto;}
 
 .background { background-image: url("/res/img/background.png"); display: flex;  background-repeat : no-repeat; background-size : cover; }
 .background-left { width: 320px; }
-.background-center { background-color: white;  display: flex; flex-grow: 1;}
+.background-center { background-color: white;  display: flex; flex-grow: 1; }
 .background-right { width: 320px; }
 
 .search-input{ position: relative; height: 40px; border: 1px solid #333; box-sizing: border-box; margin-right: 10%; margin-left: 10%; margin-bottom: 10px}

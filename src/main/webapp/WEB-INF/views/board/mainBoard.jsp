@@ -43,6 +43,7 @@
             <div class="community-board">
                 <div>
                     <div>
+                        ${param.provider == '' ? '통합게시판' : ''}
                         ${param.provider == 'freedom'  ? '자유게시판' : ''}
                         ${param.provider == 'question' ? '질문게시판' : ''}
                         ${param.provider == 'strategy' ? '공략게시판' : ''}
@@ -51,20 +52,18 @@
                     <form action="mainBoard">
                         <table>
                             <tr>
-                                <th>글번호</th>
-                                <th>제목</th>
-                                <th>내용</th>
-                                <th>작성자</th>
-                                <th>작성일자</th>
+                                <th style="width: 10%;">글번호</th>
+                                <th style="width: 50%;">제목</th>
+                                <th style="width: 10%;">작성자</th>
+                                <th style="width: 20%;">작성일자</th>
                                 <c:if test="${param.provider == ''}">
-                                    <th>카테고리</th>
+                                    <th style="width: 10%;">카테고리</th>
                                 </c:if>
                             </tr>
                             <c:forEach items="${list}" var="list" >
                                 <tr class="record pointer" onclick="moveToDetail(${list.iboard});">
                                     <td>${list.iboard}</td>
                                     <td>${list.title}</td>
-                                    <td>${list.ctnt}</td>
                                     <td>${list.userNick}</td>
                                     <td>${list.regdt}</td>
                                     <c:if test="${param.provider == ''}">
@@ -106,6 +105,5 @@
             </div>
         </div>
     </div>
-
    <div class="background-right"></div>
 </div>
