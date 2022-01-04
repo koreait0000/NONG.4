@@ -1,3 +1,5 @@
+.community-top { width: 1100px;}
+
 .api { height: 320px; }
 .api .swiper-container { height: 100%; width: 900px; }
 .api .swiper-slide { display: flex; justify-content: center; align-items: center; }
@@ -19,4 +21,4 @@
 .hotItem .hotItemBox .swiper-slide { display: flex; justify-content: center; align-items: center; }
 .hotItem .hotItemBox .swiper-slide img { width: 250px; }
 
-input[type="submit"] { font-family: "Font Awesome 5 Free"; border:none; }
+/*input[type="submit"] { font-family: "Font Awesome 5 Free"; border:none; }*/
