@@ -13,6 +13,7 @@
         <li><a href="/user/join">회원가입</a></li>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
+            <li><a href="/board/service">서비스</a></li>
             <li><a href="/user/logout">로그아웃</a></li>
         </sec:authorize>
     </ul>

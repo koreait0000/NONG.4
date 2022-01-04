@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <div class="background">
@@ -29,7 +30,7 @@
 
             <div class="cate-board">
                 <div class="title">커뮤니티 <i class="fas fa-list"></i></div>
-                <div><a href="mainBoard">통합 게시판</a></div>
+                <div><a href="mainBoard?provider=">통합 게시판</a></div>
                 <div><a href="mainBoard?provider=freedom">자유 게시판</a></div>
                 <div><a href="mainBoard?provider=question">질문 게시판</a></div>
                 <div><a href="mainBoard?provider=strategy">공략 게시판</a></div>
@@ -55,7 +56,9 @@
                                 <th>내용</th>
                                 <th>작성자</th>
                                 <th>작성일자</th>
-                                <th>게시판성격</th>
+                                <c:if test="${param.provider == ''}">
+                                    <th>카테고리</th>
+                                </c:if>
                             </tr>
                             <c:forEach items="${list}" var="list" >
                                 <tr class="record pointer" onclick="moveToDetail(${list.iboard});">
@@ -64,7 +67,14 @@
                                     <td>${list.ctnt}</td>
                                     <td>${list.userNick}</td>
                                     <td>${list.regdt}</td>
-                                    <td>${list.provider}</td>
+                                    <c:if test="${param.provider == ''}">
+                                        <td>
+                                            ${list.provider == 'freedom'  ? '자유게시판' : '' }
+                                            ${list.provider == 'question' ? '질문게시판' : '' }
+                                            ${list.provider == 'strategy' ? '공략게시판' : '' }
+                                            ${list.provider == 'friend'   ? '친구게시판' : '' }
+                                        </td>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
                         </table>
