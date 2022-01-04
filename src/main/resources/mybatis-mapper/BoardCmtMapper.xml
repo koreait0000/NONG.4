@@ -18,7 +18,7 @@
     <select id="cmtList" resultType="BoardCmtDomain">
         SELECT A.cmt
              , A.icmt
-             , date_format(A.regdt, '%Y-%m-%d %h:%i') AS regdt
+             , DATE_FORMAT(A.regdt, '%Y-%m-%d %H:%i') AS regdt
              , A.iboard
              , B.nick AS userNick
              , B.iuser

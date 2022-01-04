@@ -305,22 +305,22 @@ profileModElem.addEventListener('click', () => {
 
     // 프로필이미지가 미등록인 사용자라면, 기본 이미지 적용
     if(profileData == '') { // null아님 '' 이거임
-        chkImg = 'BASIC';
+        chkImg  = 'BASIC';
         img.src = '/res/img/BasicProfile.png';
         displayImgElem.append(img);
     }else{
-        chkImg = 'PROFILE';
+        chkImg  = 'PROFILE';
         img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
         displayImgElem.append(img);
     }
 
     displayImgElem.addEventListener('click', () => {
         if(chkImg == 'BASIC') {
-            chkImg = 'PROFILE';
+            chkImg  = 'PROFILE';
             img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
             displayImgElem.append(img);
         } else {
-            chkImg = 'BASIC';
+            chkImg  = 'BASIC';
             img.src = '/res/img/BasicProfile.png';
             displayImgElem.append(img);
         }
