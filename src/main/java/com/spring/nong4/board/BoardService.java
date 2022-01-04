@@ -91,6 +91,7 @@ public class BoardService {
 
         map.put("detail", mapper.boardDetail(param));
         map.put("img", mapper.selBoardImgList(imgParam));
+        System.out.println("img : " + imgParam);
 
         return map;
     }

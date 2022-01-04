@@ -4,6 +4,7 @@
 
 .wh150 { width: 150px; height: 150px; }
 .profileMod { margin-bottom: 5px; }
+.profileMod .profileModBtn { opacity: 0.6; width: 105px; height: 45px; padding: 0; margin: 0 4px; background-color: #fff; border: 1px solid #333; border-radius: 0; cursor:pointer; }
 .modal-img { height: 100%; width: 100%; position: fixed; left: 0; top: 0; z-index: 100; background-color: rgba(0, 0, 0, 0.87); }
 .modal-img > div { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; }
 .modal-img .container { position: relative; height: 400px; width: 680px; background-color: white; border-radius: 5px; }

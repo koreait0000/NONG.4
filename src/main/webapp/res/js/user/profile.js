@@ -298,18 +298,33 @@ if(btnDivPw) {
 }
 
 // 프로필수정 클릭 시 모달창 open
+let chkImg = '';
 profileModElem.addEventListener('click', () => {
     modalImgElem.classList.remove('hide');
     profileItemContElem.innerHTML = '';
 
     // 프로필이미지가 미등록인 사용자라면, 기본 이미지 적용
     if(profileData == '') { // null아님 '' 이거임
+        chkImg  = 'BASIC';
         img.src = '/res/img/BasicProfile.png';
         displayImgElem.append(img);
     }else{
+        chkImg  = 'PROFILE';
         img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
         displayImgElem.append(img);
     }
+
+    displayImgElem.addEventListener('click', () => {
+        if(chkImg == 'BASIC') {
+            chkImg  = 'PROFILE';
+            img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
+            displayImgElem.append(img);
+        } else {
+            chkImg  = 'BASIC';
+            img.src = '/res/img/BasicProfile.png';
+            displayImgElem.append(img);
+        }
+    })
 
     fileInput.type    = 'file';
     fileInput.id      = 'selectImgArr';
