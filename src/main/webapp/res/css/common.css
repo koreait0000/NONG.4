@@ -34,7 +34,9 @@ img{ width: inherit; max-width: 100%; height: auto;}
 .category .writeBtn { width: 80%; height: 40px; font-size: 16px; background-color: darkgreen; }
 .category .writeBtn i{ color: white;}
 .category .cate-event { margin-top: 80px; }
+.category .cate-event a { font-size: 20px;}
 .category .cate-board { margin-top: 100px; }
+.category .cate-board a { font-size: 20px; }
 .category .title { font-size: 30px; font-weight: bold; }
 
 .community { flex-grow: 1; }
