@@ -39,25 +39,7 @@
         <div class="community">
             <div class="community-top"></div>
             <div class="community-board">
-                <table>
-                    <tr>
-                        <th>번호</th>
-                        <th>이미지</th>
-                        <th>제목</th>
-                        <th>요약내용</th>
-                        <th>등록일</th>
-                    </tr>
-                    <c:forEach items="${farmTechDomain.farmTechItemList}" var="farmList">
-                        <tr class="bodyTr pointer" onclick="location.href='monthFarmTechDtl?srchCurationNo=' + ${farmList.curationNo}">
-<%--                            <th>${farmTechDomain.totalCount}</th>--%>
-                            <td>${farmList.curationNo}</td>
-                            <td>${farmList.thumbFileNm}</td>
-                            <td>${farmList.curationNm}</td>
-                            <td>${farmList.curationSumryDtl}</td>
-                            <td>${farmList.svcDt}</td>
-                        </tr>
-                    </c:forEach>
-                </table>
+                ${farmTechDtlDomain}
             </div>
         </div>
     </div>
