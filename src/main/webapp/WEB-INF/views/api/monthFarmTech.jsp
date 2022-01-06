@@ -53,7 +53,7 @@
                             <td>${farmList.curationNo}</td>
                             <td>${farmList.thumbFileNm}</td>
                             <td>
-                                <a href="#" class="fncDtl" onclick="fncDtl('${$farmList.curationNo}'); ">
+                                <a href="#" class="fncDtl" onclick="fncDtl('${farmList.curationNo}'); ">
                             ${farmList.curationNm}</a></td>
                             <td>${farmList.curationSumryDtl}</td>
                             <td>${farmList.svcDt}</td>
