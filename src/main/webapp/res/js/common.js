@@ -7,7 +7,7 @@ apiVideoElem.addEventListener('click', () => {
     location.href="/api/apiVideo";
 });
 intermediateElem.addEventListener('click', () => {
-    location.href="/api/intermediate";
+    location.href="/api/monthFarmTech";
 });
 advancedElem.addEventListener('click', () => {
     location.href="/api/advanced";
