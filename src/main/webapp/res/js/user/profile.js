@@ -311,6 +311,7 @@ profileModElem.addEventListener('click', () => {
     }else{
         chkImg  = 'PROFILE';
         img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
+        console.log('userNickData : ' + userNickData.value)
         displayImgElem.append(img);
     }
 
@@ -321,6 +322,7 @@ profileModElem.addEventListener('click', () => {
             displayImgElem.append(img);
         } else {
             chkImg  = 'BASIC';
+            console.log('userNickData!! : ' + userNickData.value)
             img.src = '/res/img/BasicProfile.png';
             displayImgElem.append(img);
         }
