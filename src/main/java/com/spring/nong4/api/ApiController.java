@@ -249,11 +249,6 @@ public class ApiController {
             pageMaker.setDisplayPageNum(Integer.parseInt(farmTechDomain.getNumOfRows()));
             pageMaker.setTotalCount(Integer.parseInt(farmTechDomain.getTotalCount()));
 
-            PageMaker pageMaker = new PageMaker();
-            pageMaker.setCri(scri);
-            pageMaker.setDisplayPageNum(Integer.parseInt(farmTechDomain.getNumOfRows()));
-            pageMaker.setTotalCount(Integer.parseInt(farmTechDomain.getTotalCount()));
-
             Map<String, Object> map = new HashMap<>();
             map.put("farmTechDomain", farmTechDomain);
             map.put("pageMaker",pageMaker);

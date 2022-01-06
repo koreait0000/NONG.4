@@ -90,23 +90,17 @@
                         <th>등록일</th>
                         <th>조회수</th>
                     </tr>
-
-                    <c:forEach items="${farmTechDomain.farmTechItemList}" var="farmList">
+                    <c:forEach items="${farmTechDomain.farmTechItemList}" var="farmList" varStatus="status">
                         <tr class="bodyTr pointer" onclick="location.href='monthFarmTechDtl?srchCurationNo=' + ${farmList.curationNo}">
-
-<%--                        <c:forEach begin="1" end="${farmTechDomain.totalCount}" var="count">--%>
-                            <td>${farmTechDomain.totalCount}</td>
-
+                            <td>${farmTechDomain.totalCount - (farmTechDomain.pageNo - 1) * 10 - status.index}</td>
                             <td>${farmList.thumbFileNm}</td>
                             <td>${farmList.curationNm}</td>
                             <td>${farmList.curationSumryDtl}</td>
                             <td>${farmList.svcDt}</td>
                             <td>${farmList.rdCnt}</td>
                         </tr>
-<%--                        </c:forEach>--%>
                     </c:forEach>
                 </table>
-
                 <div class="pageMaker">
                     <c:if test="${pageMaker.prev}">
                         <a href="monthFarmTech?pageNo=${pageMaker.startPage - 1}&page=${pageMaker.startPage - 1}&sEraInfo=${farmTechDomain.SEraInfo}&srchStr=${farmTechDomain.srchStr}">이전</a>
@@ -119,20 +113,6 @@
                     </c:if>
                 </div>
             </form>
-
-                <form action="monthFarmTech">
-                    <div class="pageMaker">
-                        <c:if test="${pageMaker.prev}">
-                            <a href="monthFarmTech?pageNo=${pageMaker.startPage - 1}&page=${pageMaker.startPage - 1}">이전</a>
-                        </c:if>
-                        <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                            <a href="monthFarmTech?pageNo=${pageNum}&page=${pageNum}"}>${pageNum}</a>
-                        </c:forEach>
-                        <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                            <a href="monthFarmTech?pageNo=${pageMaker.endPage + 1}&page=${pageMaker.endPage + 1}">다음</a>
-                        </c:if>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
