@@ -24,6 +24,7 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -173,6 +174,7 @@ public class ApiController {
             if(farmTechDomain.getSEraInfo() != null){
                 urlBuilder.append("&" + URLEncoder.encode("sEraInfo", "UTF-8") + "=" + URLEncoder.encode(farmTechDomain.getSEraInfo(), "UTF-8"));
             }
+
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
 
             URL url = new URL(urlBuilder.toString());
@@ -191,8 +193,6 @@ public class ApiController {
                 result.append(line + "\n");
             }
             urlParse = result.toString();
-
-            System.out.println("urlParse : " + urlParse);
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -229,8 +229,6 @@ public class ApiController {
                     itemTag.setSvcDt(getTagValue("svcDt",eElement));
                     itemTag.setThumbFileNm(getTagValue("thumbFileNm",eElement));
 
-                    System.out.println("저장경로 : " + itemTag.getStreCours());
-
                     farmTechItemList.add(itemTag);
                 }
 
@@ -244,10 +242,12 @@ public class ApiController {
             farmTechDomain.setTotalCount(getTagValue("totalCount",eElement));
             farmTechDomain.setSrchStr(farmTechDomain.getSrchStr());
             farmTechDomain.setSEraInfo(farmTechDomain.getSEraInfo());
-
             farmTechDomain.setFarmTechItemList(farmTechItemList);
 
-            System.out.println("farmTechDomain : " + farmTechDomain);
+            PageMaker pageMaker = new PageMaker();
+            pageMaker.setCri(scri);
+            pageMaker.setDisplayPageNum(Integer.parseInt(farmTechDomain.getNumOfRows()));
+            pageMaker.setTotalCount(Integer.parseInt(farmTechDomain.getTotalCount()));
 
             PageMaker pageMaker = new PageMaker();
             pageMaker.setCri(scri);
@@ -255,7 +255,6 @@ public class ApiController {
             pageMaker.setTotalCount(Integer.parseInt(farmTechDomain.getTotalCount()));
 
             Map<String, Object> map = new HashMap<>();
-
             map.put("farmTechDomain", farmTechDomain);
             map.put("pageMaker",pageMaker);
 
@@ -299,8 +298,6 @@ public class ApiController {
             }
             urlParse = result.toString();
 
-            System.out.println("urlParse : " + urlParse);
-
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document document = dBuilder.parse(new InputSource(new StringReader(urlParse)));
@@ -322,6 +319,7 @@ public class ApiController {
                 String str = getTagValue("cntntsInfoHtml",eElement);
                 str = str.replace("href=\"/ps","href=\"http://www.nongsaro.go.kr/ps");
                 str = str.replace("img src=\"/ps","img src=\"http://www.nongsaro.go.kr/ps");
+
                 itemTag.setCntntsInfoHtml(str);
                 farmTechItemList.add(itemTag);
             }
