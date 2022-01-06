@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/api")
@@ -257,8 +259,6 @@ public class ApiController {
         String urlParse = "";
         monthFarmTechDtlDomain.itemTag itemTag;
 
-        System.out.println("farmTechDomain! : " + farmTechDtlDomain);
-
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/monthFarmTech/monthFarmTechDtl");
             urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20220105GHIZRN4S603UMMISOFCEXQ");
@@ -302,8 +302,26 @@ public class ApiController {
 
                 itemTag = new monthFarmTechDtlDomain.itemTag();
 
-                itemTag.setCntntsInfoHtml(getTagValue("cntntsInfoHtml",eElement));
+                String str = getTagValue("cntntsInfoHtml",eElement);
+                String reg = "<img src(?:.*?)/ps/img";
+                String nongsaUrl = "http://www.nongsaro.go.kr/ps";
+                String newTxt = "";
+                Pattern pattern = Pattern.compile(reg);
+                Matcher matcher = pattern.matcher(str);
 
+                while (matcher.find()) {
+                    String before = str.substring(0, matcher.start(0));
+                    String after = str.substring(matcher.end(0));
+                    String matchStr = matcher.group(0);
+
+                    matchStr = matchStr.replaceAll("/ps", nongsaUrl);
+
+                    newTxt += before + matchStr + after;
+                    matcher = pattern.matcher(newTxt);
+                }
+                System.out.println("TEST : " +newTxt);
+
+                itemTag.setCntntsInfoHtml(newTxt);
                 farmTechItemList.add(itemTag);
             }
 
@@ -311,8 +329,6 @@ public class ApiController {
             farmTechDtlDomain.setSrchCurationNo(farmTechDtlDomain.getSrchCurationNo());
 
             farmTechDtlDomain.setFarmTechItemList(farmTechItemList);
-
-            System.out.println("farmTechDomain! : " + farmTechDtlDomain);
 
             Map<String, Object> map = new HashMap<>();
 
