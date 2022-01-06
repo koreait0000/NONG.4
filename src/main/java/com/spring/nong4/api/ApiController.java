@@ -168,6 +168,13 @@ public class ApiController {
             {
                 urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
             }
+            if(farmTechDomain.getSrchStr() != null){
+                urlBuilder.append("&" + URLEncoder.encode("srchStr", "UTF-8") + "=" + URLEncoder.encode(farmTechDomain.getSrchStr(), "UTF-8"));
+            }
+            if(farmTechDomain.getSEraInfo() != null){
+                urlBuilder.append("&" + URLEncoder.encode("sEraInfo", "UTF-8") + "=" + URLEncoder.encode(farmTechDomain.getSEraInfo(), "UTF-8"));
+            }
+
             urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
 
             URL url = new URL(urlBuilder.toString());
@@ -236,6 +243,11 @@ public class ApiController {
             farmTechDomain.setSrchStr(farmTechDomain.getSrchStr());
             farmTechDomain.setSEraInfo(farmTechDomain.getSEraInfo());
             farmTechDomain.setFarmTechItemList(farmTechItemList);
+
+            PageMaker pageMaker = new PageMaker();
+            pageMaker.setCri(scri);
+            pageMaker.setDisplayPageNum(Integer.parseInt(farmTechDomain.getNumOfRows()));
+            pageMaker.setTotalCount(Integer.parseInt(farmTechDomain.getTotalCount()));
 
             PageMaker pageMaker = new PageMaker();
             pageMaker.setCri(scri);
