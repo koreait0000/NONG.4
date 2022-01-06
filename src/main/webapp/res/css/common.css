@@ -9,13 +9,13 @@ section{ padding-top: 50px;}
 .modal_close { color: white; font-size: 50px; cursor: pointer; }
 
 a { text-decoration: none; color: black;font-family: 'Gamja Flower', cursive; font-weight: 100;  font-size: 24px; letter-spacing: 8px; }
-header { position: fixed; width: 100%; z-index: 10;}
+nav { position: fixed; width: 100%; z-index: 10;}
 /* z-index 는 우선순위이다 커뮤니티쪽 슬라이드 ajax를 덮기위해 z-index를 쓴다 */
-header ul { display: flex; justify-content: space-around; list-style-type: none; margin: 0; padding: 0; background-color: darkgreen; }
-header ul:after{ content:''; display: block; clear:both; }
-header ul li { float: left; height: 50px;}
-header ul li a { display: block; font-size: 24px; font-family: 'Nanum Gothic', sans-serif; color: white; text-align: center; padding-top: 12px; width: 180px; height: 75%; }
-header ul li a:hover:not(.active) { background-color: forestgreen; }
+nav ul { display: flex; justify-content: space-around; list-style-type: none; margin: 0; padding: 0; background-color: darkgreen; }
+nav ul:after{ content:''; display: block; clear:both; }
+nav ul li { float: left; height: 50px;}
+nav ul li a { display: block; font-size: 24px; font-family: 'Nanum Gothic', sans-serif; color: white; text-align: center; padding-top: 12px; width: 180px; height: 75%; }
+nav ul li a:hover:not(.active) { background-color: forestgreen; }
 
 #container{ position: relative; margin: 0 auto; }
 img{ width: inherit; max-width: 100%; height: auto;}
