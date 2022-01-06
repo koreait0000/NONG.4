@@ -26,7 +26,7 @@ public class monthFarmTechDomain {
         private String curationNm;
         private String curationNo;
         private String curationSumryDtl;
-        private String rdcnt;
+        private String rdCnt;
         private String recomendAt;
         private String streCours;
         private String svcDt;

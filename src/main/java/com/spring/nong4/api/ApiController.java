@@ -153,7 +153,7 @@ public class ApiController {
     }
 
     @GetMapping("/monthFarmTech")
-    public String monthFarmTech(monthFarmTechDomain farmTechDomain, Model model) {
+    public String monthFarmTech(monthFarmTechDomain farmTechDomain, Model model, SearchCriteria scri) {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         monthFarmTechDomain.itemTag itemTag;
@@ -161,8 +161,19 @@ public class ApiController {
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/monthFarmTech/monthFarmTechLst");
             urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20220105GHIZRN4S603UMMISOFCEXQ");
-            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("5","UTF-8"));
+            if(farmTechDomain.getPageNo() != null) {
+                urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(farmTechDomain.getPageNo(), "UTF-8"));
+            } else
+            {
+                urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
+            }
+            if(farmTechDomain.getSrchStr() != null){
+                urlBuilder.append("&" + URLEncoder.encode("srchStr", "UTF-8") + "=" + URLEncoder.encode(farmTechDomain.getSrchStr(), "UTF-8"));
+            }
+            if(farmTechDomain.getSEraInfo() != null){
+                urlBuilder.append("&" + URLEncoder.encode("sEraInfo", "UTF-8") + "=" + URLEncoder.encode(farmTechDomain.getSEraInfo(), "UTF-8"));
+            }
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
 
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -212,7 +223,7 @@ public class ApiController {
                     itemTag.setCurationNm(getTagValue("curationNm",eElement));
                     itemTag.setCurationNo(getTagValue("curationNo",eElement));
                     itemTag.setCurationSumryDtl(getTagValue("curationSumryDtl",eElement));
-                    itemTag.setRdcnt(getTagValue("rdcnt",eElement));
+                    itemTag.setRdCnt(getTagValue("rdcnt",eElement));
                     itemTag.setRecomendAt(getTagValue("recomendAt",eElement));
                     itemTag.setStreCours(getTagValue("streCours",eElement));
                     itemTag.setSvcDt(getTagValue("svcDt",eElement));
@@ -238,9 +249,15 @@ public class ApiController {
 
             System.out.println("farmTechDomain : " + farmTechDomain);
 
+            PageMaker pageMaker = new PageMaker();
+            pageMaker.setCri(scri);
+            pageMaker.setDisplayPageNum(Integer.parseInt(farmTechDomain.getNumOfRows()));
+            pageMaker.setTotalCount(Integer.parseInt(farmTechDomain.getTotalCount()));
+
             Map<String, Object> map = new HashMap<>();
 
             map.put("farmTechDomain", farmTechDomain);
+            map.put("pageMaker",pageMaker);
 
             model.addAllAttributes(map);
 
@@ -303,25 +320,9 @@ public class ApiController {
                 itemTag = new monthFarmTechDtlDomain.itemTag();
 
                 String str = getTagValue("cntntsInfoHtml",eElement);
-                String reg = "<img src(?:.*?)/ps/img";
-                String nongsaUrl = "http://www.nongsaro.go.kr/ps";
-                String newTxt = "";
-                Pattern pattern = Pattern.compile(reg);
-                Matcher matcher = pattern.matcher(str);
-
-                while (matcher.find()) {
-                    String before = str.substring(0, matcher.start(0));
-                    String after = str.substring(matcher.end(0));
-                    String matchStr = matcher.group(0);
-
-                    matchStr = matchStr.replaceAll("/ps", nongsaUrl);
-
-                    newTxt += before + matchStr + after;
-                    matcher = pattern.matcher(newTxt);
-                }
-                System.out.println("TEST : " +newTxt);
-
-                itemTag.setCntntsInfoHtml(newTxt);
+                str = str.replace("href=\"/ps","href=\"http://www.nongsaro.go.kr/ps");
+                str = str.replace("img src=\"/ps","img src=\"http://www.nongsaro.go.kr/ps");
+                itemTag.setCntntsInfoHtml(str);
                 farmTechItemList.add(itemTag);
             }
 
