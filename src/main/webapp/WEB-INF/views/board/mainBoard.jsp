@@ -42,7 +42,7 @@
             <div class="community-top"></div>
             <div class="community-board">
                 <div>
-                    <div>
+                    <div style="font-size: 30px; ">
                         ${param.provider == '' ? '통합게시판' : ''}
                         ${param.provider == 'freedom'  ? '자유게시판' : ''}
                         ${param.provider == 'question' ? '질문게시판' : ''}

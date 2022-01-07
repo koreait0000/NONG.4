@@ -1,5 +1,5 @@
 .background { height:100%; }
 .community-board .pageMaker { text-align: center; margin-top: 10px; }
 .community-board .search { text-align: center; margin-top: 10px; }
-table { width: 100%; border-top: 1px solid black; border-collapse: collapse; text-align: center;}
+table { width: 100%; border-top: 1px solid black; border-collapse: collapse; text-align: center; margin-top: 10px; }
 th { border-bottom: 1px solid black; }

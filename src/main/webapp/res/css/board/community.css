@@ -8,7 +8,7 @@
 #news-paging-btn { padding-bottom: 5px; font-weight: bold; font-size: 32px; }
 #news-paging-btn button{ float:right;}
 
-.news { height: 320px; font-family: 'Dongle', sans-serif; font-size: 24px; padding: 5px 30px;}
+.news { height: 500px; font-family: 'Dongle', sans-serif; font-size: 24px; padding: 5px 30px;}
 .news-list-detail { position: relative; padding: 10px; border-bottom: 1px solid #d3d3d3; }
 .news-title-span{ display: inline;  position:absolute; left:120px;}
 .news-regdt-span{ display: inline;  position:absolute; left:80px;}

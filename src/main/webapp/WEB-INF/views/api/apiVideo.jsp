@@ -46,6 +46,7 @@
                                 <div class="outerRound">
                                     <div class="innerRound">
                                         <div class="innerInput">
+                                            <div style="font-size: 30px; margin-bottom: 10px; ">짧은 주제별 동영상</div>
                                             <select class="sType" id="sType" name="sType">
                                                 <option value="sSj" <c:if test="${apiVideoDomain.SType == 'sSj'}">selected='selected'</c:if>>주제목</option>
                                                 <option value="sMvpClipSj" <c:if test="${apiVideoDomain.SType == 'sMvpClipSj'}">selected='selected'</c:if>>짧은 기술동영상 제목</option>
