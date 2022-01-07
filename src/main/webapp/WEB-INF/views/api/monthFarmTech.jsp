@@ -41,12 +41,11 @@
             <div class="community-board">
                 <form action="monthFarmTech">
                     <div class="clear bbsSection">
-                        <fieldset class="sch">
-                            <legend>게시판검색</legend>
                         <div class="schBox">
                             <div class="outerRound">
                                 <div class="innerRound">
-                                    <div class="fl">
+                                    <div style="font-size: 30px; margin-bottom: 10px; ">이달의 농업 기술</div>
+                                    <span class="fl">
                                         <strong class="nTitle">기간설정</strong>
                                         <span class="inputW">
                                             <select id="sEraInfo" name="sEraInfo">
@@ -69,17 +68,16 @@
                                         <span class="inputW">
                                             <input type="text" id="srchStr" name="srchStr" size="50" value="${farmTechDomain.srchStr}">
                                         </span>
-                                    </div>
-                                    <div class="fr">
+                                    </span>
+                                    <span class="fr">
                                         <strong class="button medium">
                                             <input type="submit" value="검색">
                                         </strong>
-                                    </div>
+                                    </span>
                                     <div class="cLear"></div>
                                 </div>
                             </div>
                         </div>
-                        </fieldset>
                     </div>
                 <table>
                     <tr>
