@@ -91,9 +91,9 @@
                     <c:forEach items="${farmTechDomain.farmTechItemList}" var="farmList" varStatus="status">
                         <tr class="bodyTr pointer" onclick="location.href='monthFarmTechDtl?srchCurationNo=' + ${farmList.curationNo}">
                             <td>${farmTechDomain.totalCount - (farmTechDomain.pageNo - 1) * 10 - status.index}</td>
-                            <td>${farmList.thumbFileNm}</td>
+                            <td class="curation" data-curationno="${farmList.curationNo}">${farmList.thumbFileNm}</td>
                             <td>${farmList.curationNm}</td>
-                            <td>${farmList.curationSumryDtl}</td>
+                            <td class="sumryDtl">${farmList.curationSumryDtl}</td>
                             <td>${farmList.svcDt}</td>
                             <td>${farmList.rdCnt}</td>
                         </tr>
