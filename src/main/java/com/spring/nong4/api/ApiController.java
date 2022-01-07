@@ -23,6 +23,7 @@ public class ApiController {
 
     @GetMapping("/monthFarmTech")
     public String monthFarmTech(monthFarmTechDomain farmTechDomain, Model model, SearchCriteria scri) {
+        model.addAllAttributes(service.monthFarmTechDtlImg(farmTechDomain, scri));
         model.addAllAttributes(service.monthFarmTech(farmTechDomain,scri));
         return "api/monthFarmTech";
     }
@@ -32,5 +33,4 @@ public class ApiController {
         model.addAllAttributes(service.monthFarmTechDtl(farmTechDtlDomain));
         return "api/monthFarmTechDtl";
     }
-
 }

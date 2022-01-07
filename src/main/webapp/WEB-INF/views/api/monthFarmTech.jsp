@@ -81,20 +81,20 @@
                     </div>
                 <table>
                     <tr>
-                        <th>번호</th>
+                        <th style="width: 5%;">번호</th>
                         <th>이미지</th>
-                        <th>제목</th>
+                        <th style="width: 20%;">제목</th>
                         <th>요약내용</th>
-                        <th>등록일</th>
-                        <th>조회수</th>
+                        <th style="width: 10%;">등록일</th>
+                        <th style="width: 10%;">조회수</th>
                     </tr>
                     <c:forEach items="${farmTechDomain.farmTechItemList}" var="farmList" varStatus="status">
                         <tr class="bodyTr pointer" onclick="location.href='monthFarmTechDtl?srchCurationNo=' + ${farmList.curationNo}">
                             <td>${farmTechDomain.totalCount - (farmTechDomain.pageNo - 1) * 10 - status.index}</td>
-                            <td class="curation" data-curationno="${farmList.curationNo}">${farmList.thumbFileNm}</td>
-                            <td>${farmList.curationNm}</td>
+                            <td><img src="${img[status.index]}" style="width: 120px; height: 80px; padding: 10px;"></td>
+                            <td style="padding: 10px;">${farmList.curationNm}</td>
                             <td class="sumryDtl">${farmList.curationSumryDtl}</td>
-                            <td>${farmList.svcDt}</td>
+                            <td style="padding-left: 5px;">${farmList.svcDt}</td>
                             <td>${farmList.rdCnt}</td>
                         </tr>
                     </c:forEach>

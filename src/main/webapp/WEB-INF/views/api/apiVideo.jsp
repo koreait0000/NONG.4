@@ -95,10 +95,10 @@
                                 </tr>
                                 <c:forEach items="${apiVideoDomain.videoItemList}" var="videoList">
                                     <tr class="bodyTr pointer" onclick="location.href='apiVideo?videoLink=' + '${videoList.videoLink}'">
-                                        <th><img src=${videoList.videoImg}></th>
-                                        <th>${videoList.stdPrdlstCodeNm}</th>
-                                        <th>${videoList.sj}</th>
-                                        <th>${videoList.mvpClipSj}</th>
+                                        <td><img src=${videoList.videoImg}></td>
+                                        <td>${videoList.stdPrdlstCodeNm}</td>
+                                        <td>${videoList.sj}</td>
+                                        <td>${videoList.mvpClipSj}</td>
                                     </tr>
                                 </c:forEach>
                             </table>

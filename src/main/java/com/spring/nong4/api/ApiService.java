@@ -5,15 +5,13 @@ import com.spring.nong4.api.model.monthFarmTechDomain;
 import com.spring.nong4.api.model.monthFarmTechDtlDomain;
 import com.spring.nong4.board.model.PageMaker;
 import com.spring.nong4.board.model.SearchCriteria;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
@@ -26,9 +24,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ApiService {
+    @Autowired
+    private ApiService service;
+
     private static String getTagValue(String tag, Element eElement) {
         NodeList nList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
         Node nValue = (Node) nList.item(0);
@@ -300,7 +303,7 @@ public class ApiService {
 
                 String str = getTagValue("cntntsInfoHtml",eElement);
                 str = str.replace("href=\"/ps","href=\"http://www.nongsaro.go.kr/ps");
-                str = str.replace("img src=\"/ps","img src=\"http://www.nongsaro.go.kr/ps");
+                str = str.replace("src=\"/ps","src=\"http://www.nongsaro.go.kr/ps");
 
                 itemTag.setCntntsInfoHtml(str);
                 farmTechItemList.add(itemTag);
@@ -320,5 +323,58 @@ public class ApiService {
             e.printStackTrace();
         }
         return map;
+    }
+
+    public Map<String, Object> monthFarmTechDtlImg(monthFarmTechDomain farmTechDomain, SearchCriteria scri){
+        Map<String, Object> monthFarmTechMap = new HashMap<>();
+        monthFarmTechMap.put("monthFarmTechMap", service.monthFarmTech(farmTechDomain,scri));
+        Map monthFarmTechDomainMap = (Map)monthFarmTechMap.get("monthFarmTechMap");
+        monthFarmTechDomain monthFarmTechDomain = (monthFarmTechDomain)monthFarmTechDomainMap.get("farmTechDomain");
+        List<monthFarmTechDomain.itemTag> farmTechItemList = monthFarmTechDomain.getFarmTechItemList();
+
+        Map<String, Object> imgMap = new HashMap<>();
+        List<String> imgList = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++){
+            String curationNo = farmTechItemList.get(i).getCurationNo();
+            monthFarmTechDtlDomain farmTechDtlDomain = new monthFarmTechDtlDomain();
+            farmTechDtlDomain.setSrchCurationNo(curationNo);
+            Map<String, Object> monthFarmTechDtlMap = new HashMap<>();
+            monthFarmTechDtlMap.put("monthFarmTechDtlMap", service.monthFarmTechDtl(farmTechDtlDomain));
+            Map monthFarmTechDtlDomainMap = (Map)monthFarmTechDtlMap.get("monthFarmTechDtlMap");
+            monthFarmTechDtlDomain monthFarmTechDtlDomain = (monthFarmTechDtlDomain)monthFarmTechDtlDomainMap.get("farmTechDtlDomain");
+            List<monthFarmTechDtlDomain.itemTag> farmTechDtlItemList = monthFarmTechDtlDomain.getFarmTechItemList();
+
+            String cntntsInfoHtml = farmTechDtlItemList.get(0).getCntntsInfoHtml();
+            Pattern pattern = Pattern.compile("src=\"http(?:.*?).jpg");
+            String result = "";
+
+            Matcher matcher = pattern.matcher(cntntsInfoHtml);
+
+            if(matcher.find()) {
+                result = matcher.group(0).substring(10);
+                imgList.add(result);
+            } else {
+                pattern = Pattern.compile("src=\"http(?:.*?).png");
+                matcher = pattern.matcher(cntntsInfoHtml);
+                if(matcher.find()){
+                    result = matcher.group(0).substring(10);
+                    imgList.add(result);
+                } else {
+                    pattern = Pattern.compile("src=\"http(?:.*?).gif");
+                    matcher = pattern.matcher(cntntsInfoHtml);
+                    if(matcher.find()){
+                        result = matcher.group(0).substring(10);
+                        imgList.add(result);
+                    } else {
+                        imgList.add(" ");
+                    }
+                }
+            }
+        }
+
+        imgMap.put("img", imgList);
+
+        return imgMap;
     }
 }
