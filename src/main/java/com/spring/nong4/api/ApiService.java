@@ -331,11 +331,12 @@ public class ApiService {
         Map monthFarmTechDomainMap = (Map)monthFarmTechMap.get("monthFarmTechMap");
         monthFarmTechDomain monthFarmTechDomain = (monthFarmTechDomain)monthFarmTechDomainMap.get("farmTechDomain");
         List<monthFarmTechDomain.itemTag> farmTechItemList = monthFarmTechDomain.getFarmTechItemList();
+        System.out.println("farmTechItemList: " + farmTechItemList);
 
         Map<String, Object> imgMap = new HashMap<>();
         List<String> imgList = new ArrayList<>();
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < farmTechItemList.size(); i++){
             String curationNo = farmTechItemList.get(i).getCurationNo();
             monthFarmTechDtlDomain farmTechDtlDomain = new monthFarmTechDtlDomain();
             farmTechDtlDomain.setSrchCurationNo(curationNo);
