@@ -10,7 +10,7 @@ intermediateElem.addEventListener('click', () => {
     location.href="/api/monthFarmTech";
 });
 advancedElem.addEventListener('click', () => {
-    location.href="/api/advanced";
+    location.href="/api/farmWorkingPlan";
 });
 masterElem.addEventListener('click', () => {
     location.href="/api/master";

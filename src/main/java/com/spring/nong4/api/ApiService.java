@@ -1,5 +1,6 @@
 package com.spring.nong4.api;
 
+import com.spring.nong4.api.model.farmWorkingPlanDomain;
 import com.spring.nong4.api.model.apiVideoDomain;
 import com.spring.nong4.api.model.monthFarmTechDomain;
 import com.spring.nong4.api.model.monthFarmTechDtlDomain;
@@ -224,7 +225,6 @@ public class ApiService {
 
                     farmTechItemList.add(itemTag);
                 }
-
             }
 
             Node nNode = itemsList.item(0);
@@ -373,9 +373,163 @@ public class ApiService {
                 }
             }
         }
-
         imgMap.put("img", imgList);
 
         return imgMap;
+    }
+
+    public Map<String, Object> farmWorkingPlan(farmWorkingPlanDomain workingDomain, String ajaxValue) {
+        System.out.println("FIRST AJAXVALUE : " + ajaxValue);
+        Map<String, Object> map = new HashMap<>();
+        StringBuffer result = new StringBuffer();
+        String urlParse = "";
+        farmWorkingPlanDomain.itemTag itemTag;
+
+        try {
+            StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/farmWorkingPlanNew/workScheduleGrpList");
+            urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20220105GHIZRN4S603UMMISOFCEXQ");
+
+            URL url = new URL(urlBuilder.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type", "application/json");
+
+            BufferedReader rd;
+            if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+            String line;
+            while((line = rd.readLine()) != null) {
+                result.append(line + "\n");
+            }
+            urlParse = result.toString();
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document document = dBuilder.parse(new InputSource(new StringReader(urlParse)));
+
+            //root tag(<response>)
+            document.getDocumentElement().normalize();
+
+            // node tag name
+            NodeList nList = document.getElementsByTagName("item");
+
+            List<farmWorkingPlanDomain.itemTag> workingItemList = new ArrayList<>();
+
+            for(int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+
+                if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+
+                    itemTag = new farmWorkingPlanDomain.itemTag();
+
+                    itemTag.setCodeNm(getTagValue("codeNm",eElement));
+                    itemTag.setKidofcomdtySeCode(getTagValue("kidofcomdtySeCode",eElement));
+                    itemTag.setSort(getTagValue("sort",eElement));
+
+                    workingItemList.add(itemTag);
+                }
+            }
+            workingDomain.setWorkingItemList(workingItemList);
+
+            System.out.println("WORKING DOMAIN : " + workingDomain);
+            System.out.println("WORKING SCHEDULELIST : " + workingDomain.getWorkingScheduleList());
+
+            map.put("workingDomain", workingDomain);
+            map.put("ajaxValue", ajaxValue);
+//            map.put("workScheduleLst", workingDomain.getWorkingScheduleList());
+
+            rd.close();
+            conn.disconnect();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    public Map<String, Object> workScheduleLst(farmWorkingPlanDomain workingDomain, String ajaxValue) {
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> workingMap = new HashMap<>();
+        workingMap.put("workingMap", service.farmWorkingPlan(workingDomain, ajaxValue));
+
+        Map workingDomainMap = (Map)workingMap.get("workingMap");
+        farmWorkingPlanDomain workingPlanDomainMap = (farmWorkingPlanDomain)workingDomainMap.get("workingDomain");
+
+        List<farmWorkingPlanDomain.itemTag> workingItemListMap = workingPlanDomainMap.getWorkingItemList();
+
+        StringBuffer result = new StringBuffer();
+        String urlParse = "";
+        farmWorkingPlanDomain.scheduleLst scheduleLst;
+
+        try {
+            StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/farmWorkingPlanNew/workScheduleLst");
+            urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + "20220105GHIZRN4S603UMMISOFCEXQ");
+            urlBuilder.append("&" + URLEncoder.encode("kidofcomdtySeCode", "UTF-8") + "=" + ajaxValue);
+
+            URL url = new URL(urlBuilder.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type", "application/json");
+
+            BufferedReader rd;
+            if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+            String line;
+            while((line = rd.readLine()) != null) {
+                result.append(line + "\n");
+            }
+            urlParse = result.toString();
+            System.out.println("urlParse : " + urlParse);
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document document = dBuilder.parse(new InputSource(new StringReader(urlParse)));
+
+            //root tag(<response>)
+            document.getDocumentElement().normalize();
+
+            // node tag name
+            NodeList nList = document.getElementsByTagName("item");
+
+            List<farmWorkingPlanDomain.scheduleLst> workingItemList = new ArrayList<>();
+
+            for(int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+
+                if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+
+                    scheduleLst = new farmWorkingPlanDomain.scheduleLst();
+
+                    scheduleLst.setCntntsNo(getTagValue("cntntsNo",eElement));
+                    scheduleLst.setFileDownUrlInfo(getTagValue("fileDownUrlInfo",eElement));
+                    scheduleLst.setFileName(getTagValue("fileName",eElement));
+                    scheduleLst.setFileSeCode(getTagValue("fileSeCode",eElement));
+                    scheduleLst.setOrginlFIleNm(getTagValue("orginlFileNm",eElement));
+                    scheduleLst.setSj(getTagValue("sj",eElement));
+
+                    workingItemList.add(scheduleLst);
+                }
+            }
+            workingDomain.setWorkingScheduleList(workingItemList);
+
+            System.out.println("workScheduleLst : " + workingDomain.getWorkingScheduleList());
+
+            map.put("workScheduleLst", workingDomain.getWorkingScheduleList());
+
+            rd.close();
+            conn.disconnect();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
     }
 }
