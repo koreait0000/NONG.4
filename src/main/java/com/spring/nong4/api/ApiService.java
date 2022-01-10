@@ -331,7 +331,6 @@ public class ApiService {
         Map monthFarmTechDomainMap = (Map)monthFarmTechMap.get("monthFarmTechMap");
         monthFarmTechDomain monthFarmTechDomain = (monthFarmTechDomain)monthFarmTechDomainMap.get("farmTechDomain");
         List<monthFarmTechDomain.itemTag> farmTechItemList = monthFarmTechDomain.getFarmTechItemList();
-        System.out.println("farmTechItemList: " + farmTechItemList);
 
         Map<String, Object> imgMap = new HashMap<>();
         List<String> imgList = new ArrayList<>();

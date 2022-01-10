@@ -1,7 +1,5 @@
 const tableRoundDiv = document.querySelector('.tableRound');
 
-//const tbody = document.querySelector('.tbody');
-
 function fncViewButtom(kidofcomdtySeCode) {
     fetch('farmWorkingPlan',
         {
@@ -35,8 +33,8 @@ function tabArea(myJson) {
         textSpan.addEventListener('click', () => {
             location.href = 'farmWorkingInfo?cntntsNo='+item.cntntsNo;
         })
-        textSpan.className = 'textSpan';
-        fileSpan.className = 'fileSpan';
+        textSpan.className = 'textSpan pointer';
+        fileSpan.className = 'fileSpan pointer';
         textSpan.append(item.sj);
         fileSpan.append(iconImg);
 

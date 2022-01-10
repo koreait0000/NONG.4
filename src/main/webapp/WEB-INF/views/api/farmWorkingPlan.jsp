@@ -54,9 +54,7 @@
                                     <div class="tabArea">
                                         <ul>
                                             <c:forEach items="${workingDomain.workingItemList}" var="workingList" varStatus="status">
-                                                <a id="${workingList.kidofcomdtySeCode}" href="#" onclick="fncViewButtom('${workingList.kidofcomdtySeCode}'); return false;">
-                                                <li>${workingList.codeNm}</li>
-                                                </a>
+                                                <li><a id="${workingList.kidofcomdtySeCode}" href="#" onclick="fncViewButtom('${workingList.kidofcomdtySeCode}'); return false;">${workingList.codeNm}</a></li>
                                             </c:forEach>
                                         </ul>
                                     </div>
