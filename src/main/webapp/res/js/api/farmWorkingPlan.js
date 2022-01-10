@@ -1,8 +1,8 @@
-const tbody = document.querySelector('.tbody');
+const tableRoundDiv = document.querySelector('.tableRound');
+
+//const tbody = document.querySelector('.tbody');
 
 function fncViewButtom(kidofcomdtySeCode) {
-    console.log('kidofcomdtySeCode : ' + kidofcomdtySeCode)
-
     fetch('farmWorkingPlan',
         {
             method: 'POST',
@@ -13,21 +13,37 @@ function fncViewButtom(kidofcomdtySeCode) {
         })
         .then(res => res.json())
         .then(myJson => {
-            console.log('?? : ' + myJson.workScheduleLst.length)
             tabArea(myJson);
         })
 }
 
 function tabArea(myJson) {
+    tableRoundDiv.innerHTML = '';
     myJson.workScheduleLst.forEach(function (item){
-        const scheduleTr = document.createElement('tr');
-        const scheduleTd = document.createElement('td');
-        const scheduleA  = document.createElement('a');
+        const cntDiv = document.createElement('div');
+        const textSpan = document.createElement('span');
+        const fileSpan = document.createElement('span');
+        const iconImg = document.createElement('img');
 
-        scheduleA.innerText = item.sj;
+        cntDiv.className = 'scheduleDiv';
 
-        scheduleTd.append(scheduleA);
-        scheduleTr.append(scheduleTd);
-        tbody.append(scheduleTr);
+        iconImg.src = 'http://www.nongsaro.go.kr/ps/img/icon/icon_file.gif';
+        iconImg.addEventListener('click', () => {
+            location.href = item.fileDownUrlInfo;
+        })
+
+        textSpan.addEventListener('click', () => {
+            location.href = 'farmWorkingInfo?cntntsNo='+item.cntntsNo;
+        })
+        textSpan.className = 'textSpan';
+        fileSpan.className = 'fileSpan';
+        textSpan.append(item.sj);
+        fileSpan.append(iconImg);
+
+        cntDiv.append(textSpan, fileSpan);
+        tableRoundDiv.append(cntDiv);
     })
+
 }
+
+fncViewButtom(210004);

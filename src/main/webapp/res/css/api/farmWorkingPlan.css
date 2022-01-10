@@ -1,1 +1,9 @@
 .tabArea ul li { float: left; list-style: none; padding: 5px;  }
+.grid{ margin:0; empty-cells:show; border-collapse:collapse; border-style:none; border-width:0; font-size:12px; border-color:#FFF; position: relative; width:100%;}
+.tableRound { display: grid; grid-template-columns: 300px 300px 300px; grid-template-rows: auto;
+}
+.tabArea ul { display: flex; justify-content: space-around; padding-inline-start: 20px;}
+
+.scheduleDiv { margin-right: 20px ; padding: 15px; border-bottom: 1px solid #d3d3d3; display: flex; justify-content: space-between; }
+
+.fileSpan { margin-right: 5px; margin-top: 5px; }

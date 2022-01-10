@@ -1,0 +1,89 @@
+/*-----------------------------------------------------------------------------*\
+ *                                  서브타이틀
+\*-----------------------------------------------------------------------------*/
+.apiContArea h3{margin: 0px; padding: 0px; border-top:2px solid #b9b9b9; position: relative; margin-bottom: 40px;}
+.apiContArea h3 p{position:relative; top:-2px; display:inline; text-align:left; height:20px; border-top:2px solid #2f6aa6; height:inherit; padding: 5px 3px 0px 3px;}
+.apiContArea h3 p.bgRp{border-top:2px solid #b9b9b9; margin-left: 3px;}
+.apiContArea h3 p strong{font-size: 16px; letter-spacing: -0.5px;}
+.apiContArea h3 p strong.miniF{font-family: Helvetica , Verdana; color: #9f9f9f; font-stretch:extra-expanded; text-transform:uppercase; font-size:11px; letter-spacing: 1px; font-weight: normal;}
+/*-----------------------------------------------------------------------------*\
+ *                                  //서브타이틀
+\*-----------------------------------------------------------------------------*/
+
+/* 농작업일정_타이틀 */
+#nongScheduleTit{ margin-top: 30px}
+#nongScheduleTit h1{ font-size: 24px; margin-left: 10px; float: left}
+#nongScheduleTit h2{ background: #dadada; font-size: 16px; color: #434343; font-weight: normal; line-height: 30px; text-align: center; margin-top: 10px; }
+#nongScheduleTit h1 span{ display: inline-block; margin-left: 15px; font-size: 16px; color: #a3a3a3; font-weight: normal; background: url(../img/nongsaroAdd/division1.gif) no-repeat 0 100%; padding-left: 10px}
+#nongScheduleTit .floatDiv .btn-2{ float: right}
+#nongScheduleTit table, #nongScheduleTit td{ table-layout: fixed}
+#nongScheduleTit .m_scrollTable{ margin-bottom: 30px}
+#nongScheduleTit .tblSchedule{ border-top: 2px solid #70bc5c}
+#nongScheduleTit .tblSchedule thead th{ border: 1px solid #70bc5c; background: #fff; font-size: 15px; font-weight: 600; color: #434343; line-height: 30px; text-align: center}
+#nongScheduleTit .tblSchedule thead td{ background: #70bc5c; border: 1px solid #70bc5c; font-size: 0; text-indent: -1000000000px; line-height: 0; height: 8px}
+#nongScheduleTit .tblSchedule thead td.bg2{ background: #8dc97d}
+#nongScheduleTit .tblSchedule thead td.bg3{ background: #a9d79d}
+#nongScheduleTit .tblSchedule tbody td{ background: #fff; border: 1px solid #ccc; empty-cells: show; text-align: center; vertical-align: middle; line-height: 1.2 !important; color: #333; padding: 4px 0; letter-spacing: -1px; height: 30px;}
+#nongScheduleTit .tblSchedule tbody td.empty{ border: 0 !important; height: 5px; padding: 0}
+#nongScheduleTit .tblSchedule tbody td.bgYellow{ background: #e7ecbd}
+#nongScheduleTit .tblSchedule tbody td.bgBlue{ background: #daedff}
+#nongScheduleTit .tblSchedule tbody td.bgRed{ background: #ffe6d7}
+#nongScheduleTit .tblSchedule tbody td.bgPurple{ background: #dedfff}
+#nongScheduleTit .tblSchedule tbody td.bgGreen{ background: #e6ffde}
+#nongScheduleTit .tblSchedule.tblSchedule2{ border-top: 2px solid #08acf2}
+#nongScheduleTit .tblSchedule.tblSchedule2 thead th{ border: 1px solid #08acf2;}
+#nongScheduleTit .tblSchedule.tblSchedule2 thead td{ background: #08acf2; border: 1px solid #08acf2;}
+#nongScheduleTit .tblSchedule.tblSchedule2 thead td.bg2{ background: #39bdf5}
+#nongScheduleTit .tblSchedule.tblSchedule2 thead td.bg3{ background: #6bcdf7}
+#nongScheduleTit .tblSchedule.tblSchedule3{ border-top: 2px solid #ffb400}
+#nongScheduleTit .tblSchedule.tblSchedule3 thead th{ border: 1px solid #ffb400;}
+#nongScheduleTit .tblSchedule.tblSchedule3 thead td{ background: #ffb400; border: 1px solid #ffb400;}
+#nongScheduleTit .tblSchedule.tblSchedule3 thead td.bg2{ background: #ffca4c}
+#nongScheduleTit .tblSchedule.tblSchedule3 thead td.bg3{ background: #ffd97f}
+#nongScheduleTit h3{ background: url(../img/interabang/interabang_h3.png) no-repeat 0 8px; padding-left: 15px; font-size: 19px; color: #333; letter-spacing: -1px; line-height: 1.4; margin: 30px 0 10px;}
+#nongScheduleTit .bullet1{ background: url(../img/interabang/bullet1.png) no-repeat 0 7px; margin: 0 0 5px 15px; padding-left: 12px; line-height: 1.4; font-size: 16px; color: #545454; word-break: keep-all}
+#nongScheduleTit .bullet3{ background: url(../img/interabang/bullet3.png) no-repeat 0 10px; padding-left: 12px; line-height: 1.4; margin: 3px 0 0 0; font-size: 14px; color: #666;}
+#nongScheduleTit .txt_point{ font-size: 14px; color: #ff7800;}
+#nongScheduleTit .tblSection{ margin-top: 30px}
+#nongScheduleTit .tblSection table{ border-top: 2px solid #ababab}
+#nongScheduleTit .tblSection th, #nongScheduleTit .tblSection td{ border: 1px solid #dedede; font-size: 14px; padding: 5px 10px; word-wrap: break-word; white-space: normal;}
+#nongScheduleTit .tblSection th{ background: #f5f5f5; font-weight: 600}
+
+/* 농작업일정 */
+#nongSchedule{ margin-top: 30px}
+#nongSchedule h1{ font-size: 24px; margin-left: 10px; float: left}
+#nongSchedule h2{ background: #dadada; font-size: 16px; color: #434343; font-weight: normal; line-height: 30px; text-align: center; margin-top: 10px}
+#nongSchedule h1 span{ display: inline-block; margin-left: 15px; font-size: 16px; color: #a3a3a3; font-weight: normal; background: url(../img/nongsaroAdd/division1.gif) no-repeat 0 100%; padding-left: 10px}
+#nongSchedule .floatDiv .btn-2{ float: right}
+#nongSchedule table, #nongSchedule td{ table-layout: fixed}
+#nongSchedule .m_scrollTable{ margin-bottom: 30px}
+#nongSchedule .tblSchedule{ border-top: 2px solid #70bc5c}
+#nongSchedule .tblSchedule thead th{ border: 1px solid #70bc5c; background: #fff; font-size: 15px; font-weight: 600; color: #434343; line-height: 30px; text-align: center}
+#nongSchedule .tblSchedule thead td{ background: #70bc5c; border: 1px solid #70bc5c; font-size: 0; text-indent: -1000000000px; line-height: 0; height: 8px}
+#nongSchedule .tblSchedule thead td.bg2{ background: #8dc97d}
+#nongSchedule .tblSchedule thead td.bg3{ background: #a9d79d}
+#nongSchedule .tblSchedule tbody td{ background: #fff; border: 1px solid #ccc; empty-cells: show; text-align: center; vertical-align: middle; line-height: 1.2 !important; color: #333; padding: 4px 0; letter-spacing: -1px; height: 30px;}
+#nongSchedule .tblSchedule tbody td.empty{ border: 0 !important; height: 5px; padding: 0}
+#nongSchedule .tblSchedule tbody td.bgYellow{ background: #e7ecbd}
+#nongSchedule .tblSchedule tbody td.bgBlue{ background: #daedff}
+#nongSchedule .tblSchedule tbody td.bgRed{ background: #ffe6d7}
+#nongSchedule .tblSchedule tbody td.bgPurple{ background: #dedfff}
+#nongSchedule .tblSchedule tbody td.bgGreen{ background: #e6ffde}
+#nongSchedule .tblSchedule.tblSchedule2{ border-top: 2px solid #08acf2}
+#nongSchedule .tblSchedule.tblSchedule2 thead th{ border: 1px solid #08acf2;}
+#nongSchedule .tblSchedule.tblSchedule2 thead td{ background: #08acf2; border: 1px solid #08acf2;}
+#nongSchedule .tblSchedule.tblSchedule2 thead td.bg2{ background: #39bdf5}
+#nongSchedule .tblSchedule.tblSchedule2 thead td.bg3{ background: #6bcdf7}
+#nongSchedule .tblSchedule.tblSchedule3{ border-top: 2px solid #ffb400}
+#nongSchedule .tblSchedule.tblSchedule3 thead th{ border: 1px solid #ffb400;}
+#nongSchedule .tblSchedule.tblSchedule3 thead td{ background: #ffb400; border: 1px solid #ffb400;}
+#nongSchedule .tblSchedule.tblSchedule3 thead td.bg2{ background: #ffca4c}
+#nongSchedule .tblSchedule.tblSchedule3 thead td.bg3{ background: #ffd97f}
+#nongSchedule h3{ background: url(../img/interabang/interabang_h3.png) no-repeat 0 8px; padding-left: 15px; font-size: 19px; color: #333; letter-spacing: -1px; line-height: 1.4; margin: 30px 0 10px;}
+#nongSchedule .bullet1{ background: url(../img/interabang/bullet1.png) no-repeat 0 7px; margin: 0 0 5px 15px; padding-left: 12px; line-height: 1.4; font-size: 16px; color: #545454; word-break: keep-all}
+#nongSchedule .bullet3{ background: url(../img/interabang/bullet3.png) no-repeat 0 10px; padding-left: 12px; line-height: 1.4; margin: 3px 0 0 0; font-size: 14px; color: #666;}
+#nongSchedule .txt_point{ font-size: 14px; color: #ff7800;}
+#nongSchedule .tblSection{ margin-top: 30px}
+#nongSchedule .tblSection table{ border-top: 2px solid #ababab}
+#nongSchedule .tblSection th, #nongSchedule .tblSection td{ border: 1px solid #dedede; font-size: 14px; padding: 5px 10px; word-wrap: break-word; white-space: normal;}
+#nongSchedule .tblSection th{ background: #f5f5f5; font-weight: 600}
