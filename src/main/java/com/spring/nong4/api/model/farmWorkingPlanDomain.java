@@ -12,6 +12,10 @@ public class farmWorkingPlanDomain {
     private List<itemTag> workingItemList;
     @JsonProperty("schedule")
     private List<scheduleLst> workingScheduleList;
+    @JsonProperty("info")
+    private List<itemTagHtml> workingInfoList;
+
+    private List<schedultDt> workScheduleDtList;
 
     @Data
     public static class itemTag {
@@ -27,5 +31,16 @@ public class farmWorkingPlanDomain {
         private String fileSeCode; // 첨부파일구분코드
         private String orginlFIleNm; // 첨부파일물리명
         private String sj; // 제목
+    }
+    @Data
+    public static class itemTagHtml {
+        private String htmlCn; // 상세 내용
+    }
+    @Data
+    public static class schedultDt {
+        private String kidofcomdtySeCode; // 품목 코드
+        private String kidofcomdtySeCodeNm; // 품목 명
+        private String cntntsSj; // 제목
+        private String cn; // 내용
     }
 }

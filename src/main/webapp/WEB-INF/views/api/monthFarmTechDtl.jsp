@@ -39,9 +39,7 @@
         <div class="community">
             <div class="community-top"></div>
             <div class="community-board">
-                <c:forEach items="${farmTechDtlDomain.farmTechItemList}" var="farmTechItemList">
-                    ${farmTechItemList.cntntsInfoHtml}
-                </c:forEach>
+                ${farmTechDtlDomain.farmTechItemList[0].cntntsInfoHtml}
             </div>
         </div>
     </div>

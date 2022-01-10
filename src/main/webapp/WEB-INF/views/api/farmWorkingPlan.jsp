@@ -51,10 +51,9 @@
                             </p>
                             <div class="clear bbsSection">
                                 <fieldset class="sch">
-                                    <legend></legend>
                                     <div class="tabArea">
                                         <ul>
-                                            <c:forEach items="${farmWorkingPlanDomain.workingItemList}" var="workingList" varStatus="status">
+                                            <c:forEach items="${workingDomain.workingItemList}" var="workingList" varStatus="status">
                                                 <a id="${workingList.kidofcomdtySeCode}" href="#" onclick="fncViewButtom('${workingList.kidofcomdtySeCode}'); return false;">
                                                 <li>${workingList.codeNm}</li>
                                                 </a>
@@ -69,25 +68,7 @@
                 <div id="apiLoadingAreaButtom">
                     <div class="apiContArea">
                         <div class="bbsSection">
-                            <div class="tableRound">
-                                <table class="grid tobLine" border="1" cellspacing="0" cellpadding="0">
-                                    <caption>품목별 관리매뉴얼 목록</caption>
-                                    <colgroup>
-                                        <col width="33%">
-                                        <col width="*">
-                                        <col width="33%">
-                                    </colgroup>
-                                    <tbody class="tbody">
-                                    <c:forEach items="${farmWorkingPlanDomain.workingScheduleList}" var="scheduleLst" varStatus="status">
-                                        <tr>
-                                            <td>
-                                                <a href="#">${scheduleLst.sj}</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <div class="tableRound"></div>
                         </div>
                     </div>
                 </div>

@@ -39,15 +39,9 @@ public class ApiController {
     }
 
     @GetMapping("/farmWorkingPlan")
-    public String farmWorkingPlan(farmWorkingPlanDomain workingDomain, Model model, String ajaxValue) {
-        model.addAllAttributes(service.farmWorkingPlan(workingDomain, ajaxValue));
-        System.out.println("CONTROLLER_AJAX : " + workingDomain.getWorkingScheduleList());
-        System.out.println("CONTROLLER_AJAXVLAUE : " + ajaxValue);
-        if(ajaxValue == null) {
-            ajaxValue = workingDomain.getWorkingItemList().get(0).getKidofcomdtySeCode();
-        }
-        model.addAllAttributes(service.workScheduleLst(workingDomain, ajaxValue));
-
+    public String farmWorkingPlan(Model model) {
+        System.out.println("CONTROLLER : " + service.farmWorkingPlan());
+        model.addAllAttributes(service.farmWorkingPlan());
         return "api/farmWorkingPlan";
     }
 
@@ -55,13 +49,16 @@ public class ApiController {
     @PostMapping("/farmWorkingPlan")
     public Map<String, Object> workScheduletLst(@RequestBody String ajaxValue, farmWorkingPlanDomain workingPlanDomain, Model model) {
         ajaxValue = ajaxValue.replaceAll("\\\"","");
-        System.out.println("ajaxValue : "  + ajaxValue);
-        System.out.println("workingPlanDomain : " + workingPlanDomain);
-//        service.workScheduleLst(workingPlanDomain);
-//        map.put("workScheduleLst", workingDomain.getWorkingScheduleList());
-
-        farmWorkingPlan(workingPlanDomain, model, ajaxValue);
-
         return service.workScheduleLst(workingPlanDomain, ajaxValue);
     }
+
+    @GetMapping("/farmWorkingInfo")
+    public String farmWorkingInfo(Model model, String cntntsNo) {
+        System.out.println("cntntsNo : " + cntntsNo);
+        model.addAllAttributes(service.farmWorkingInfo(cntntsNo));
+        model.addAllAttributes(service.schedultDt(cntntsNo));
+        return "api/farmWorkingInfo";
+    }
+
+
 }
