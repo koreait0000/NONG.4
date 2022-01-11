@@ -1,6 +1,14 @@
 const tableRoundDiv = document.querySelector('.tableRound');
 
 function fncViewButtom(kidofcomdtySeCode) {
+    const active = document.querySelector('.active');
+    if(active != null){
+        active.classList.remove('active');
+    }
+    let code = kidofcomdtySeCode;
+    const aTag = document.getElementById(code);
+    aTag.classList.add('active');
+
     fetch('farmWorkingPlan',
         {
             method: 'POST',

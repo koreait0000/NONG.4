@@ -8,19 +8,15 @@
     </div>
     <div class="form-img">
         <span class="apiVideo-class pointer">
-            <img src="/res/img/junior.png" id="junior-img"/>
+            <img src="/res/img/apivideo.jpg"/>
         </span>
 
-        <span class="intermediate-class pointer">
-            <img src="/res/img/intermediate.png"/>
+        <span class="monthFarmTech-class pointer">
+            <img src="/res/img/farmtech.jpg"/>
         </span>
 
-        <span class="advanced-class pointer">
-            <img src="/res/img/advanced.png"/>
-        </span>
-
-        <span class="master-class pointer">
-            <img src="/res/img/master.png"/>
+        <span class="farmWorkingPlan-class pointer">
+            <img src="/res/img/farmplan.jpg"/>
         </span>
     </div>
 </div>
