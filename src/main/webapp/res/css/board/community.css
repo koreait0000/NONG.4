@@ -3,7 +3,7 @@
 .api { height: 320px; }
 .api .swiper-container { height: 100%; width: 900px; }
 .api .swiper-slide { display: flex; justify-content: center; align-items: center; }
-.api .swiper-slide img { width: 250px; }
+.api .swiper-slide img { width: 300px; height: 250px; border-radius: 20px; }
 
 #news-paging-btn { padding-bottom: 5px; font-weight: bold; font-size: 32px; }
 #news-paging-btn button{ float:right;}
