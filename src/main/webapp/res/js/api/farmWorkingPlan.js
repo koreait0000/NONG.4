@@ -1,6 +1,9 @@
 const tableRoundDiv = document.querySelector('.tableRound');
+const t = document.getElementById('${workingList.kidofcomdtySeCode}');
+
 
 function fncViewButtom(kidofcomdtySeCode) {
+
     const active = document.querySelector('.active');
     if(active != null){
         active.classList.remove('active');
