@@ -27,34 +27,42 @@ public class BoardService {
         return mapper.auth(param);
     }
 
-    public Map<String, Object> boardWrite(BoardDomain param, MultipartFile[] imgArr) {
-        Map<String, Object> map = new HashMap<>();
+    public int boardWrite(BoardDomain param, MultipartFile[] imgArr) {
+        int result = 0;
 
-        int write = mapper.boardWrite(param);
-        map.put("data1",write);
+        String chkTitle = param.getTitle().replaceAll(" ", "");
+        String chkCtnt = param.getCtnt().replaceAll(" ", "");
 
-        if(imgArr == null && param.getTitle() == null && param.getCtnt() == null) { return null; }
+        if(param.getTitle().isEmpty() || chkTitle.equals("")){
+            result = 3;
+            return result;
+        } else if(param.getCtnt().isEmpty() || chkCtnt.equals("")){
+            result = 4;
+            return result;
+        } else {
+            result = mapper.boardWrite(param);
+            // 파일 업로드
+            if (param.getIboard() > 0 && imgArr != null && imgArr.length > 0) {
+                BoardImgEntity paramImg = new BoardImgEntity();
+                paramImg.setIboard(param.getIboard());
 
-        // 파일 업로드
-        if(param.getIboard() > 0 && imgArr != null && imgArr.length > 0) {
-            BoardImgEntity paramImg = new BoardImgEntity();
-            paramImg.setIboard(param.getIboard());
-
-            String target = "board/" + param.getIboard();
-            for(MultipartFile img : imgArr) {
-                String saveFileNm = MyFileUtils.transferTo(img , target);
-                if(saveFileNm != null) {
-                    paramImg.setImg(saveFileNm);
-                    map.put("data",mapper.boardWriteImg(paramImg));
+                String target = "board/" + param.getIboard();
+                for (MultipartFile img : imgArr) {
+                    String saveFileNm = MyFileUtils.transferTo(img, target);
+                    if (saveFileNm != null) {
+                        paramImg.setImg(saveFileNm);
+                        mapper.boardWriteImg(paramImg);
+                    }
                 }
             }
+            return result;
         }
-        return map;
     }
 
     public List<BoardDomain> newsList(BoardDomain param, SearchCriteria scri){
         return mapper.mainBoardList(param, scri);
     }
+
     public Map<String, Object> boardUpdate(BoardDomain param) {
         param.setIuser(auth.getLoginUserPk());
         Map<String, Object> map = new HashMap<>();
