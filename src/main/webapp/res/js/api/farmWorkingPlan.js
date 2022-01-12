@@ -1,8 +1,11 @@
 const tableRoundDiv = document.querySelector('.tableRound');
+const t = document.getElementById('${workingList.kidofcomdtySeCode}');
+
 
 //const tbody = document.querySelector('.tbody');
 
 function fncViewButtom(kidofcomdtySeCode) {
+    console.log('text : ' + t)
     fetch('farmWorkingPlan',
         {
             method: 'POST',
