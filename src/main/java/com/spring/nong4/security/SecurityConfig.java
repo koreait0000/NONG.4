@@ -42,16 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/user/login", "/user/join", "/user/auth","/index","/chat","/user/chkOverlap","/user/findUser","/user/findEmail","/user/findPw","/openapi/apiTest").permitAll()
+                .antMatchers("/user/login", "/user/join", "/user/auth","/index","/chat","/user/chkOverlap","/user/findUser","/user/findEmail","/user/findPw","/board/home").permitAll()
                 .anyRequest().authenticated();
-        //.authenticated();
 
         http.formLogin()
                 .loginPage("/user/login")
                 .loginProcessingUrl("/login")
                 .usernameParameter("email")
                 .passwordParameter("pw")
-//                .successHandler(authenticationSuccessHandler)
                 .defaultSuccessUrl("/board/home");
 
         http.oauth2Login()

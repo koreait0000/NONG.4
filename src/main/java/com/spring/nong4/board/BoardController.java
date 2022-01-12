@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,9 +53,24 @@ public class BoardController {
     public String boardWrite() { return "board/boardWrite"; }
 
     @PostMapping("/boardWrite")
-    public String boardWrite(BoardDomain param, MultipartFile[] imgArr,Model model ) {
+    public String boardWrite(BoardDomain param, MultipartFile[] imgArr) throws IOException {
+        int result = 0;
         param.setIuser(auth.getLoginUserPk());
-        model.addAllAttributes(service.boardWrite(param,imgArr));
+        result = service.boardWrite(param,imgArr);
+
+        if(result == 3) {
+            response.setContentType("text/html; charset=euc-kr");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('제목을 작성해주세요');</script>");
+            out.flush();
+            return null;
+        } else if(result == 4) {
+            response.setContentType("text/html; charset=euc-kr");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('내용을 작성해주세요');</script>");
+            out.flush();
+            return null;
+        }
         return "redirect:/board/mainBoard?provider=" + param.getProvider();
     }
 
@@ -89,7 +106,6 @@ public class BoardController {
             cookie += param.getIboard() + "/"; // 쿠키에 iboard값 마다마다 누적
             model.addAllAttributes(service.boardDetailHit(param)); // 조회수 증가
         }
-
         response.addCookie(new Cookie("hit",cookie));
         model.addAllAttributes(service.boardDetail(param, imgParam));
         return "board/boardDetail";
