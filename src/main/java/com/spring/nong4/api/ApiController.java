@@ -40,7 +40,6 @@ public class ApiController {
 
     @GetMapping("/farmWorkingPlan")
     public String farmWorkingPlan(Model model) {
-        System.out.println("CONTROLLER : " + service.farmWorkingPlan());
         model.addAllAttributes(service.farmWorkingPlan());
         return "api/farmWorkingPlan";
     }
@@ -54,7 +53,6 @@ public class ApiController {
 
     @GetMapping("/farmWorkingInfo")
     public String farmWorkingInfo(Model model, String cntntsNo) {
-        System.out.println("cntntsNo : " + cntntsNo);
         model.addAllAttributes(service.farmWorkingInfo(cntntsNo));
         model.addAllAttributes(service.schedultDt(cntntsNo));
         return "api/farmWorkingInfo";

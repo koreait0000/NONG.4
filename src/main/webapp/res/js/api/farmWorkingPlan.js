@@ -2,10 +2,16 @@ const tableRoundDiv = document.querySelector('.tableRound');
 const t = document.getElementById('${workingList.kidofcomdtySeCode}');
 
 
-//const tbody = document.querySelector('.tbody');
-
 function fncViewButtom(kidofcomdtySeCode) {
-    console.log('text : ' + t)
+
+    const active = document.querySelector('.active');
+    if(active != null){
+        active.classList.remove('active');
+    }
+    let code = kidofcomdtySeCode;
+    const aTag = document.getElementById(code);
+    aTag.classList.add('active');
+
     fetch('farmWorkingPlan',
         {
             method: 'POST',
@@ -38,8 +44,8 @@ function tabArea(myJson) {
         textSpan.addEventListener('click', () => {
             location.href = 'farmWorkingInfo?cntntsNo='+item.cntntsNo;
         })
-        textSpan.className = 'textSpan';
-        fileSpan.className = 'fileSpan';
+        textSpan.className = 'textSpan pointer';
+        fileSpan.className = 'fileSpan pointer';
         textSpan.append(item.sj);
         fileSpan.append(iconImg);
 

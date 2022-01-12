@@ -1,19 +1,15 @@
 const apiVideoElem = document.querySelector('.apiVideo-class');
-const intermediateElem = document.querySelector('.intermediate-class');
-const advancedElem = document.querySelector('.advanced-class');
-const masterElem = document.querySelector('.master-class');
+const monthFarmTechElem = document.querySelector('.monthFarmTech-class');
+const farmWorkingPlanElem = document.querySelector('.farmWorkingPlan-class');
 
 apiVideoElem.addEventListener('click', () => {
     location.href="/api/apiVideo";
 });
-intermediateElem.addEventListener('click', () => {
+monthFarmTechElem.addEventListener('click', () => {
     location.href="/api/monthFarmTech";
 });
-advancedElem.addEventListener('click', () => {
+farmWorkingPlanElem.addEventListener('click', () => {
     location.href="/api/farmWorkingPlan";
-});
-masterElem.addEventListener('click', () => {
-    location.href="/api/master";
 });
 
 function moveToDetail(iboard){

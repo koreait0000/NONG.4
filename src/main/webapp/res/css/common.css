@@ -33,9 +33,11 @@ img{ width: inherit; max-width: 100%; height: auto;}
 .category img { border-radius: 10px; height: 100px; width: 100px; }
 .category .writeBtn { width: 80%; height: 40px; font-size: 16px; background-color: darkgreen; }
 .category .writeBtn i{ color: white;}
-.category .cate-event { margin-top: 80px; }
+.category .cate-event { margin-top: 50px; }
 .category .cate-event a { font-size: 20px;}
-.category .cate-board { margin-top: 100px; }
+.category .cate-info { margin-top: 50px; }
+.category .cate-info a { font-size: 20px; }
+.category .cate-board { margin-top: 50px; }
 .category .cate-board a { font-size: 20px; }
 .category .title { font-size: 30px; font-weight: bold; }
 
