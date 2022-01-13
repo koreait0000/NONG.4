@@ -2,8 +2,11 @@ package com.spring.nong4.user;
 
 import com.spring.nong4.user.model.UserEntity;
 import com.spring.nong4.user.model.UserProfileEntity;
+import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -34,4 +37,7 @@ public interface UserMapper {
 
     // 비밀번호 변경
     int changePw1(UserEntity param);
+
+    // 중복 닉네임 체크
+    UserEntity nickValid(UserEntity param, @Param("nick")String nickValid);
 }

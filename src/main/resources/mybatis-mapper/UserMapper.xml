@@ -111,4 +111,12 @@
         SET   pw    = #{pw}
         WHERE iuser = #{iuser}
     </update>
+
+    <select id="nickValid" resultType="userEntity">
+        SELECT nick AS userNick
+        FROM t_user
+        WHERE 1 = 1
+        AND nick = #{nick}
+    </select>
+
 </mapper>
