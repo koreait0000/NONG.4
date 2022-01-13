@@ -37,19 +37,6 @@
         AND authCd IS NULL
     </select>
 
-    <insert id="insUserProfile">
-        INSERT INTO t_user_profile
-        (
-          iuser
-        , profileImg
-        )
-        VALUES
-        (
-          #{iuser}
-        , #{profileImg}
-        )
-    </insert>
-
     <update id="updUserProfile">
         UPDATE t_user
         <set>
@@ -64,12 +51,6 @@
 <!--        <selectKey order="BEFORE" resultType="String" keyColumn="profileImg" keyProperty="profileImg">-->
 <!--            SELECT profileImg FROM t_user WHERE iuser = #{param.iuser}-->
 <!--        </selectKey>-->
-    </update>
-
-    <update id="updUserProfileNick">
-        UPDATE t_user
-        SET nick    = #{userNick}
-        WHERE iuser = #{iuser}
     </update>
 
     <select id="selUserProfile" resultType="userEntity">

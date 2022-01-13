@@ -293,9 +293,12 @@ pwChangeElem.addEventListener('click', () => {
 if(btnDivPw) {
     btnDivPw.addEventListener('click', () => {
         pwModalImgElem.classList.add('hide');
-        // location.reload(true); // 서버에서 현재 페이지를 강제로 reload
     });
 }
+
+
+//---------------------------------------프로필변경-------------------------------------------------
+
 
 // 프로필수정 클릭 시 모달창 open
 let chkImg = '';
@@ -372,13 +375,11 @@ profileModElem.addEventListener('click', () => {
 if(btnDiv) {
     btnDiv.addEventListener('click', () => {
         modalImgElem.classList.add('hide');
-        location.reload(true); // 서버에서 현재 페이지를 강제로 reload
     });
 }
 
 // fileList에 추가 된 이미지들을 디스플레이 처리
 function displaySelectedImgArr() {
-    // togglesubmitUpload();
     displayImgElem.innerHTML = '';
 
     for(let i=0; i<fileList.length; i++) {
@@ -402,14 +403,6 @@ function displaySelectedImgArr() {
     }
 }
 
-// submit버튼 활성화/비활성화
-// function togglesubmitUpload() {
-//     submitInput.disabled = true;
-//     if(fileList.length > 0 ) {
-//         submitInput.disabled = false;
-//     }
-// }
-
 // Ajax 파일 업로드
 submitInput.addEventListener('click', () => {
     const data = new FormData();
@@ -420,7 +413,6 @@ submitInput.addEventListener('click', () => {
             data.append('imgArr', fileList[i]);
         }
     }
-    // data.append('nick',nickInput.value);
 
     fetch('profile', {
         method: 'PUT',
@@ -434,7 +426,6 @@ submitInput.addEventListener('click', () => {
                     break;
                 case 1:
                     alert('프로필 이미지 등록에  성공하셨습니다.');
-                    location.href = '/user/profile';
                     location.reload();
                     break;
             }
@@ -446,4 +437,3 @@ if(userProvider != 'nong4'){
     pwChangeElem.setAttribute('disabled','disabled');
     pwChangeElem.classList.remove('pointer');
 }
-// togglesubmitUpload();
