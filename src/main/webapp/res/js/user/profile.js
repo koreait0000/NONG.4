@@ -8,7 +8,6 @@ const pwModalImgElem       = document.querySelector('.pwModal-img');
 const profileItemContElem  = document.querySelector('.profileCont');
 const pwChangeItemContElem = document.querySelector('.pwChangeCont');
 const pwChangeElem         = document.querySelector('.pwChange');
-const userNickData  = displayImgListElem.dataset.usernick;
 const userProvider = displayImgListElem.dataset.provider;
 
 const nickDiv     = document.createElement('div');
@@ -53,7 +52,7 @@ const img = document.createElement('img');
 
 // 비밀번호 변경 클릭 시 모달창 open
 pwChangeElem.addEventListener('click', () => {
-    const pwJ = /^[A-Za-z0-9]{4,12}$/;  //A-Z,a~z,0~9로 시작하는 4~12자리 비밀번호
+    const pwJ   = /^[A-Za-z0-9]{4,12}$/;  //A-Z,a~z,0~9로 시작하는 4~12자리 비밀번호
 
     pwModalImgElem.classList.remove('hide');
 
@@ -109,14 +108,11 @@ pwChangeElem.addEventListener('click', () => {
                 if(!pwJ.test(currentInput.value)) {
                     msgCurrentPwDiv.innerText   = '비밀번호는 영문 대,소문자 및 숫자만 가능합니다.';
                     msgCurrentPwDiv.style.color = msgErrorColor;
-                    // currentInput.focus();
                 } else if(pwJ.test(currentInput.value)) {
                     msgCurrentPwDiv.innerText   = '비밀번호를 확인해주세요.';
                     msgCurrentPwDiv.style.color = msgErrorColor;
-                    // currentInput.focus();
                 }
                 currentInput.focus();
-                // submitInput.disabled = true;
                 break;
             case 1:
                 msgCurrentPwDiv.innerText = '';
@@ -154,11 +150,9 @@ pwChangeElem.addEventListener('click', () => {
         if(!pwJ.test(changePwInput.value)) {
             msgChangePwDiv.innerText   = '비밀번호는 영문 대,소문자 및 숫자만 가능합니다.';
             msgChangePwDiv.style.color = msgErrorColor;
-            // changePwInput.focus();
         } else if(currentInput.value == changePwInput.value) {
             msgChangePwDiv.innerText   = '현재 비밀번호와 동일합니다.';
             msgChangePwDiv.style.color = msgErrorColor;
-            // changePwInput.focus();
         } else if(pwJ.test(changePwInput.value)) {
             msgChangePwDiv.innerText = '';
         }
@@ -195,7 +189,10 @@ pwChangeElem.addEventListener('click', () => {
             msgChangePwReDiv.innerText = '새 비밀번호와 다릅니다.';
             msgChangePwReDiv.style.color = msgErrorColor;
             return false;
-        } else {
+        } else if(!pwJ.test(changePwReInput.value)) {
+            submitPwInput.disabled = true;
+        }
+        else {
             submitPwInput.disabled = false;
             msgChangePwReDiv.innerText = '';
             // 최종적으로 새 비밀번호 확인 입력 후 submit 버튼을 누르지 않고
@@ -209,7 +206,6 @@ pwChangeElem.addEventListener('click', () => {
     changePwReDiv.append(changePwReTh);
     msgChangePwReContDiv.append(changePwReInput,msgChangePwReDiv);
     changePwReContDiv.append(changePwReDiv,msgChangePwReContDiv);
-
 
     submitPwInput.type  = 'submit';
     submitPwInput.id    = 'submitUpload';
@@ -235,7 +231,6 @@ pwChangeElem.addEventListener('click', () => {
         } else if(changePwInput.value != changePwReInput.value) {
             alert('새 비밀번호를 다시 확인해주세요.')
             changePwInput.focus();
-            // return false;
             return;
         } else {
             submitAjax();
@@ -293,15 +288,28 @@ pwChangeElem.addEventListener('click', () => {
 if(btnDivPw) {
     btnDivPw.addEventListener('click', () => {
         pwModalImgElem.classList.add('hide');
-        // location.reload(true); // 서버에서 현재 페이지를 강제로 reload
     });
 }
+cancelInput.addEventListener('click', () => {
+    location.reload(true);
+})
 
 // 프로필수정 클릭 시 모달창 open
-let chkImg = '';
+let  chkImg = '';
+const nickJ = /^[가-힣A-Za-z0-9]{3,8}$/;  //가-힣,A-Z,a~z,0~9로 시작하는 3~8자리 비밀번호
 profileModElem.addEventListener('click', () => {
     modalImgElem.classList.remove('hide');
     profileItemContElem.innerHTML = '';
+
+    submitInput.disabled = true;
+
+    nickInput.addEventListener('change', () => {
+        if(nickJ.test(nickInput.value)) {
+            submitInput.disabled = false;
+        } else {
+            submitInput.disabled = true;
+        }
+    })
 
     // 프로필이미지가 미등록인 사용자라면, 기본 이미지 적용
     if(profileData == '') { // null아님 '' 이거임
@@ -332,7 +340,7 @@ profileModElem.addEventListener('click', () => {
 
     nickInput.type        = 'text';
     nickInput.id          = 'profile-nickname';
-    nickInput.placeholder = userNickData;
+    nickInput.placeholder = '세글자 이상 입력해 주세요.';
 
     submitInput.type  = 'submit';
     submitInput.id    = 'submitUpload';
@@ -360,10 +368,12 @@ profileModElem.addEventListener('click', () => {
     // 서버에 저장된 썸네일이 변경 될 시
     fileInput.addEventListener('change', ()=> {
         const files = fileInput.files;
+        console.log('files : ' + files)
         for(let i=0; i<files.length; i++) {
             fileList.pop(files[i-1]);
             fileList.push(files[i]);
         }
+        submitInput.disabled = false;
         displaySelectedImgArr();
     });
 })
@@ -372,13 +382,11 @@ profileModElem.addEventListener('click', () => {
 if(btnDiv) {
     btnDiv.addEventListener('click', () => {
         modalImgElem.classList.add('hide');
-        location.reload(true); // 서버에서 현재 페이지를 강제로 reload
     });
 }
 
 // fileList에 추가 된 이미지들을 디스플레이 처리
 function displaySelectedImgArr() {
-    // togglesubmitUpload();
     displayImgElem.innerHTML = '';
 
     for(let i=0; i<fileList.length; i++) {
@@ -402,29 +410,20 @@ function displaySelectedImgArr() {
     }
 }
 
-// submit버튼 활성화/비활성화
-// function togglesubmitUpload() {
-//     submitInput.disabled = true;
-//     if(fileList.length > 0 ) {
-//         submitInput.disabled = false;
-//     }
-// }
-
 // Ajax 파일 업로드
 submitInput.addEventListener('click', () => {
     const data = new FormData();
     if(fileList.length > 0 || nickInput.value.length > 2) {
         data.append('nick',nickInput.value);
-
         for(let i=0; i<fileList.length; i++) {
             data.append('imgArr', fileList[i]);
         }
     }
-    // data.append('nick',nickInput.value);
 
     fetch('profile', {
         method: 'PUT',
-        body: data
+        body: data,
+        timeout : 30000
     })
         .then(res => res.json())
         .then(myJson => {
@@ -435,7 +434,7 @@ submitInput.addEventListener('click', () => {
                 case 1:
                     alert('프로필 이미지 등록에  성공하셨습니다.');
                     location.href = '/user/profile';
-                    location.reload();
+                    location.reload(true);
                     break;
             }
         })
@@ -446,4 +445,3 @@ if(userProvider != 'nong4'){
     pwChangeElem.setAttribute('disabled','disabled');
     pwChangeElem.classList.remove('pointer');
 }
-// togglesubmitUpload();
