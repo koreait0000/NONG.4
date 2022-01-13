@@ -145,20 +145,16 @@ public class UserService {
         param.setIuser(auth.getLoginUserPk());
         int result = 0;
 
-        if(imgArr == null ) {
+        if(imgArr == null || !userNick.equals("")) {
             UserEntity param2 = mapper.selUserProfile(param);
             param.setProfileImg(param2.getProfileImg());
             result = mapper.updUserProfile(param,userNick);
         }
 
-        if(userNick != null && userNick != ""){
-            UserEntity param2 = mapper.selUserProfile(param);
-            userNick = param2.getUserNick();
-            result = mapper.updUserProfile(param,userNick);
-        }
-
         if (imgArr != null && imgArr.length > 0) {
             String target = "profileImg/" + param.getIuser();
+            UserEntity param2 = mapper.selUserProfile(param);
+            userNick = param2.getUserNick();
             for (MultipartFile img : imgArr) {
                 String saveFileNm = myFileUtils.transferTo(img, target);
                 if (saveFileNm != null) { //이미지 정보 DB에 저장
