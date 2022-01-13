@@ -86,13 +86,16 @@ pwChangeElem.addEventListener('click', () => {
     })
 
     function currentAjax() {
+        const param = {
+            currentInput : currentInput.value
+        }
         fetch('profile',
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(currentInput.value)
+                body: JSON.stringify(param)
             })
             .then(res => res.json())
             .then(myJson => {
@@ -307,13 +310,49 @@ profileModElem.addEventListener('click', () => {
     submitInput.disabled = true;
 
     nickInput.addEventListener('change', () => {
-        if(nickJ.test(nickInput.value)) {
-            submitInput.disabled = false;
-        } else {
-            submitInput.disabled = true;
-        }
+        nickAjax();
     })
 
+    function nickAjax() {
+        const param = {
+            nickValid : nickInput.value
+        }
+        fetch('profile',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(param)
+            })
+            .then(res => res.json())
+            .then(myJson => {
+                nickValid(myJson);
+            })
+    }
+
+    function nickValid(myJson) {
+        switch(myJson.result) {
+            case 0:
+                if(nickJ.test(nickInput.value)) {
+                    submitInput.disabled = false;
+                    // 사용 가능한 닉네임 메세지 하단 추가
+                } else if(!nickJ.test(nickInput.value)) {
+                    submitInput.disabled = true;
+                    // 사용 불가한 닉네임 메세지 하단 추가
+                }
+                nickInput.addEventListener('blur', () => {
+                    submitInput.disabled = true;
+                })
+                break;
+            case 1:
+                if(!nickJ.test(nickInput.value)) {
+                    submitInput.disabled = true;
+                    // 중복된 닉네임 메세지 하단 추가
+                }
+                break;
+        }
+    }
     // 프로필이미지가 미등록인 사용자라면, 기본 이미지 적용
     if(profileData == '') { // null아님 '' 이거임
         chkImg  = 'BASIC';
@@ -422,7 +461,10 @@ submitInput.addEventListener('click', () => {
             data.append('imgArr', fileList[i]);
         }
     }
+    submitProfile(data);
+})
 
+function submitProfile(data) {
     fetch('profile', {
         method: 'PUT',
         body: data,
@@ -440,8 +482,7 @@ submitInput.addEventListener('click', () => {
                     break;
             }
         })
-})
-
+}
 if(userProvider != 'nong4'){
     pwChangeElem.innerHTML = '여기서 변경할 수 없습니다.';
     pwChangeElem.setAttribute('disabled','disabled');

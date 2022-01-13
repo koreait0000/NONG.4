@@ -94,10 +94,20 @@ public class UserController {
     // 비밀번호 변경
     @ResponseBody
     @PostMapping("/profile")
-    public Map<String, Object> profile(@RequestBody String currentInput) {
+    public Map<String, Object> profile(@RequestBody Map<String, Object> ajaxValue) {
+        String currentInput = "";
+        String nickValid    = "";
         Map<String, Object> returnValue = new HashMap<>();
         UserEntity param = new UserEntity();
-        returnValue.put("result",service.currentPw(param,currentInput));
+
+        if(ajaxValue.containsKey("currentInput")) {
+            currentInput = ajaxValue.get("currentInput").toString();
+            returnValue.put("result",service.currentPw(param,currentInput));
+        } else if(ajaxValue.containsKey("nickValid")) {
+            nickValid = ajaxValue.get("nickValid").toString();
+            returnValue.put("result",service.nickValid(param,nickValid));
+        }
+
         return returnValue;
     }
 
@@ -117,7 +127,6 @@ public class UserController {
         Map<String, Object> returnValue = new HashMap<>();
         UserEntity param = new UserEntity();
 
-        //returnValue.put("result",service.currentPw(param,changeInput));
         returnValue.put("result",service.changePw1(param,changeInput));
         return returnValue;
     }

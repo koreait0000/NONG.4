@@ -5,12 +5,14 @@ import com.spring.nong4.common.MyFileUtils;
 import com.spring.nong4.common.MySecurityUtils;
 import com.spring.nong4.security.IAuthenticationFacade;
 import com.spring.nong4.user.model.UserEntity;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -163,6 +165,17 @@ public class UserService {
                 }
             }
         }
+        return result;
+    }
+    public int nickValid(UserEntity param, String nickValid) {
+        int result = 0;
+
+        UserEntity currentNick = mapper.nickValid(param, nickValid);
+
+        if(currentNick != null) {
+            result = 1;
+        }
+
         return result;
     }
 }
