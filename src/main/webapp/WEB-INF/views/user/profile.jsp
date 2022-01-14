@@ -73,7 +73,14 @@
 
                     <div id="flexContainer">
                         <table>
-                            <img class="profileImg wh150" src="/pic/profileImg/${profile.iuser}/${profile.profileImg}" onerror="this.onerror=null; this.style.display='none';">
+                            <c:choose>
+                                <c:when test="${empty profile.profileImg}">
+                                    <img class="profileImg wh150" src="/res/img/BasicProfile.png" onerror="this.onerror=null; this.style.display='none';">
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="profileImg wh150" src="/pic/profileImg/${profile.iuser}/${profile.profileImg}" onerror="this.onerror=null; this.style.display='none';">
+                                </c:otherwise>
+                            </c:choose>
                             <tr>
                                 <th>이메일</th>
                                 <td>${profile.email}</td>

@@ -294,7 +294,7 @@ if(btnDivPw) {
     });
 }
 cancelInput.addEventListener('click', () => {
-    location.reload(true);
+    location.reload();
 })
 
 
@@ -355,6 +355,21 @@ profileModElem.addEventListener('click', () => {
     }
 
     nickValidMsg.id        = 'nick-msg';
+
+    displayImgElem.addEventListener('click', () => {
+        if(chkImg == 'BASIC') {
+            chkImg  = 'PROFILE';
+            img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
+            displayImgElem.append(img);
+        } else {
+            chkImg  = 'BASIC';
+            img.src = '/res/img/BasicProfile.png';
+            displayImgElem.append(img);
+            fileList.pop();
+            fileList.push('basicProfile');
+            submitInput.disabled = false;
+        }
+    })
 
     fileInput.type    = 'file';
     fileInput.id      = 'selectImgArr';
@@ -417,9 +432,9 @@ profileModElem.addEventListener('click', () => {
     // 서버에 저장된 썸네일이 변경 될 시
     fileInput.addEventListener('change', ()=> {
         const files = fileInput.files;
-        console.log('files : ' + files.length)
+
         for(let i=0; i<files.length; i++) {
-            fileList.pop(files[i-1]);
+            fileList.pop();
             fileList.push(files[i]);
             console.log('fileLIST_2 : ' + fileList[0])
         }
@@ -465,8 +480,12 @@ submitInput.addEventListener('click', () => {
     const data = new FormData();
     if(fileList.length > 0 || nickInput.value.length > 2) {
         data.append('nick',nickInput.value);
-        for(let i=0; i<fileList.length; i++) {
-            data.append('imgArr', fileList[i]);
+        if(fileList[0] == 'basicProfile'){
+            data.append('basicProfile', 'basicProfile');
+        } else {
+            for(let i=0; i<fileList.length; i++) {
+                data.append('imgArr', fileList[i]);
+            }
         }
     }
     submitProfile(data);
@@ -486,7 +505,7 @@ function submitProfile(data) {
                     break;
                 case 1:
                     alert('프로필 이미지 등록에  성공하셨습니다.');
-                    location.reload(true);
+                    location.reload();
                     break;
             }
         })

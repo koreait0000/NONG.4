@@ -114,7 +114,11 @@ public class UserController {
 
     @ResponseBody
     @PutMapping("/profile")
-    public Map<String, Object> profile(MultipartFile[] imgArr, UserEntity param, @RequestParam("nick") String userNick) {
+    public Map<String, Object> profile(MultipartFile[] imgArr, UserEntity param, @RequestParam Map<String, Object> ajaxValue) {
+        String userNick = ajaxValue.get("nick").toString();
+        if( ajaxValue.containsKey("basicProfile")) {
+            imgArr = null;
+        }
         Map<String, Object> map = new HashMap<>();
         param.setUserNick(userNick);
         map.put("result", service.profileMod(imgArr,param,userNick));
