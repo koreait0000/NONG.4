@@ -10,15 +10,16 @@ const pwChangeItemContElem = document.querySelector('.pwChangeCont');
 const pwChangeElem         = document.querySelector('.pwChange');
 const userProvider = displayImgListElem.dataset.provider;
 
-const nickDiv     = document.createElement('div');
-const fileDiv     = document.createElement('div');
-const btnDiv      = document.createElement('div'); // 확인, 취소 버튼
-const btnDivPw    = document.createElement('div');
-const fileInput   = document.createElement('input');
-const submitInput = document.createElement('input'); // 확인
+const nickDiv       = document.createElement('div');
+const nickValidMsg  = document.createElement('div');
+const fileDiv       = document.createElement('div');
+const btnDiv        = document.createElement('div'); // 확인, 취소 버튼
+const btnDivPw      = document.createElement('div');
+const fileInput     = document.createElement('input');
+const submitInput   = document.createElement('input'); // 확인
 const submitPwInput = document.createElement('input');
-const cancelInput = document.createElement('input'); // 취소
-const nickInput   = document.createElement('input');
+const cancelInput   = document.createElement('input'); // 취소
+const nickInput     = document.createElement('input');
 
 const pwBoxDiv          = document.createElement('div');
 
@@ -299,7 +300,6 @@ cancelInput.addEventListener('click', () => {
 
 //---------------------------------------프로필변경-------------------------------------------------
 
-
 // 프로필수정 클릭 시 모달창 open
 let  chkImg = '';
 const nickJ = /^[가-힣A-Za-z0-9]{3,8}$/;  //가-힣,A-Z,a~z,0~9로 시작하는 3~8자리 비밀번호
@@ -335,46 +335,26 @@ profileModElem.addEventListener('click', () => {
         switch(myJson.result) {
             case 0:
                 if(nickJ.test(nickInput.value)) {
-                    submitInput.disabled = false;
-                    // 사용 가능한 닉네임 메세지 하단 추가
+                    submitInput.disabled   = false;
+                    nickValidMsg.innerText = '사용 가능합니다.';
                 } else if(!nickJ.test(nickInput.value)) {
-                    submitInput.disabled = true;
-                    // 사용 불가한 닉네임 메세지 하단 추가
+                    submitInput.disabled   = true;
+                    nickValidMsg.innerText = '한영 및 숫자만 가능합니다.';
                 }
                 nickInput.addEventListener('blur', () => {
                     submitInput.disabled = true;
                 })
                 break;
             case 1:
-                if(!nickJ.test(nickInput.value)) {
-                    submitInput.disabled = true;
-                    // 중복된 닉네임 메세지 하단 추가
+                if(nickJ.test(nickInput.value)) {
+                    submitInput.disabled   = true;
+                    nickValidMsg.innerText = '이미 사용중인 닉네임입니다.';
                 }
                 break;
         }
     }
-    // 프로필이미지가 미등록인 사용자라면, 기본 이미지 적용
-    if(profileData == '') { // null아님 '' 이거임
-        chkImg  = 'BASIC';
-        img.src = '/res/img/BasicProfile.png';
-        displayImgElem.append(img);
-    }else{
-        chkImg  = 'PROFILE';
-        img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
-        displayImgElem.append(img);
-    }
 
-    displayImgElem.addEventListener('click', () => {
-        if(chkImg == 'BASIC') {
-            chkImg  = 'PROFILE';
-            img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
-            displayImgElem.append(img);
-        } else {
-            chkImg  = 'BASIC';
-            img.src = '/res/img/BasicProfile.png';
-            displayImgElem.append(img);
-        }
-    })
+    nickValidMsg.id        = 'nick-msg';
 
     fileInput.type    = 'file';
     fileInput.id      = 'selectImgArr';
@@ -393,13 +373,13 @@ profileModElem.addEventListener('click', () => {
     cancelInput.value = '취소';
 
     // nickDiv.append();
-    fileDiv.append(displayImgElem,fileInput,nickInput);
+    fileDiv.append(displayImgElem,fileInput,nickInput,nickValidMsg);
     btnDiv.append(cancelInput,submitInput);
     displayImgListElem.append(fileDiv,nickDiv);
     btnContElem.append(btnDiv);
 
     //className()
-    btnDiv.className = 'btnDiv';
+    btnDiv.className  = 'btnDiv';
     fileDiv.className = 'profile-box';
     displayImgElem.className = 'profileImg';
 
@@ -407,13 +387,41 @@ profileModElem.addEventListener('click', () => {
     profileItemContElem.append(displayImgListElem);
     profileItemContElem.append(btnContElem);
 
+    // 프로필이미지가 미등록인 사용자라면, 기본 이미지 적용
+    if(profileData == '') { // null아님 '' 이거임
+        chkImg  = 'BASIC';
+        img.src = '/res/img/BasicProfile.png';
+        displayImgElem.append(img);
+    }else{
+        chkImg  = 'PROFILE';
+        img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
+        displayImgElem.append(img);
+    }
+
+    displayImgElem.addEventListener('click', () => {
+        if(chkImg == 'BASIC') {
+            chkImg  = 'PROFILE';
+            img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
+        } else {
+            chkImg  = 'BASIC';
+            img.src = '/res/img/BasicProfile.png';
+            fileList.push(img);
+        }
+        console.log('IMG : ' + img.src)
+        console.log('LENGTH : ' + fileInput.files.length)
+        console.log('fileLIST_CHK : ' + fileList[0]);
+        submitInput.disabled = false;
+        displayImgElem.append(img);
+    })
+    console.log('fileLIST_1 : ' + fileList)
     // 서버에 저장된 썸네일이 변경 될 시
     fileInput.addEventListener('change', ()=> {
         const files = fileInput.files;
-        console.log('files : ' + files)
+        console.log('files : ' + files.length)
         for(let i=0; i<files.length; i++) {
             fileList.pop(files[i-1]);
             fileList.push(files[i]);
+            console.log('fileLIST_2 : ' + fileList[0])
         }
         submitInput.disabled = false;
         displaySelectedImgArr();
@@ -422,7 +430,7 @@ profileModElem.addEventListener('click', () => {
 
 // 모달창 닫기
 if(btnDiv) {
-    btnDiv.addEventListener('click', () => {
+    cancelInput.addEventListener('click', () => {
         modalImgElem.classList.add('hide');
     });
 }

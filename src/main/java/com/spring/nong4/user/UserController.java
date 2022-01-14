@@ -99,6 +99,7 @@ public class UserController {
         String nickValid    = "";
         Map<String, Object> returnValue = new HashMap<>();
         UserEntity param = new UserEntity();
+        System.out.println("AJAX_VALUE : " + ajaxValue);
 
         if(ajaxValue.containsKey("currentInput")) {
             currentInput = ajaxValue.get("currentInput").toString();
