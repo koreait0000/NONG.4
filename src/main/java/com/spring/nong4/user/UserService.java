@@ -180,6 +180,7 @@ public class UserService {
         if(currentNick != null) {
             result = 1;
         }
+        System.out.println("result : " + result);
 
         return result;
     }
