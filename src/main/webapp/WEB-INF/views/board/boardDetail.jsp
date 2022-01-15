@@ -69,6 +69,16 @@
                         <div id="title">${detail.title}</div>
                     </div>
                         <div class="userinfo">
+                            <div id="profile-img">
+                                <c:choose>
+                                    <c:when test="${detail.profileImg == null}">
+                                        <img src="/res/img/BasicProfile.png">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="/pic/profileImg/${detail.iuser}/${detail.profileImg}">
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                             <div class="detail-userNick">${detail.userNick}</div>
                             <div>${detail.regdt}</div>
                         </div>

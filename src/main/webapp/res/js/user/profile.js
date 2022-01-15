@@ -354,23 +354,6 @@ profileModElem.addEventListener('click', () => {
         }
     }
 
-    nickValidMsg.id        = 'nick-msg';
-
-    displayImgElem.addEventListener('click', () => {
-        if(chkImg == 'BASIC') {
-            chkImg  = 'PROFILE';
-            img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
-            displayImgElem.append(img);
-        } else {
-            chkImg  = 'BASIC';
-            img.src = '/res/img/BasicProfile.png';
-            displayImgElem.append(img);
-            fileList.pop();
-            fileList.push('basicProfile');
-            submitInput.disabled = false;
-        }
-    })
-
     fileInput.type    = 'file';
     fileInput.id      = 'selectImgArr';
     fileInput.accept  = 'image/*';
@@ -378,6 +361,8 @@ profileModElem.addEventListener('click', () => {
     nickInput.type        = 'text';
     nickInput.id          = 'profile-nickname';
     nickInput.placeholder = '세글자 이상 입력해 주세요.';
+
+    nickValidMsg.id       = 'nick-msg';
 
     submitInput.type  = 'submit';
     submitInput.id    = 'submitUpload';
@@ -407,28 +392,26 @@ profileModElem.addEventListener('click', () => {
         chkImg  = 'BASIC';
         img.src = '/res/img/BasicProfile.png';
         displayImgElem.append(img);
-    }else{
+    } else {
         chkImg  = 'PROFILE';
         img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
         displayImgElem.append(img);
+
+        displayImgElem.addEventListener('click', () => {
+            if(chkImg == 'BASIC') {
+                chkImg  = 'PROFILE';
+                img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
+            } else {
+                chkImg  = 'BASIC';
+                img.src = '/res/img/BasicProfile.png';
+                fileList.push(img);
+            }
+            console.log('src : ' + img.src)
+            submitInput.disabled = false;
+            displayImgElem.append(img);
+        })
     }
 
-    displayImgElem.addEventListener('click', () => {
-        if(chkImg == 'BASIC') {
-            chkImg  = 'PROFILE';
-            img.src = '/pic/profileImg/' + iuserData + '/' + profileData;
-        } else {
-            chkImg  = 'BASIC';
-            img.src = '/res/img/BasicProfile.png';
-            fileList.push(img);
-        }
-        console.log('IMG : ' + img.src)
-        console.log('LENGTH : ' + fileInput.files.length)
-        console.log('fileLIST_CHK : ' + fileList[0]);
-        submitInput.disabled = false;
-        displayImgElem.append(img);
-    })
-    console.log('fileLIST_1 : ' + fileList)
     // 서버에 저장된 썸네일이 변경 될 시
     fileInput.addEventListener('change', ()=> {
         const files = fileInput.files;

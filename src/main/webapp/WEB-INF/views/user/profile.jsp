@@ -107,7 +107,7 @@
                                 <td>${profile.tel}</td>
                             </tr>
                             <tr>
-                                <th>가입일자!</th>
+                                <th>가입일자</th>
                                 <td>${profile.regdt}</td>
                             </tr>
                         </table>
@@ -121,7 +121,7 @@
                                 <th style="width: 50%;">제목</th>
                                 <th style="width: 10%;">작성자</th>
                                 <th style="width: 20%;">작성일자</th>
-                                <th style="width: 10%;">게시판성격</th>
+                                <th style="width: 10%;">카테고리</th>
                             </tr>
 
                             <c:forEach items="${list}" var="list" >
@@ -131,7 +131,12 @@
                                         <td>${list.title}</td>
                                         <td>${list.userNick}</td>
                                         <td>${list.regdt}</td>
-                                        <td>${list.provider}</td>
+                                        <td>
+                                            ${list.provider == 'freedom'  ? '자유게시판' : '' }
+                                            ${list.provider == 'question' ? '질문게시판' : '' }
+                                            ${list.provider == 'strategy' ? '공략게시판' : '' }
+                                            ${list.provider == 'friend'   ? '친구게시판' : '' }
+                                        </td>
                                     </tr>
                                 </c:if>
                             </c:forEach>
