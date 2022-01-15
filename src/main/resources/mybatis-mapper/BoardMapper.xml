@@ -130,6 +130,7 @@
              , A.hitCount
              , B.nick AS userNick
              , B.iuser
+             , B.profileImg
              , CASE WHEN (SELECT iboard
                           FROM t_board_fav
                           WHERE iboard = #{iboard}
