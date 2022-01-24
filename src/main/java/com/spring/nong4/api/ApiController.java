@@ -21,6 +21,8 @@ public class ApiController {
 
     @GetMapping("/apiVideo")
     public String apiVideo (apiVideoDomain apiVideoDomain, Model model, SearchCriteria scri) {
+        System.out.println("CONTROLLER_SCRi : " +scri);
+        System.out.println("CONTROLLER_DOMAIN : " + apiVideoDomain);
         model.addAllAttributes(service.apiVideo(apiVideoDomain, scri));
         return "api/apiVideo";
     }

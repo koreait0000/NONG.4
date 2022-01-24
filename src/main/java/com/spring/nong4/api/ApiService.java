@@ -46,6 +46,7 @@ public class ApiService {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         apiVideoDomain.itemTag itemTag;
+        System.out.println("NUMOFROWS : " + apiVideoDomain.getNumOfRows());
 
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/curationMvp/curationMvpList");
@@ -61,11 +62,15 @@ public class ApiService {
             }
             if(apiVideoDomain.getPageNo() != null) {
                 urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(apiVideoDomain.getPageNo(), "UTF-8"));
-            } else
-            {
+            } else {
                 urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
             }
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
+            if(apiVideoDomain.getNumOfRows() == "5") {
+                urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("5","UTF-8"));
+            } else {
+                urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
+            }
+
 
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -132,7 +137,6 @@ public class ApiService {
             pageMaker.setCri(scri);
             pageMaker.setDisplayPageNum(Integer.parseInt(apiVideoDomain.getNumOfRows()));
             pageMaker.setTotalCount(Integer.parseInt(apiVideoDomain.getTotalCount()));
-
 
             map.put("apiVideoDomain", apiVideoDomain);
             map.put("pageMaker",pageMaker);
@@ -378,7 +382,6 @@ public class ApiService {
     }
 
     public Map<String, Object> farmWorkingPlan() {
-
         Map<String, Object> map = new HashMap<>();
         StringBuffer result = new StringBuffer();
         String urlParse = "";

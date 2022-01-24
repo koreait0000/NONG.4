@@ -1,5 +1,7 @@
 package com.spring.nong4.board;
 
+import com.spring.nong4.api.ApiService;
+import com.spring.nong4.api.model.apiVideoDomain;
 import com.spring.nong4.board.model.*;
 import com.spring.nong4.cmt.BoardCmtMapper;
 import com.spring.nong4.cmt.model.BoardCmtDomain;
@@ -21,6 +23,7 @@ public class BoardService {
     @Autowired private BoardCmtMapper cmtMapper;
     @Autowired private IAuthenticationFacade auth;
     @Autowired private MyFileUtils MyFileUtils;
+    @Autowired private ApiService apiService;
 
     // 이메일 인증 처리
     public int auth(UserEntity param) {
@@ -135,5 +138,33 @@ public class BoardService {
     public int delCmt(BoardCmtDomain param){
         param.setIuser(auth.getLoginUserPk());
         return cmtMapper.delCmt(param);
+    }
+
+    public Map<String, Object> totalSearch(apiVideoDomain apiVideoDomain, BoardDomain param, SearchCriteria scri) {
+        Map<String, Object> map = new HashMap<>();
+
+        int total = mapper.totalSearchCount(param, scri);
+
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCri(scri);
+        pageMaker.setTotalCount(total);
+        pageMaker.setKeyword(scri.getKeyword());
+
+        map.put("pageMaker",pageMaker);
+        map.put("video", apiService.apiVideo(apiVideoDomain, scri));
+
+        return map;
+    }
+    public Map<String, Object> searchPaging(BoardDomain param, SearchCriteria scri){
+        int total = mapper.totalSearchCount(param, scri);
+        Map<String, Object> map = new HashMap<>();
+
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCri(scri);
+        pageMaker.setTotalCount(total);
+        map.put("total", mapper.totalSearch(param, scri));
+        map.put("pageMaker", pageMaker);
+
+        return map;
     }
 }

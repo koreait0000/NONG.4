@@ -60,7 +60,7 @@
             , nick AS userNick
             , profileImg
             , tel
-            , date_format(regdt, '%Y-%m-%d') AS regdt
+            , DATE_FORMAT(regdt, '%Y-%m-%d') AS regdt
             , provider
         FROM  t_user
         WHERE iuser = ${iuser}

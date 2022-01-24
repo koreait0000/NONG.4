@@ -1,5 +1,7 @@
 package com.spring.nong4.board;
 
+import com.spring.nong4.api.ApiService;
+import com.spring.nong4.api.model.apiVideoDomain;
 import com.spring.nong4.board.model.*;
 import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.security.IAuthenticationFacade;
@@ -24,6 +26,7 @@ public class BoardController {
     @Autowired private BoardService service;
     @Autowired private IAuthenticationFacade auth;
     @Autowired private HttpServletResponse response;
+    @Autowired private ApiService apiService;
 
     @GetMapping("/home")
     public String home() {
@@ -166,9 +169,40 @@ public class BoardController {
 
     // 통합 검색
     @GetMapping("/totalSearch")
-    public String totalSearch(BoardEntity param) {
-        System.out.println("param : " + param);
+    public String totalSearch(apiVideoDomain apiVideoDomain, BoardDomain param, SearchCriteria scri, Model model) {
+
+//        System.out.println("VIDEO : " + apiService.apiVideo(apiVideoDomain, scri));
+//        model.addAllAttributes(apiService.apiVideo(apiVideoDomain, scri));
+        model.addAllAttributes(service.totalSearch(apiVideoDomain, param, scri));
         return "board/totalSearch";
+    }
+
+    @ResponseBody
+    @RequestMapping("/totalSearch/{currentPage}/{keyword}")
+    public Map<String, Object> searchPaging(BoardDomain param, SearchCriteria scri, @PathVariable("currentPage") int currentPage, @PathVariable("keyword") String keyword) {
+        Map<String, Object> map = new HashMap<>();
+        scri.setPage(currentPage);
+
+        scri.setPerPageNum(5);
+        scri.setKeyword(keyword);
+        System.out.println("SCRI : " + service.searchPaging(param,scri));
+
+        return service.searchPaging(param,scri);
+    }
+    @ResponseBody
+    @RequestMapping("/totalSearchVideo/{currentPage}/{keyword}")
+    public Map<String, Object> searchVideoPaging(apiVideoDomain apiVideoDomain, SearchCriteria scri, @PathVariable("currentPage") int currentPage, @PathVariable("keyword") String keyword) {
+        final String VIEW_ROWS = "5";
+        apiVideoDomain.setPageNo(String.valueOf(currentPage));
+        apiVideoDomain.setNumOfRows(VIEW_ROWS);
+        apiVideoDomain.setSText(keyword);
+        apiVideoDomain.setSType("sSj");
+        scri.setPerPageNum(5);
+        scri.setPage(currentPage);
+
+        System.out.println("CURRENT_PAGE : " + currentPage);
+
+        return apiService.apiVideo(apiVideoDomain, scri);
     }
 
 //-----------------------------서비스------------------------------

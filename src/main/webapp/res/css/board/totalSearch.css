@@ -1,0 +1,6 @@
+.community-board .section { padding: 15px; border-bottom: 2px solid #d3d3d3; height: auto; }
+.community-board .section .strong-ctnt { font-weight: normal; }
+.community-board .section .strong-sj { padding-left: 10px; position: absolute; }
+.community-board .section .strong-mvpclipsj { padding-left: 10px; font-weight: normal; }
+
+img { width: 120px; height: 80px; }
