@@ -15,6 +15,7 @@ public class PageMaker {
     private int endPage;
     private boolean prev;
     private boolean next;
+    private String keyword;
     private int displayPageNum = 5;
 
     public void setTotalCount(int totalCount) {

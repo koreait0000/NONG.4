@@ -1,6 +1,7 @@
-const comm_pagingElem = document.querySelector('#news-list');
+const comm_pagingElem     = document.querySelector('#news-list');
 const comm_paging_btnElem = document.querySelector('#news-paging-btn');
-const commListDiv = document.createElement('div');
+const commListDiv         = document.createElement('div');
+
 const prevBtn = document.createElement('button');
 const nextBtn = document.createElement('button');
 
@@ -64,18 +65,18 @@ function makeCommunityPaging(data){
     }
 
     data.forEach(function (item){
-        const commListElemDiv = document.createElement('div');
-        const commFirstLine = document.createElement('div');
+        const commListElemDiv  = document.createElement('div');
+        const commFirstLine    = document.createElement('div');
         const commProviderSpan = document.createElement('span');
-        const commTitleSpan = document.createElement('span');
-        const commWiterSpan = document.createElement('span');
-        const commRegdtSpan = document.createElement('span');
+        const commTitleSpan    = document.createElement('span');
+        const commWiterSpan    = document.createElement('span');
+        const commRegdtSpan    = document.createElement('span');
         const commHitCountSpan = document.createElement('span');
 
-        commListElemDiv.className = 'news-list-detail pointer';
+        commListElemDiv.className  = 'news-list-detail pointer';
         commProviderSpan.className = 'news-provider-span';
-        commTitleSpan.className = 'news-title-span';
-        commRegdtSpan.className = 'news-regdt-span';
+        commTitleSpan.className    = 'news-title-span';
+        commRegdtSpan.className    = 'news-regdt-span';
         commHitCountSpan.className = 'news-count-span';
 
         if(item.provider == 'freedom'){

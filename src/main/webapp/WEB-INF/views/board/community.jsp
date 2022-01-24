@@ -12,9 +12,9 @@
 
             <div class="search-input">
                 <form action="totalSearch">
-                    <input type="text" class="search-txt" name="title">
-                    <%--<input type="submit" class="fas fa-search pointer" value="&#xf002;">--%>
-                    <i class="fas fa-search pointer" onclick="location.href='totalSearch'"></i>
+                    <input type="text" class="search-txt" name="keyword">
+                    <input type="submit" class="fas fa-search pointer" value="&#xf002;">
+<%--                    <i class="fas fa-search pointer" onclick="location.href='totalSearch?'+'1'"></i>--%>
                 </form>
             </div>
 

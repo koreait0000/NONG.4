@@ -27,4 +27,8 @@ public interface BoardMapper {
 
     int insFav(BoardDomain param);
     int delFav(BoardDomain param);
+
+    List<BoardDomain> totalSearch(@Param("param") BoardDomain param, @Param("scri") SearchCriteria scri);
+
+    int totalSearchCount(@Param("param") BoardDomain param, @Param("scri") SearchCriteria scri);
 }
