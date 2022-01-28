@@ -230,5 +230,112 @@ videoPageMaker.className = 'pageMaker'
 
 listVideoElem.append(videoPageMaker);
 
+// ##################################### VIDEO_LIST #####################################
+const listMonthElem = document.querySelector('.list-month');
+const monthPageMaker = document.createElement('div');
+
+let monthPrevView = document.createElement('a');
+let monthNextView = document.createElement('a');
+
+let currentMonthPageView;
+const currentMonthPageDiv = document.createElement('div');
+
+function searchMonthPaging() {
+
+    searchMonthPagingAjax(currentPage);
+
+    function searchMonthPagingAjax(currentPage) {
+        currentPage = currentPage;
+
+        fetch('totalSearchMonth/' + currentPage +'/'+ keyword)
+            .then(res => res.json())
+            .then(myJson => {
+                console.log('MYJSON : ' + myJson.farmTech)
+                monthPagingBottom(myJson.farmTech.pageMaker);
+                searchMonthList(myJson.farmTech.farmTechDomain.data);
+            })
+    }
+    function monthPagingBottom(data) {
+        endPage   = data.endPage;
+        startPage = data.startPage;
+        prev      = data.prev;
+        next      = data.next;
+
+        if(prev) {
+            monthPrevView.innerText = '이전';
+
+            monthPrevView.addEventListener('click', () => {
+                currentPage = startPage - 5;
+                currentVideoPageDiv.innerText = '';
+                if(event.stopImmediatePropagation()) event.stopImmediatePropagation(); // 동일 DOM의 이벤트 전파 막기
+                searchMonthPagingAjax(currentPage);
+            })
+        } else {
+            videoPrevView.innerText = '';
+        }
+
+        for(let i= startPage; i<= endPage; i++) {
+            currentMonthPageView = document.createElement('a');
+
+            currentMonthPageView.innerText += i;
+
+            currentMonthPageView.addEventListener('click', () => {
+                currentMonthPageDiv.innerText = '';
+                currentPage = i;
+                searchMonthPagingAjax(currentPage);
+            })
+
+            currentMonthPageDiv.append(currentMonthPageView);
+        }
+
+        if(next && endPage > 0) {
+            monthNextView.innerText = '다음';
+
+            monthNextView.addEventListener('click', () => {
+                currentPage = startPage + 5;
+
+                currentMonthPageDiv.innerText = '';
+                if(event.stopImmediatePropagation()) event.stopImmediatePropagation(); // 동일 DOM의 이벤트 전파 막기
+                searchMonthPagingAjax(currentPage);
+            })
+        } else {
+            monthNextView.innerText = '';
+        }
+        monthPageMaker.append(currentMonthPageDiv);
+        monthPageMaker.append(monthPrevView, monthNextView);
+    }
+}
+function searchMonthList(data) {
+    listMonthElem.innerHTML = '';
+    console.log('DATA : ' + data)
+    data.forEach(function (item) {
+        const monthSectionDiv   = document.createElement('div');
+        const monthInnerDiv     = document.createElement('div');
+        const monthTitleStrong   = document.createElement('strong');
+        const monthSumryStrong     = document.createElement('strong')
+        const videoClipSjStrong = document.createElement('strong');
+        const videoImg = document.createElement('img');
+
+        monthSectionDiv.className   = 'month-section';
+        monthTitleStrong.className     = 'strong-title';
+        monthSumryStrong.className = 'strong-sumrydtl';
+
+        // videoImg.className = 'pointer';
+        // videoImg.src       = item.videoImg;
+
+        // videoLinkStrong.append(videoImg);
+        monthTitleStrong.append(item.curationNm);
+        // monthSumryStrong.append(item.curationSumryDtl);
+
+        monthInnerDiv.append(monthTitleStrong, monthSumryStrong);
+        monthSectionDiv.append(monthInnerDiv);
+
+        listMonthElem.append(monthSectionDiv, monthPageMaker);
+    })
+}
+
+listMonthElem.append(monthPageMaker);
+
 searchPaging();
 searchVideoPaging();
+searchMonthPaging();

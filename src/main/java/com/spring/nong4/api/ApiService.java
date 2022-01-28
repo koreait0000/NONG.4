@@ -156,6 +156,7 @@ public class ApiService {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         monthFarmTechDomain.itemTag itemTag;
+        System.out.println("DOMAIN_TEST : " + farmTechDomain);
 
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/monthFarmTech/monthFarmTechLst");
@@ -240,6 +241,8 @@ public class ApiService {
             farmTechDomain.setSrchStr(farmTechDomain.getSrchStr());
             farmTechDomain.setSEraInfo(farmTechDomain.getSEraInfo());
             farmTechDomain.setFarmTechItemList(farmTechItemList);
+
+            System.out.println("DOMAIN : " + farmTechDomain);
 
             PageMaker pageMaker = new PageMaker();
             pageMaker.setCri(scri);
@@ -377,6 +380,7 @@ public class ApiService {
             }
         }
         imgMap.put("img", imgList);
+        System.out.println("IMG : " + imgList);
 
         return imgMap;
     }
@@ -603,6 +607,7 @@ public class ApiService {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         farmWorkingPlanDomain.schedultDt schedultDt;
+        System.out.println();
 
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/farmWorkingPlanNew/workScheduleDtl");

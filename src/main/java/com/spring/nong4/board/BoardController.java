@@ -2,6 +2,7 @@ package com.spring.nong4.board;
 
 import com.spring.nong4.api.ApiService;
 import com.spring.nong4.api.model.apiVideoDomain;
+import com.spring.nong4.api.model.monthFarmTechDomain;
 import com.spring.nong4.board.model.*;
 import com.spring.nong4.cmt.model.BoardCmtDomain;
 import com.spring.nong4.security.IAuthenticationFacade;
@@ -169,11 +170,11 @@ public class BoardController {
 
     // 통합 검색
     @GetMapping("/totalSearch")
-    public String totalSearch(apiVideoDomain apiVideoDomain, BoardDomain param, SearchCriteria scri, Model model) {
+    public String totalSearch(apiVideoDomain apiVideoDomain, monthFarmTechDomain farmTechDomain, BoardDomain param, SearchCriteria scri, Model model) {
 
 //        System.out.println("VIDEO : " + apiService.apiVideo(apiVideoDomain, scri));
 //        model.addAllAttributes(apiService.apiVideo(apiVideoDomain, scri));
-        model.addAllAttributes(service.totalSearch(apiVideoDomain, param, scri));
+        model.addAllAttributes(service.totalSearch(apiVideoDomain, farmTechDomain, param, scri));
         return "board/totalSearch";
     }
 
@@ -203,6 +204,21 @@ public class BoardController {
         System.out.println("CURRENT_PAGE : " + currentPage);
 
         return apiService.apiVideo(apiVideoDomain, scri);
+    }
+    @ResponseBody
+    @RequestMapping("/totalSearchMonth/{currentPage}/{keyword}")
+    public Map<String, Object> searchMonthPaging(monthFarmTechDomain farmTechDomain, SearchCriteria scri, @PathVariable("currentPage") int currentPage, @PathVariable("keyword") String keyword) {
+        farmTechDomain.setSrchStr(keyword);
+        scri.setPage(currentPage);
+
+        System.out.println("AJAX_DOMAIN : " + farmTechDomain);
+        System.out.println("CURRENT_PAGE : " + currentPage);
+        System.out.println("KEYWORD : " + keyword);
+        Map<String, Object> map = new HashMap();
+        map.put("img", apiService.monthFarmTechDtlImg(farmTechDomain, scri));
+        map.put("farmTech", apiService.monthFarmTech(farmTechDomain, scri));
+
+        return map;
     }
 
 //-----------------------------서비스------------------------------

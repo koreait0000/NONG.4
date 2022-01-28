@@ -2,6 +2,7 @@ package com.spring.nong4.board;
 
 import com.spring.nong4.api.ApiService;
 import com.spring.nong4.api.model.apiVideoDomain;
+import com.spring.nong4.api.model.monthFarmTechDomain;
 import com.spring.nong4.board.model.*;
 import com.spring.nong4.cmt.BoardCmtMapper;
 import com.spring.nong4.cmt.model.BoardCmtDomain;
@@ -34,7 +35,7 @@ public class BoardService {
         int result = 0;
 
         String chkTitle = param.getTitle().replaceAll(" ", "");
-        String chkCtnt = param.getCtnt().replaceAll(" ", "");
+        String chkCtnt  = param.getCtnt().replaceAll(" ", "");
 
         if(param.getTitle().isEmpty() || chkTitle.equals("")){
             result = 3;
@@ -140,7 +141,7 @@ public class BoardService {
         return cmtMapper.delCmt(param);
     }
 
-    public Map<String, Object> totalSearch(apiVideoDomain apiVideoDomain, BoardDomain param, SearchCriteria scri) {
+    public Map<String, Object> totalSearch(apiVideoDomain apiVideoDomain, monthFarmTechDomain farmTechDomain, BoardDomain param, SearchCriteria scri) {
         Map<String, Object> map = new HashMap<>();
 
         int total = mapper.totalSearchCount(param, scri);
@@ -150,8 +151,23 @@ public class BoardService {
         pageMaker.setTotalCount(total);
         pageMaker.setKeyword(scri.getKeyword());
 
+
+        map.put("farmTechGet", apiService.monthFarmTech(farmTechDomain, scri));
+        Map farmTechGet = (Map) map.get("farmTechGet");
+        monthFarmTechDomain farmTechDomainMap = (monthFarmTechDomain) farmTechGet.get("farmTechDomain");
+        farmTechDomainMap.setSrchStr(scri.getKeyword());
+
+        map.put("result", apiService.monthFarmTech(farmTechDomainMap, scri));
+        Map result = (Map) map.get("result");
+        System.out.println("RESULT : " + result);
+        monthFarmTechDomain farmTech = (monthFarmTechDomain) result.get("farmTechDomain");
+        System.out.println("KEYWORD_MAP : " + farmTech);
+
+        System.out.println("FARM_3 : " + farmTechDomainMap);
+
         map.put("pageMaker",pageMaker);
         map.put("video", apiService.apiVideo(apiVideoDomain, scri));
+        map.put("farmTech", farmTech);
 
         return map;
     }
