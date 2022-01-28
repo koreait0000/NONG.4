@@ -46,13 +46,11 @@
             <div class="community-top"></div>
             <div class="community-board">
                 <div class="list-board">
-                    <div class="boardlist-bottom" data-pagenum="${pageMaker.cri.page}" data-keyword="${pageMaker.keyword}" >
-                    </div>
+                    <div class="boardlist-bottom" data-keyword="${keyword}" ></div>
                 </div>
                 <div class="list-video" ></div>
-                <div class="list-month">
-                    @@ : ${farmTech}
-                </div>
+                <div class="list-month"></div>
+                <div class="list-working"></div>
             </div>
         </div>
     </div>

@@ -4,3 +4,5 @@
 .community-board .section .strong-mvpclipsj { padding-left: 10px; font-weight: normal; }
 
 img { width: 120px; height: 80px; }
+
+.disabled { display: none; }
