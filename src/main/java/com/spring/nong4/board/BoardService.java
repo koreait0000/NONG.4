@@ -152,22 +152,22 @@ public class BoardService {
         pageMaker.setKeyword(scri.getKeyword());
 
 
-        map.put("farmTechGet", apiService.monthFarmTech(farmTechDomain, scri));
-        Map farmTechGet = (Map) map.get("farmTechGet");
-        monthFarmTechDomain farmTechDomainMap = (monthFarmTechDomain) farmTechGet.get("farmTechDomain");
-        farmTechDomainMap.setSrchStr(scri.getKeyword());
-
-        map.put("result", apiService.monthFarmTech(farmTechDomainMap, scri));
-        Map result = (Map) map.get("result");
-        System.out.println("RESULT : " + result);
-        monthFarmTechDomain farmTech = (monthFarmTechDomain) result.get("farmTechDomain");
-        System.out.println("KEYWORD_MAP : " + farmTech);
-
-        System.out.println("FARM_3 : " + farmTechDomainMap);
+//        map.put("farmTechGet", apiService.monthFarmTech(farmTechDomain, scri));
+//        Map farmTechGet = (Map) map.get("farmTechGet");
+//        monthFarmTechDomain farmTechDomainMap = (monthFarmTechDomain) farmTechGet.get("farmTechDomain");
+//        farmTechDomainMap.setSrchStr(scri.getKeyword());
+//
+//        map.put("result", apiService.monthFarmTech(farmTechDomainMap, scri));
+//        Map result = (Map) map.get("result");
+//        System.out.println("RESULT : " + result);
+//        monthFarmTechDomain farmTech = (monthFarmTechDomain) result.get("farmTechDomain");
+//        System.out.println("KEYWORD_MAP : " + farmTech);
+//
+//        System.out.println("FARM_3 : " + farmTechDomainMap);
 
         map.put("pageMaker",pageMaker);
         map.put("video", apiService.apiVideo(apiVideoDomain, scri));
-        map.put("farmTech", farmTech);
+//        map.put("farmTech", farmTech);
 
         return map;
     }

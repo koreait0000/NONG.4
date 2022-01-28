@@ -171,7 +171,6 @@ public class BoardController {
     // 통합 검색
     @GetMapping("/totalSearch")
     public String totalSearch(String keyword, Model model) {
-
 //        System.out.println("VIDEO : " + apiService.apiVideo(apiVideoDomain, scri));
 //        model.addAllAttributes(apiService.apiVideo(apiVideoDomain, scri));
 //        model.addAllAttributes(service.totalSearch(apiVideoDomain, farmTechDomain, param, scri));
@@ -209,16 +208,19 @@ public class BoardController {
     @ResponseBody
     @RequestMapping("/totalSearchMonth/{currentPage}/{keyword}")
     public Map<String, Object> searchMonthPaging(monthFarmTechDomain farmTechDomain, SearchCriteria scri, @PathVariable("currentPage") int currentPage, @PathVariable("keyword") String keyword) {
+        final String VIEW_ROWS = "5";
         farmTechDomain.setSrchStr(keyword);
+        farmTechDomain.setNumOfRows(VIEW_ROWS);
         farmTechDomain.setPageNo(String.valueOf(currentPage));
+        scri.setPerPageNum(5);
         scri.setPage(currentPage);
 
-        System.out.println("AJAX_DOMAIN : " + farmTechDomain);
-        System.out.println("CURRENT_PAGE : " + currentPage);
-        System.out.println("KEYWORD : " + keyword);
         Map<String, Object> map = new HashMap();
-        map.put("img", apiService.monthFarmTechDtlImg(farmTechDomain, scri));
+        System.out.println("TEST : " + apiService.monthFarmTech(farmTechDomain, scri));
+        System.out.println("첫번째 : " + farmTechDomain.getNumOfRows());
         map.put("farmTech", apiService.monthFarmTech(farmTechDomain, scri));
+        System.out.println("두번쨰 : " + farmTechDomain.getNumOfRows());
+        map.put("img", apiService.monthFarmTechDtlImg(farmTechDomain, scri));
 
         return map;
     }
