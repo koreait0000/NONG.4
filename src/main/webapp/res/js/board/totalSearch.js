@@ -7,7 +7,7 @@ let prev;
 let next;
 let startPage;
 let endPage;
-let currentPage = boardListBottomElem.dataset.pagenum;
+let currentPage = 1;
 const keyword   = boardListBottomElem.dataset.keyword;
 
 let prevView = document.createElement('a');

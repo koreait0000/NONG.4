@@ -170,11 +170,12 @@ public class BoardController {
 
     // 통합 검색
     @GetMapping("/totalSearch")
-    public String totalSearch(apiVideoDomain apiVideoDomain, monthFarmTechDomain farmTechDomain, BoardDomain param, SearchCriteria scri, Model model) {
+    public String totalSearch(String keyword, Model model) {
 
 //        System.out.println("VIDEO : " + apiService.apiVideo(apiVideoDomain, scri));
 //        model.addAllAttributes(apiService.apiVideo(apiVideoDomain, scri));
-        model.addAllAttributes(service.totalSearch(apiVideoDomain, farmTechDomain, param, scri));
+//        model.addAllAttributes(service.totalSearch(apiVideoDomain, farmTechDomain, param, scri));
+        model.addAttribute("keyword", keyword);
         return "board/totalSearch";
     }
 
@@ -209,6 +210,7 @@ public class BoardController {
     @RequestMapping("/totalSearchMonth/{currentPage}/{keyword}")
     public Map<String, Object> searchMonthPaging(monthFarmTechDomain farmTechDomain, SearchCriteria scri, @PathVariable("currentPage") int currentPage, @PathVariable("keyword") String keyword) {
         farmTechDomain.setSrchStr(keyword);
+        farmTechDomain.setPageNo(String.valueOf(currentPage));
         scri.setPage(currentPage);
 
         System.out.println("AJAX_DOMAIN : " + farmTechDomain);
