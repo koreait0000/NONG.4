@@ -7,7 +7,7 @@ let prev;
 let next;
 let startPage;
 let endPage;
-let currentPage = boardListBottomElem.dataset.pagenum;
+let currentPage = 1;
 const keyword   = boardListBottomElem.dataset.keyword;
 
 let prevView = document.createElement('a');
@@ -155,8 +155,12 @@ function searchVideoPaging() {
 
         if(prev) {
             videoPrevView.innerText = '이전';
+            videoPrevView.classList.remove('disabled');
+            videoNextView.classList.remove('disabled');
 
             videoPrevView.addEventListener('click', () => {
+                videoPrevView.classList.add('disabled');
+                videoNextView.classList.add('disabled');
                 currentPage = startPage - 5;
                 currentVideoPageDiv.innerText = '';
                 if(event.stopImmediatePropagation()) event.stopImmediatePropagation(); // 동일 DOM의 이벤트 전파 막기
@@ -182,11 +186,13 @@ function searchVideoPaging() {
 
         if(next && endPage > 0) {
             videoNextView.innerText = '다음';
-
+            videoNextView.classList.remove('disabled');
             videoNextView.addEventListener('click', () => {
+                videoPrevView.classList.add('disabled');
+                videoNextView.classList.add('disabled');
+                currentVideoPageDiv.innerText = '';
                 currentPage = startPage + 5;
 
-                currentVideoPageDiv.innerText = '';
                 if(event.stopImmediatePropagation()) event.stopImmediatePropagation(); // 동일 DOM의 이벤트 전파 막기
                 searchVideoPagingAjax(currentPage);
             })
@@ -250,9 +256,10 @@ function searchMonthPaging() {
         fetch('totalSearchMonth/' + currentPage +'/'+ keyword)
             .then(res => res.json())
             .then(myJson => {
-                console.log('MYJSON : ' + myJson.farmTech)
+                const farmTech = myJson.farmTech.farmTechDomain.data;
+                const imgData  = myJson.img.img;
                 monthPagingBottom(myJson.farmTech.pageMaker);
-                searchMonthList(myJson.farmTech.farmTechDomain.data);
+                searchMonthList(farmTech, imgData);
             })
     }
     function monthPagingBottom(data) {
@@ -260,19 +267,23 @@ function searchMonthPaging() {
         startPage = data.startPage;
         prev      = data.prev;
         next      = data.next;
-
         if(prev) {
             monthPrevView.innerText = '이전';
+            monthPrevView.classList.remove('disabled');
+            monthNextView.classList.remove('disabled');
 
             monthPrevView.addEventListener('click', () => {
+                monthPrevView.classList.add('disabled');
+                monthNextView.classList.add('disabled');
+                currentMonthPageDiv.innerText = '';
                 currentPage = startPage - 5;
-                currentVideoPageDiv.innerText = '';
                 if(event.stopImmediatePropagation()) event.stopImmediatePropagation(); // 동일 DOM의 이벤트 전파 막기
                 searchMonthPagingAjax(currentPage);
             })
         } else {
-            videoPrevView.innerText = '';
+            monthPrevView.innerText = '';
         }
+
 
         for(let i= startPage; i<= endPage; i++) {
             currentMonthPageView = document.createElement('a');
@@ -290,8 +301,12 @@ function searchMonthPaging() {
 
         if(next && endPage > 0) {
             monthNextView.innerText = '다음';
+            monthPrevView.classList.remove('disabled');
+            monthNextView.classList.remove('disabled');
 
             monthNextView.addEventListener('click', () => {
+                monthPrevView.classList.add('disabled');
+                monthNextView.classList.add('disabled');
                 currentPage = startPage + 5;
 
                 currentMonthPageDiv.innerText = '';
@@ -305,29 +320,27 @@ function searchMonthPaging() {
         monthPageMaker.append(monthPrevView, monthNextView);
     }
 }
-function searchMonthList(data) {
+function searchMonthList(data, img) {
     listMonthElem.innerHTML = '';
-    console.log('DATA : ' + data)
-    data.forEach(function (item) {
-        const monthSectionDiv   = document.createElement('div');
-        const monthInnerDiv     = document.createElement('div');
-        const monthTitleStrong   = document.createElement('strong');
-        const monthSumryStrong     = document.createElement('strong')
-        const videoClipSjStrong = document.createElement('strong');
-        const videoImg = document.createElement('img');
 
-        monthSectionDiv.className   = 'month-section';
-        monthTitleStrong.className     = 'strong-title';
+    data.forEach(function (item, imgNo) {
+        const monthSectionDiv  = document.createElement('div');
+        const monthInnerDiv    = document.createElement('div');
+        const monthTitleStrong = document.createElement('strong');
+        const monthSumryStrong = document.createElement('strong')
+        const monthImg = document.createElement('img');
+
+        monthSectionDiv.className  = 'month-section';
+        monthTitleStrong.className = 'strong-title';
         monthSumryStrong.className = 'strong-sumrydtl';
 
-        // videoImg.className = 'pointer';
-        // videoImg.src       = item.videoImg;
+        monthImg.className = 'pointer';
+        monthImg.src       = img[imgNo];
 
-        // videoLinkStrong.append(videoImg);
         monthTitleStrong.append(item.curationNm);
         // monthSumryStrong.append(item.curationSumryDtl);
 
-        monthInnerDiv.append(monthTitleStrong, monthSumryStrong);
+        monthInnerDiv.append(monthImg, monthTitleStrong, monthSumryStrong);
         monthSectionDiv.append(monthInnerDiv);
 
         listMonthElem.append(monthSectionDiv, monthPageMaker);
@@ -336,6 +349,37 @@ function searchMonthList(data) {
 
 listMonthElem.append(monthPageMaker);
 
+// ##################################### MONTH_LIST #####################################
+
+const listWorkElem = document.querySelector('.list-working');
+const apiContAreaDiv = document.createElement('div');
+const bbsSectionDiv = document.createElement('div');
+const tableRoundDiv = document.createElement('div');
+const scheduleDiv   = document.createElement('div');
+const schTextSpan = document.createElement('span');
+const schFileSpan = document.createElement('span');
+
+apiContAreaDiv.className = 'apiContArea';
+bbsSectionDiv.className = 'bbsSection';
+tableRoundDiv.className = 'tableRound';
+scheduleDiv.className = 'scheduleDiv';
+
+schTextSpan.className = 'textSpan';
+schFileSpan.className = 'fileSpan';
+
+function searchWorkPaging() {
+    searchWorkAjax(currentPage)
+    function searchWorkAjax(currentPage) {
+        currentPage = currentPage;
+        fetch('totalSearchWork/' + currentPage +'/'+ keyword)
+            .then(res => res.json())
+            .then(myJson => {
+                console.log(myJson)
+            })
+    }
+}
+
 searchPaging();
 searchVideoPaging();
 searchMonthPaging();
+searchWorkPaging();

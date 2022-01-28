@@ -156,7 +156,9 @@ public class ApiService {
         StringBuffer result = new StringBuffer();
         String urlParse = "";
         monthFarmTechDomain.itemTag itemTag;
-        System.out.println("DOMAIN_TEST : " + farmTechDomain);
+        farmTechDomain.setPageNo(String.valueOf(scri.getPage()));
+
+        System.out.println("NUM_1 : " + farmTechDomain.getNumOfRows());
 
         try {
             StringBuilder urlBuilder = new StringBuilder("http://api.nongsaro.go.kr/service/monthFarmTech/monthFarmTechLst");
@@ -173,8 +175,11 @@ public class ApiService {
             if(farmTechDomain.getSEraInfo() != null){
                 urlBuilder.append("&" + URLEncoder.encode("sEraInfo", "UTF-8") + "=" + URLEncoder.encode(farmTechDomain.getSEraInfo(), "UTF-8"));
             }
-
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
+            if(farmTechDomain.getNumOfRows() != null) {
+                urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("5","UTF-8"));
+            } else {
+                urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10","UTF-8"));
+            }
 
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -242,7 +247,7 @@ public class ApiService {
             farmTechDomain.setSEraInfo(farmTechDomain.getSEraInfo());
             farmTechDomain.setFarmTechItemList(farmTechItemList);
 
-            System.out.println("DOMAIN : " + farmTechDomain);
+            System.out.println("NUM_2 : " + farmTechDomain.getNumOfRows());
 
             PageMaker pageMaker = new PageMaker();
             pageMaker.setCri(scri);
