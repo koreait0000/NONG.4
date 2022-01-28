@@ -49,16 +49,10 @@
                     <div class="boardlist-bottom" data-pagenum="${pageMaker.cri.page}" data-keyword="${pageMaker.keyword}" >
                     </div>
                 </div>
-                <div class="list-video" data-pageno="${apiVideoDomain.pageNo}" data-stext="${apiVideoDomain.SText}"></div>
-<%--                <c:forEach items="${apiVideoDomain.videoItemList}" var="video">--%>
-<%--                    <div class="section">--%>
-<%--                        <div>--%>
-<%--                            <strong onclick="location.href='apiVideo?videoLink=' + '${video.videoLink}'"><img class="pointer" src=${video.videoImg}></strong>--%>
-<%--                            <strong class="strong-sj">${video.sj}</strong>--%>
-<%--                            <strong class="strong-mvpclipsj">${video.mvpClipSj}</strong>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </c:forEach>--%>
+                <div class="list-video" ></div>
+                <div class="list-month">
+                    @@ : ${farmTech}
+                </div>
             </div>
         </div>
     </div>
